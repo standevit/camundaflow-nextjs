@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.40.1">
+  <bpmn:process id="order-approval-process" name="Auftragsfreigabe mit Genehmigung" isExecutable="true">
+    <bpmn:startEvent id="StartEvent" name="Auftrag eingegangen">
+      <bpmn:outgoing>Flow_01</bpmn:outgoing>
+      <bpmn:outgoing>Flow_04090ac</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="UserTask_Fachbereich" name="Freigabe Fachbereich" camunda:candidateGroups="sales">
+      <bpmn:incoming>Flow_01</bpmn:incoming>
+      <bpmn:incoming>Flow_04090ac</bpmn:incoming>
+      <bpmn:outgoing>Flow_02</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0pw2vr7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_Amount" name="Betrag &#62; 5.000 €?">
+      <bpmn:incoming>Flow_02</bpmn:incoming>
+      <bpmn:incoming>Flow_0pw2vr7</bpmn:incoming>
+      <bpmn:outgoing>Flow_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_No</bpmn:outgoing>
+      <bpmn:outgoing>Flow_117amuj</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1j58788</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="UserTask_GF" name="Freigabe Geschäftsführung" camunda:candidateGroups="management">
+      <bpmn:incoming>Flow_Yes</bpmn:incoming>
+      <bpmn:incoming>Flow_117amuj</bpmn:incoming>
+      <bpmn:outgoing>Flow_04</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="ServiceTask_Confirmation" name="Bestätigung versenden" camunda:type="external" camunda:topic="send-confirmation">
+      <bpmn:incoming>Flow_No</bpmn:incoming>
+      <bpmn:incoming>Flow_04</bpmn:incoming>
+      <bpmn:incoming>Flow_1j58788</bpmn:incoming>
+      <bpmn:outgoing>Flow_05</bpmn:outgoing>
+      <bpmn:outgoing>Flow_18phx5h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent" name="Fertig">
+      <bpmn:incoming>Flow_05</bpmn:incoming>
+      <bpmn:incoming>Flow_18phx5h</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent" targetRef="UserTask_Fachbereich" />
+    <bpmn:sequenceFlow id="Flow_02" sourceRef="UserTask_Fachbereich" targetRef="Gateway_Amount" />
+    <bpmn:sequenceFlow id="Flow_Yes" name="Ja" sourceRef="Gateway_Amount" targetRef="UserTask_GF">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${amount &gt; 5000}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_No" name="Nein" sourceRef="Gateway_Amount" targetRef="ServiceTask_Confirmation">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${amount &lt;= 5000}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_04" sourceRef="UserTask_GF" targetRef="ServiceTask_Confirmation" />
+    <bpmn:sequenceFlow id="Flow_05" sourceRef="ServiceTask_Confirmation" targetRef="EndEvent" />
+    <bpmn:sequenceFlow id="Flow_04090ac" sourceRef="StartEvent" targetRef="UserTask_Fachbereich" />
+    <bpmn:sequenceFlow id="Flow_0pw2vr7" sourceRef="UserTask_Fachbereich" targetRef="Gateway_Amount" />
+    <bpmn:sequenceFlow id="Flow_117amuj" name="Ja" sourceRef="Gateway_Amount" targetRef="UserTask_GF">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" />
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1j58788" name="Nein" sourceRef="Gateway_Amount" targetRef="ServiceTask_Confirmation" />
+    <bpmn:sequenceFlow id="Flow_18phx5h" sourceRef="ServiceTask_Confirmation" targetRef="EndEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane bpmnElement="order-approval-process">
+      <bpmndi:BPMNShape id="StartEvent_di" bpmnElement="StartEvent" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="170" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="238" width="64" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_Fachbereich_di" bpmnElement="UserTask_Fachbereich" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="280" y="180" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Amount_di" bpmnElement="Gateway_Amount" isMarkerVisible="true">
+        <dc:Bounds x="480" y="195" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="541" y="213" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_GF_di" bpmnElement="UserTask_GF" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="600" y="100" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_Confirmation_di" bpmnElement="ServiceTask_Confirmation" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="600" y="280" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_di" bpmnElement="EndEvent" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="800" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="804" y="338" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_04090ac_di" bpmnElement="Flow_04090ac">
+        <di:waypoint x="206" y="220" />
+        <di:waypoint x="280" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pw2vr7_di" bpmnElement="Flow_0pw2vr7">
+        <di:waypoint x="400" y="220" />
+        <di:waypoint x="480" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_117amuj_di" bpmnElement="Flow_117amuj">
+        <di:waypoint x="505" y="195" />
+        <di:waypoint x="505" y="140" />
+        <di:waypoint x="600" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="514" y="165" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j58788_di" bpmnElement="Flow_1j58788">
+        <di:waypoint x="505" y="245" />
+        <di:waypoint x="505" y="320" />
+        <di:waypoint x="600" y="320" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="509" y="280" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18phx5h_di" bpmnElement="Flow_18phx5h">
+        <di:waypoint x="720" y="320" />
+        <di:waypoint x="800" y="320" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

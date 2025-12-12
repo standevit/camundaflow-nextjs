@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.40.1">
+  <bpmn:message id="Message_CustomerInquiry" name="Kundennachricht" />
+  <bpmn:process id="aiCustomerService" name="Intelligenter Kundenservice mit AI-Agenten" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_Inquiry" name="Kundennachricht empfangen">
+      <bpmn:outgoing>Flow_01</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_CustomerInquiry" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Task_Intent" name="AI Agent 1: Intent &#38; Sentiment erkennen" camunda:type="external" camunda:topic="ai-intent-detection">
+      <bpmn:incoming>Flow_01</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tf3qqc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="ParallelGateway_Split">
+      <bpmn:incoming>Flow_0tf3qqc</bpmn:incoming>
+      <bpmn:outgoing>Flow_RAG</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Compensation</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0o6mpb8</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:serviceTask id="Task_GenerateResponse" name="AI Agent 2: Antwort generieren" camunda:type="external" camunda:topic="ai-generate-response">
+      <bpmn:incoming>Flow_0o6mpb8</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToJoin</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_RAG" name="AI Agent 3: Wissensdatenbank-Suche (RAG)" camunda:type="external" camunda:topic="ai-rag-search">
+      <bpmn:incoming>Flow_RAG</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToJoin2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_Compensation" name="AI Agent 4: Entschädigung vorschlagen" camunda:type="external" camunda:topic="ai-compensation">
+      <bpmn:incoming>Flow_Compensation</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToJoin3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="ParallelGateway_Join">
+      <bpmn:incoming>Flow_ToJoin</bpmn:incoming>
+      <bpmn:incoming>Flow_ToJoin2</bpmn:incoming>
+      <bpmn:incoming>Flow_ToJoin3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0oqe8dg</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:serviceTask id="Task_QualityCheck" name="AI Agent 5: Qualitäts-Check der Antwort" camunda:type="external" camunda:topic="ai-quality-gate">
+      <bpmn:incoming>Flow_0oqe8dg</bpmn:incoming>
+      <bpmn:outgoing>Flow_Good</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Bad</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_Quality">
+      <bpmn:incoming>Flow_Good</bpmn:incoming>
+      <bpmn:incoming>Flow_Bad</bpmn:incoming>
+      <bpmn:outgoing>Flow_SendAuto</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Human</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_SendAuto" name="Automatisch an Kunde senden" camunda:type="external" camunda:topic="send-response">
+      <bpmn:incoming>Flow_SendAuto</bpmn:incoming>
+      <bpmn:outgoing>Flow_EndAuto</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_HumanReview" name="Menschlicher Agent prüft &#38; bearbeitet" camunda:assignee="support-team">
+      <bpmn:incoming>Flow_Human</bpmn:incoming>
+      <bpmn:outgoing>Flow_SendHuman</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_SendHuman" name="Antwort senden (nach Mensch)" camunda:type="external" camunda:topic="send-response">
+      <bpmn:incoming>Flow_SendHuman</bpmn:incoming>
+      <bpmn:outgoing>Flow_EndHuman</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_Auto" name="Fall automatisch erledigt">
+      <bpmn:incoming>Flow_EndAuto</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_Human" name="Fall mit Mensch erledigt">
+      <bpmn:incoming>Flow_EndHuman</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent_Inquiry" targetRef="Task_Intent" />
+    <bpmn:sequenceFlow id="Flow_RAG" sourceRef="ParallelGateway_Split" targetRef="Task_RAG" />
+    <bpmn:sequenceFlow id="Flow_Compensation" sourceRef="ParallelGateway_Split" targetRef="Task_Compensation" />
+    <bpmn:sequenceFlow id="Flow_ToJoin" sourceRef="Task_GenerateResponse" targetRef="ParallelGateway_Join" />
+    <bpmn:sequenceFlow id="Flow_ToJoin2" sourceRef="Task_RAG" targetRef="ParallelGateway_Join" />
+    <bpmn:sequenceFlow id="Flow_ToJoin3" sourceRef="Task_Compensation" targetRef="ParallelGateway_Join" />
+    <bpmn:sequenceFlow id="Flow_Good" sourceRef="Task_QualityCheck" targetRef="Gateway_Quality" />
+    <bpmn:sequenceFlow id="Flow_Bad" sourceRef="Task_QualityCheck" targetRef="Gateway_Quality" />
+    <bpmn:sequenceFlow id="Flow_SendAuto" sourceRef="Gateway_Quality" targetRef="Task_SendAuto">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${qualityApproved == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Human" sourceRef="Gateway_Quality" targetRef="Task_HumanReview">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${qualityApproved == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_EndAuto" sourceRef="Task_SendAuto" targetRef="EndEvent_Auto" />
+    <bpmn:sequenceFlow id="Flow_SendHuman" sourceRef="Task_HumanReview" targetRef="Task_SendHuman" />
+    <bpmn:sequenceFlow id="Flow_EndHuman" sourceRef="Task_SendHuman" targetRef="EndEvent_Human" />
+    <bpmn:sequenceFlow id="Flow_0o6mpb8" sourceRef="ParallelGateway_Split" targetRef="Task_GenerateResponse" />
+    <bpmn:sequenceFlow id="Flow_0tf3qqc" sourceRef="Task_Intent" targetRef="ParallelGateway_Split" />
+    <bpmn:sequenceFlow id="Flow_0oqe8dg" sourceRef="ParallelGateway_Join" targetRef="Task_QualityCheck" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="aiCustomerService">
+      <bpmndi:BPMNShape id="Shape_Split" bpmnElement="ParallelGateway_Split" isMarkerVisible="true">
+        <dc:Bounds x="355" y="193" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Intent" bpmnElement="Task_Intent">
+        <dc:Bounds x="160" y="178" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Response" bpmnElement="Task_GenerateResponse">
+        <dc:Bounds x="525" y="80" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_RAG" bpmnElement="Task_RAG">
+        <dc:Bounds x="525" y="180" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Comp" bpmnElement="Task_Compensation">
+        <dc:Bounds x="525" y="280" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Join" bpmnElement="ParallelGateway_Join" isMarkerVisible="true">
+        <dc:Bounds x="765" y="189" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_QG" bpmnElement="Gateway_Quality" isMarkerVisible="true">
+        <dc:Bounds x="845" y="585" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SendHuman" bpmnElement="Task_SendHuman">
+        <dc:Bounds x="525" y="690" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_EndHuman" bpmnElement="EndEvent_Human">
+        <dc:Bounds x="362" y="710" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="341" y="746" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SendAuto" bpmnElement="Task_SendAuto">
+        <dc:Bounds x="525" y="570" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_EndAuto" bpmnElement="EndEvent_Auto">
+        <dc:Bounds x="362" y="590" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="340" y="626" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_QCheck" bpmnElement="Task_QualityCheck">
+        <dc:Bounds x="795" y="370" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Human" bpmnElement="Task_HumanReview">
+        <dc:Bounds x="795" y="690" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Start" bpmnElement="StartEvent_Inquiry">
+        <dc:Bounds x="202" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="178" y="64.5" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0tf3qqc_di" bpmnElement="Flow_0tf3qqc">
+        <di:waypoint x="280" y="218" />
+        <di:waypoint x="355" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RAG" bpmnElement="Flow_RAG">
+        <di:waypoint x="405" y="218" />
+        <di:waypoint x="525" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Comp" bpmnElement="Flow_Compensation">
+        <di:waypoint x="380" y="243" />
+        <di:waypoint x="380" y="320" />
+        <di:waypoint x="525" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0o6mpb8_di" bpmnElement="Flow_0o6mpb8">
+        <di:waypoint x="380" y="193" />
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="525" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_ToJoin" bpmnElement="Flow_ToJoin">
+        <di:waypoint x="675" y="120" />
+        <di:waypoint x="790" y="120" />
+        <di:waypoint x="790" y="189" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_ToJoin2" bpmnElement="Flow_ToJoin2">
+        <di:waypoint x="675" y="214" />
+        <di:waypoint x="765" y="214" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_ToJoin3" bpmnElement="Flow_ToJoin3">
+        <di:waypoint x="675" y="320" />
+        <di:waypoint x="790" y="320" />
+        <di:waypoint x="790" y="239" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oqe8dg_di" bpmnElement="Flow_0oqe8dg">
+        <di:waypoint x="815" y="214" />
+        <di:waypoint x="870" y="214" />
+        <di:waypoint x="870" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_01" bpmnElement="Flow_01">
+        <di:waypoint x="220" y="138" />
+        <di:waypoint x="220" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Good" bpmnElement="Flow_Good">
+        <di:waypoint x="920" y="450" />
+        <di:waypoint x="920" y="533" />
+        <di:waypoint x="870" y="533" />
+        <di:waypoint x="870" y="585" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Bad" bpmnElement="Flow_Bad">
+        <di:waypoint x="820" y="450" />
+        <di:waypoint x="820" y="533" />
+        <di:waypoint x="870" y="533" />
+        <di:waypoint x="870" y="585" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SendAuto" bpmnElement="Flow_SendAuto">
+        <di:waypoint x="845" y="610" />
+        <di:waypoint x="675" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Human" bpmnElement="Flow_Human">
+        <di:waypoint x="870" y="635" />
+        <di:waypoint x="870" y="690" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SendHuman" bpmnElement="Flow_SendHuman">
+        <di:waypoint x="795" y="730" />
+        <di:waypoint x="675" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_EndHuman" bpmnElement="Flow_EndHuman">
+        <di:waypoint x="525" y="730" />
+        <di:waypoint x="398" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_EndAuto" bpmnElement="Flow_EndAuto">
+        <di:waypoint x="525" y="610" />
+        <di:waypoint x="398" y="610" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

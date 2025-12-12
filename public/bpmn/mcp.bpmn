@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_AI_Agent_MCP" targetNamespace="http://example.com/bpmn/ai-agent-mcp" exporter="Camunda Modeler" exporterVersion="5.40.1">
+  <bpmn:process id="ai-agent-chat-with-mcp-approval" name="AI Agent Chat With MCP Approval" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_Initiate" name="User Request / Start">
+      <bpmn:outgoing>flow_start_to_gateway</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_StartToAgent" name="Use AI Agent?">
+      <bpmn:incoming>flow_start_to_gateway</bpmn:incoming>
+      <bpmn:outgoing>flow_to_ai_agent_container</bpmn:outgoing>
+      <bpmn:outgoing>flow_to_superflux</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="flow_start_to_gateway" sourceRef="StartEvent_Initiate" targetRef="Gateway_StartToAgent" />
+    <bpmn:sequenceFlow id="flow_to_ai_agent_container" sourceRef="Gateway_StartToAgent" targetRef="ServiceTask_DeepWiki">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${useAgent == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_to_superflux" sourceRef="Gateway_StartToAgent" targetRef="ServiceTask_Superflux">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${useAgent == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="ServiceTask_DeepWiki" name="DeepWiki (MCP Tool)" camunda:type="external" camunda:topic="mcp-tool-deepwiki">
+      <bpmn:incoming>flow_to_ai_agent_container</bpmn:incoming>
+      <bpmn:outgoing>flow_deepwiki_to_timeconv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="flow_deepwiki_to_timeconv" sourceRef="ServiceTask_DeepWiki" targetRef="ServiceTask_TimeConversions" />
+    <bpmn:serviceTask id="ServiceTask_TimeConversions" name="Time Conversions (MCP Tool)" camunda:type="external" camunda:topic="mcp-tool-timeconv">
+      <bpmn:incoming>flow_deepwiki_to_timeconv</bpmn:incoming>
+      <bpmn:outgoing>flow_timeconv_to_fetchurl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="flow_timeconv_to_fetchurl" sourceRef="ServiceTask_TimeConversions" targetRef="ServiceTask_FetchURL" />
+    <bpmn:serviceTask id="ServiceTask_FetchURL" name="Fetch URL (MCP Tool)" camunda:type="external" camunda:topic="mcp-tool-fetchurl">
+      <bpmn:incoming>flow_timeconv_to_fetchurl</bpmn:incoming>
+      <bpmn:outgoing>flow_fetchurl_to_github</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="flow_fetchurl_to_github" sourceRef="ServiceTask_FetchURL" targetRef="ServiceTask_GitHub" />
+    <bpmn:serviceTask id="ServiceTask_GitHub" name="GitHub (MCP Tool)" camunda:type="external" camunda:topic="mcp-tool-github">
+      <bpmn:incoming>flow_fetchurl_to_github</bpmn:incoming>
+      <bpmn:outgoing>flow_github_to_subprocess</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="flow_github_to_subprocess" sourceRef="ServiceTask_GitHub" targetRef="SubProcess_MCP_Confirm" />
+    <bpmn:subProcess id="SubProcess_MCP_Confirm" name="MCP with user confirmation">
+      <bpmn:incoming>flow_github_to_subprocess</bpmn:incoming>
+      <bpmn:outgoing>flow_after_subprocess</bpmn:outgoing>
+      <bpmn:startEvent id="Sub_Start" name="sub-start">
+        <bpmn:outgoing>sub_flow_to_check</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:exclusiveGateway id="Sub_Gateway_NeedsConfirmation" name="Needs confirmation?">
+        <bpmn:incoming>sub_flow_to_check</bpmn:incoming>
+        <bpmn:outgoing>sub_flow_confirm_needed</bpmn:outgoing>
+        <bpmn:outgoing>sub_flow_no_confirmation</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:sequenceFlow id="sub_flow_to_check" sourceRef="Sub_Start" targetRef="Sub_Gateway_NeedsConfirmation" />
+      <bpmn:sequenceFlow id="sub_flow_no_confirmation" sourceRef="Sub_Gateway_NeedsConfirmation" targetRef="ServiceTask_Filesystem">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${needsConfirmation == false}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="sub_flow_confirm_needed" sourceRef="Sub_Gateway_NeedsConfirmation" targetRef="UserTask_AskForConfirmation">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${needsConfirmation == true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:userTask id="UserTask_AskForConfirmation" name="Ask for confirmation" camunda:formKey="embedded:app:forms/confirm.html">
+        <bpmn:incoming>sub_flow_confirm_needed</bpmn:incoming>
+        <bpmn:outgoing>sub_flow_after_confirmation</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="sub_flow_after_confirmation" sourceRef="UserTask_AskForConfirmation" targetRef="BusinessRule_ExecutionAllowed" />
+      <bpmn:businessRuleTask id="BusinessRule_ExecutionAllowed" name="Execution allowed? (DMN)" camunda:decisionRef="mcpExecutionDecision">
+        <bpmn:incoming>sub_flow_after_confirmation</bpmn:incoming>
+        <bpmn:outgoing>sub_flow_to_check_execution</bpmn:outgoing>
+      </bpmn:businessRuleTask>
+      <bpmn:sequenceFlow id="sub_flow_to_check_execution" sourceRef="BusinessRule_ExecutionAllowed" targetRef="Sub_Gateway_ExecutionAllowed" />
+      <bpmn:exclusiveGateway id="Sub_Gateway_ExecutionAllowed" name="Execution allowed?">
+        <bpmn:incoming>sub_flow_to_check_execution</bpmn:incoming>
+        <bpmn:outgoing>sub_flow_exec_yes</bpmn:outgoing>
+        <bpmn:outgoing>sub_flow_exec_no</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:sequenceFlow id="sub_flow_exec_yes" sourceRef="Sub_Gateway_ExecutionAllowed" targetRef="ServiceTask_Filesystem">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${executionAllowed == true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="sub_flow_exec_no" sourceRef="Sub_Gateway_ExecutionAllowed" targetRef="Sub_End_NotAllowed">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${executionAllowed == false}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:serviceTask id="ServiceTask_Filesystem" name="Filesystem (MCP Tool)" camunda:type="external" camunda:topic="mcp-tool-filesystem">
+        <bpmn:incoming>sub_flow_no_confirmation</bpmn:incoming>
+        <bpmn:incoming>sub_flow_exec_yes</bpmn:incoming>
+        <bpmn:outgoing>sub_flow_filesystem_done</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sequenceFlow id="sub_flow_filesystem_done" sourceRef="ServiceTask_Filesystem" targetRef="Sub_End_Allowed" />
+      <bpmn:endEvent id="Sub_End_Allowed" name="MCP execution allowed - done">
+        <bpmn:incoming>sub_flow_filesystem_done</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:endEvent id="Sub_End_NotAllowed" name="MCP execution not allowed">
+        <bpmn:incoming>sub_flow_exec_no</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="flow_after_subprocess" sourceRef="SubProcess_MCP_Confirm" targetRef="UserTask_UserFeedback" />
+    <bpmn:serviceTask id="ServiceTask_Superflux" name="Superflux Product Calculation" camunda:type="external" camunda:topic="superflux-product-calc">
+      <bpmn:incoming>flow_to_superflux</bpmn:incoming>
+      <bpmn:outgoing>flow_superflux_to_feedback</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="flow_superflux_to_feedback" sourceRef="ServiceTask_Superflux" targetRef="UserTask_UserFeedback" />
+    <bpmn:userTask id="UserTask_UserFeedback" name="User Feedback / Review" camunda:formKey="embedded:app:forms/feedback.html">
+      <bpmn:incoming>flow_after_subprocess</bpmn:incoming>
+      <bpmn:incoming>flow_superflux_to_feedback</bpmn:incoming>
+      <bpmn:outgoing>flow_feedback_to_end</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="flow_feedback_to_end" sourceRef="UserTask_UserFeedback" targetRef="EndEvent_ProcessComplete" />
+    <bpmn:endEvent id="EndEvent_ProcessComplete" name="End / Notify User">
+      <bpmn:incoming>flow_feedback_to_end</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_AI_Agent">
+    <bpmndi:BPMNPlane id="BPMNPlane_AI_Agent" bpmnElement="ai-agent-chat-with-mcp-approval">
+      <bpmndi:BPMNShape id="StartEvent_Initiate_di" bpmnElement="StartEvent_Initiate">
+        <dc:Bounds x="142" y="98" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="123" y="134" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_StartToAgent_di" bpmnElement="Gateway_StartToAgent" isMarkerVisible="true">
+        <dc:Bounds x="235" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="225" y="71" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_DeepWiki_di" bpmnElement="ServiceTask_DeepWiki" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="350" y="80" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_TimeConversions_di" bpmnElement="ServiceTask_TimeConversions" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="490" y="80" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_FetchURL_di" bpmnElement="ServiceTask_FetchURL" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="650" y="80" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_GitHub_di" bpmnElement="ServiceTask_GitHub" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="820" y="80" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_MCP_Confirm_di" bpmnElement="SubProcess_MCP_Confirm" isExpanded="true">
+        <dc:Bounds x="370" y="210" width="560" height="340" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_Start_di" bpmnElement="Sub_Start">
+        <dc:Bounds x="456" y="260" width="28" height="28" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="448" y="236" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_Gateway_NeedsConfirmation_di" bpmnElement="Sub_Gateway_NeedsConfirmation" isMarkerVisible="true">
+        <dc:Bounds x="450" y="340" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="372.5" y="346.5" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_AskForConfirmation_di" bpmnElement="UserTask_AskForConfirmation" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="450" y="430" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BusinessRule_ExecutionAllowed_di" bpmnElement="BusinessRule_ExecutionAllowed" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="600" y="430" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_Gateway_ExecutionAllowed_di" bpmnElement="Sub_Gateway_ExecutionAllowed" isMarkerVisible="true">
+        <dc:Bounds x="770" y="370" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="710.5" y="376.5" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_Filesystem_di" bpmnElement="ServiceTask_Filesystem" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="540" y="254" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_End_Allowed_di" bpmnElement="Sub_End_Allowed">
+        <dc:Bounds x="820" y="260" width="28" height="28" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="288" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_End_NotAllowed_di" bpmnElement="Sub_End_NotAllowed">
+        <dc:Bounds x="846" y="376" width="28" height="28" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="823" y="404" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sub_flow_to_check_di" bpmnElement="sub_flow_to_check">
+        <di:waypoint x="470" y="288" />
+        <di:waypoint x="470" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_no_confirmation_di" bpmnElement="sub_flow_no_confirmation">
+        <di:waypoint x="489" y="359" />
+        <di:waypoint x="600" y="359" />
+        <di:waypoint x="600" y="334" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_confirm_needed_di" bpmnElement="sub_flow_confirm_needed">
+        <di:waypoint x="470" y="380" />
+        <di:waypoint x="470" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_after_confirmation_di" bpmnElement="sub_flow_after_confirmation">
+        <di:waypoint x="570" y="470" />
+        <di:waypoint x="600" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_to_check_execution_di" bpmnElement="sub_flow_to_check_execution">
+        <di:waypoint x="740" y="470" />
+        <di:waypoint x="790" y="470" />
+        <di:waypoint x="790" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_exec_yes_di" bpmnElement="sub_flow_exec_yes">
+        <di:waypoint x="790" y="370" />
+        <di:waypoint x="790" y="310" />
+        <di:waypoint x="660" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_exec_no_di" bpmnElement="sub_flow_exec_no">
+        <di:waypoint x="810" y="390" />
+        <di:waypoint x="846" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sub_flow_filesystem_done_di" bpmnElement="sub_flow_filesystem_done">
+        <di:waypoint x="660" y="274" />
+        <di:waypoint x="820" y="274" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_Superflux_di" bpmnElement="ServiceTask_Superflux" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="180" y="595" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_UserFeedback_di" bpmnElement="UserTask_UserFeedback" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="650" y="590" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_ProcessComplete_di" bpmnElement="EndEvent_ProcessComplete">
+        <dc:Bounds x="882" y="612" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="858" y="648" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="flow_start_to_gateway_di" bpmnElement="flow_start_to_gateway">
+        <di:waypoint x="178" y="118" />
+        <di:waypoint x="237" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_to_ai_agent_container_di" bpmnElement="flow_to_ai_agent_container">
+        <di:waypoint x="285" y="120" />
+        <di:waypoint x="350" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_to_superflux_di" bpmnElement="flow_to_superflux">
+        <di:waypoint x="258" y="143" />
+        <di:waypoint x="258" y="595" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_deepwiki_to_timeconv_di" bpmnElement="flow_deepwiki_to_timeconv" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="470" y="120" />
+        <di:waypoint x="490" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_timeconv_to_fetchurl_di" bpmnElement="flow_timeconv_to_fetchurl" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="630" y="120" />
+        <di:waypoint x="650" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_fetchurl_to_github_di" bpmnElement="flow_fetchurl_to_github" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="790" y="120" />
+        <di:waypoint x="820" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_github_to_subprocess_di" bpmnElement="flow_github_to_subprocess">
+        <di:waypoint x="890" y="160" />
+        <di:waypoint x="890" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_after_subprocess_di" bpmnElement="flow_after_subprocess">
+        <di:waypoint x="730" y="550" />
+        <di:waypoint x="730" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_superflux_to_feedback_di" bpmnElement="flow_superflux_to_feedback" bioc:stroke="#6b3c00" color:border-color="#6b3c00">
+        <di:waypoint x="340" y="635" />
+        <di:waypoint x="650" y="635" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="flow_feedback_to_end_di" bpmnElement="flow_feedback_to_end">
+        <di:waypoint x="810" y="630" />
+        <di:waypoint x="882" y="630" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
