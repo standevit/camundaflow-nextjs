@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export default function HomePage() {
-  const filePath = path.join(process.cwd(), "public/static_html/index.html");
+  const filePath = path.join(process.cwd(), "public/index.html");
   const html = fs.readFileSync(filePath, "utf8");
 
   return (

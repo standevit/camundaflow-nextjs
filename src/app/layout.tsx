@@ -1,27 +1,32 @@
+// src/app/layout.tsx
+import type { Metadata } from "next";
 import "../styles/globals.css";
 
-export const metadata = {
-  title: "CamundaFlow",
-  description: "Process automation & BPMN consulting"
+export const metadata: Metadata = {
+  title: "Camunda Flow – Prozessautomatisierung & BPM Experte",
+  description: "Camunda 8 Experte aus Deutschland – Beratung, Implementierung und Custom-Entwicklung",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="de">
-      <body className="min-h-screen bg-gray-50 text-gray-900">
-        <header className="bg-white shadow p-4">
-          <nav className="max-w-5xl mx-auto flex gap-6 text-lg">
-            <a href="/">Home</a>
-            <a href="/contact">Kontakt</a>
-            <a href="/bpmn-viewer">BPMN Viewer</a>
-          </nav>
-        </header>
-
-        <main className="max-w-5xl mx-auto py-10">
-          {children}
-        </main>
-      </body>
+      <head>
+        {/* Ovo je ključ – svi stilovi i skripte iz originalnog index.html */}
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/bpmn-js@17.8.1/dist/bpmn-navigated-viewer.development.js" async></script>
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
-
