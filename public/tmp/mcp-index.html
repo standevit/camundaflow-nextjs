@@ -1,0 +1,39 @@
+<h2>Model Context Protocol (MCP)</h2>
+<p style="text-align:center;max-width:800px;margin:0 auto 3rem">
+  An emerging open standard that lets AI agents securely discover, understand, and use external tools and other agents — the “USB-C of agent interoperability” that is rapidly gaining traction in the multi-agent ecosystem.
+</p>
+
+<section>
+  <h3>What does MCP actually enable?</h3>
+  <ul>
+    <li><strong>Discovers</strong> available tools automatically (no hard-coded integrations)</li>
+    <li><strong>Understands</strong> what each tool does, its parameters and required permissions</li>
+    <li><strong>Calls</strong> any MCP-compatible tool (web search, filesystem, GitHub, databases, calculators, wikis, APIs…)</li>
+    <li><strong>Works across frameworks</strong> — LangChain, CrewAI, Autogen, LlamaIndex, Semantic Kernel and many others already support or plan MCP</li>
+    <li><strong>Supports human-in-the-loop</strong> — sensitive actions can require explicit user approval before execution</li>
+    <li><strong>Enables multi-agent collaboration</strong> via A2A (Agent-to-Agent) over the same protocol</li>
+  </ul>
+
+  <h3>Typical tools available today via MCP (2025/2026)</h3>
+  <ul>
+    <li>Fetch URL / Web Browser tools</li>
+    <li>Filesystem read/write operations</li>
+    <li>GitHub (issues, PRs, repo access)</li>
+    <li>DeepWiki / internal knowledge base search</li>
+    <li>Time & date conversions, math calculators</li>
+    <li>Any REST/GraphQL service wrapped as an MCP tool</li>
+    <li>Database query tools (SQL, vector DBs)</li>
+  </ul>
+
+  <h3>Why Camunda 8 + MCP is the perfect enterprise combination</h3>
+  <ul>
+    <li><strong>100% visibility & auditability</strong> — every MCP tool call is a regular BPMN service task</li>
+    <li><strong>Built-in guardrails</strong> — DMN tables decide which tool calls need user confirmation</li>
+    <li><strong>No black-box agents</strong> — full trace of what the agent saw, decided and executed</li>
+    <li><strong>Human-in-the-loop at any point</strong> — escalation to Tasklist with one click</li>
+    <li><strong>Mix & match agents</strong> — use Camunda agents alongside OpenAI, Anthropic, Mistral or any MCP-compatible agent</li>
+    <li><strong>Scales to millions of tool calls per day</strong> on Zeebe cloud-native engine</li>
+  </ul>
+
+  <p><strong>Conclusion:</strong> MCP is not just another integration format — it is the universal plug that finally lets enterprises safely and governably give AI agents real power by connecting them to hundreds of tools, all while keeping everything transparent, auditable and under full process-orchestration control with Camunda.</p>
+</section>

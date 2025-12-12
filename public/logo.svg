@@ -1,0 +1,7 @@
+<!-- 8. Suptilni plavi prsten oko kruga -->
+<svg width="270" height="52" viewBox="0 0 285 52" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="26" cy="26" r="22" fill="none" stroke="#aabbcc" stroke-width="3"/>
+  <circle cx="26" cy="26" r="16" fill="#475569"/>
+  <path d="M19 20 l6 6 l-6 6" stroke="white" stroke-width="3" fill="none"/>
+  <text x="68" y="34" font-family="Inter, sans-serif" font-size="29" font-weight="900" fill="#0f172a">Camunda Flow</text>
+</svg>

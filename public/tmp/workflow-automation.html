@@ -1,0 +1,38 @@
+    <h2>Workflow-Automatisierung statt klassischer Programmierung</h2>
+
+      <h2>Traditionelle Softwareentwicklung</h2>
+      <p>Bei klassischer Entwicklung (z. B. Java Spring Boot Monolith) ist der Prozessablauf im Quellcode „vergraben“:</p>
+      <ul>
+        <li>if-Abfragen, Schleifen, Exception-Handling verteilt über viele Klassen</li>
+        <li>Nur Entwickler verstehen, wie der Gesamtprozess wirklich läuft</li>
+        <li>Änderungen erfordern neuen Code, Build, Test, Deployment</li>
+      </ul>
+
+      <h2>Workflow-Engine-Ansatz (Camunda)</h2>
+      <ul>
+        <li>Der Prozessablauf ist explizit als Modell (BPMN-Diagramm) vorhanden</li>
+        <li>Fachabteilung und IT sehen exakt dasselbe Diagramm</li>
+        <li>Änderungen am Ablauf → nur Diagramm anpassen → sofort aktiv (kein Neubau)</li>
+        <li>Lang laufende Prozesse (Tage, Wochen, Monate) werden zuverlässig verwaltet</li>
+      </ul>
+
+      <h2>Vergleichstabelle</h2>
+      <table style="width:100%; border-collapse: collapse; margin: 2rem 0;">
+        <tr style="background:#0d6efd;color:white;">
+          <th style="padding:1rem;">Kriterium</th>
+          <th style="padding:1rem;">Klassische Programmierung</th>
+          <th style="padding:1rem;">Workflow Engine</th>
+        </tr>
+        <tr>
+          <td>Sichtbarkeit des Prozesses</td><td>Nur im Code</td><td>Explizites Diagramm</td>
+        </tr>
+        <tr style="background:#f8f9fa;">
+          <td>Änderungsdauer</td><td>Tage bis Wochen</td><td>Minuten bis Stunden</td>
+        </tr>
+        <tr>
+          <td>Lang laufende Prozesse</td><td>Komplex (eigene Persistenz)</td><td>Out-of-the-box</td>
+        </tr>
+        <tr style="background:#f8f9fa;">
+          <td>Transparenz für Fachbereich</td><td>Sehr gering</td><td>Sehr hoch</td>
+        </tr>
+      </table>

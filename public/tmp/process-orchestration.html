@@ -1,0 +1,31 @@
+    <h2>Prozess-Orchestrierung in der Microservices-Welt</h2>
+
+      <p>Microservices lösen das Monolith-Problem – erzeugen aber ein neues: <strong>Wer koordiniert die ganzen kleinen Dienste?</p>
+
+      <h2>Das Orchestrierungsproblem</h2>
+      <p>Beispiel „Bestellung abschließen“:</p>
+      <ol>
+        <li>Bestellung anlegen (Order Service)</li>
+        <li>
+        <li>Zahlung einziehen (Payment Service)</li>
+        <li>Lager reservieren (Inventory Service)</li>
+        <li>Versand beauftragen (Shipping Service)</li>
+        <li>Kunde benachrichtigen (Notification Service)</li>
+      </ol>
+
+      <p>Wenn jeder Service seine Logik selbst implementiert, entsteht schnell <strong>verteilter Monolith</strong> und Saga-Chaos.</p>
+
+      <h2>Lösung: Zentrale Prozess-Engine als „Dirigent“</h2>
+      <ul>
+        <li>Camunda führt den BPMN-Prozess aus</li>
+        <li>Jeder Microservice stellt nur seinen fachlichen Teil bereit (z. B. REST/GRPC-Endpoint)</li>
+        <li>Camunda ruft die Services in der richtigen Reihenfolge auf, wartet, behandelt Timeouts und Kompensationsaktionen</li>
+      </ul>
+
+      <h2>Vorteile</h2>
+      <ul>
+        <li>Ein zentrales, verständliches Ablaufmodell</li>
+        <li>Automatische Kompensation bei Fehlern (Saga-Pattern out-of-the-box)</li>
+        <li>End-to-end Monitoring und Transparenz</li>
+        <li>Einfache Anpassung der Reihenfolge ohne Code-Änderung an den Services</li>
+      </ul>
