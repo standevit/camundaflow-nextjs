@@ -10,11 +10,12 @@ export default function ContactForm() {
     setStatus("loading");
 
     const form = e.currentTarget;
+    const formData = new FormData(form);
 
     const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      message: formData.get("message") as string,
     };
 
     try {
