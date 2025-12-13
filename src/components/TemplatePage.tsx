@@ -2,35 +2,38 @@
 
 import { useEffect } from "react";
 
-export default function HomePage() {
+type Item = {
+  label: string;
+  template: string;
+};
 
+export default function TemplatePage({
+  items,
+  initial,
+}: {
+  items: Item[];
+  initial: string;
+}) {
   const loadPage = async (file: string) => {
     const canvas = document.getElementById("canvas");
     if (!canvas) return;
 
-    // učitaj HTML template
-    const html = await fetch(file).then(res => res.text());
+    const html = await fetch(file).then((r) => r.text());
     canvas.innerHTML = html;
 
-    // dinamički učitaj BPMN viewer
     const BpmnJS = (await import(
       "bpmn-js/dist/bpmn-navigated-viewer.development.js"
     )).default;
 
-    // pronađi sve BPMN blokove
     const blocks = canvas.querySelectorAll("[data-diagram]");
-
     blocks.forEach(async (block) => {
       const diagram = block.getAttribute("data-diagram");
       if (!diagram) return;
 
       const viewer = new BpmnJS({ container: block });
-      const xml = await fetch(diagram).then(r => r.text());
-
+      const xml = await fetch(diagram).then((r) => r.text());
       await viewer.importXML(xml);
       //viewer.get("canvas").zoom("fit-viewport", { padding: 40 });
-
-
     const canvas = viewer.get("canvas");
 
     const tryZoom = () => {
@@ -51,21 +54,20 @@ export default function HomePage() {
     tryZoom();
 
 
+
     });
   };
 
   useEffect(() => {
-    // početni content
-    loadPage("/tmp/bpmn.html");
+    loadPage("/" + initial);
 
-    // sidebar click handler
-    document.querySelectorAll(".example-link").forEach(link => {
-      link.addEventListener("click", e => {
+    document.querySelectorAll(".example-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
 
         document
           .querySelectorAll(".example-link")
-          .forEach(l => l.classList.remove("active"));
+          .forEach((l) => l.classList.remove("active"));
 
         link.classList.add("active");
 
@@ -77,54 +79,28 @@ export default function HomePage() {
 
   return (
     <div className="container">
-      {/* SIDEBAR */}
       <aside className="sidebar">
         <h3>Beispiele auswählen</h3>
         <ul>
-          <li>
-            <a className="example-link active" data-template="tmp/bpmn.html">
-              BPMN 2.0
-            </a>
-          </li>
-          <li>
-            <a className="example-link" data-template="tmp/process-basics.html">
-              Prozessmodellierung
-            </a>
-          </li>
-          <li>
-            <a className="example-link" data-template="tmp/pizza.html">
-              Pizza Bestellung
-            </a>
-          </li>
-          <li>
-            <a className="example-link" data-template="tmp/order-approval-process.html">
-              Order Approval
-            </a>
-          </li>
-          <li>
-            <a className="example-link" data-template="tmp/lieferung.html">
-              Event Driven Process
-            </a>
-          </li>
-          <li>
-            <a className="example-link" data-template="tmp/b2bbestellung.html">
-              Webshop Service
-            </a>
-          </li>
+          {items.map((i, idx) => (
+            <li key={i.template}>
+              <a
+                className={`example-link ${idx === 0 ? "active" : ""}`}
+                data-template={i.template}
+              >
+                {i.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </aside>
 
-      {/* MAIN */}
       <main className="main-content">
         <div className="card">
           <div id="canvas" />
-          <a href="/ai-agents" className="btn-primary">
-            AI Agents
-          </a>
         </div>
       </main>
     </div>
   );
 }
-
 

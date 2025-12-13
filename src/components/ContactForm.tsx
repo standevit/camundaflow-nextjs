@@ -1,40 +1,73 @@
-// src/components/ContactForm.tsx
-'use client';
-import { useState } from 'react';
+"use client";
+
+import { useState } from "react";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<"" | "loading" | "success" | "error">("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("Sende…");
+    setStatus("loading");
 
-    const formData = new FormData(e.currentTarget);
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData)),
-    });
+    const form = e.currentTarget;
 
-    if (res.ok) {
-      setStatus("Vielen Dank! Wir melden uns bald.");
-      (e.target as HTMLFormElement).reset();
-    } else {
-      setStatus("Fehler – bitte direkt an post@camundaflow.de");
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
     }
-  };
+  }
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <input name="name" placeholder="Name *" required className="w-full p-4 border rounded-lg" />
-        <input name="email" type="email" placeholder="E-Mail *" required className="w-full p-4 border rounded-lg" />
-        <textarea name="message" rows={8} placeholder="Ihre Nachricht *" required className="w-full p-4 border rounded-lg" />
-        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg text-xl transition">
-          Nachricht senden
+      <form onSubmit={handleSubmit} className="contact-form">
+        <div className="contact-group">
+          <label className="contact-label">Name *</label>
+          <input name="name" required className="contact-input" />
+        </div>
+
+        <div className="contact-group">
+          <label className="contact-label">E-Mail *</label>
+          <input name="email" type="email" required className="contact-input" />
+        </div>
+
+        <div className="contact-group">
+          <label className="contact-label">Nachricht *</label>
+          <textarea name="message" rows={6} required className="contact-textarea" />
+        </div>
+
+        <button type="submit" className="btn-primary contact-button">
+          {status === "loading" ? "Sende…" : "Nachricht senden"}
         </button>
       </form>
-      {status && <p className="text-center text-xl font-bold mt-8">{status}</p>}
+
+      {status === "success" && (
+        <p className="text-center mt-6 font-semibold text-green-600">
+          Vielen Dank! Ich melde mich bald.
+        </p>
+      )}
+
+      {status === "error" && (
+        <p className="text-center mt-6 font-semibold text-red-600">
+          Fehler – bitte direkt an post@camundaflow.de
+        </p>
+      )}
     </>
   );
 }
+

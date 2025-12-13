@@ -1,42 +1,40 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function POST(req) {
-  const { name, email, message } = await req.json();
-
-  if (!name || !email || !message) {
-    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
-    }
-  });
-
+export async function POST(req: Request) {
   try {
+    const { name, email, message } = await req.json();
+
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: Number(process.env.MAIL_PORT),
+      secure: false, // STARTTLS
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
+
     await transporter.sendMail({
-      from: `"${name}" <${process.env.SMTP_USER}>`,
+      from: `"Website Kontakt" <${process.env.MAIL_USER}>`,
       to: "post@camundaflow.de",
       replyTo: email,
-      subject: `Website-Anfrage von ${name}`,
+      subject: "Neue Kontaktanfrage – camundaflow.de",
       html: `
-        <h3>Neue Anfrage</h3>
         <p><b>Name:</b> ${name}</p>
-        <p><b>E-Mail:</b> ${email}</p>
-        <p><b>Nachricht:</b></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
-      `
+        <p><b>Email:</b> ${email}</p>
+        <p>${message.replace(/\n/g, "<br/>")}</p>
+      `,
     });
 
     return NextResponse.json({ success: true });
-  } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: "Mail nicht gesendet" }, { status: 500 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Mail failed" }, { status: 500 });
   }
 }
 
