@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import ChatWidget from "@/components/ChatWidget";
 
 export const metadata: Metadata = {
   title: "Camunda Flow – Prozessautomatisierung & BPM Experte",
@@ -55,6 +56,7 @@ export default function RootLayout({
             post@camundaflow.de
           </a>
         </footer>
+        <ChatWidget />
       </body>
     </html>
   );
