@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"" | "loading" | "success" | "error">("");
+  const [topic, setTopic] = useState<string>("BPMN-Entwicklung");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -13,10 +14,25 @@ export default function ContactForm() {
     const formData = new FormData(form);
 
     const data = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      message: formData.get("message") as string,
+      name: (formData.get("name") as string) || "",
+      email: (formData.get("email") as string) || "",
+      message: (formData.get("message") as string) || "",
+      phone: (formData.get("phone") as string) || "",
+      company: (formData.get("company") as string) || "",
+      topic: (formData.get("topic") as string) || "",
+      otherDescription: (formData.get("otherDescription") as string) || "",
     };
+
+    // client-side validation (extra): ensure required fields
+    if (!data.name || !data.email || !data.message || !data.company || !data.topic) {
+      setStatus("error");
+      return;
+    }
+
+    if (data.topic === "Ostalo" && !data.otherDescription) {
+      setStatus("error");
+      return;
+    }
 
     try {
       const res = await fetch("/api/contact", {
@@ -29,6 +45,7 @@ export default function ContactForm() {
 
       setStatus("success");
       form.reset();
+      setTopic("BPMN razvoj");
     } catch {
       setStatus("error");
     }
@@ -48,11 +65,49 @@ export default function ContactForm() {
         </div>
 
         <div className="contact-group">
+          <label className="contact-label">Telefon</label>
+          <input name="phone" type="tel" placeholder="Optional" className="contact-input" />
+        </div>
+
+        <div className="contact-group">
+          <label className="contact-label">Firmenname *</label>
+          <input name="company" required className="contact-input" />
+        </div>
+
+        <div className="contact-group">
+          <label className="contact-label">Thema / Leistung *</label>
+          <select
+            name="topic"
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+            required
+            className="contact-input"
+          >
+            <option>BPMN-Entwicklung</option>
+            <option>Camunda-Implementierung</option>
+            <option>Microservices-Architektur</option>
+            <option>Prozessautomatisierung</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+
+        {topic === "Sonstiges" && (
+          <div className="contact-group">
+            <label className="contact-label">Beschreibung (Sonstiges) *</label>
+            <textarea name="otherDescription" rows={4} required className="contact-textarea" />
+          </div>
+        )}
+
+        <div className="contact-group">
           <label className="contact-label">Nachricht *</label>
           <textarea name="message" rows={6} required className="contact-textarea" />
         </div>
 
-        <button type="submit" className="btn-primary contact-button">
+        <div className="mt-4">
+          <p className="text-sm text-gray-600">* Pflichtfelder</p>
+        </div>
+
+        <button type="submit" className="btn-primary contact-button mt-4">
           {status === "loading" ? "Sende…" : "Nachricht senden"}
         </button>
       </form>

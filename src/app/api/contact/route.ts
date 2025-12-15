@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, message, phone, company, topic, otherDescription } = await req.json();
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !company || !topic) {
       return NextResponse.json({ error: "Invalid data" }, { status: 400 });
     }
 
@@ -25,8 +25,12 @@ export async function POST(req: NextRequest) {
       replyTo: email,
       subject: "Neue Kontaktanfrage – camundaflow.de",
       html: `
-        <p><b>Name:</b> ${name}</p>
+        <p><b>Name:</b> ${company} — ${name}</p>
         <p><b>Email:</b> ${email}</p>
+        <p><b>Telefon:</b> ${phone || "-"}</p>
+        <p><b>Thema:</b> ${topic}</p>
+        ${otherDescription ? `<p><b>Weitere Beschreibung:</b> ${otherDescription.replace(/\n/g, "<br/>")}</p>` : ""}
+        <hr/>
         <p>${message.replace(/\n/g, "<br/>")}</p>
       `,
     });
