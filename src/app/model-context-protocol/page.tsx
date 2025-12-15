@@ -7,14 +7,10 @@ export const metadata = {
 export default function AiAgentsPage() {
   return (
     <TemplatePage
-      initial="tmp/ai-agents-index.html"
+      initial="tmp/mcp-index.html"
       items={[
-        { label: "AI Agents", template: "tmp/ai-agents-index.html" },
-        { label: "AI & Camunda", template: "tmp/agents-camunda.html" },
-        {
-          label: "Intelligenter Kundenservice",
-          template: "tmp/ai-customer-service.html",
-        },
+        { label: "Model Context Protocol", template: "tmp/mcp-index.html" },
+        { label: "MCP Beispeil", template: "tmp/mcp.html" },
       ]}
     />
   );
