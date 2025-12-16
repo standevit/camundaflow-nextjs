@@ -27,23 +27,24 @@ export default function LanguageSelector() {
       >
         <img
           src={locale === "de" ? "/flags/de.svg" : "/flags/us.svg"}
-          alt={locale === "de" ? "Deutsch" : "English"}
+
           className="object-contain"
-          style={{ width: "4rem", height: "1.4rem" }}
+          style={{ width: "5rem", height: "1.4rem" }}
         />
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-28 bg-white border rounded-md shadow-lg z-40">
+        <div className="absolute right-0 mt-2 bg-white border rounded-md shadow-lg z-40" style={{ width: "2.7rem" }}>
           <button
             onClick={() => {
               setLocale("de");
               setOpen(false);
             }}
-            className="w-full px-3 py-2 flex items-center gap-3 hover:bg-gray-50"
+            className="w-full flex items-center hover:bg-gray-50"
+            style={{ padding: "0.2rem" }}
           >
-            <img src="/flags/de.svg" alt="Deutsch" className="object-contain" style={{ width: "4rem", height: "1.4rem" }} />
-            <span className="text-sm">Deutsch</span>
+            <img src="/flags/de.svg" className="object-contain" style={{ width: "2.2rem", height: "1.4rem" }} />
+            
           </button>
 
           <button
@@ -51,10 +52,11 @@ export default function LanguageSelector() {
               setLocale("en");
               setOpen(false);
             }}
-            className="w-full px-3 py-2 flex items-center gap-3 hover:bg-gray-50"
+            className="w-full flex items-center hover:bg-gray-50"
+            style={{ padding: "0.2rem" }}
           >
-            <img src="/flags/us.svg" alt="English" className="object-contain" style={{ width: "4rem", height: "1.4rem" }} />
-            <span className="text-sm">English</span>
+            <img src="/flags/us.svg"  className="object-contain" style={{ width: "2.2rem", height: "1.4rem" }} />
+           
           </button>
         </div>
       )}
