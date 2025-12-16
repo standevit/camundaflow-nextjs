@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/components/LanguageProvider";
 
 export default function ContactForm() {
+  const { t, getArray } = useTranslation();
   const [status, setStatus] = useState<"" | "loading" | "success" | "error">("");
-  const [topic, setTopic] = useState<string>("BPMN-Entwicklung");
+  const topics = getArray("topic_options");
+  const [topic, setTopic] = useState<string>(topics[0] || "");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,7 +32,9 @@ export default function ContactForm() {
       return;
     }
 
-    if (data.topic === "Ostalo" && !data.otherDescription) {
+    // check localized "Other" option by matching last option key
+    const otherKey = topics[topics.length - 1] || "Other";
+    if (data.topic === otherKey && !data.otherDescription) {
       setStatus("error");
       return;
     }
@@ -45,7 +50,7 @@ export default function ContactForm() {
 
       setStatus("success");
       form.reset();
-      setTopic("BPMN razvoj");
+      setTopic(topics[0] || "");
     } catch {
       setStatus("error");
     }
@@ -55,27 +60,27 @@ export default function ContactForm() {
     <>
       <form onSubmit={handleSubmit} className="contact-form">
         <div className="contact-group">
-          <label className="contact-label">Name *</label>
+          <label className="contact-label">{t("name")}</label>
           <input name="name" required className="contact-input" />
         </div>
 
         <div className="contact-group">
-          <label className="contact-label">E-Mail *</label>
+          <label className="contact-label">{t("email")}</label>
           <input name="email" type="email" required className="contact-input" />
         </div>
 
         <div className="contact-group">
-          <label className="contact-label">Telefon</label>
-          <input name="phone" type="tel" placeholder="Optional" className="contact-input" />
+          <label className="contact-label">{t("phone")}</label>
+          <input name="phone" type="tel" placeholder={t("phone_placeholder") as string} className="contact-input" />
         </div>
 
         <div className="contact-group">
-          <label className="contact-label">Firmenname *</label>
+          <label className="contact-label">{t("company")}</label>
           <input name="company" required className="contact-input" />
         </div>
 
         <div className="contact-group">
-          <label className="contact-label">Thema / Leistung *</label>
+          <label className="contact-label">{t("topic_label")}</label>
           <select
             name="topic"
             value={topic}
@@ -83,45 +88,39 @@ export default function ContactForm() {
             required
             className="contact-input"
           >
-            <option>BPMN-Entwicklung</option>
-            <option>Camunda-Implementierung</option>
-            <option>Microservices-Architektur</option>
-            <option>Prozessautomatisierung</option>
-            <option>Sonstiges</option>
+            {topics.map((opt) => (
+              <option key={opt}>{opt}</option>
+            ))}
           </select>
         </div>
 
-        {topic === "Sonstiges" && (
+        {topic === (topics[topics.length - 1] || "Other") && (
           <div className="contact-group">
-            <label className="contact-label">Beschreibung (Sonstiges) *</label>
+            <label className="contact-label">{t("other_description")}</label>
             <textarea name="otherDescription" rows={4} required className="contact-textarea" />
           </div>
         )}
 
         <div className="contact-group">
-          <label className="contact-label">Nachricht *</label>
+          <label className="contact-label">{t("message")}</label>
           <textarea name="message" rows={6} required className="contact-textarea" />
         </div>
 
         <div className="mt-4">
-          <p className="text-sm text-gray-600">* Pflichtfelder</p>
+          <p className="text-sm text-gray-600">{t("required_note")}</p>
         </div>
 
         <button type="submit" className="btn-primary contact-button mt-4">
-          {status === "loading" ? "Sende…" : "Nachricht senden"}
+          {status === "loading" ? (t("sending") as string) : (t("send") as string)}
         </button>
       </form>
 
       {status === "success" && (
-        <p className="text-center mt-6 font-semibold text-green-600">
-          Vielen Dank! Ich melde mich bald.
-        </p>
+        <p className="text-center mt-6 font-semibold text-green-600">{t("success")}</p>
       )}
 
       {status === "error" && (
-        <p className="text-center mt-6 font-semibold text-red-600">
-          Fehler – bitte direkt an post@camundaflow.de
-        </p>
+        <p className="text-center mt-6 font-semibold text-red-600">{t("error")}</p>
       )}
     </>
   );
