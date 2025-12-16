@@ -1,18 +1,101 @@
-import TemplatePage from "@/components/TemplatePage";
+"use client";
 
-export const metadata = {
-  title: "AI Agents mit Camunda 8 – Camunda Flow",
-};
+import { useState, useEffect } from "react";
+import { useTranslation } from "@/components/LanguageProvider";
+import McpIndexContent from "@/components/content/McpIndexContent";
+import McpContent from "@/components/content/McpContent";
 
-export default function AiAgentsPage() {
+export default function McpPage() {
+  const { t } = useTranslation();
+  const [activeTemplate, setActiveTemplate] = useState("mcp-index");
+
+  const renderContent = () => {
+    switch (activeTemplate) {
+      case "mcp-index":
+        return <McpIndexContent />;
+      case "mcp":
+        return <McpContent />;
+      default:
+        return <McpIndexContent />;
+    }
+  };
+
+  useEffect(() => {
+    const initBpmn = async () => {
+      const canvas = document.getElementById("canvas");
+      if (!canvas) return;
+
+      const BpmnJS = (await import(
+        "bpmn-js/dist/bpmn-navigated-viewer.development.js"
+      )).default;
+
+      const blocks = canvas.querySelectorAll("[data-diagram]");
+
+      for (const block of Array.from(blocks)) {
+        const diagram = block.getAttribute("data-diagram");
+        if (!diagram) continue;
+
+        try {
+          const viewer = new BpmnJS({ container: block });
+          const xml = await fetch(diagram).then((r) => r.text());
+          await viewer.importXML(xml);
+
+          const bpmnCanvas = viewer.get("canvas");
+
+          const tryZoom = () => {
+            const viewbox = bpmnCanvas.viewbox();
+
+            if (
+              viewbox.inner &&
+              viewbox.outer &&
+              viewbox.outer.width > 0 &&
+              viewbox.outer.height > 0
+            ) {
+              bpmnCanvas.zoom("fit-viewport", { padding: 30 });
+            } else {
+              requestAnimationFrame(tryZoom);
+            }
+          };
+
+          tryZoom();
+        } catch (err) {
+          console.error("Failed to load BPMN diagram:", err);
+        }
+      }
+    };
+
+    initBpmn();
+  }, [activeTemplate]);
+
   return (
-    <TemplatePage
-      initial="tmp/mcp-index.html"
-      items={[
-        { label: "Model Context Protocol", template: "tmp/mcp-index.html" },
-        { label: "MCP Beispeil", template: "tmp/mcp.html" },
-      ]}
-    />
+    <div className="container">
+      <aside className="sidebar">
+        <h3>{t("select_examples")}</h3>
+        <ul>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "mcp-index" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("mcp-index")}
+            >
+              {t("mcp_option1")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "mcp" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("mcp")}
+            >
+              {t("mcp_example")}
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <main className="main-content">
+        <div className="card">
+          <div id="canvas">{renderContent()}</div>
+        </div>
+      </main>
+    </div>
   );
 }
-

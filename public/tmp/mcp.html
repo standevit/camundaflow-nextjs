@@ -1,13 +1,13 @@
-<h2>MCP Tool Execution with User Confirmation</h2>
+<h2>MCP Tool-Ausführung mit Benutzerbestätigung</h2>
 <p>
-  The following describes a secure, governed BPMN process in Camunda 8 that allows an AI agent to use MCP tools (Model Context Protocol) only after explicit checks and, if necessary, user approval.
+  Im Folgenden wird ein sicherer, kontrollierter BPMN-Prozess in Camunda 8 beschrieben, der es einem KI-Agenten ermöglicht, MCP-Tools (Model Context Protocol) nur nach expliziten Prüfungen und, falls erforderlich, Benutzerfreigabe zu verwenden.
 </p>
 <ul>
-  <li>A user submits a request, and the system decides whether an AI agent should be deployed</li>
-  <li>The AI agent can use various MCP tools (e.g., DeepWiki, Time Conversions, Fetch URL, GitHub, Filesystem)</li>
-  <li>For certain actions, an embedded MCP sub-process is started that checks whether the planned tool execution requires user confirmation</li>
-  <li>If confirmation is required, the user is asked for approval and the answer is validated via a DMN decision table</li>
-  <li>If execution is allowed, the AI agent performs the action using the respective MCP tool (e.g., Filesystem); otherwise the sub-process ends with “MCP execution not allowed”</li>
-  <li>Finally, the user receives feedback or a complete summary of the results</li>
+  <li>Ein Benutzer stellt eine Anfrage, und das System entscheidet, ob ein KI-Agent eingesetzt werden soll</li>
+  <li>Der KI-Agent kann verschiedene MCP-Tools verwenden (z.B. DeepWiki, Zeit-Konvertierungen, Fetch URL, GitHub, Dateisystem)</li>
+  <li>Für bestimmte Aktionen wird ein eingebetteter MCP-Subprozess gestartet, der prüft, ob die geplante Tool-Ausführung eine Benutzerbestätigung erfordert</li>
+  <li>Falls Bestätigung erforderlich ist, wird der Benutzer um Freigabe gebeten und die Antwort wird über eine DMN-Entscheidungstabelle validiert</li>
+  <li>Wenn die Ausführung erlaubt ist, führt der KI-Agent die Aktion mit dem jeweiligen MCP-Tool aus (z.B. Dateisystem); andernfalls endet der Subprozess mit "MCP-Ausführung nicht erlaubt"</li>
+  <li>Abschließend erhält der Benutzer Feedback oder eine vollständige Zusammenfassung der Ergebnisse</li>
 </ul>
 <div class="bpmn-container" data-diagram="../bpmn/mcp.bpmn"></div>

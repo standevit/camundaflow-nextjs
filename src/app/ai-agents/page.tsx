@@ -1,22 +1,112 @@
-import TemplatePage from "@/components/TemplatePage";
+"use client";
 
-export const metadata = {
-  title: "AI Agents mit Camunda 8 – Camunda Flow",
-};
+import { useState, useEffect } from "react";
+import { useTranslation } from "@/components/LanguageProvider";
+import AiAgentsIndexContent from "@/components/content/AiAgentsIndexContent";
+import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
+import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
 
 export default function AiAgentsPage() {
+  const { t } = useTranslation();
+  const [activeTemplate, setActiveTemplate] = useState("ai-agents-index");
+
+  const renderContent = () => {
+    switch (activeTemplate) {
+      case "ai-agents-index":
+        return <AiAgentsIndexContent />;
+      case "agents-camunda":
+        return <AgentsCamundaContent />;
+      case "ai-customer-service":
+        return <AiCustomerServiceContent />;
+      default:
+        return <AiAgentsIndexContent />;
+    }
+  };
+
+  useEffect(() => {
+    const initBpmn = async () => {
+      const canvas = document.getElementById("canvas");
+      if (!canvas) return;
+
+      const BpmnJS = (await import(
+        "bpmn-js/dist/bpmn-navigated-viewer.development.js"
+      )).default;
+
+      const blocks = canvas.querySelectorAll("[data-diagram]");
+
+      for (const block of Array.from(blocks)) {
+        const diagram = block.getAttribute("data-diagram");
+        if (!diagram) continue;
+
+        try {
+          const viewer = new BpmnJS({ container: block });
+          const xml = await fetch(diagram).then((r) => r.text());
+          await viewer.importXML(xml);
+
+          const bpmnCanvas = viewer.get("canvas");
+
+          const tryZoom = () => {
+            const viewbox = bpmnCanvas.viewbox();
+
+            if (
+              viewbox.inner &&
+              viewbox.outer &&
+              viewbox.outer.width > 0 &&
+              viewbox.outer.height > 0
+            ) {
+              bpmnCanvas.zoom("fit-viewport", { padding: 30 });
+            } else {
+              requestAnimationFrame(tryZoom);
+            }
+          };
+
+          tryZoom();
+        } catch (err) {
+          console.error("Failed to load BPMN diagram:", err);
+        }
+      }
+    };
+
+    initBpmn();
+  }, [activeTemplate]);
+
   return (
-    <TemplatePage
-      initial="tmp/ai-agents-index.html"
-      items={[
-        { label: "AI Agents", template: "tmp/ai-agents-index.html" },
-        { label: "AI & Camunda", template: "tmp/agents-camunda.html" },
-        {
-          label: "Intelligenter Kundenservice",
-          template: "tmp/ai-customer-service.html",
-        },
-      ]}
-    />
+    <div className="container">
+      <aside className="sidebar">
+        <h3>{t("select_examples")}</h3>
+        <ul>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "ai-agents-index" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("ai-agents-index")}
+            >
+              {t("ai_agents_opt1")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "agents-camunda" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("agents-camunda")}
+            >
+              {t("ai_camunda")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "ai-customer-service" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("ai-customer-service")}
+            >
+              {t("intelligent_customer_service")}
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <main className="main-content">
+        <div className="card">
+          <div id="canvas">{renderContent()}</div>
+        </div>
+      </main>
+    </div>
   );
 }
-

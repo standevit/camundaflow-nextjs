@@ -2,20 +2,10 @@
 
 import { useEffect } from "react";
 import { useTranslation } from "@/components/LanguageProvider";
+import Link from "next/link";
 
-type Item = {
-  label: string;
-  template: string;
-};
-
-export default function TemplatePage({
-  items,
-  initial,
-}: {
-  items: Item[];
-  initial: string;
-}) {
-  const { locale, t } = useTranslation();
+export default function HomePage() {
+  const { t, locale } = useTranslation();
 
   const getLocalizedCandidate = (path: string) => {
     // For German, use base file (no suffix); for English, use -en suffix
@@ -37,37 +27,36 @@ export default function TemplatePage({
   const loadPage = async (file: string) => {
     const canvas = document.getElementById("canvas");
     if (!canvas) return;
-    // try localized variant first, then fall back to the base file
+
     const candidate = getLocalizedCandidate(file);
     let html: string;
     try {
       const res = await fetch(candidate);
-      if (res.ok) {
-        html = await res.text();
-      } else {
-        html = await fetch(file.startsWith("/") ? file : "/" + file).then((r) => r.text());
-      }
+      if (res.ok) html = await res.text();
+      else html = await fetch(file.startsWith("/") ? file : "/" + file).then(res => res.text());
     } catch (e) {
-      html = await fetch(file.startsWith("/") ? file : "/" + file).then((r) => r.text());
+      html = await fetch(file.startsWith("/") ? file : "/" + file).then(res => res.text());
     }
+
     canvas.innerHTML = html;
 
-    // Load BPMN viewer dynamically
+    // dinamički učitaj BPMN viewer
     const BpmnJS = (await import(
       "bpmn-js/dist/bpmn-navigated-viewer.development.js"
     )).default;
 
-    // Find all BPMN blocks
+    // pronađi sve BPMN blokove
     const blocks = canvas.querySelectorAll("[data-diagram]");
-    
-    // Process each block
+
+    // Process each block sequentially
     for (const block of Array.from(blocks)) {
       const diagram = block.getAttribute("data-diagram");
       if (!diagram) continue;
 
       try {
         const viewer = new BpmnJS({ container: block });
-        const xml = await fetch(diagram).then((r) => r.text());
+        const xml = await fetch(diagram).then(r => r.text());
+
         await viewer.importXML(xml);
         
         const bpmnCanvas = viewer.get("canvas");
@@ -94,22 +83,22 @@ export default function TemplatePage({
     }
   };
 
-  // reload template when locale (or initial) changes
+  // reload initial template when locale changes
   useEffect(() => {
-    loadPage("/" + initial);
-  }, [locale, initial]);
+    loadPage("/tmp/bpmn.html");
+  }, [locale]);
 
   // register click handlers once
   useEffect(() => {
     const handlers: Array<() => void> = [];
 
-    document.querySelectorAll(".example-link").forEach((link) => {
+    document.querySelectorAll(".example-link").forEach(link => {
       const handler = (e: Event) => {
         e.preventDefault();
 
         document
           .querySelectorAll(".example-link")
-          .forEach((l) => l.classList.remove("active"));
+          .forEach(l => l.classList.remove("active"));
 
         link.classList.add("active");
 
@@ -120,35 +109,59 @@ export default function TemplatePage({
       handlers.push(() => link.removeEventListener("click", handler));
     });
 
-    return () => {
-      handlers.forEach((fn) => fn());
-    };
+    return () => handlers.forEach(fn => fn());
   }, []);
 
   return (
     <div className="container">
+      {/* SIDEBAR */}
       <aside className="sidebar">
         <h3>{t("select_examples")}</h3>
         <ul>
-          {items.map((i, idx) => (
-            <li key={i.template}>
-              <a
-                className={`example-link ${idx === 0 ? "active" : ""}`}
-                data-template={i.template}
-              >
-                {i.label}
-              </a>
-            </li>
-          ))}
+          <li>
+            <a className="example-link active" data-template="tmp/bpmn.html">
+              {t("bpmn_20")}
+            </a>
+          </li>
+          <li>
+            <a className="example-link" data-template="tmp/process-basics.html">
+              {t("process_modeling")}
+            </a>
+          </li>
+          <li>
+            <a className="example-link" data-template="tmp/pizza.html">
+              {t("pizza_order")}
+            </a>
+          </li>
+          <li>
+            <a className="example-link" data-template="tmp/order-approval-process.html">
+              {t("order_approval")}
+            </a>
+          </li>
+          <li>
+            <a className="example-link" data-template="tmp/lieferung.html">
+              {t("event_driven")}
+            </a>
+          </li>
+          <li>
+            <a className="example-link" data-template="tmp/b2bbestellung.html">
+              {t("webshop")}
+            </a>
+          </li>
         </ul>
       </aside>
 
+      {/* MAIN */}
       <main className="main-content">
         <div className="card">
           <div id="canvas" />
+          <Link href="/ai-agents" className="btn-primary">
+            {t("ai_agents_link")}
+          </Link>
         </div>
       </main>
     </div>
   );
 }
+
 
