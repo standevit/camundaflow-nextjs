@@ -1,9 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const MAX_CONTEXT_LENGTH = 1000; // characters limit per request
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const messages = body.messages || [];
+
+    // Validate context length to prevent excessive token usage
+    const contextLength = JSON.stringify(messages).length;
+    console.log(`[API] Received ${messages.length} messages, ${contextLength} chars (max: ${MAX_CONTEXT_LENGTH})`);
+    if (contextLength > MAX_CONTEXT_LENGTH) {
+      return NextResponse.json(
+        { error: `Context too long (${contextLength} chars, max ${MAX_CONTEXT_LENGTH}). Try shorter messages or fewer chat history.` },
+        { status: 400 }
+      );
+    }
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(

@@ -36,10 +36,18 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
+      // Limit chat history to last 5 messages (excluding system) to reduce token usage
+      const MAX_HISTORY = 5;
+      const userMessages = messages.filter((m) => m.role !== "system");
+      const limitedHistory = userMessages.slice(-MAX_HISTORY);
+      const messagesToSend = [...limitedHistory, { role: "user", content: userText }];
+
+      console.log(`[Chat] Sending ${messagesToSend.length} messages, ${JSON.stringify(messagesToSend).length} chars`);
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, { role: "user", content: userText }] }),
+        body: JSON.stringify({ messages: messagesToSend }),
       });
 
       if (!res.ok) {

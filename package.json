@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "bpmn-js": "^15.0.0",
+    "bpmn-js-properties-panel": "^5.44.0",
+    "diagram-js": "^15.4.0",
     "next": "14.2.5",
     "nodemailer": "^6.10.1",
     "react": "18.3.1",
