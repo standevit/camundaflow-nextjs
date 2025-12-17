@@ -7,6 +7,14 @@ export default function LeistungenPage() {
 
   return (
     <div className="container">
+      <aside className="sidebar" style={{ padding: 0, background: 'transparent' }}>
+        <img 
+          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80" 
+          alt="Business analytics" 
+          className="w-full h-full object-cover"
+        />
+      </aside>
+
       <main className="main-content">
         <div className="card">
           <h2>{t("leistungen_title")}</h2>

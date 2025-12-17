@@ -10,7 +10,7 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "system", content: "Du bist ein hilfreicher Assistent für die Website." },
+
   ]);
   const [loading, setLoading] = useState(false);
   const messagesRef = useRef<HTMLDivElement | null>(null);
