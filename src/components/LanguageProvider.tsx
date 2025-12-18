@@ -26,7 +26,7 @@ const translations: Record<string, Messages> = {
     ],
     other_description: "Beschreibung (Sonstiges) *",
     message: "Nachricht *",
-    required_note: "Pflichtfelder",
+    required_note: "* Pflichtfelder",
     sending: "Sende…",
     send: "Nachricht senden",
     success: "Vielen Dank! Ich melde mich bald.",
