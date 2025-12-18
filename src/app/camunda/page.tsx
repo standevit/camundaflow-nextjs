@@ -7,6 +7,7 @@ import WorkflowAutomationContent from "@/components/content/WorkflowAutomationCo
 import ProcessOrchestrationContent from "@/components/content/ProcessOrchestrationContent";
 import HumanCentricContent from "@/components/content/HumanCentricContent";
 import ScalabilityContent from "@/components/content/ScalabilityContent";
+import MigrationContent from "@/components/content/MigrationContent";
 
 export default function CamundaPage() {
   const { t } = useTranslation();
@@ -24,6 +25,8 @@ export default function CamundaPage() {
         return <HumanCentricContent />;
       case "scalability":
         return <ScalabilityContent />;
+      case "migration":
+        return <MigrationContent />;
       default:
         return <CamundaIndexContent />;
     }
@@ -72,6 +75,14 @@ export default function CamundaPage() {
               onClick={() => setActiveTemplate("scalability")}
             >
               {t("scalability")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "migration" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("migration")}
+            >
+              {t("migration_link")}
             </a>
           </li>
         </ul>
