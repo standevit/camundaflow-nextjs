@@ -26,10 +26,10 @@ export default function LanguageSelector() {
         className="flex items-center justify-center p-1 rounded-md border"
       >
         <img
-          src={locale === "de" ? "/flags/de.svg" : "/flags/us.svg"}
+          src={locale === "de" ? "/flags/de.svg" : locale === "nl" ? "/flags/nl.svg" : "/flags/us.svg"}
 
           className="object-contain"
-          style={{ width: "5rem", height: "1.4rem" }}
+          style={{ minWidth: "2.2rem", height: "1.4rem" }}
         />
       </button>
 
@@ -44,6 +44,18 @@ export default function LanguageSelector() {
             style={{ padding: "0.2rem" }}
           >
             <img src="/flags/de.svg" className="object-contain" style={{ width: "2.2rem", height: "1.4rem" }} />
+            
+          </button>
+
+          <button
+            onClick={() => {
+              setLocale("nl");
+              setOpen(false);
+            }}
+            className="w-full flex items-center hover:bg-gray-50"
+            style={{ padding: "0.2rem" }}
+          >
+            <img src="/flags/nl.svg" className="object-contain" style={{ width: "2.2rem", height: "1.4rem" }} />
             
           </button>
 
