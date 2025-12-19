@@ -824,7 +824,7 @@ const translations: Record<string, Messages> = {
 
     // Header & Navigation
     nav_bpmn: "BPMN",
-    nav_camunda: "Camunda 8 Migratie",
+    nav_camunda: "Camunda 8",
     nav_ai_agents: "AI Agents",
     nav_mcp: "Model Context Protocol",
     nav_leistungen: "Diensten",
