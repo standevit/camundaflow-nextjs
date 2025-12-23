@@ -12,9 +12,9 @@ export default function SupplyChainContent() {
         marginBottom: '2rem',
         color: 'white'
       }}>
-        <h2 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.8rem' }}>
-          {t("ref_supply_title")}
-        </h2>
+        <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.75rem', fontWeight: '700' }}>
+          {t('ref_supply_title')}
+        </h3>
         <p style={{ opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>
           {t("ref_supply_company")}
         </p>

@@ -8,9 +8,9 @@ export default function ServicePortalBWContent() {
         marginBottom: '2rem',
         color: 'white'
       }}>
-        <h2 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.8rem' }}>
+        <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.75rem', fontWeight: '700' }}>
           Service-Portal Baden-Württemberg
-        </h2>
+        </h3>
         <p style={{ opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>
           Komm.ONE - Evia · Stuttgart · 2022
         </p>

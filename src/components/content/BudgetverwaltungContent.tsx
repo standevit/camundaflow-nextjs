@@ -8,9 +8,9 @@ export default function BudgetverwaltungContent() {
         marginBottom: '2rem',
         color: 'white'
       }}>
-        <h2 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.8rem' }}>
+        <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.75rem', fontWeight: '700' }}>
           Budgetverwaltung für das Land Rheinland-Pfalz
-        </h2>
+        </h3>
         <p style={{ opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>
           Ministerium der Finanzen Rheinland-Pfalz · Mainz · 2023-2024
         </p>

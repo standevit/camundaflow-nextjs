@@ -16,14 +16,14 @@ export default function AiAgentsIndexContent() {
         marginBottom: '3rem',
         textAlign: 'center'
       }}>
-        <h2 style={{ 
-          fontSize: '2.5rem', 
+        <h3 style={{ 
+          fontSize: '1.75rem', 
           fontWeight: '700', 
           marginBottom: '1rem',
           color: 'white'
         }}>
           {t("ai_agents_index_heading")}
-        </h2>
+        </h3>
         <p style={{ 
           fontSize: '1.2rem', 
           lineHeight: '1.8',

@@ -17,9 +17,9 @@ export default function McpContent() {
         marginBottom: '2rem',
         color: 'white'
       }}>
-        <h2 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.8rem' }}>
-          {t("mcp_heading")}
-        </h2>
+        <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.75rem', fontWeight: '700' }}>
+          {t('mcp_heading')}
+        </h3>
         <p style={{ color: 'white', opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>
           {t("mcp_intro")}
         </p>
