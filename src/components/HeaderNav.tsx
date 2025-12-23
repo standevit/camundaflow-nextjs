@@ -21,6 +21,7 @@ export default function HeaderNav() {
             {t("nav_mcp")}
           </Link>
           <Link href="/leistungen" className="hover:text-blue-600 transition">{t("nav_leistungen")}</Link>
+          <Link href="/references" className="hover:text-blue-600 transition">{t("nav_references")}</Link>
           <Link href="/contact" className="hover:text-blue-600 transition">{t("nav_contact")}</Link>
         </div>
         <div className="ml-4">

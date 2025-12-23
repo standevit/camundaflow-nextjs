@@ -47,7 +47,30 @@ export default function LeistungenPage() {
               <p>
                 {t("migration_desc")}
               </p>
-              <a href="/camunda?tab=migration" className="btn-secondary" style={{ marginTop: '1rem', display: 'inline-block' }}>
+              <a 
+                href="/camunda?tab=migration" 
+                className="btn-primary" 
+                style={{ 
+                  marginTop: '1rem', 
+                  display: 'inline-block',
+                  padding: '0.75rem 1.5rem',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                }}
+              >
                 {t("migration_link")} →
               </a>
             </div>
@@ -116,7 +139,30 @@ export default function LeistungenPage() {
             </div>
           </div>
 
-          <a href="/contact" className="btn-primary">
+          <a 
+            href="/contact" 
+            className="btn-primary"
+            style={{ 
+              marginTop: '2rem',
+              display: 'inline-block',
+              padding: '0.75rem 1.5rem',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontWeight: '600',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            }}
+          >
             {t("request_quote")}
           </a>
         </div>
