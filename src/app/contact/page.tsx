@@ -9,6 +9,10 @@ export default function ContactPage() {
   const [companyInfo, setCompanyInfo] = useState<{ name: string; address: string; phone: string; kvk: string } | null>(null);
 
   useEffect(() => {
+    document.title = `${t('contact_title')} | CamundaFlow`;
+  }, [t]);
+
+  useEffect(() => {
 
     const obfuscated = {
       name: "UHJvQXBweg==",
@@ -101,6 +105,9 @@ export default function ContactPage() {
               paddingTop: '1.5rem'
             }}>
               {t("contact_eu_text")}
+              <div style={{ marginTop: '0.5rem', fontWeight: 'bold' }}>
+                {t("no_cure_no_pay")}
+              </div>
             </div>
           </div>
         )}

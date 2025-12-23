@@ -10,6 +10,16 @@ export default function AiAgentsPage() {
   const { t } = useTranslation();
   const [activeTemplate, setActiveTemplate] = useState("ai-agents-index");
 
+  useEffect(() => {
+    // Update document title based on active template
+    const titleMap: Record<string, string> = {
+      'ai-agents-index': t('ai_agents_index_heading'),
+      'agents-camunda': t('agents_camunda_heading'),
+      'ai-customer-service': t('ai_customer_service_intro_heading')
+    };
+    document.title = `${titleMap[activeTemplate] || 'AI Agents'} | CamundaFlow`;
+  }, [activeTemplate, t]);
+
   const renderContent = () => {
     switch (activeTemplate) {
       case "ai-agents-index":

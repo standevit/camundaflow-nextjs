@@ -13,6 +13,28 @@ export default function CamundaPage() {
   const { t } = useTranslation();
   const [activeTemplate, setActiveTemplate] = useState("camunda-index");
 
+  useEffect(() => {
+    // Check URL params for tab parameter
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab && ['camunda-index', 'workflow-automation', 'process-orchestration', 'human-centric', 'scalability', 'migration'].includes(tab)) {
+      setActiveTemplate(tab);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Update document title based on active template
+    const titleMap: Record<string, string> = {
+      'camunda-index': t('what_is_camunda8'),
+      'workflow-automation': t('workflow_automation'),
+      'process-orchestration': t('process_orchestration'),
+      'human-centric': t('user_tasks_cockpit'),
+      'scalability': t('scalability'),
+      'migration': t('migration_link')
+    };
+    document.title = `${titleMap[activeTemplate] || 'Camunda 8'} | CamundaFlow`;
+  }, [activeTemplate, t]);
+
   const renderContent = () => {
     switch (activeTemplate) {
       case "camunda-index":

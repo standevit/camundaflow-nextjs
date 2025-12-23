@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslation } from "@/components/LanguageProvider";
 
 export default function LeistungenPage() {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    document.title = `${t('leistungen_title')} | CamundaFlow`;
+  }, [t]);
 
   return (
     <div className="container">
@@ -42,6 +47,9 @@ export default function LeistungenPage() {
               <p>
                 {t("migration_desc")}
               </p>
+              <a href="/camunda?tab=migration" className="btn-secondary" style={{ marginTop: '1rem', display: 'inline-block' }}>
+                {t("migration_link")} →
+              </a>
             </div>
 
             <div className="leistungen-card">

@@ -9,6 +9,15 @@ export default function McpPage() {
   const { t } = useTranslation();
   const [activeTemplate, setActiveTemplate] = useState("mcp-index");
 
+  useEffect(() => {
+    // Update document title based on active template
+    const titleMap: Record<string, string> = {
+      'mcp-index': t('mcp_index_heading'),
+      'mcp': t('mcp_heading')
+    };
+    document.title = `${titleMap[activeTemplate] || 'MCP'} | CamundaFlow`;
+  }, [activeTemplate, t]);
+
   const renderContent = () => {
     switch (activeTemplate) {
       case "mcp-index":
