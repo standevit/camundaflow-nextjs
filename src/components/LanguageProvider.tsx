@@ -37,7 +37,7 @@ const translations: Record<string, Messages> = {
     establishment_type: "Hauptsitz",
     company_description: "Java-Entwickler.",
     trade_name: "Handelsname",
-    kvk_number: "Handelskammernummer",
+    kvk_number: "Handelsregisternummer",
 
     // Home page
     home_title: "BPMN Beispiele",
