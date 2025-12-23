@@ -156,6 +156,10 @@ export default function ChatWidget() {
   return (
     <>
       <style jsx>{`
+        .chat-widget-container {
+          font-family: 'Times New Roman', Times, serif;
+        }
+        
         @keyframes slideUp {
           from {
             opacity: 0;
@@ -215,7 +219,7 @@ export default function ChatWidget() {
         }
       `}</style>
       
-      <div>
+      <div className="chat-widget-container">
         {/* Floating bubble */}
         <div className="fixed bottom-6 right-6 z-50">
           {open && (
