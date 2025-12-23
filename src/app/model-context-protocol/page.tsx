@@ -29,53 +29,6 @@ export default function McpPage() {
     }
   };
 
-  useEffect(() => {
-    const initBpmn = async () => {
-      const canvas = document.getElementById("canvas");
-      if (!canvas) return;
-
-      const BpmnJS = (await import(
-        "bpmn-js/dist/bpmn-navigated-viewer.development.js"
-      )).default;
-
-      const blocks = canvas.querySelectorAll("[data-diagram]");
-
-      for (const block of Array.from(blocks)) {
-        const diagram = block.getAttribute("data-diagram");
-        if (!diagram) continue;
-
-        try {
-          const viewer = new BpmnJS({ container: block });
-          const xml = await fetch(diagram).then((r) => r.text());
-          await viewer.importXML(xml);
-
-          const bpmnCanvas = viewer.get("canvas");
-
-          const tryZoom = () => {
-            const viewbox = bpmnCanvas.viewbox();
-
-            if (
-              viewbox.inner &&
-              viewbox.outer &&
-              viewbox.outer.width > 0 &&
-              viewbox.outer.height > 0
-            ) {
-              bpmnCanvas.zoom("fit-viewport", { padding: 30 });
-            } else {
-              requestAnimationFrame(tryZoom);
-            }
-          };
-
-          tryZoom();
-        } catch (err) {
-          console.error("Failed to load BPMN diagram:", err);
-        }
-      }
-    };
-
-    initBpmn();
-  }, [activeTemplate]);
-
   return (
     <div className="container">
       <aside className="sidebar">

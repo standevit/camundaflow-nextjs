@@ -223,7 +223,7 @@ const translations: Record<string, Messages> = {
 
     // Header & Navigation
     nav_bpmn: "BPMN",
-    nav_camunda: "Camunda 8",
+    nav_camunda: "Camunda",
     nav_ai_agents: "AI Agents",
     nav_mcp: "Model Context Protocol",
     nav_leistungen: "Leistungen",
@@ -305,6 +305,49 @@ const translations: Record<string, Messages> = {
     bpmn_swimlanes: "Verantwortlichkeiten und Rollen abbilden.",
     bpmn_benefits_title: "Warum BPMN nutzen?",
     bpmn_benefits: "BPMN schafft eine gemeinsame Sprache zwischen Business und IT, verbessert Transparenz und ist die Grundlage für Workflow-Engines wie Camunda 8.",
+
+    // BPMN Diagrams
+    pizza_process_desc: "Ein einfacher Prozess zur Bestellung und Lieferung von Pizza",
+    pizza_step1: "Kunde startet eine Bestellung",
+    pizza_step2: "System nimmt die Bestellung auf und speichert Details",
+    pizza_step3: "Küche bereitet die Pizza nach Bestellangaben zu",
+    pizza_step4: "Entscheidung ob Lieferung oder Abholung",
+    pizza_step5: "Fahrer liefert die Pizza an die angegebene Adresse",
+    pizza_step6: "Prozess ist abgeschlossen, Bestellung erfolgreich",
+    order_approval_desc: "Genehmigungsprozess für Bestellungen mit automatischer Prüfung und Manager-Freigabe",
+    order_step1: "Neue Bestellung wird eingereicht",
+    order_step2: "System prüft automatisch Betrag, Verfügbarkeit und Kreditlimit",
+    order_step3: "Bei Beträgen über Limit → Manager-Genehmigung erforderlich",
+    order_step4: "Manager erhält User Task zur Freigabe oder Ablehnung",
+    order_step5: "Genehmigte Bestellung wird zur Ausführung weitergeleitet",
+    order_step6: "Prozess endet – Bestellung genehmigt oder abgelehnt",
+
+    // Delivery Process
+    delivery_process_desc: "Event-gesteuerter Lieferprozess mit Message Events und paralleler Verarbeitung",
+    delivery_step1: "Lieferauftrag wird erstellt",
+    delivery_step2: "System prüft Lagerbestand automatisch",
+    delivery_step3: "Warten auf Bestätigung vom Lager (Message Intermediate Event)",
+    delivery_step4: "Parallel: Versandetiketten erstellen und Carrier informieren",
+    delivery_step5: "Sendungsverfolgung aktivieren und Kunde benachrichtigen",
+    delivery_step6: "Lieferung abgeschlossen",
+
+    // B2B Process
+    b2b_process_desc: "Komplexer B2B-Bestellprozess mit Kreditprüfung und ERP-Integration",
+    b2b_step1: "B2B-Kunde reicht Großbestellung ein",
+    b2b_step2: "Automatische Kreditwürdigkeitsprüfung via externem Service",
+    b2b_step3: "Entscheidung basierend auf Kreditlimit und Zahlungshistorie",
+    b2b_step4: "Service Task erstellt Vertragsdokument",
+    b2b_step5: "Bestellung wird an SAP/ERP-System übermittelt",
+    b2b_step6: "Bestätigung an Kunden, Prozess beendet",
+
+    // MCP Example
+    mcp_example_desc: "AI Agent verarbeitet Kundenanfrage automatisch mit MCP-Integration",
+    mcp_example_step1: "Kundenanfrage per E-Mail oder Chat eingehend",
+    mcp_example_step2: "AI Agent analysiert Intent, Sentiment und Dringlichkeit",
+    mcp_example_step3: "Agent ruft MCP Server auf für Kundendaten und Bestellhistorie",
+    mcp_example_step4: "MCP Server liefert strukturierte Daten aus CRM/ERP zurück",
+    mcp_example_step5: "AI generiert Antwort und triggert Camunda-Prozess (z.B. Rücksendung)",
+    mcp_example_step6: "Kunde erhält automatische Benachrichtigung, Ticket erstellt",
 
     // Process Basics page
     process_basics_title: "Geschäftsprozesse – Was, Warum, Wie?",
@@ -694,7 +737,7 @@ const translations: Record<string, Messages> = {
 
     // Header & Navigation
     nav_bpmn: "BPMN",
-    nav_camunda: "Camunda 8",
+    nav_camunda: "Camunda",
     nav_ai_agents: "AI Agents",
     nav_mcp: "Model Context Protocol",
     nav_leistungen: "Services",
@@ -776,6 +819,49 @@ const translations: Record<string, Messages> = {
     bpmn_swimlanes: "Represent responsibilities and roles.",
     bpmn_benefits_title: "Why Use BPMN?",
     bpmn_benefits: "BPMN creates a common language between business and IT, improves transparency, and is the foundation for workflow engines like Camunda 8.",
+
+    // BPMN Diagrams
+    pizza_process_desc: "A simple process for ordering and delivering pizza",
+    pizza_step1: "Customer starts an order",
+    pizza_step2: "System receives the order and stores details",
+    pizza_step3: "Kitchen prepares the pizza according to order specifications",
+    pizza_step4: "Decision whether delivery or pickup",
+    pizza_step5: "Driver delivers the pizza to the specified address",
+    pizza_step6: "Process is complete, order successful",
+    order_approval_desc: "Approval process for orders with automatic validation and manager approval",
+    order_step1: "New order is submitted",
+    order_step2: "System automatically checks amount, availability, and credit limit",
+    order_step3: "For amounts over limit → Manager approval required",
+    order_step4: "Manager receives user task to approve or reject",
+    order_step5: "Approved order is forwarded for execution",
+    order_step6: "Process ends – order approved or rejected",
+
+    // Delivery Process
+    delivery_process_desc: "Event-driven delivery process with message events and parallel processing",
+    delivery_step1: "Delivery order is created",
+    delivery_step2: "System automatically checks inventory",
+    delivery_step3: "Waiting for confirmation from warehouse (Message Intermediate Event)",
+    delivery_step4: "Parallel: Create shipping labels and inform carrier",
+    delivery_step5: "Activate tracking and notify customer",
+    delivery_step6: "Delivery completed",
+
+    // B2B Process
+    b2b_process_desc: "Complex B2B order process with credit check and ERP integration",
+    b2b_step1: "B2B customer submits bulk order",
+    b2b_step2: "Automatic credit check via external service",
+    b2b_step3: "Decision based on credit limit and payment history",
+    b2b_step4: "Service task creates contract document",
+    b2b_step5: "Order is transmitted to SAP/ERP system",
+    b2b_step6: "Confirmation to customer, process ended",
+
+    // MCP Example
+    mcp_example_desc: "AI Agent automatically processes customer inquiry with MCP integration",
+    mcp_example_step1: "Customer inquiry received via email or chat",
+    mcp_example_step2: "AI Agent analyzes intent, sentiment, and urgency",
+    mcp_example_step3: "Agent calls MCP Server for customer data and order history",
+    mcp_example_step4: "MCP Server returns structured data from CRM/ERP",
+    mcp_example_step5: "AI generates response and triggers Camunda process (e.g., return)",
+    mcp_example_step6: "Customer receives automatic notification, ticket created",
 
     // Process Basics page
     process_basics_title: "Business Processes – What, Why, How?",
@@ -1038,7 +1124,7 @@ const translations: Record<string, Messages> = {
 
     // Header & Navigation
     nav_bpmn: "BPMN",
-    nav_camunda: "Camunda 8",
+    nav_camunda: "Camunda",
     nav_ai_agents: "AI Agents",
     nav_mcp: "Model Context Protocol",
     nav_leistungen: "Diensten",
@@ -1266,6 +1352,51 @@ const translations: Record<string, Messages> = {
     bpmn_flows: "– Stromen die de volgorde bepalen.",
     bpmn_pools: "– Scheiden van partijen/systemen.",
     bpmn_swimlanes: "Verantwoordelijkheden en rollen weergeven.",
+    bpmn_benefits_title: "Waarom BPMN gebruiken?",
+    bpmn_benefits: "BPMN creëert een gemeenschappelijke taal tussen business en IT, verbetert transparantie en is de basis voor workflow-engines zoals Camunda 8.",
+
+    // BPMN Diagrams
+    pizza_process_desc: "Een eenvoudig proces voor het bestellen en bezorgen van pizza",
+    pizza_step1: "Klant start een bestelling",
+    pizza_step2: "Systeem ontvangt de bestelling en slaat details op",
+    pizza_step3: "Keuken bereidt de pizza volgens bestelspecificaties",
+    pizza_step4: "Beslissing of bezorging of afhalen",
+    pizza_step5: "Chauffeur bezorgt de pizza op het opgegeven adres",
+    pizza_step6: "Proces is voltooid, bestelling succesvol",
+    order_approval_desc: "Goedkeuringsproces voor bestellingen met automatische validatie en manager goedkeuring",
+    order_step1: "Nieuwe bestelling wordt ingediend",
+    order_step2: "Systeem controleert automatisch bedrag, beschikbaarheid en kredietlimiet",
+    order_step3: "Voor bedragen boven limiet → Manager goedkeuring vereist",
+    order_step4: "Manager ontvangt gebruikerstaak om goed te keuren of af te wijzen",
+    order_step5: "Goedgekeurde bestelling wordt doorgestuurd voor uitvoering",
+    order_step6: "Proces eindigt – bestelling goedgekeurd of afgewezen",
+
+    // Delivery Process
+    delivery_process_desc: "Event-gestuurd leveringsproces met message events en parallelle verwerking",
+    delivery_step1: "Leveringsopdracht wordt aangemaakt",
+    delivery_step2: "Systeem controleert automatisch voorraad",
+    delivery_step3: "Wachten op bevestiging van magazijn (Message Intermediate Event)",
+    delivery_step4: "Parallel: Verzendlabels maken en vervoerder informeren",
+    delivery_step5: "Tracking activeren en klant op de hoogte stellen",
+    delivery_step6: "Levering voltooid",
+
+    // B2B Process
+    b2b_process_desc: "Complex B2B-bestelproces met kredietcontrole en ERP-integratie",
+    b2b_step1: "B2B-klant dient bulkbestelling in",
+    b2b_step2: "Automatische kredietcontrole via externe service",
+    b2b_step3: "Beslissing op basis van kredietlimiet en betalingsgeschiedenis",
+    b2b_step4: "Service task maakt contractdocument aan",
+    b2b_step5: "Bestelling wordt naar SAP/ERP-systeem verzonden",
+    b2b_step6: "Bevestiging aan klant, proces beëindigd",
+
+    // MCP Example
+    mcp_example_desc: "AI Agent verwerkt klantvraag automatisch met MCP-integratie",
+    mcp_example_step1: "Klantvraag ontvangen via e-mail of chat",
+    mcp_example_step2: "AI Agent analyseert intentie, sentiment en urgentie",
+    mcp_example_step3: "Agent roept MCP Server aan voor klantgegevens en bestelgeschiedenis",
+    mcp_example_step4: "MCP Server retourneert gestructureerde gegevens uit CRM/ERP",
+    mcp_example_step5: "AI genereert antwoord en triggert Camunda-proces (bijv. retour)",
+    mcp_example_step6: "Klant ontvangt automatische melding, ticket aangemaakt",
     
     // Pizza process
     pizza_title: "Pizza-bestelling: Een eenvoudig BPMN-proces",

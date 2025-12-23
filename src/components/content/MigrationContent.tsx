@@ -103,34 +103,92 @@ export default function MigrationContent() {
   const currentContent = content[locale as 'de' | 'en'] || content.de;
 
   return (
-    <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-      <h2 style={{ textAlign: 'center' }}>{currentContent.heading}</h2>
-      <p style={{ textAlign: 'left', marginBottom: '3rem', fontSize: '1.1rem', lineHeight: '1.8' }}>
-        {currentContent.intro}
-      </p>
+    <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      {/* Hero Section */}
+      <div style={{
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white',
+        padding: '3rem 2rem',
+        borderRadius: '12px',
+        marginBottom: '3rem',
+        textAlign: 'center'
+      }}>
+        <h2 style={{ 
+          fontSize: '2.5rem', 
+          fontWeight: '700', 
+          marginBottom: '1rem',
+          color: 'white'
+        }}>
+          {currentContent.heading}
+        </h2>
+        <p style={{ 
+          fontSize: '1.2rem', 
+          lineHeight: '1.8',
+          opacity: '0.95',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}>
+          {currentContent.intro}
+        </p>
+      </div>
 
-      {currentContent.steps.map((step, index) => (
-        <section key={index} style={{ marginBottom: '2.5rem', textAlign: 'left' }}>
-          <h3 style={{ 
-            fontSize: '1.15rem', 
-            fontWeight: '700', 
-            color: '#0f172a', 
-            marginBottom: '0.8rem',
-            lineHeight: '1.6'
+      {/* Migration Steps Grid */}
+      <div style={{
+        display: 'grid',
+        gap: '2rem'
+      }}>
+        {currentContent.steps.map((step, index) => (
+          <div key={index} style={{
+            background: 'white',
+            padding: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            border: '1px solid #e2e8f0',
+            transition: 'transform 0.2s, box-shadow 0.2s'
           }}>
-            {index + 1}. {step.title}
-          </h3>
-          <p style={{ 
-            fontSize: '1rem', 
-            color: '#475569', 
-            lineHeight: '1.8',
-            textAlign: 'left',
-            marginLeft: '0'
-          }}>
-            {step.desc}
-          </p>
-        </section>
-      ))}
+            <div style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '1.5rem'
+            }}>
+              <div style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                width: '48px',
+                height: '48px',
+                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                flexShrink: 0
+              }}>
+                {index + 1}
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '700', 
+                  color: '#0f172a', 
+                  marginBottom: '1rem',
+                  lineHeight: '1.4'
+                }}>
+                  {step.title}
+                </h3>
+                <p style={{ 
+                  fontSize: '1rem', 
+                  color: '#475569', 
+                  lineHeight: '1.8',
+                  margin: 0
+                }}>
+                  {step.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,22 +2,21 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/components/LanguageProvider";
+import BpmnContent from "@/components/content/BpmnContent";
+import ProcessBasicsContent from "@/components/content/ProcessBasicsContent";
 import CamundaIndexContent from "@/components/content/CamundaIndexContent";
-import WorkflowAutomationContent from "@/components/content/WorkflowAutomationContent";
-import ProcessOrchestrationContent from "@/components/content/ProcessOrchestrationContent";
-import HumanCentricContent from "@/components/content/HumanCentricContent";
-import ScalabilityContent from "@/components/content/ScalabilityContent";
+import McpIndexContent from "@/components/content/McpIndexContent";
 import MigrationContent from "@/components/content/MigrationContent";
 
 export default function CamundaPage() {
   const { t } = useTranslation();
-  const [activeTemplate, setActiveTemplate] = useState("camunda-index");
+  const [activeTemplate, setActiveTemplate] = useState("bpmn");
 
   useEffect(() => {
     // Check URL params for tab parameter
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab');
-    if (tab && ['camunda-index', 'workflow-automation', 'process-orchestration', 'human-centric', 'scalability', 'migration'].includes(tab)) {
+    if (tab && ['bpmn', 'process-basics', 'camunda-index', 'mcp', 'migration'].includes(tab)) {
       setActiveTemplate(tab);
     }
   }, []);
@@ -25,11 +24,10 @@ export default function CamundaPage() {
   useEffect(() => {
     // Update document title based on active template
     const titleMap: Record<string, string> = {
+      'bpmn': t('nav_bpmn') as string,
+      'process-basics': t('process_basics_title') as string,
       'camunda-index': t('what_is_camunda8') as string,
-      'workflow-automation': t('workflow_automation') as string,
-      'process-orchestration': t('process_orchestration') as string,
-      'human-centric': t('user_tasks_cockpit') as string,
-      'scalability': t('scalability') as string,
+      'mcp': t('nav_mcp') as string,
       'migration': t('migration_link') as string
     };
     document.title = `${titleMap[activeTemplate] || 'Camunda 8'} | CamundaFlow`;
@@ -37,66 +35,103 @@ export default function CamundaPage() {
 
   const renderContent = () => {
     switch (activeTemplate) {
+      case "bpmn":
+        return <BpmnContent />;
+      case "process-basics":
+        return <ProcessBasicsContent />;
       case "camunda-index":
         return <CamundaIndexContent />;
-      case "workflow-automation":
-        return <WorkflowAutomationContent />;
-      case "process-orchestration":
-        return <ProcessOrchestrationContent />;
-      case "human-centric":
-        return <HumanCentricContent />;
-      case "scalability":
-        return <ScalabilityContent />;
+      case "mcp":
+        return <McpIndexContent />;
       case "migration":
         return <MigrationContent />;
       default:
-        return <CamundaIndexContent />;
+        return <BpmnContent />;
     }
   };
+
+  useEffect(() => {
+    const initBpmn = async () => {
+      const canvas = document.getElementById("canvas");
+      if (!canvas) return;
+
+      const BpmnJS = (await import(
+        "bpmn-js/dist/bpmn-navigated-viewer.development.js"
+      )).default;
+
+      const blocks = canvas.querySelectorAll("[data-diagram]");
+
+      for (const block of Array.from(blocks)) {
+        const diagram = block.getAttribute("data-diagram");
+        if (!diagram) continue;
+
+        try {
+          const viewer = new BpmnJS({ container: block });
+          const xml = await fetch(diagram).then((r) => r.text());
+          await viewer.importXML(xml);
+
+          const bpmnCanvas = viewer.get("canvas");
+
+          const tryZoom = () => {
+            const viewbox = bpmnCanvas.viewbox();
+
+            if (
+              viewbox.inner &&
+              viewbox.outer &&
+              viewbox.outer.width > 0 &&
+              viewbox.outer.height > 0
+            ) {
+              bpmnCanvas.zoom("fit-viewport", { padding: 30 });
+            } else {
+              requestAnimationFrame(tryZoom);
+            }
+          };
+
+          tryZoom();
+        } catch (err) {
+          console.error("Failed to load BPMN diagram:", err);
+        }
+      }
+    };
+
+    initBpmn();
+  }, [activeTemplate]);
 
   return (
     <div className="container">
       <aside className="sidebar">
-        <h3>{t("select_examples")}</h3>
+        <h3>{t("nav_camunda")}</h3>
         <ul>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "bpmn" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("bpmn")}
+            >
+              {t("nav_bpmn")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "process-basics" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("process-basics")}
+            >
+              {t("process_basics_title")}
+            </a>
+          </li>
           <li>
             <a
               className={`example-link ${activeTemplate === "camunda-index" ? "active" : ""}`}
               onClick={() => setActiveTemplate("camunda-index")}
             >
-              {t("what_is_camunda8")}
+              Camunda 8
             </a>
           </li>
           <li>
             <a
-              className={`example-link ${activeTemplate === "workflow-automation" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("workflow-automation")}
+              className={`example-link ${activeTemplate === "mcp" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("mcp")}
             >
-              {t("workflow_automation")}
-            </a>
-          </li>
-          <li>
-            <a
-              className={`example-link ${activeTemplate === "process-orchestration" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("process-orchestration")}
-            >
-              {t("process_orchestration")}
-            </a>
-          </li>
-          <li>
-            <a
-              className={`example-link ${activeTemplate === "human-centric" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("human-centric")}
-            >
-              {t("user_tasks_cockpit")}
-            </a>
-          </li>
-          <li>
-            <a
-              className={`example-link ${activeTemplate === "scalability" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("scalability")}
-            >
-              {t("scalability")}
+              {t("nav_mcp")}
             </a>
           </li>
           <li>
