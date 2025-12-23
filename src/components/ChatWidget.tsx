@@ -13,6 +13,7 @@ export default function ChatWidget() {
 
   ]);
   const [loading, setLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function ChatWidget() {
     // placeholder for assistant
     addMessage({ role: "assistant", content: "" });
     setLoading(true);
+    setIsTyping(true);
 
     try {
       // Limit chat history to last 5 messages (excluding system) to reduce token usage
@@ -147,58 +149,184 @@ export default function ChatWidget() {
       });
     } finally {
       setLoading(false);
+      setIsTyping(false);
     }
   }
 
   return (
-    <div>
-      {/* Floating bubble */}
-      <div className="fixed bottom-6 right-6 z-50">
-        {open && (
-          <div className="w-80 md:w-96 bg-white border border-gray-200 shadow-lg rounded-xl overflow-hidden flex flex-col">
-            <div className="px-4 py-3 bg-slate-600 text-white flex items-center justify-between">
-              <div className="font-semibold">AI-Assistent</div>
-              <div className="text-sm opacity-90">Streaming · Markdown</div>
-            </div>
-
-            <div ref={messagesRef} className="p-3 space-y-3 max-h-72 overflow-auto">
-              {messages.map((m, i) => (
-                <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
-                  <div className={`inline-block text-sm p-2 rounded-md ${m.role === "user" ? "bg-slate-50 text-slate-800" : "bg-gray-50 text-gray-900"}`}>
-                    {m.role === "assistant" ? (
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content || "…"}</ReactMarkdown>
-                    ) : (
-                      <span>{m.content}</span>
-                    )}
+    <>
+      <style jsx>{`
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes bounce {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+        }
+        
+        @keyframes typing {
+          0%, 100% {
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        
+        .chat-card {
+          animation: slideUp 0.3s ease-out;
+        }
+        
+        .chat-bubble {
+          transition: all 0.3s ease;
+        }
+        
+        .chat-bubble:hover {
+          transform: scale(1.1) rotate(5deg);
+          box-shadow: 0 8px 30px rgba(236, 72, 153, 0.4);
+        }
+        
+        .typing-dot {
+          animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+        
+        .message-enter {
+          animation: slideUp 0.3s ease-out;
+        }
+      `}</style>
+      
+      <div>
+        {/* Floating bubble */}
+        <div className="fixed bottom-6 right-6 z-50">
+          {open && (
+            <div className="chat-card w-80 md:w-96 bg-gradient-to-br from-white to-purple-50 border-2 border-purple-200 shadow-2xl rounded-3xl overflow-hidden flex flex-col mb-4">
+              {/* Header with gradient */}
+              <div className="px-4 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-lg flex items-center justify-center text-2xl border-2 border-white/30">
+                    🤖
+                  </div>
+                  <div>
+                    <div className="font-bold text-lg">AI-Assistent</div>
+                    <div className="text-xs opacity-90">Immer für dich da!</div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="p-3 border-t border-gray-100">
-              <div className="flex gap-2">
-                <input
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Schreibe eine Frage..."
-                  className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none"
-                />
-                <button type="submit" disabled={loading} className="bg-slate-600 text-white px-3 py-2 rounded-md text-sm">
-                  {loading ? "Senden…" : "Senden"}
+                <button 
+                  onClick={() => setOpen(false)}
+                  className="w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center transition-all"
+                >
+                  ✕
                 </button>
               </div>
-            </form>
-          </div>
-        )}
 
-        <button
-          onClick={() => setOpen((o) => !o)}
-          aria-label="Chat öffnen"
-          className="mt-3 w-14 h-14 rounded-full bg-slate-600 shadow-lg flex items-center justify-center text-white text-xl"
-        >
-          💬
-        </button>
+              {/* Messages */}
+              <div ref={messagesRef} className="p-4 space-y-4 max-h-96 overflow-auto bg-gradient-to-b from-transparent to-purple-50/30">
+                {messages.length === 0 && (
+                  <div className="text-center py-8">
+                    <div className="text-6xl mb-3">👋</div>
+                    <p className="text-gray-600 font-medium">Hallo! Wie kann ich helfen?</p>
+                  </div>
+                )}
+                
+                {messages.map((m, i) => (
+                  <div key={i} className={`message-enter flex gap-2 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
+                    {/* Avatar */}
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-lg ${
+                      m.role === "user" 
+                        ? "bg-gradient-to-br from-blue-400 to-cyan-400" 
+                        : "bg-gradient-to-br from-pink-400 to-purple-400"
+                    }`}>
+                      {m.role === "user" ? "👤" : "🤖"}
+                    </div>
+                    
+                    {/* Message bubble */}
+                    <div className={`max-w-[75%] ${m.role === "user" ? "text-right" : "text-left"}`}>
+                      <div className={`inline-block text-sm p-3 rounded-2xl shadow-md ${
+                        m.role === "user" 
+                          ? "bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-tr-none" 
+                          : "bg-white text-gray-800 rounded-tl-none border border-purple-100"
+                      }`}>
+                        {m.role === "assistant" ? (
+                          <div className="prose prose-sm max-w-none">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content || ""}</ReactMarkdown>
+                          </div>
+                        ) : (
+                          <span className="font-medium">{m.content}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Typing indicator */}
+                {isTyping && (
+                  <div className="message-enter flex gap-2 flex-row">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-lg bg-gradient-to-br from-pink-400 to-purple-400">
+                      🤖
+                    </div>
+                    <div className="bg-white text-gray-800 rounded-2xl rounded-tl-none border border-purple-100 p-3 shadow-md">
+                      <div className="flex gap-1">
+                        <div className="typing-dot w-2 h-2 bg-purple-400 rounded-full"></div>
+                        <div className="typing-dot w-2 h-2 bg-purple-400 rounded-full"></div>
+                        <div className="typing-dot w-2 h-2 bg-purple-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Input form */}
+              <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="p-4 border-t border-purple-100 bg-white/80 backdrop-blur-sm">
+                <div className="flex gap-2">
+                  <input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Schreibe eine Frage... 💭"
+                    className="flex-1 border-2 border-purple-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 transition-all bg-white"
+                    disabled={loading}
+                  />
+                  <button 
+                    type="submit" 
+                    disabled={loading || !input.trim()} 
+                    className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-5 py-3 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  >
+                    {loading ? "⏳" : "🚀"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* Chat bubble button */}
+          <button
+            onClick={() => setOpen((o) => !o)}
+            aria-label="Chat öffnen"
+            className="chat-bubble w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 shadow-2xl flex items-center justify-center text-white text-3xl border-4 border-white"
+          >
+            {open ? "✕" : "💬"}
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
