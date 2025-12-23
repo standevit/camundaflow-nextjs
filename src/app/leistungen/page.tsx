@@ -7,7 +7,7 @@ export default function LeistungenPage() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('leistungen_title')} | CamundaFlow`;
+    document.title = `${t('leistungen_title') as string} | CamundaFlow`;
   }, [t]);
 
   return (
@@ -56,6 +56,62 @@ export default function LeistungenPage() {
               <h3>{t("training")}</h3>
               <p>
                 {t("training_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("microservices")}</h3>
+              <p>
+                {t("microservices_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("event_driven")}</h3>
+              <p>
+                {t("event_driven_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("identity_management")}</h3>
+              <p>
+                {t("identity_management_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("devops_kubernetes")}</h3>
+              <p>
+                {t("devops_kubernetes_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("ai_integration")}</h3>
+              <p>
+                {t("ai_integration_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("frontend_development")}</h3>
+              <p>
+                {t("frontend_development_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("ecommerce")}</h3>
+              <p>
+                {t("ecommerce_desc")}
+              </p>
+            </div>
+
+            <div className="leistungen-card">
+              <h3>{t("performance")}</h3>
+              <p>
+                {t("performance_desc")}
               </p>
             </div>
           </div>

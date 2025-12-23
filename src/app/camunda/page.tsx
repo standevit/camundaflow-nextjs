@@ -25,12 +25,12 @@ export default function CamundaPage() {
   useEffect(() => {
     // Update document title based on active template
     const titleMap: Record<string, string> = {
-      'camunda-index': t('what_is_camunda8'),
-      'workflow-automation': t('workflow_automation'),
-      'process-orchestration': t('process_orchestration'),
-      'human-centric': t('user_tasks_cockpit'),
-      'scalability': t('scalability'),
-      'migration': t('migration_link')
+      'camunda-index': t('what_is_camunda8') as string,
+      'workflow-automation': t('workflow_automation') as string,
+      'process-orchestration': t('process_orchestration') as string,
+      'human-centric': t('user_tasks_cockpit') as string,
+      'scalability': t('scalability') as string,
+      'migration': t('migration_link') as string
     };
     document.title = `${titleMap[activeTemplate] || 'Camunda 8'} | CamundaFlow`;
   }, [activeTemplate, t]);

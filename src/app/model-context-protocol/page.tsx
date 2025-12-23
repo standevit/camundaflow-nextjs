@@ -12,8 +12,8 @@ export default function McpPage() {
   useEffect(() => {
     // Update document title based on active template
     const titleMap: Record<string, string> = {
-      'mcp-index': t('mcp_index_heading'),
-      'mcp': t('mcp_heading')
+      'mcp-index': t('mcp_index_heading') as string,
+      'mcp': t('mcp_heading') as string
     };
     document.title = `${titleMap[activeTemplate] || 'MCP'} | CamundaFlow`;
   }, [activeTemplate, t]);

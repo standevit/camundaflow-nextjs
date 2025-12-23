@@ -9,7 +9,7 @@ export default function ContactPage() {
   const [companyInfo, setCompanyInfo] = useState<{ name: string; address: string; phone: string; kvk: string } | null>(null);
 
   useEffect(() => {
-    document.title = `${t('contact_title')} | CamundaFlow`;
+    document.title = `${t('contact_title') as string} | CamundaFlow`;
   }, [t]);
 
   useEffect(() => {
