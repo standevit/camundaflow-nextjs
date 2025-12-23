@@ -375,38 +375,6 @@ const translations: Record<string, Messages> = {
     process_basics_level3_desc: "Ausführbare Prozesse in Workflow-Engines wie Camunda 8.",
     process_basics_camunda_note: "Mit BPMN und Camunda 8 decken Sie alle drei Ebenen ab – von der Business-Sicht bis zur vollautomatisierten Ausführung.",
 
-    // Pizza Order page
-    pizza_title: "Pizza-Bestellung: Ein einfacher BPMN-Prozess",
-    pizza_intro: "Dieser Prozess zeigt, wie eine Pizza-Bestellung in BPMN modelliert wird:",
-    pizza_step1: "Kunde gibt Bestellung auf",
-    pizza_step2: "Zahlung wird geprüft",
-    pizza_step3: "Pizza wird zubereitet",
-    pizza_step4: "Pizza wird ausgeliefert",
-
-    // Order Approval page
-    order_approval_title: "Order Approval Process",
-    order_approval_intro: "Ein typischer Genehmigungsprozess mit parallelen Prüfungen und exklusiven Entscheidungen:",
-    order_approval_step1: "Bestellung wird eingereicht",
-    order_approval_step2: "Automatische Risikoprüfung",
-    order_approval_step3: "Manuelle Genehmigung durch Manager",
-    order_approval_step4: "Bestellung wird bearbeitet oder abgelehnt",
-
-    // Delivery Process page
-    delivery_title: "Lieferprozess: Event-gesteuert",
-    delivery_intro: "Dieser Prozess zeigt, wie Events genutzt werden, um auf externe Ereignisse zu reagieren:",
-    delivery_step1: "Versandauftrag wird erstellt",
-    delivery_step2: "Lagerbestand wird geprüft",
-    delivery_step3: "Paket wird versendet",
-    delivery_step4: "Lieferbestätigung wird ausgelöst (Event)",
-
-    // B2B Order page
-    b2b_order_title: "B2B-Bestellung mit Kreditprüfung",
-    b2b_order_intro: "Ein realitätsnaher B2B-Prozess mit Kreditprüfung, Service-Tasks und Gateway-Logik:",
-    b2b_order_step1: "Bestellung geht ein",
-    b2b_order_step2: "Kreditwürdigkeit wird geprüft",
-    b2b_order_step3: "Bei ausreichendem Kredit: Bestellung freigeben",
-    b2b_order_step4: "Bei fehlendem Kredit: Bestellung ablehnen",
-
     // Camunda Index page
     camunda_index_heading: "Was ist Camunda 8?",
     camunda_index_intro: "Die führende Open-Source-Plattform für Prozessautomatisierung – cloud-native, skalierbar und entwicklerfreundlich.",
@@ -889,38 +857,6 @@ const translations: Record<string, Messages> = {
     process_basics_level3_desc: "Executable processes in workflow engines like Camunda 8.",
     process_basics_camunda_note: "With BPMN and Camunda 8, you cover all three levels – from business perspective to fully automated execution.",
 
-    // Pizza Order page
-    pizza_title: "Pizza Order: A Simple BPMN Process",
-    pizza_intro: "This process shows how a pizza order is modeled in BPMN:",
-    pizza_step1: "Customer places order",
-    pizza_step2: "Payment is verified",
-    pizza_step3: "Pizza is prepared",
-    pizza_step4: "Pizza is delivered",
-
-    // Order Approval page
-    order_approval_title: "Order Approval Process",
-    order_approval_intro: "A typical approval process with parallel checks and exclusive decisions:",
-    order_approval_step1: "Order is submitted",
-    order_approval_step2: "Automatic risk assessment",
-    order_approval_step3: "Manual approval by manager",
-    order_approval_step4: "Order is processed or rejected",
-
-    // Delivery Process page
-    delivery_title: "Delivery Process: Event-Driven",
-    delivery_intro: "This process shows how events are used to react to external occurrences:",
-    delivery_step1: "Shipping order is created",
-    delivery_step2: "Inventory is checked",
-    delivery_step3: "Package is shipped",
-    delivery_step4: "Delivery confirmation is triggered (Event)",
-
-    // B2B Order page
-    b2b_order_title: "B2B Order with Credit Check",
-    b2b_order_intro: "A realistic B2B process with credit check, service tasks, and gateway logic:",
-    b2b_order_step1: "Order is received",
-    b2b_order_step2: "Creditworthiness is checked",
-    b2b_order_step3: "If sufficient credit: Approve order",
-    b2b_order_step4: "If insufficient credit: Reject order",
-
     // Camunda Index page
     camunda_index_heading: "What is Camunda 8?",
     camunda_index_intro: "The leading open-source platform for process automation — cloud-native, scalable and developer-friendly.",
@@ -1398,26 +1334,6 @@ const translations: Record<string, Messages> = {
     mcp_example_step5: "AI genereert antwoord en triggert Camunda-proces (bijv. retour)",
     mcp_example_step6: "Klant ontvangt automatische melding, ticket aangemaakt",
     
-    // Pizza process
-    pizza_title: "Pizza-bestelling: Een eenvoudig BPMN-proces",
-    pizza_intro: "Dit proces toont hoe een pizza-bestelling in BPMN wordt gemodelleerd:",
-    pizza_step1: "Klant plaatst bestelling",
-    pizza_step2: "Betaling wordt geverifieerd",
-    pizza_step3: "Pizza wordt bereid",
-    pizza_step4: "Pizza wordt bezorgd",
-    
-    // Order Approval
-    order_approval_heading: "Order Approval: Menselijke taak + timeout",
-    order_approval_intro: "Een bestelling moet handmatig goedgekeurd worden. Als na 2 dagen niemand reageert, wordt automatisch geweigerd (timeout).",
-    order_approval_step1: "Bestelling ingediend",
-    order_approval_step2: "Manager krijgt taak in Tasklist",
-    order_approval_step3: "3 uitkomsten: goedgekeurd, geweigerd, timeout",
-    order_approval_benefit: "Voordeel: Camunda handelt zowel happy path als exceptions af.",
-    
-    // Delivery & B2B - basic translations
-    delivery_heading: "Levering: Event-driven proces",
-    b2b_order_heading: "B2B Bestelling",
-    
     // Workflow Automation
     workflow_automation_heading: "Workflow Automation met Camunda 8",
     workflow_automation_intro: "Automatiseer repetitieve taken en laat Camunda de orchestratie voor zijn rekening nemen.",
@@ -1493,21 +1409,6 @@ const translations: Record<string, Messages> = {
     process_basics_level3_desc: "Executable BPMN met service tasks, connectors, retry-logica.",
     process_basics_bpmn_role: "De rol van BPMN",
     process_basics_bpmn_role_desc: "BPMN (Business Process Model and Notation) is dé industriestandaard voor het visualiseren en automatiseren van bedrijfsprocessen. Met BPMN kunnen business en IT in dezelfde taal spreken.",
-    
-    // Event Driven, Delivery, B2B Order - uitgebreid
-    event_driven_heading: "Event Driven Proces",
-    event_driven_intro: "Een proces dat reageert op externe gebeurtenissen (messages, timers, signals) en asynchroon werkt.",
-    
-    delivery_intro: "Een leveringsproces dat wacht op externe bevestiging en reageert op tracking-events.",
-    delivery_step1: "Order verzonden",
-    delivery_step2: "Tracking-update ontvangen",
-    delivery_step3: "Levering bevestigd",
-    
-    b2b_order_intro: "Een B2B-bestelproces met complexe goedkeuringen en integraties met ERP-systemen.",
-    b2b_order_step1: "Order aangemaakt",
-    b2b_order_step2: "Kredietcontrole",
-    b2b_order_step3: "Goedkeuring management",
-    b2b_order_step4: "ERP-integratie",
     
     // Webshop Service
     webshop_heading: "Webshop Service",
