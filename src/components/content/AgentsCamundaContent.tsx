@@ -37,7 +37,7 @@ export default function AgentsCamundaContent() {
       {/* Why Section */}
       <div style={{
         background: 'white',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         border: '1px solid #e2e8f0',
@@ -94,7 +94,7 @@ export default function AgentsCamundaContent() {
       {/* Use Cases */}
       <div style={{
         background: '#f8f9fa',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         marginBottom: '3rem'
       }}>
@@ -152,33 +152,43 @@ export default function AgentsCamundaContent() {
       <div style={{
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         color: 'white',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         textAlign: 'center'
       }}>
         <p style={{
           fontSize: '1.2rem',
           lineHeight: '1.7',
-          marginBottom: '1.5rem'
+          marginBottom: '1.5rem',
+          color: 'white'
         }}>
           {t("agents_camunda_cta")}
         </p>
         <a 
-          href="mailto:info@camundaflow.de" 
+          href="/contact" 
           style={{
             display: 'inline-block',
-            background: 'white',
-            color: '#667eea',
+            background: 'rgba(0, 0, 0, 0.2)',
+            color: 'white',
             padding: '0.875rem 2rem',
             borderRadius: '8px',
             fontWeight: '600',
             fontSize: '1.1rem',
             textDecoration: 'none',
-            transition: 'transform 0.2s',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+            transition: 'all 0.2s',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.2)'
           }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.3)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.2)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+          }}
         >
           {t("agents_camunda_cta_button")}
         </a>

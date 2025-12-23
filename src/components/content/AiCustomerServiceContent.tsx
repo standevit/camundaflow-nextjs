@@ -37,7 +37,7 @@ export default function AiCustomerServiceContent() {
       {/* Capabilities Section */}
       <div style={{
         background: '#f8f9fa',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         marginBottom: '3rem'
       }}>
@@ -103,7 +103,7 @@ export default function AiCustomerServiceContent() {
           borderRadius: '10px',
           textAlign: 'center'
         }}>
-          <p style={{ margin: 0, fontSize: '1.1rem', fontWeight: '600' }}>
+          <p style={{ margin: 0, fontSize: '1.1rem', fontWeight: '600', color: 'white' }}>
             {t("ai_customer_service_intro_result")}
           </p>
         </div>
@@ -112,7 +112,7 @@ export default function AiCustomerServiceContent() {
       {/* BPMN Diagram Section */}
       <div style={{
         background: 'white',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         border: '1px solid #e2e8f0',

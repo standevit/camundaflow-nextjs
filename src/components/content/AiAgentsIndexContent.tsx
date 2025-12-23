@@ -37,7 +37,7 @@ export default function AiAgentsIndexContent() {
       {/* What is an AI Agent */}
       <div style={{
         background: 'white',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         border: '1px solid #e2e8f0',
@@ -86,7 +86,7 @@ export default function AiAgentsIndexContent() {
       {/* Use Cases */}
       <div style={{
         background: '#f8f9fa',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         marginBottom: '3rem'
       }}>
@@ -137,7 +137,7 @@ export default function AiAgentsIndexContent() {
       {/* Why Camunda Benefits */}
       <div style={{
         background: 'white',
-        padding: '2.5rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         border: '1px solid #e2e8f0',
@@ -190,9 +190,10 @@ export default function AiAgentsIndexContent() {
         <p style={{
           margin: 0,
           fontSize: '1.1rem',
-          lineHeight: '1.7'
+          lineHeight: '1.7',
+          color: 'white'
         }}>
-          <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
+          <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '1.2rem', color: 'white' }}>
             {t("ai_agents_index_conclusion_label")}
           </strong>
           {t("ai_agents_index_conclusion")}
