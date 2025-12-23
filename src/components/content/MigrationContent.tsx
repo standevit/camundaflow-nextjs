@@ -108,25 +108,24 @@ export default function MigrationContent() {
       <div style={{
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         color: 'white',
-        padding: '3rem 2rem',
+        padding: '2rem',
         borderRadius: '12px',
-        marginBottom: '3rem',
-        textAlign: 'center'
+        marginBottom: '3rem'
       }}>
         <h3 style={{ 
           fontSize: '1.75rem', 
           fontWeight: '700', 
-          marginBottom: '1rem',
+          marginBottom: '0.5rem',
           color: 'white'
         }}>
           {currentContent.heading}
         </h3>
         <p style={{ 
-          fontSize: '1.2rem', 
+          color: 'white',
+          fontSize: '1.1rem', 
           lineHeight: '1.8',
           opacity: '0.95',
-          maxWidth: '800px',
-          margin: '0 auto'
+          marginBottom: '0'
         }}>
           {currentContent.intro}
         </p>

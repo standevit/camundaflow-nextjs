@@ -15,7 +15,7 @@ export default function SupplyChainContent() {
         <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.75rem', fontWeight: '700' }}>
           {t('ref_supply_title')}
         </h3>
-        <p style={{ opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>
+        <p style={{ color: 'white', opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>
           {t("ref_supply_company")}
         </p>
       </div>
