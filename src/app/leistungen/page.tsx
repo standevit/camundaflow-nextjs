@@ -67,9 +67,9 @@ export default function LeistungenPage() {
             </div>
 
             <div className="leistungen-card">
-              <h3>{t("event_driven")}</h3>
+              <h3>{t("event_driven_service")}</h3>
               <p>
-                {t("event_driven_desc")}
+                {t("event_driven_service_desc")}
               </p>
             </div>
 
