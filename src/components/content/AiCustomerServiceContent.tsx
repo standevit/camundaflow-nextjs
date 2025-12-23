@@ -11,9 +11,9 @@ export default function AiCustomerServiceContent() {
       <div style={{
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         color: 'white',
-        padding: '2rem',
+        padding: '1.5rem',
         borderRadius: '12px',
-        marginBottom: '3rem'
+        marginBottom: '2rem'
       }}>
         <h3 style={{ 
           fontSize: '1.75rem', 

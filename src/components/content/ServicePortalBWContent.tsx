@@ -3,7 +3,7 @@ export default function ServicePortalBWContent() {
     <>
       <div style={{ 
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        padding: '2rem',
+        padding: '1.5rem',
         borderRadius: '12px',
         marginBottom: '2rem',
         color: 'white'
