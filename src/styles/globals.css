@@ -285,10 +285,11 @@ footer a:hover{
 }
 
 .sidebar a.active {
-  background: #475569;
-  color: white;
+  background: transparent;
+  color: #475569;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(71,85,105,0.3);
+  border: 3px solid #667eea;
+  box-shadow: none;
 }
 
 /* Glavni sadržaj desno */
