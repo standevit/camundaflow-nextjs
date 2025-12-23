@@ -31,6 +31,12 @@ const translations: Record<string, Messages> = {
     send: "Nachricht senden",
     success: "Vielen Dank! Ich melde mich bald.",
     error: "Fehler – bitte direkt an post@camundaflow.de",
+    contact_eu_text: "Wir sind ein EU-Unternehmen und bieten unsere Dienstleistungen grenzüberschreitend an – schnell, zuverlässig und gemäß EU-Recht.",
+    company_type: "Einzelunternehmen",
+    establishment_type: "Hauptsitz",
+    company_description: "Java-Entwickler.",
+    trade_name: "Handelsname",
+    kvk_number: "Handelskammernummer",
 
     // Home page
     home_title: "BPMN Beispiele",
@@ -396,6 +402,12 @@ const translations: Record<string, Messages> = {
     phone_placeholder: "Optional",
     company: "Company name *",
     topic_label: "Topic / Service *",
+    contact_eu_text: "We are an EU company offering cross-border services – fast, reliable, and in accordance with EU law.",
+    company_type: "Sole Proprietorship",
+    establishment_type: "Main Establishment",
+    company_description: "Java Developer.",
+    trade_name: "Trade name",
+    kvk_number: "Chamber of Commerce number",
     topic_options: [
       "BPMN Development",
       "Camunda Implementation",
@@ -789,6 +801,12 @@ const translations: Record<string, Messages> = {
     send: "Bericht verzenden",
     success: "Hartelijk dank! Ik neem binnenkort contact met u op.",
     error: "Fout – neem direct contact op via post@camundaflow.de",
+    contact_eu_text: "Wij zijn een EU-bedrijf en bieden onze diensten grensoverschrijdend aan – snel, betrouwbaar en conform EU-recht.",
+    company_type: "Eenmanszaak",
+    establishment_type: "Hoofdvestiging",
+    company_description: "Java ontwikkelaar.",
+    trade_name: "Handelsnaam",
+    kvk_number: "KVK-nummer",
 
     // Home page
     home_title: "BPMN Voorbeelden",
