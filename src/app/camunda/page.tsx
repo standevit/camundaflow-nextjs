@@ -201,8 +201,8 @@ export default function CamundaPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="/flow-water.jpg" 
-          alt="Flow Visualization" 
+          src="/workflow2.avif" 
+          alt="Workflow Design" 
           style={{
             width: '100%',
             aspectRatio: '1',
@@ -211,8 +211,8 @@ export default function CamundaPage() {
           }}
         />
         <img 
-          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop" 
-          alt="Business Analytics Flow" 
+          src="/workflow.avif" 
+          alt="Workflow Process" 
           style={{
             width: '100%',
             aspectRatio: '1',
