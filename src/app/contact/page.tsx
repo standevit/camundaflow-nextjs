@@ -95,12 +95,32 @@ export default function ContactPage() {
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'flex-start',
         color: 'white'
       }}>
+        {/* Left vertical line */}
+        <div style={{
+          position: 'absolute',
+          left: '5px',
+          top: '0',
+          bottom: '0',
+          width: '1px',
+          background: '#ffffff'
+        }}></div>
+        
+        {/* Right vertical line */}
+        <div style={{
+          position: 'absolute',
+          right: '5px',
+          top: '0',
+          bottom: '0',
+          width: '1px',
+          background: '#ffffff'
+        }}></div>
+        
         {companyInfo && (
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '100%', marginTop: '3rem' }}>
             <div style={{ 
               fontSize: '1.5rem', 
               fontWeight: 'bold', 
