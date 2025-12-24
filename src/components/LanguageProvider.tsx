@@ -350,7 +350,7 @@ const translations: Record<string, Messages> = {
     mcp_example_step6: "Kunde erhält automatische Benachrichtigung, Ticket erstellt",
 
     // Process Basics page
-    process_basics_title: "Geschäftsprozesse – Was, Warum, Wie?",
+    process_basics_title: "Geschäftsprozesse",
     process_basics_intro: "Ein Geschäftsprozess ist eine Abfolge strukturierter Aktivitäten, die ein definiertes Ziel erreichen – etwa einen Auftrag abwickeln, eine Kundenanfrage bearbeiten oder eine Lieferung koordinieren.",
     process_basics_what_is: "Was ist ein Geschäftsprozess?",
     process_basics_what_is_desc: "Jedes Unternehmen arbeitet mit Prozessen, bewusst oder unbewusst. Typische Beispiele:",

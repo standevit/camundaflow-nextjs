@@ -105,21 +105,33 @@ p:nth-of-type(2){
   font-weight:600;margin-bottom:1.9rem;
 }
 
-/* Liste */
-ul li{
-  list-style:square;position:relative;padding-left:1.2rem;
-  font-size:1.13rem;color:#475569;margin-bottom:1rem;
+/* Liste - samo gdje je potrebno, ne forsirati na sve */
+.card > ul,
+.card section > ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.card > ul li,
+.card section > ul li {
+  list-style: disc;
+  padding-left: 0.5rem;
+  font-size:1.13rem;
+  color:#475569;
+  margin-bottom: 0.8rem;
+  line-height: 1.7;
+}
+.card > ul li::marker,
+.card section > ul li::marker {
+  color: #64748b;
 }
 
 /* Jedinstveno poravnanje za sve sekcije – lijevo, kao na ai-agents stranici */
 .card section {
     text-align: left;
-    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 3rem;
     margin-bottom: 3rem;
-max-width:800px;
 }
 
 /* Opcionalno: ako želiš da i naslovi unutar sekcija budu lijevo (a ne centrirani) */
@@ -130,7 +142,6 @@ max-width:800px;
 }
 .card section p {
     text-align: center;
-max-width:800px;
 }
 .card section h2::after,
 .card section h3::after {
@@ -261,35 +272,40 @@ footer a:hover{
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  list-style: none;
 }
 
 .sidebar a {
   display: block;
-  padding: 0.9rem 1.2rem;
-  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
   color: #475569;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.98rem;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  border-left: 3px solid #e2e8f0;
 }
 
 .sidebar a:hover {
-  background: #f1f5f9;
+  background: #f8fafc;
   color: #1e293b;
-  transform: translateX(4px);
+  border-left-color: #94a3b8;
 }
 
 .sidebar a.active {
   background: transparent;
-  color: #475569;
+  color: #667eea;
   font-weight: 700;
-  border: 3px solid #667eea;
-  box-shadow: none;
+  border: 2px solid #667eea;
+  border-left: 3px solid #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
 }
 
 /* Glavni sadržaj desno */

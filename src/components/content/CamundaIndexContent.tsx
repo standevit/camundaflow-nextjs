@@ -76,7 +76,14 @@ export default function CamundaIndexContent() {
         </div>
       </div>
 
-      <section style={{ marginTop: '3rem' }}>
+      <div style={{
+        background: 'white',
+        padding: '2.5rem',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        border: '1px solid #e2e8f0',
+        marginBottom: '3rem'
+      }}>
         <div style={{ 
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           padding: '1.5rem',
@@ -110,9 +117,16 @@ export default function CamundaIndexContent() {
             <li style={{ marginBottom: '0.5rem' }}><strong>End Event:</strong> {t("delivery_step6")}</li>
           </ol>
         </div>
-      </section>
+      </div>
 
-      <section style={{ marginTop: '3rem' }}>
+      <div style={{
+        background: 'white',
+        padding: '2.5rem',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        border: '1px solid #e2e8f0',
+        marginBottom: '3rem'
+      }}>
         <div style={{ 
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           padding: '1.5rem',
@@ -146,7 +160,7 @@ export default function CamundaIndexContent() {
             <li style={{ marginBottom: '0.5rem' }}><strong>End Event:</strong> {t("b2b_step6")}</li>
           </ol>
         </div>
-      </section>
+      </div>
     </>
   );
 }
