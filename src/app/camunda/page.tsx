@@ -180,7 +180,7 @@ export default function CamundaPage() {
               className={`example-link ${activeTemplate === "migration" ? "active" : ""}`}
               onClick={() => setActiveTemplate("migration")}
             >
-              {t("migration_link")}
+              Migration C7 → C8
             </a>
           </li>
         </ul>
