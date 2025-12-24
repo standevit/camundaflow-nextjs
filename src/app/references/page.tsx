@@ -79,28 +79,45 @@ export default function ReferencesPage() {
         gap: '1rem',
         alignItems: 'flex-start'
       }}>
-        <img 
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&h=300&fit=crop&q=80" 
-          alt="Happy business team" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-          }}
-        />
-        <img 
-          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&q=80" 
-          alt="Business handshake" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-          }}
-        />
+        {activeTemplate === "supply-chain" && (
+          <img 
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&h=300&fit=crop&q=80" 
+            alt="Happy business team" 
+            style={{
+              width: '100%',
+              aspectRatio: '1',
+              objectFit: 'cover',
+              borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}
+          />
+        )}
+        {activeTemplate === "budgetverwaltung" && (
+          <img 
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&q=80" 
+            alt="Business handshake" 
+            style={{
+              width: '100%',
+              aspectRatio: '1',
+              objectFit: 'cover',
+              borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}
+          />
+        )}
+        {activeTemplate === "service-portal-bw" && (
+          <img 
+            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=300&h=300&fit=crop&q=80" 
+            alt="Business professionals handshake" 
+            style={{
+              width: '100%',
+              aspectRatio: '1',
+              objectFit: 'cover',
+              borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}
+          />
+        )}
       </aside>
     </div>
   );
