@@ -191,6 +191,46 @@ export default function CamundaPage() {
           <div id="canvas">{renderContent()}</div>
         </div>
       </main>
+
+      <aside className="sidebar" style={{ 
+        padding: '0', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start'
+      }}>
+        <img 
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=400&fit=crop" 
+          alt="Team Collaboration" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px'
+          }}
+        />
+        <img 
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=400&fit=crop" 
+          alt="Modern Office" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px'
+          }}
+        />
+        <img 
+          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop" 
+          alt="Computer Work" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px'
+          }}
+        />
+      </aside>
     </div>
     </>
   );
