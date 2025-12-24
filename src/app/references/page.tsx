@@ -36,24 +36,30 @@ export default function ReferencesPage() {
             <a
               className={`example-link ${activeTemplate === "supply-chain" ? "active" : ""}`}
               onClick={() => setActiveTemplate("supply-chain")}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
             >
-              Multi-Tenant Supply-Chain
+              <span>Multi-Tenant Supply-Chain</span>
+              <img src="/vink.jpeg" alt="✓" style={{ width: '36px', height: '36px', flexShrink: 0 }} />
             </a>
           </li>
           <li>
             <a
               className={`example-link ${activeTemplate === "budgetverwaltung" ? "active" : ""}`}
               onClick={() => setActiveTemplate("budgetverwaltung")}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
             >
-              Budgetverwaltung
+              <span>Budgetverwaltung</span>
+              <img src="/vink.jpeg" alt="✓" style={{ width: '36px', height: '36px', flexShrink: 0 }} />
             </a>
           </li>
           <li>
             <a
               className={`example-link ${activeTemplate === "service-portal-bw" ? "active" : ""}`}
               onClick={() => setActiveTemplate("service-portal-bw")}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
             >
-              Service-Portal Baden-Württemberg
+              <span>Service-Portal Baden-Württemberg</span>
+              <img src="/vink.jpeg" alt="✓" style={{ width: '36px', height: '36px', flexShrink: 0 }} />
             </a>
           </li>
         </ul>
