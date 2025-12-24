@@ -83,7 +83,7 @@ export default function AiAgentsPage() {
   return (
     <div className="container">
       <aside className="sidebar">
-        <h3>{t("select_examples")}</h3>
+        <h3>AI Agents</h3>
         <ul>
           <li>
             <a
