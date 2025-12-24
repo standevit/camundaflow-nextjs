@@ -11,7 +11,7 @@ export default function HeaderNav() {
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-xl border-b border-gray-200 py-4">
       <nav className="max-w-6xl mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="logo">
-          <img src="/logo.svg" alt="Camunda Flow" height={46} />
+          <img src="/development-logo.svg" alt="Development" height={46} />
         </Link>
         <div className="menu flex items-center space-x-6 text-lg font-medium">
           <Link href="/camunda" className="hover:text-blue-600 transition">{t("nav_camunda")}</Link>
