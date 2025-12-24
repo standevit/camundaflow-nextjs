@@ -117,6 +117,36 @@ export default function AiAgentsPage() {
           <div id="canvas">{renderContent()}</div>
         </div>
       </main>
+
+      <aside className="sidebar" style={{ 
+        padding: '0', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start'
+      }}>
+        <img 
+          src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=400&fit=crop" 
+          alt="AI Agents" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px'
+          }}
+        />
+        <img 
+          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=400&fit=crop" 
+          alt="Artificial Intelligence" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px'
+          }}
+        />
+      </aside>
     </div>
   );
 }
