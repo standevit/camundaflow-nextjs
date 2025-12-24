@@ -94,7 +94,7 @@ export default function ReferencesPage() {
         )}
         {activeTemplate === "budgetverwaltung" && (
           <img 
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&q=80" 
+            src="/handshake.avif" 
             alt="Business handshake" 
             style={{
               width: '100%',

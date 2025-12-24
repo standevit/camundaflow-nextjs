@@ -127,8 +127,8 @@ export default function AiAgentsPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=400&fit=crop" 
-          alt="Artificial Intelligence" 
+          src="/ai-profiel.webp" 
+          alt="AI Profile" 
           style={{
             width: '100%',
             aspectRatio: '1',
