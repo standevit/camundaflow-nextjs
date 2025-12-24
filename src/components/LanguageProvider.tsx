@@ -832,7 +832,7 @@ const translations: Record<string, Messages> = {
     mcp_example_step6: "Customer receives automatic notification, ticket created",
 
     // Process Basics page
-    process_basics_title: "Business Processes – What, Why, How?",
+    process_basics_title: "Business Processes",
     process_basics_intro: "A business process is a sequence of structured activities that achieve a defined goal – such as processing an order, handling a customer inquiry, or coordinating a delivery.",
     process_basics_what_is: "What is a Business Process?",
     process_basics_what_is_desc: "Every company works with processes, consciously or unconsciously. Typical examples:",
@@ -1392,7 +1392,7 @@ const translations: Record<string, Messages> = {
     human_centric_hybrid_desc: "De kracht van Camunda ligt precies hier: volledig geautomatiseerde stappen en menselijke interactie naadloos in hetzelfde procesmodel.",
     
     // Process Basics (Procesmodellering)
-    process_basics_title: "Bedrijfsprocessen – Wat, Waarom, Hoe?",
+    process_basics_title: "Bedrijfsprocessen",
     process_basics_intro: "Een bedrijfsproces is een reeks gestructureerde activiteiten die een gedefinieerd doel bereiken – zoals het afhandelen van een order, het verwerken van een klantaanvraag of het coördineren van een levering.",
     process_basics_what_is: "Wat is een bedrijfsproces?",
     process_basics_what_is_desc: "Elk bedrijf werkt met processen, bewust of onbewust. Typische voorbeelden:",
