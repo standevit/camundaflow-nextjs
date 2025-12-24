@@ -98,6 +98,47 @@ export default function CamundaPage() {
   }, [activeTemplate]);
 
   return (
+    <>
+      {/* Snowfall animation */}
+      <style jsx>{`
+        @keyframes snowfall {
+          0% {
+            transform: translateY(-10vh) translateX(0);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) translateX(10px);
+            opacity: 0.3;
+          }
+        }
+        .snowflake {
+          position: fixed;
+          top: -10vh;
+          z-index: 9999;
+          color: #87CEEB;
+          font-size: 1.5rem;
+          animation: snowfall linear infinite;
+          pointer-events: none;
+          text-shadow: 0 0 8px rgba(135, 206, 235, 1), 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+      `}</style>
+      
+      {/* Generate snowflakes */}
+      {[...Array(30)].map((_, i) => (
+        <div
+          key={i}
+          className="snowflake"
+          style={{
+            left: `${Math.random() * 100}%`,
+            animationDuration: `${8 + Math.random() * 12}s`,
+            animationDelay: `${Math.random() * 5}s`,
+            fontSize: `${1 + Math.random() * 1}rem`,
+          }}
+        >
+          ❄
+        </div>
+      ))}
+
     <div className="container">
       <aside className="sidebar">
         <h3>{t("nav_camunda")}</h3>
@@ -151,5 +192,6 @@ export default function CamundaPage() {
         </div>
       </main>
     </div>
+    </>
   );
 }

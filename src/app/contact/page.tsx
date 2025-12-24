@@ -36,11 +36,45 @@ export default function ContactPage() {
 
   return (
     <div className="container">
-      <aside className="sidebar" style={{ padding: 0, background: 'transparent' }}>
+      <aside className="sidebar" style={{ 
+        padding: '1rem', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem'
+      }}>
         <img 
-          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80" 
-          alt="Professional team" 
-          className="w-full h-full object-cover"
+          src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=300&h=300&fit=crop&q=80" 
+          alt="Service desk support" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}
+        />
+        <img 
+          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=300&fit=crop&q=80" 
+          alt="Workspace with laptop and notes" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}
+        />
+        <img 
+          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300&h=300&fit=crop&q=80" 
+          alt="Developer at workspace" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}
         />
       </aside>
 
