@@ -41,7 +41,8 @@ export default function ContactPage() {
         background: 'transparent',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem'
+        gap: '1rem',
+        overflow: 'hidden'
       }}>
         <img 
           src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=300&h=300&fit=crop&q=80" 
@@ -55,8 +56,8 @@ export default function ContactPage() {
           }}
         />
         <img 
-          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=300&fit=crop&q=80" 
-          alt="Workspace with laptop and notes" 
+          src="/contact.avif" 
+          alt="Contact us" 
           style={{
             width: '100%',
             aspectRatio: '1',

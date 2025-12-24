@@ -127,8 +127,8 @@ export default function AiAgentsPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=400&fit=crop" 
-          alt="AI Agents" 
+          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=400&fit=crop" 
+          alt="Artificial Intelligence" 
           style={{
             width: '100%',
             aspectRatio: '1',
@@ -137,8 +137,8 @@ export default function AiAgentsPage() {
           }}
         />
         <img 
-          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=400&fit=crop" 
-          alt="Artificial Intelligence" 
+          src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?w=400&h=400&fit=crop" 
+          alt="AI Neural Network" 
           style={{
             width: '100%',
             aspectRatio: '1',

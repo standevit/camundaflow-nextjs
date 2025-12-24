@@ -201,8 +201,8 @@ export default function CamundaPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=400&fit=crop" 
-          alt="Modern Office" 
+          src="/flow-water.jpg" 
+          alt="Flow Visualization" 
           style={{
             width: '100%',
             aspectRatio: '1',
@@ -211,8 +211,8 @@ export default function CamundaPage() {
           }}
         />
         <img 
-          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop" 
-          alt="Computer Work" 
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop" 
+          alt="Business Analytics Flow" 
           style={{
             width: '100%',
             aspectRatio: '1',
