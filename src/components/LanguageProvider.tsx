@@ -1212,6 +1212,14 @@ const translations: Record<string, Messages> = {
     ai_agents_index_use_case_3: "Factuurverwerking & boekhouding",
     ai_agents_index_use_case_4: "Talent acquisition & sollicitatiebeheer",
     ai_agents_index_use_case_5: "Supply Chain Management (orderverwerking, voorraad)",
+    ai_agents_index_why_camunda_heading: "Waarom Camunda 8 + AI Agents?",
+    ai_agents_index_benefit_1: "100% transparantie – elke agent-stap is een BPMN-proces",
+    ai_agents_index_benefit_2: "Verminderde hallucinaties door duidelijke regels en DMN-beslissingen",
+    ai_agents_index_benefit_3: "Eenvoudige integratie met OpenAI, Anthropic, Mistral, Llama 3, Gemini …",
+    ai_agents_index_benefit_4: "Human-in-the-loop indien nodig (Tasklist-escalatie)",
+    ai_agents_index_benefit_5: "Schaalt naar miljoenen interacties per dag (Zeebe)",
+    ai_agents_index_conclusion_label: "Samenvatting:",
+    ai_agents_index_conclusion: "Een AI Agent is meer dan een chatbot — het is een orkestratiekapabele, betrouwbare medewerker onder volledige procescontrole.",
     
     // MCP page
     mcp_title: "Model Context Protocol",
