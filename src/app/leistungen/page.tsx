@@ -12,11 +12,33 @@ export default function LeistungenPage() {
 
   return (
     <div className="container">
-      <aside className="sidebar" style={{ padding: 0, background: 'transparent' }}>
+      <aside className="sidebar" style={{ 
+        padding: '0', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start'
+      }}>
         <img 
-          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80" 
-          alt="Business analytics" 
-          className="w-full h-full object-cover"
+          src="/scrum-board.png" 
+          alt="Scrum Board" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'contain',
+            borderRadius: '12px'
+          }}
+        />
+        <img 
+          src="/all-the-data.png" 
+          alt="All the Data" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'contain',
+            borderRadius: '12px'
+          }}
         />
       </aside>
 
@@ -167,6 +189,36 @@ export default function LeistungenPage() {
           </a>
         </div>
       </main>
+
+      <aside className="sidebar" style={{ 
+        padding: '0', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start'
+      }}>
+        <img 
+          src="/investing.png" 
+          alt="Investing" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'contain',
+            borderRadius: '12px'
+          }}
+        />
+        <img 
+          src="/idea-sketching.png" 
+          alt="Idea Sketching" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'contain',
+            borderRadius: '12px'
+          }}
+        />
+      </aside>
     </div>
   );
 }
