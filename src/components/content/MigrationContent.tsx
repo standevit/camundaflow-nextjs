@@ -171,16 +171,12 @@ export default function MigrationContent() {
               gap: '1.5rem'
             }}>
               <div style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
                 width: '48px',
                 height: '48px',
-                borderRadius: '10px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.75rem',
-                fontWeight: '700',
+                fontSize: '2rem',
                 flexShrink: 0
               }}>
                 {step.icon}
