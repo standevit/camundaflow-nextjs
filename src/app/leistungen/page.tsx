@@ -21,22 +21,22 @@ export default function LeistungenPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="/scrum-board.png" 
-          alt="Scrum Board" 
+          src="/leistung1.avif" 
+          alt="Leistung 1" 
           style={{
             width: '100%',
             aspectRatio: '1',
-            objectFit: 'contain',
+            objectFit: 'cover',
             borderRadius: '12px'
           }}
         />
         <img 
-          src="/all-the-data.png" 
-          alt="All the Data" 
+          src="/leistung2.avif" 
+          alt="Leistung 2" 
           style={{
             width: '100%',
             aspectRatio: '1',
-            objectFit: 'contain',
+            objectFit: 'cover',
             borderRadius: '12px'
           }}
         />
@@ -199,22 +199,22 @@ export default function LeistungenPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="/investing.png" 
-          alt="Investing" 
+          src="/leistung3.avif" 
+          alt="Leistung 3" 
           style={{
             width: '100%',
             aspectRatio: '1',
-            objectFit: 'contain',
+            objectFit: 'cover',
             borderRadius: '12px'
           }}
         />
         <img 
-          src="/idea-sketching.png" 
-          alt="Idea Sketching" 
+          src="/leistung4.avif" 
+          alt="Leistung 4" 
           style={{
             width: '100%',
             aspectRatio: '1',
-            objectFit: 'contain',
+            objectFit: 'cover',
             borderRadius: '12px'
           }}
         />

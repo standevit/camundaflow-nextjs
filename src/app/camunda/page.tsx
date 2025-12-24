@@ -11,6 +11,18 @@ import MigrationContent from "@/components/content/MigrationContent";
 export default function CamundaPage() {
   const { t } = useTranslation();
   const [activeTemplate, setActiveTemplate] = useState("bpmn");
+  const [snowflakes, setSnowflakes] = useState<Array<{left: string, duration: string, delay: string, size: string}>>([]);
+
+  useEffect(() => {
+    // Generate snowflakes on client side only
+    const flakes = Array.from({ length: 30 }, () => ({
+      left: `${Math.random() * 100}%`,
+      duration: `${8 + Math.random() * 12}s`,
+      delay: `${Math.random() * 5}s`,
+      size: `${1 + Math.random() * 1}rem`
+    }));
+    setSnowflakes(flakes);
+  }, []);
 
   useEffect(() => {
     // Check URL params for tab parameter
@@ -124,15 +136,15 @@ export default function CamundaPage() {
       `}</style>
       
       {/* Generate snowflakes */}
-      {[...Array(30)].map((_, i) => (
+      {snowflakes.map((flake, i) => (
         <div
           key={i}
           className="snowflake"
           style={{
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${8 + Math.random() * 12}s`,
-            animationDelay: `${Math.random() * 5}s`,
-            fontSize: `${1 + Math.random() * 1}rem`,
+            left: flake.left,
+            animationDuration: flake.duration,
+            animationDelay: flake.delay,
+            fontSize: flake.size,
           }}
         >
           ❄
