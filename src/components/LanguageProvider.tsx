@@ -193,7 +193,7 @@ const translations: Record<string, Messages> = {
     mcp_step_6: "Abschließend erhält der Benutzer Feedback oder eine vollständige Zusammenfassung der Ergebnisse",
 
     // Leistungen page
-    leistungen_title: "Meine Leistungen",
+    leistungen_title: "Leistungen",
     leistungen_desc: "Von der Beratung bis zur produktiven Lösung – alles aus einer Hand.",
     architecture_consulting: "Architektur-Beratung",
     architecture_desc: "Konzeption skalierbarer Camunda-8-Lösungen inkl. Integration mit Kafka & Microservices",
