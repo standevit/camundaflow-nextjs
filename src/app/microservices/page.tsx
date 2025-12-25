@@ -1,123 +1,75 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslation } from "@/components/LanguageProvider";
-import AiAgentsIndexContent from "@/components/content/AiAgentsIndexContent";
-import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
-import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
+import MicroservicesIndexContent from "@/components/content/MicroservicesIndexContent";
+import MicroservicesPatternsContent from "@/components/content/MicroservicesPatternsContent";
+import MicroservicesBestPracticesContent from "@/components/content/MicroservicesBestPracticesContent";
 
-export default function AiAgentsPage() {
-  const { t } = useTranslation();
-  const [activeTemplate, setActiveTemplate] = useState("ai-agents-index");
+export default function MicroservicesPage() {
+  const [activeTemplate, setActiveTemplate] = useState("overview");
 
   useEffect(() => {
     // Update document title based on active template
     const titleMap: Record<string, string> = {
-      'ai-agents-index': t('ai_agents_index_heading') as string,
-      'agents-camunda': t('agents_camunda_heading') as string,
-      'ai-customer-service': t('ai_customer_service_intro_heading') as string
+      'overview': 'Microservices Architecture Overview',
+      'patterns': 'Microservices Design Patterns',
+      'best-practices': 'Microservices Best Practices'
     };
-    document.title = `${titleMap[activeTemplate] || 'AI Agents'} | CamundaFlow`;
-  }, [activeTemplate, t]);
+    document.title = `${titleMap[activeTemplate] || 'Microservices'} | CamundaFlow`;
+  }, [activeTemplate]);
 
   const renderContent = () => {
     switch (activeTemplate) {
-      case "ai-agents-index":
-        return <AiAgentsIndexContent />;
-      case "agents-camunda":
-        return <AgentsCamundaContent />;
-      case "ai-customer-service":
-        return <AiCustomerServiceContent />;
+      case "overview":
+        return <MicroservicesIndexContent />;
+      case "patterns":
+        return <MicroservicesPatternsContent />;
+      case "best-practices":
+        return <MicroservicesBestPracticesContent />;
       default:
-        return <AiAgentsIndexContent />;
+        return <MicroservicesIndexContent />;
     }
   };
-
-  useEffect(() => {
-    const initBpmn = async () => {
-      const canvas = document.getElementById("canvas");
-      if (!canvas) return;
-
-      const BpmnJS = (await import(
-        "bpmn-js/dist/bpmn-navigated-viewer.development.js"
-      )).default;
-
-      const blocks = canvas.querySelectorAll("[data-diagram]");
-
-      for (const block of Array.from(blocks)) {
-        const diagram = block.getAttribute("data-diagram");
-        if (!diagram) continue;
-
-        try {
-          const viewer = new BpmnJS({ container: block });
-          const xml = await fetch(diagram).then((r) => r.text());
-          await viewer.importXML(xml);
-
-          const bpmnCanvas = viewer.get("canvas");
-
-          const tryZoom = () => {
-            const viewbox = bpmnCanvas.viewbox();
-
-            if (
-              viewbox.inner &&
-              viewbox.outer &&
-              viewbox.outer.width > 0 &&
-              viewbox.outer.height > 0
-            ) {
-              bpmnCanvas.zoom("fit-viewport", { padding: 30 });
-            } else {
-              requestAnimationFrame(tryZoom);
-            }
-          };
-
-          tryZoom();
-        } catch (err) {
-          console.error("Failed to load BPMN diagram:", err);
-        }
-      }
-    };
-
-    initBpmn();
-  }, [activeTemplate]);
 
   return (
     <div className="container">
       <aside className="sidebar">
-        <h3>AI Agents</h3>
+        <h3>Microservices</h3>
         <ul>
           <li>
             <a
-              className={`example-link ${activeTemplate === "ai-agents-index" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("ai-agents-index")}
+              className={`example-link ${activeTemplate === "overview" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("overview")}
+              style={{ cursor: 'pointer' }}
             >
-              {t("ai_agents_opt1")}
+              📖 Overview
             </a>
           </li>
           <li>
             <a
-              className={`example-link ${activeTemplate === "agents-camunda" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("agents-camunda")}
+              className={`example-link ${activeTemplate === "patterns" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("patterns")}
+              style={{ cursor: 'pointer' }}
             >
-              {t("ai_camunda")}
+              🎨 Design Patterns
             </a>
           </li>
           <li>
             <a
-              className={`example-link ${activeTemplate === "ai-customer-service" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("ai-customer-service")}
+              className={`example-link ${activeTemplate === "best-practices" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("best-practices")}
+              style={{ cursor: 'pointer' }}
             >
-              {t("intelligent_customer_service")}
+              ✨ Best Practices
             </a>
           </li>
         </ul>
       </aside>
-
       <main className="main-content">
         <div className="card">
           <div id="canvas">{renderContent()}</div>
         </div>
       </main>
-
       <aside className="sidebar" style={{ 
         padding: '0', 
         background: 'transparent',
@@ -127,8 +79,8 @@ export default function AiAgentsPage() {
         alignItems: 'flex-start'
       }}>
         <img 
-          src="/ai-profiel.webp" 
-          alt="AI Profile" 
+          src="/service-portal.avif" 
+          alt="Microservices Portal" 
           style={{
             width: '100%',
             aspectRatio: '1',
@@ -137,8 +89,8 @@ export default function AiAgentsPage() {
           }}
         />
         <img 
-          src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?w=400&h=400&fit=crop" 
-          alt="AI Neural Network" 
+          src="/supply-chain.avif" 
+          alt="Supply Chain" 
           style={{
             width: '100%',
             aspectRatio: '1',
