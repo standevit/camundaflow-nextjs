@@ -93,7 +93,7 @@ export default function ReferencesPage() {
               }}
             />
             <img 
-              src="/suplly-chain.avif" 
+              src="/supply-chain.avif" 
               alt="Supply Chain Management" 
               style={{
                 width: '100%',
