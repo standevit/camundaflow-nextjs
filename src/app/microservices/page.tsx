@@ -1,22 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "@/components/LanguageProvider";
 import MicroservicesIndexContent from "@/components/content/MicroservicesIndexContent";
 import MicroservicesPatternsContent from "@/components/content/MicroservicesPatternsContent";
 import MicroservicesBestPracticesContent from "@/components/content/MicroservicesBestPracticesContent";
 
 export default function MicroservicesPage() {
+  const { t } = useTranslation();
   const [activeTemplate, setActiveTemplate] = useState("overview");
 
   useEffect(() => {
     // Update document title based on active template
     const titleMap: Record<string, string> = {
-      'overview': 'Microservices Architecture Overview',
-      'patterns': 'Microservices Design Patterns',
-      'best-practices': 'Microservices Best Practices'
+      'overview': t('microservices_overview') as string,
+      'patterns': t('microservices_patterns') as string,
+      'best-practices': t('microservices_best_practices') as string
     };
-    document.title = `${titleMap[activeTemplate] || 'Microservices'} | CamundaFlow`;
-  }, [activeTemplate]);
+    document.title = `${titleMap[activeTemplate] || t('microservices_page_title')} | CamundaFlow`;
+  }, [activeTemplate, t]);
 
   const renderContent = () => {
     switch (activeTemplate) {
@@ -34,7 +36,7 @@ export default function MicroservicesPage() {
   return (
     <div className="container">
       <aside className="sidebar">
-        <h3>Microservices</h3>
+        <h3>{t("microservices_page_title")}</h3>
         <ul>
           <li>
             <a
@@ -42,7 +44,7 @@ export default function MicroservicesPage() {
               onClick={() => setActiveTemplate("overview")}
               style={{ cursor: 'pointer' }}
             >
-              📖 Overview
+              📖 {t("microservices_overview")}
             </a>
           </li>
           <li>
@@ -51,7 +53,7 @@ export default function MicroservicesPage() {
               onClick={() => setActiveTemplate("patterns")}
               style={{ cursor: 'pointer' }}
             >
-              🎨 Design Patterns
+              🎨 {t("microservices_patterns")}
             </a>
           </li>
           <li>
@@ -60,7 +62,7 @@ export default function MicroservicesPage() {
               onClick={() => setActiveTemplate("best-practices")}
               style={{ cursor: 'pointer' }}
             >
-              ✨ Best Practices
+              ✨ {t("microservices_best_practices")}
             </a>
           </li>
         </ul>

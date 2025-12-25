@@ -1,6 +1,10 @@
 "use client";
 
+import { useTranslation } from "@/components/LanguageProvider";
+
 export default function MicroservicesIndexContent() {
+  const { t } = useTranslation();
+  
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
       {/* Hero Section */}
@@ -17,7 +21,7 @@ export default function MicroservicesIndexContent() {
           marginBottom: '0.5rem',
           color: 'white'
         }}>
-          Microservices Architecture
+          {t("ms_index_hero_title")}
         </h3>
         <p style={{ 
           color: 'white',
@@ -26,7 +30,7 @@ export default function MicroservicesIndexContent() {
           opacity: '0.95',
           marginBottom: '0'
         }}>
-          Build scalable, resilient applications with loosely coupled, independently deployable services
+          {t("ms_index_hero_subtitle")}
         </p>
       </div>
 
@@ -47,7 +51,7 @@ export default function MicroservicesIndexContent() {
           borderBottom: '2px solid #667eea',
           paddingBottom: '0.5rem'
         }}>
-          What are Microservices?
+          {t("ms_index_what_heading")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Microservices architecture is a modern approach to software development where applications are structured as a collection of loosely coupled, independently deployable services. Each service is responsible for a specific business capability and communicates with others through well-defined APIs.
@@ -74,7 +78,7 @@ export default function MicroservicesIndexContent() {
           borderBottom: '2px solid #667eea',
           paddingBottom: '0.5rem'
         }}>
-          Key Benefits
+          {t("ms_index_benefits_heading")}
         </h3>
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #667eea' }}>
@@ -137,7 +141,7 @@ export default function MicroservicesIndexContent() {
           borderBottom: '2px solid #667eea',
           paddingBottom: '0.5rem'
         }}>
-          When to Use Microservices?
+          {t("ms_index_when_heading")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Microservices are ideal for:
@@ -165,7 +169,7 @@ export default function MicroservicesIndexContent() {
           marginBottom: '1rem',
           color: '#0f172a'
         }}>
-          Our Microservices Expertise
+          {t("ms_index_expertise_heading")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           We help organizations design, implement, and operate robust microservices architectures:

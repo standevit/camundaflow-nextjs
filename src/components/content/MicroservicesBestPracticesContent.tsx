@@ -1,6 +1,10 @@
 "use client";
 
+import { useTranslation } from "@/components/LanguageProvider";
+
 export default function MicroservicesBestPracticesContent() {
+  const { t } = useTranslation();
+  
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
       {/* Hero Section */}
@@ -17,7 +21,7 @@ export default function MicroservicesBestPracticesContent() {
           marginBottom: '0.5rem',
           color: 'white'
         }}>
-          Microservices Best Practices
+          {t("ms_bp_hero_title")}
         </h3>
         <p style={{ 
           color: 'white',
@@ -26,7 +30,7 @@ export default function MicroservicesBestPracticesContent() {
           opacity: '0.95',
           marginBottom: '0'
         }}>
-          Essential guidelines for building production-ready microservices
+          {t("ms_bp_hero_subtitle")}
         </p>
       </div>
 
@@ -47,7 +51,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          🎯 Design Principles
+          🎯 {t("ms_bp_design_heading")}
         </h3>
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px', borderLeft: '4px solid #f59e0b' }}>
@@ -94,7 +98,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          🔌 API Design Best Practices
+          🔌 {t("ms_bp_api_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
           <li><strong>Version your APIs:</strong> Use semantic versioning (v1, v2) to manage breaking changes</li>
@@ -123,7 +127,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          🗄️ Data Management
+          🗄️ {t("ms_bp_data_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
           <li><strong>Database per service:</strong> Each service owns its database to ensure independence</li>
@@ -151,7 +155,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          🚀 DevOps & Deployment
+          🚀 {t("ms_bp_devops_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
           <li><strong>Automate everything:</strong> CI/CD pipelines for build, test, and deployment</li>
@@ -180,7 +184,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          📊 Observability & Monitoring
+          📊 {t("ms_bp_observability_heading")}
         </h3>
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px' }}>
@@ -227,7 +231,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          🔒 Security Best Practices
+          🔒 {t("ms_bp_security_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
           <li><strong>Zero Trust Architecture:</strong> Never trust, always verify</li>
@@ -255,7 +259,7 @@ export default function MicroservicesBestPracticesContent() {
           borderBottom: '2px solid #f59e0b',
           paddingBottom: '0.5rem'
         }}>
-          🧪 Testing Strategy
+          🧪 {t("ms_bp_testing_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
           <li><strong>Unit tests:</strong> Test individual components in isolation</li>

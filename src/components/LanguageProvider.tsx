@@ -192,6 +192,41 @@ const translations: Record<string, Messages> = {
     mcp_step_5: "Wenn die Ausführung erlaubt ist, führt der KI-Agent die Aktion mit dem jeweiligen MCP-Tool aus (z.B. Dateisystem); andernfalls endet der Subprozess mit \"MCP-Ausführung nicht erlaubt\"",
     mcp_step_6: "Abschließend erhält der Benutzer Feedback oder eine vollständige Zusammenfassung der Ergebnisse",
 
+    // Microservices page
+    microservices_page_title: "Microservices",
+    microservices_overview: "Übersicht",
+    microservices_patterns: "Design Patterns",
+    microservices_best_practices: "Best Practices",
+    
+    // Microservices Index Content
+    ms_index_hero_title: "Microservices-Architektur",
+    ms_index_hero_subtitle: "Skalierbare, resiliente Anwendungen mit lose gekoppelten, unabhängig bereitstellbaren Services erstellen",
+    ms_index_what_heading: "Was sind Microservices?",
+    ms_index_benefits_heading: "Wichtigste Vorteile",
+    ms_index_when_heading: "Wann sollte man Microservices einsetzen?",
+    ms_index_expertise_heading: "Unsere Microservices-Expertise",
+    
+    // Microservices Patterns Content
+    ms_patterns_hero_title: "Microservices Design Patterns",
+    ms_patterns_hero_subtitle: "Bewährte Architekturmuster für robuste verteilte Systeme",
+    ms_patterns_api_gateway: "API Gateway Pattern",
+    ms_patterns_service_discovery: "Service Discovery Pattern",
+    ms_patterns_circuit_breaker: "Circuit Breaker Pattern",
+    ms_patterns_event_driven: "Event-Driven Architecture Pattern",
+    ms_patterns_saga: "Saga Pattern",
+    ms_patterns_database_per_service: "Database per Service Pattern",
+    
+    // Microservices Best Practices Content
+    ms_bp_hero_title: "Microservices Best Practices",
+    ms_bp_hero_subtitle: "Wichtige Richtlinien für produktionsreife Microservices",
+    ms_bp_design_heading: "Design-Prinzipien",
+    ms_bp_api_heading: "API-Design Best Practices",
+    ms_bp_data_heading: "Datenmanagement",
+    ms_bp_devops_heading: "DevOps & Deployment",
+    ms_bp_observability_heading: "Observability & Monitoring",
+    ms_bp_security_heading: "Sicherheits-Best Practices",
+    ms_bp_testing_heading: "Test-Strategie",
+
     // Leistungen page
     leistungen_title: "Leistungen",
     leistungen_desc: "Von der Beratung bis zur produktiven Lösung – alles aus einer Hand.",
@@ -673,6 +708,41 @@ const translations: Record<string, Messages> = {
     mcp_step_4: "If confirmation is required, the user is asked for approval and the answer is validated via a DMN decision table",
     mcp_step_5: "If execution is allowed, the AI agent performs the action using the respective MCP tool (e.g., Filesystem); otherwise the sub-process ends with \"MCP execution not allowed\"",
     mcp_step_6: "Finally, the user receives feedback or a complete summary of the results",
+
+    // Microservices page
+    microservices_page_title: "Microservices",
+    microservices_overview: "Overview",
+    microservices_patterns: "Design Patterns",
+    microservices_best_practices: "Best Practices",
+    
+    // Microservices Index Content
+    ms_index_hero_title: "Microservices Architecture",
+    ms_index_hero_subtitle: "Build scalable, resilient applications with loosely coupled, independently deployable services",
+    ms_index_what_heading: "What are Microservices?",
+    ms_index_benefits_heading: "Key Benefits",
+    ms_index_when_heading: "When to Use Microservices?",
+    ms_index_expertise_heading: "Our Microservices Expertise",
+    
+    // Microservices Patterns Content
+    ms_patterns_hero_title: "Microservices Design Patterns",
+    ms_patterns_hero_subtitle: "Proven architectural patterns for building robust distributed systems",
+    ms_patterns_api_gateway: "API Gateway Pattern",
+    ms_patterns_service_discovery: "Service Discovery Pattern",
+    ms_patterns_circuit_breaker: "Circuit Breaker Pattern",
+    ms_patterns_event_driven: "Event-Driven Architecture Pattern",
+    ms_patterns_saga: "Saga Pattern",
+    ms_patterns_database_per_service: "Database per Service Pattern",
+    
+    // Microservices Best Practices Content
+    ms_bp_hero_title: "Microservices Best Practices",
+    ms_bp_hero_subtitle: "Essential guidelines for building production-ready microservices",
+    ms_bp_design_heading: "Design Principles",
+    ms_bp_api_heading: "API Design Best Practices",
+    ms_bp_data_heading: "Data Management",
+    ms_bp_devops_heading: "DevOps & Deployment",
+    ms_bp_observability_heading: "Observability & Monitoring",
+    ms_bp_security_heading: "Security Best Practices",
+    ms_bp_testing_heading: "Testing Strategy",
 
     // Leistungen page
     leistungen_title: "My Services",
@@ -1287,6 +1357,41 @@ const translations: Record<string, Messages> = {
     mcp_step_4: "MCP Server query't CRM-database en retourneert JSON",
     mcp_step_5: "Agent genereert conceptantwoord + triggert Camunda proces (bijv. 'Retour aanvragen')",
     mcp_step_6: "Proces loopt automatisch → notificatie naar klant + intern ticket",
+    
+    // Microservices page
+    microservices_page_title: "Microservices",
+    microservices_overview: "Overzicht",
+    microservices_patterns: "Design Patterns",
+    microservices_best_practices: "Best Practices",
+    
+    // Microservices Index Content
+    ms_index_hero_title: "Microservices Architectuur",
+    ms_index_hero_subtitle: "Bouw schaalbare, veerkrachtige applicaties met losjes gekoppelde, onafhankelijk inzetbare services",
+    ms_index_what_heading: "Wat zijn Microservices?",
+    ms_index_benefits_heading: "Belangrijkste Voordelen",
+    ms_index_when_heading: "Wanneer Microservices gebruiken?",
+    ms_index_expertise_heading: "Onze Microservices Expertise",
+    
+    // Microservices Patterns Content
+    ms_patterns_hero_title: "Microservices Design Patterns",
+    ms_patterns_hero_subtitle: "Bewezen architectuurpatronen voor robuuste gedistribueerde systemen",
+    ms_patterns_api_gateway: "API Gateway Pattern",
+    ms_patterns_service_discovery: "Service Discovery Pattern",
+    ms_patterns_circuit_breaker: "Circuit Breaker Pattern",
+    ms_patterns_event_driven: "Event-Driven Architectuur Pattern",
+    ms_patterns_saga: "Saga Pattern",
+    ms_patterns_database_per_service: "Database per Service Pattern",
+    
+    // Microservices Best Practices Content
+    ms_bp_hero_title: "Microservices Best Practices",
+    ms_bp_hero_subtitle: "Essentiële richtlijnen voor productie-klare microservices",
+    ms_bp_design_heading: "Ontwerpprincipes",
+    ms_bp_api_heading: "API Design Best Practices",
+    ms_bp_data_heading: "Data Management",
+    ms_bp_devops_heading: "DevOps & Deployment",
+    ms_bp_observability_heading: "Observability & Monitoring",
+    ms_bp_security_heading: "Beveiligings Best Practices",
+    ms_bp_testing_heading: "Test Strategie",
     
     // BPMN page keys
     bpmn_elements: "Centrale elementen van BPMN",

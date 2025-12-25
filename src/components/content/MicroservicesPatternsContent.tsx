@@ -1,6 +1,10 @@
 "use client";
 
+import { useTranslation } from "@/components/LanguageProvider";
+
 export default function MicroservicesPatternsContent() {
+  const { t } = useTranslation();
+  
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
       {/* Hero Section */}
@@ -17,7 +21,7 @@ export default function MicroservicesPatternsContent() {
           marginBottom: '0.5rem',
           color: 'white'
         }}>
-          Microservices Design Patterns
+          {t("ms_patterns_hero_title")}
         </h3>
         <p style={{ 
           color: 'white',
@@ -26,7 +30,7 @@ export default function MicroservicesPatternsContent() {
           opacity: '0.95',
           marginBottom: '0'
         }}>
-          Proven architectural patterns for building robust distributed systems
+          {t("ms_patterns_hero_subtitle")}
         </p>
       </div>
 
@@ -47,7 +51,7 @@ export default function MicroservicesPatternsContent() {
           borderBottom: '2px solid #4ade80',
           paddingBottom: '0.5rem'
         }}>
-          🚪 API Gateway Pattern
+          🚪 {t("ms_patterns_api_gateway")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           A single entry point for all client requests that routes them to appropriate microservices. The API Gateway handles cross-cutting concerns like authentication, rate limiting, and request aggregation.
@@ -82,7 +86,7 @@ export default function MicroservicesPatternsContent() {
           borderBottom: '2px solid #4ade80',
           paddingBottom: '0.5rem'
         }}>
-          🔍 Service Discovery Pattern
+          🔍 {t("ms_patterns_service_discovery")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Automatic detection of services on the network, allowing microservices to find and communicate with each other dynamically without hard-coded addresses.
@@ -115,7 +119,7 @@ export default function MicroservicesPatternsContent() {
           borderBottom: '2px solid #4ade80',
           paddingBottom: '0.5rem'
         }}>
-          ⚡ Circuit Breaker Pattern
+          ⚡ {t("ms_patterns_circuit_breaker")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Prevents cascading failures by detecting service failures and stopping requests to failing services temporarily, giving them time to recover.
@@ -149,7 +153,7 @@ export default function MicroservicesPatternsContent() {
           borderBottom: '2px solid #4ade80',
           paddingBottom: '0.5rem'
         }}>
-          📡 Event-Driven Architecture Pattern
+          📡 {t("ms_patterns_event_driven")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Services communicate asynchronously through events published to message brokers, enabling loose coupling and better scalability.
@@ -183,7 +187,7 @@ export default function MicroservicesPatternsContent() {
           borderBottom: '2px solid #4ade80',
           paddingBottom: '0.5rem'
         }}>
-          🔄 Saga Pattern
+          🔄 {t("ms_patterns_saga")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Manages distributed transactions across multiple services by breaking them into a sequence of local transactions, each with a compensating action in case of failure.
@@ -215,7 +219,7 @@ export default function MicroservicesPatternsContent() {
           borderBottom: '2px solid #4ade80',
           paddingBottom: '0.5rem'
         }}>
-          🗄️ Database per Service Pattern
+          🗄️ {t("ms_patterns_database_per_service")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           Each microservice owns its private database to ensure loose coupling. Services can only access each other's data through APIs.
