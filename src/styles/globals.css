@@ -53,11 +53,9 @@ nav{
 
 /* Boxed meni */
 .menu{
-  display:flex;gap:0.9rem;background:#f8fafc;
-  /*padding:0.55rem 1.1rem;*/
+  display:flex;gap:0.9rem;
   border-radius:999px;
   margin-left: 1rem;
-  border:1px solid #e2e8f0;box-shadow:0 4px 15px rgba(0,0,0,0.05);
 }
 .menu a{
   color:#475569;font-weight:600;font-size:0.96rem;
@@ -67,7 +65,13 @@ nav{
   min-width: max-content;   /* forsira da link bude širok koliko treba */
 }
 .menu a:hover{background:#e2e8f0;color:#1e293b}
-.menu a.active{background:#475569;color:white;font-weight:700}
+.menu a.active{
+  background:#fff;
+  color:#8b5cf6;
+  font-weight:700;
+  border:2px solid #8b5cf6;
+  box-shadow:0 2px 8px rgba(139,92,246,0.08);
+}
 
 /* Main & Card */
 main{flex:1;padding:0rem 1rem 4rem;margin:0 auto; width: 100%; }
