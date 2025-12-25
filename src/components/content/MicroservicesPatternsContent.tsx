@@ -54,17 +54,17 @@ export default function MicroservicesPatternsContent() {
           🚪 {t("ms_patterns_api_gateway")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          A single entry point for all client requests that routes them to appropriate microservices. The API Gateway handles cross-cutting concerns like authentication, rate limiting, and request aggregation.
+          {t("ms_patterns_api_gateway_desc")}
         </p>
         <div style={{ background: '#f0fdf4', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4ade80' }}>
           <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#166534' }}>
-            Benefits:
+            {t("ms_patterns_api_gateway_benefits")}
           </h4>
           <ul style={{ fontSize: '1rem', lineHeight: '1.7', color: '#15803d', paddingLeft: '1.5rem' }}>
-            <li>Simplified client-side code with a single endpoint</li>
-            <li>Reduced round trips by aggregating multiple service calls</li>
-            <li>Centralized security and monitoring</li>
-            <li>Protocol translation (REST to gRPC, etc.)</li>
+            <li>{t("ms_patterns_api_gateway_b1")}</li>
+            <li>{t("ms_patterns_api_gateway_b2")}</li>
+            <li>{t("ms_patterns_api_gateway_b3")}</li>
+            <li>{t("ms_patterns_api_gateway_b4")}</li>
           </ul>
         </div>
       </div>
@@ -89,15 +89,15 @@ export default function MicroservicesPatternsContent() {
           🔍 {t("ms_patterns_service_discovery")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Automatic detection of services on the network, allowing microservices to find and communicate with each other dynamically without hard-coded addresses.
+          {t("ms_patterns_service_discovery_desc")}
         </p>
         <div style={{ background: '#f0fdf4', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4ade80' }}>
           <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#166534' }}>
-            Implementation Options:
+            {t("ms_patterns_service_discovery_options")}
           </h4>
           <ul style={{ fontSize: '1rem', lineHeight: '1.7', color: '#15803d', paddingLeft: '1.5rem' }}>
-            <li><strong>Client-side discovery:</strong> Clients query a service registry (e.g., Consul, Eureka)</li>
-            <li><strong>Server-side discovery:</strong> Load balancer queries registry (e.g., Kubernetes, AWS ELB)</li>
+            <li>{t("ms_patterns_service_discovery_o1")}</li>
+            <li>{t("ms_patterns_service_discovery_o2")}</li>
           </ul>
         </div>
       </div>
@@ -122,16 +122,16 @@ export default function MicroservicesPatternsContent() {
           ⚡ {t("ms_patterns_circuit_breaker")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Prevents cascading failures by detecting service failures and stopping requests to failing services temporarily, giving them time to recover.
+          {t("ms_patterns_circuit_breaker_desc")}
         </p>
         <div style={{ background: '#f0fdf4', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4ade80' }}>
           <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#166534' }}>
-            How it works:
+            {t("ms_patterns_circuit_breaker_how")}
           </h4>
           <ul style={{ fontSize: '1rem', lineHeight: '1.7', color: '#15803d', paddingLeft: '1.5rem' }}>
-            <li><strong>Closed:</strong> Normal operation, requests flow through</li>
-            <li><strong>Open:</strong> Failures detected, requests fail immediately</li>
-            <li><strong>Half-Open:</strong> Testing if service recovered</li>
+            <li>{t("ms_patterns_circuit_breaker_h1")}</li>
+            <li>{t("ms_patterns_circuit_breaker_h2")}</li>
+            <li>{t("ms_patterns_circuit_breaker_h3")}</li>
           </ul>
         </div>
       </div>
@@ -156,16 +156,16 @@ export default function MicroservicesPatternsContent() {
           📡 {t("ms_patterns_event_driven")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Services communicate asynchronously through events published to message brokers, enabling loose coupling and better scalability.
+          {t("ms_patterns_event_driven_desc")}
         </p>
         <div style={{ background: '#f0fdf4', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4ade80' }}>
           <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#166534' }}>
-            Common Technologies:
+            {t("ms_patterns_event_driven_tech")}
           </h4>
           <ul style={{ fontSize: '1rem', lineHeight: '1.7', color: '#15803d', paddingLeft: '1.5rem' }}>
-            <li>Apache Kafka for high-throughput event streaming</li>
-            <li>RabbitMQ for reliable message queuing</li>
-            <li>AWS EventBridge or Google Cloud Pub/Sub for cloud-native solutions</li>
+            <li>{t("ms_patterns_event_driven_t1")}</li>
+            <li>{t("ms_patterns_event_driven_t2")}</li>
+            <li>{t("ms_patterns_event_driven_t3")}</li>
           </ul>
         </div>
       </div>
@@ -190,15 +190,15 @@ export default function MicroservicesPatternsContent() {
           🔄 {t("ms_patterns_saga")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Manages distributed transactions across multiple services by breaking them into a sequence of local transactions, each with a compensating action in case of failure.
+          {t("ms_patterns_saga_desc")}
         </p>
         <div style={{ background: '#f0fdf4', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4ade80' }}>
           <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#166534' }}>
-            Implementation Approaches:
+            {t("ms_patterns_saga_approaches")}
           </h4>
           <ul style={{ fontSize: '1rem', lineHeight: '1.7', color: '#15803d', paddingLeft: '1.5rem' }}>
-            <li><strong>Choreography:</strong> Services publish and listen to events</li>
-            <li><strong>Orchestration:</strong> Central coordinator manages the saga</li>
+            <li>{t("ms_patterns_saga_a1")}</li>
+            <li>{t("ms_patterns_saga_a2")}</li>
           </ul>
         </div>
       </div>
@@ -222,16 +222,16 @@ export default function MicroservicesPatternsContent() {
           🗄️ {t("ms_patterns_database_per_service")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Each microservice owns its private database to ensure loose coupling. Services can only access each other's data through APIs.
+          {t("ms_patterns_database_per_service_desc")}
         </p>
         <div style={{ background: '#f0fdf4', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4ade80' }}>
           <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#166534' }}>
-            Advantages:
+            {t("ms_patterns_database_per_service_advantages")}
           </h4>
           <ul style={{ fontSize: '1rem', lineHeight: '1.7', color: '#15803d', paddingLeft: '1.5rem' }}>
-            <li>Services can use different database technologies</li>
-            <li>Changes to database schema don't affect other services</li>
-            <li>Better scalability and fault isolation</li>
+            <li>{t("ms_patterns_database_per_service_a1")}</li>
+            <li>{t("ms_patterns_database_per_service_a2")}</li>
+            <li>{t("ms_patterns_database_per_service_a3")}</li>
           </ul>
         </div>
       </div>

@@ -54,10 +54,10 @@ export default function MicroservicesIndexContent() {
           {t("ms_index_what_heading")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Microservices architecture is a modern approach to software development where applications are structured as a collection of loosely coupled, independently deployable services. Each service is responsible for a specific business capability and communicates with others through well-defined APIs.
+          {t("ms_index_what_p1")}
         </p>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569' }}>
-          Unlike monolithic architectures where all components are tightly integrated, microservices allow teams to develop, deploy, and scale services independently, enabling greater flexibility and faster innovation.
+          {t("ms_index_what_p2")}
         </p>
       </div>
 
@@ -83,42 +83,42 @@ export default function MicroservicesIndexContent() {
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #667eea' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#1e293b' }}>
-              🚀 Autonomous Services
+              {t("ms_index_benefit1_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#64748b' }}>
-              Each microservice can be developed, deployed, and scaled independently without affecting other services
+              {t("ms_index_benefit1_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #667eea' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#1e293b' }}>
-              🔧 Technology Diversity
+              {t("ms_index_benefit2_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#64748b' }}>
-              Teams can use different programming languages, databases, and tools best suited for each service
+              {t("ms_index_benefit2_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #667eea' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#1e293b' }}>
-              💪 Resilience
+              {t("ms_index_benefit3_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#64748b' }}>
-              Failures in one service do not bring down the entire system, ensuring better fault isolation
+              {t("ms_index_benefit3_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #667eea' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#1e293b' }}>
-              ⚡ Faster Time to Market
+              {t("ms_index_benefit4_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#64748b' }}>
-              Smaller, focused teams can deliver features more quickly with parallel development
+              {t("ms_index_benefit4_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #667eea' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#1e293b' }}>
-              📈 Scalability
+              {t("ms_index_benefit5_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#64748b' }}>
-              Scale only the services that need it, optimizing resource usage and cost efficiency
+              {t("ms_index_benefit5_desc")}
             </p>
           </div>
         </div>
@@ -144,15 +144,15 @@ export default function MicroservicesIndexContent() {
           {t("ms_index_when_heading")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          Microservices are ideal for:
+          {t("ms_index_when_intro")}
         </p>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li>Large, complex applications requiring high scalability</li>
-          <li>Organizations with multiple development teams</li>
-          <li>Applications with diverse technology requirements</li>
-          <li>Cloud-native and DevOps environments</li>
-          <li>Systems requiring continuous delivery and deployment</li>
-          <li>Applications with varying scalability needs per component</li>
+          <li>{t("ms_index_when_item1")}</li>
+          <li>{t("ms_index_when_item2")}</li>
+          <li>{t("ms_index_when_item3")}</li>
+          <li>{t("ms_index_when_item4")}</li>
+          <li>{t("ms_index_when_item5")}</li>
+          <li>{t("ms_index_when_item6")}</li>
         </ul>
       </div>
 
@@ -172,17 +172,17 @@ export default function MicroservicesIndexContent() {
           {t("ms_index_expertise_heading")}
         </h3>
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
-          We help organizations design, implement, and operate robust microservices architectures:
+          {t("ms_index_expertise_intro")}
         </p>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li>Microservices strategy and architecture consulting</li>
-          <li>API design and management with REST, GraphQL, and gRPC</li>
-          <li>Service mesh implementation (Istio, Linkerd)</li>
-          <li>DevOps and CI/CD pipeline setup</li>
-          <li>Containerization with Docker & Kubernetes orchestration</li>
-          <li>Event-driven architectures with message brokers</li>
-          <li>Monitoring, logging, and distributed tracing</li>
-          <li>Migration from monolith to microservices</li>
+          <li>{t("ms_index_expertise_item1")}</li>
+          <li>{t("ms_index_expertise_item2")}</li>
+          <li>{t("ms_index_expertise_item3")}</li>
+          <li>{t("ms_index_expertise_item4")}</li>
+          <li>{t("ms_index_expertise_item5")}</li>
+          <li>{t("ms_index_expertise_item6")}</li>
+          <li>{t("ms_index_expertise_item7")}</li>
+          <li>{t("ms_index_expertise_item8")}</li>
         </ul>
       </div>
     </div>

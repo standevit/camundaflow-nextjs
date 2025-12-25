@@ -66,10 +66,7 @@ nav{
 }
 .menu a:hover{
   background:#fff;
-  font-weight:700;
-  border:2px solid #9c88c4;
-  box-shadow:0 2px 8px rgba(139,92,246,0.08);
-  padding: 0.25rem;
+
 }
 .menu a.active{
   background:#fff;

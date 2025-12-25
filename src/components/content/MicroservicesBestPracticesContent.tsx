@@ -56,26 +56,26 @@ export default function MicroservicesBestPracticesContent() {
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px', borderLeft: '4px solid #f59e0b' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#92400e' }}>
-              Single Responsibility
+              {t("ms_bp_design_sr_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#78350f' }}>
-              Each service should have one clear business purpose. Keep services small and focused on doing one thing well.
+              {t("ms_bp_design_sr_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px', borderLeft: '4px solid #f59e0b' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#92400e' }}>
-              Loose Coupling
+              {t("ms_bp_design_lc_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#78350f' }}>
-              Minimize dependencies between services. Changes to one service shouldn't require changes to others.
+              {t("ms_bp_design_lc_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px', borderLeft: '4px solid #f59e0b' }}>
             <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem', color: '#92400e' }}>
-              High Cohesion
+              {t("ms_bp_design_hc_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#78350f' }}>
-              Related functionality should be grouped together within the same service for better maintainability.
+              {t("ms_bp_design_hc_desc")}
             </p>
           </div>
         </div>
@@ -101,12 +101,12 @@ export default function MicroservicesBestPracticesContent() {
           🔌 {t("ms_bp_api_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li><strong>Version your APIs:</strong> Use semantic versioning (v1, v2) to manage breaking changes</li>
-          <li><strong>Design for backward compatibility:</strong> Add new fields, don't remove or rename existing ones</li>
-          <li><strong>Use standard protocols:</strong> REST for CRUD, gRPC for performance, GraphQL for flexible queries</li>
-          <li><strong>Implement pagination:</strong> Limit response sizes for list operations</li>
-          <li><strong>Provide clear documentation:</strong> Use OpenAPI/Swagger specifications</li>
-          <li><strong>Handle errors consistently:</strong> Use standard HTTP status codes and error formats</li>
+          <li>{t("ms_bp_api_item1")}</li>
+          <li>{t("ms_bp_api_item2")}</li>
+          <li>{t("ms_bp_api_item3")}</li>
+          <li>{t("ms_bp_api_item4")}</li>
+          <li>{t("ms_bp_api_item5")}</li>
+          <li>{t("ms_bp_api_item6")}</li>
         </ul>
       </div>
 
@@ -130,11 +130,11 @@ export default function MicroservicesBestPracticesContent() {
           🗄️ {t("ms_bp_data_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li><strong>Database per service:</strong> Each service owns its database to ensure independence</li>
-          <li><strong>Event sourcing:</strong> Store state changes as events for auditability and replay</li>
-          <li><strong>CQRS:</strong> Separate read and write models for better performance</li>
-          <li><strong>Data consistency:</strong> Use eventual consistency and sagas for distributed transactions</li>
-          <li><strong>Avoid shared databases:</strong> Services should never directly access another service's database</li>
+          <li>{t("ms_bp_data_item1")}</li>
+          <li>{t("ms_bp_data_item2")}</li>
+          <li>{t("ms_bp_data_item3")}</li>
+          <li>{t("ms_bp_data_item4")}</li>
+          <li>{t("ms_bp_data_item5")}</li>
         </ul>
       </div>
 
@@ -158,12 +158,12 @@ export default function MicroservicesBestPracticesContent() {
           🚀 {t("ms_bp_devops_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li><strong>Automate everything:</strong> CI/CD pipelines for build, test, and deployment</li>
-          <li><strong>Containerize services:</strong> Use Docker for consistent environments</li>
-          <li><strong>Orchestrate with Kubernetes:</strong> Manage containers at scale with auto-scaling</li>
-          <li><strong>Infrastructure as Code:</strong> Use Terraform, Helm, or similar tools</li>
-          <li><strong>Blue-Green deployments:</strong> Minimize downtime during releases</li>
-          <li><strong>Feature flags:</strong> Enable gradual rollouts and A/B testing</li>
+          <li>{t("ms_bp_devops_item1")}</li>
+          <li>{t("ms_bp_devops_item2")}</li>
+          <li>{t("ms_bp_devops_item3")}</li>
+          <li>{t("ms_bp_devops_item4")}</li>
+          <li>{t("ms_bp_devops_item5")}</li>
+          <li>{t("ms_bp_devops_item6")}</li>
         </ul>
       </div>
 
@@ -189,26 +189,26 @@ export default function MicroservicesBestPracticesContent() {
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px' }}>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#92400e' }}>
-              📈 Logging
+              {t("ms_bp_observability_logging_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#78350f' }}>
-              Centralized logging with correlation IDs. Use ELK stack (Elasticsearch, Logstash, Kibana) or similar tools.
+              {t("ms_bp_observability_logging_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px' }}>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#92400e' }}>
-              🔍 Distributed Tracing
+              {t("ms_bp_observability_tracing_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#78350f' }}>
-              Track requests across services with tools like Jaeger, Zipkin, or OpenTelemetry.
+              {t("ms_bp_observability_tracing_desc")}
             </p>
           </div>
           <div style={{ padding: '1rem', background: '#fffbeb', borderRadius: '8px' }}>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', color: '#92400e' }}>
-              📉 Metrics
+              {t("ms_bp_observability_metrics_title")}
             </h4>
             <p style={{ fontSize: '1rem', lineHeight: '1.7', color: '#78350f' }}>
-              Collect and visualize metrics with Prometheus and Grafana. Monitor SLIs and SLOs.
+              {t("ms_bp_observability_metrics_desc")}
             </p>
           </div>
         </div>
@@ -234,12 +234,12 @@ export default function MicroservicesBestPracticesContent() {
           🔒 {t("ms_bp_security_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li><strong>Zero Trust Architecture:</strong> Never trust, always verify</li>
-          <li><strong>Service-to-service authentication:</strong> Use mutual TLS (mTLS) or JWT tokens</li>
-          <li><strong>API Gateway security:</strong> Centralized authentication and authorization</li>
-          <li><strong>Secrets management:</strong> Use HashiCorp Vault or cloud-native solutions</li>
-          <li><strong>Rate limiting:</strong> Protect services from abuse and DDoS</li>
-          <li><strong>Regular security audits:</strong> Scan containers and dependencies for vulnerabilities</li>
+          <li>{t("ms_bp_security_item1")}</li>
+          <li>{t("ms_bp_security_item2")}</li>
+          <li>{t("ms_bp_security_item3")}</li>
+          <li>{t("ms_bp_security_item4")}</li>
+          <li>{t("ms_bp_security_item5")}</li>
+          <li>{t("ms_bp_security_item6")}</li>
         </ul>
       </div>
 
@@ -262,12 +262,12 @@ export default function MicroservicesBestPracticesContent() {
           🧪 {t("ms_bp_testing_heading")}
         </h3>
         <ul style={{ fontSize: '1.05rem', lineHeight: '1.9', color: '#475569', paddingLeft: '1.5rem' }}>
-          <li><strong>Unit tests:</strong> Test individual components in isolation</li>
-          <li><strong>Integration tests:</strong> Test service interactions with real dependencies</li>
-          <li><strong>Contract testing:</strong> Verify API contracts between services (Pact)</li>
-          <li><strong>End-to-end tests:</strong> Test critical user journeys across services</li>
-          <li><strong>Chaos engineering:</strong> Test resilience by introducing failures (Chaos Monkey)</li>
-          <li><strong>Performance testing:</strong> Load test services under realistic conditions</li>
+          <li>{t("ms_bp_testing_item1")}</li>
+          <li>{t("ms_bp_testing_item2")}</li>
+          <li>{t("ms_bp_testing_item3")}</li>
+          <li>{t("ms_bp_testing_item4")}</li>
+          <li>{t("ms_bp_testing_item5")}</li>
+          <li>{t("ms_bp_testing_item6")}</li>
         </ul>
       </div>
     </div>
