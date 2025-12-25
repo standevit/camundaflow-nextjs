@@ -59,7 +59,7 @@ nav{
 }
 .menu a{
   color:#475569;font-weight:600;font-size:0.96rem;
-  text-decoration:none;padding:0.45rem 0.95rem;
+  text-decoration:none;
   border-radius:999px;transition:all .3s;
   white-space: nowrap;
   min-width: max-content;   /* forsira da link bude širok koliko treba */
