@@ -170,29 +170,22 @@ export default function AgentsCamundaContent() {
           style={{
             marginTop: '1rem', 
             display: 'inline-block',
-            padding: '0.875rem 2rem',
-            background: 'rgba(255, 255, 255, 0.15)',
+            padding: '0.75rem 1.5rem',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             color: 'white',
             borderRadius: '8px',
             textDecoration: 'none',
-            fontWeight: '700',
-            fontSize: '1.05rem',
-            transition: 'all 0.3s',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            border: '2px solid rgba(255, 255, 255, 0.4)',
-            backdropFilter: 'blur(10px)'
+            fontWeight: '600',
+            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-3px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
-            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+            e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
           }}
         >
           {t("agents_camunda_cta_button")}
