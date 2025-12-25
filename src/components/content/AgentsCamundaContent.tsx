@@ -166,28 +166,33 @@ export default function AgentsCamundaContent() {
         </p>
         <a 
           href="/contact" 
+          className="btn-primary"
           style={{
+            marginTop: '1rem', 
             display: 'inline-block',
-            background: 'rgba(0, 0, 0, 0.2)',
-            color: 'white',
             padding: '0.875rem 2rem',
+            background: 'rgba(255, 255, 255, 0.15)',
+            color: 'white',
             borderRadius: '8px',
-            fontWeight: '600',
-            fontSize: '1.1rem',
             textDecoration: 'none',
-            transition: 'all 0.2s',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.2)'
+            fontWeight: '700',
+            fontSize: '1.05rem',
+            transition: 'all 0.3s',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            border: '2px solid rgba(255, 255, 255, 0.4)',
+            backdropFilter: 'blur(10px)'
           }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.3)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-3px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.6)';
           }}
-          onMouseOut={(e) => {
+          onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
           }}
         >
           {t("agents_camunda_cta_button")}

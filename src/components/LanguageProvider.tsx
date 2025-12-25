@@ -8,7 +8,7 @@ const translations: Record<string, Messages> = {
   de: {
     // Contact page
     contact_title: "Kontakt",
-    contact_desc: "Haben Sie Fragen zu Camunda 8, Prozessautomatisierung oder AI Agents? Schreiben Sie mir – ich melde mich schnellstmöglich zurück.",
+    contact_desc: "Haben Sie Fragen zu Camunda 8, Prozessautomatisierung oder AI Agents? Kontaktieren Sie uns.",
     
     // Contact form
     name: "Name *",
@@ -490,7 +490,7 @@ const translations: Record<string, Messages> = {
   en: {
     // Contact page
     contact_title: "Contact",
-    contact_desc: "Do you have questions about Camunda 8, process automation, or AI agents? Write to me – I will get back to you as soon as possible.",
+    contact_desc: "Do you have questions about Camunda 8, process automation, or AI agents? Contact us.",
     
     // Contact form
     name: "Name *",
@@ -972,7 +972,7 @@ const translations: Record<string, Messages> = {
   nl: {
     // Contact page
     contact_title: "Contact",
-    contact_desc: "Heeft u vragen over Camunda 8, procesautomatisering of AI Agents? Schrijf me – ik neem zo snel mogelijk contact met u op.",
+    contact_desc: "Heeft u vragen over Camunda 8, procesautomatisering of AI Agents? Neem contact met ons op.",
     
     // Contact form
     name: "Naam *",
