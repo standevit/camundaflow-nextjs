@@ -133,7 +133,7 @@ export default function MigrationContent() {
         marginBottom: '2rem'
       }}>
         <h3 style={{ 
-          fontSize: '1.75rem', 
+          fontSize: '1.5rem',
           fontWeight: '700', 
           marginBottom: '0.5rem',
           color: 'white'

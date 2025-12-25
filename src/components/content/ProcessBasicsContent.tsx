@@ -14,7 +14,7 @@ export default function ProcessBasicsContent() {
         marginBottom: '2rem',
         color: 'white'
       }}>
-        <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.75rem', fontWeight: '700' }}>
+        <h3 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: '700' }}>
           {t('process_basics_title')}
         </h3>
         <p style={{ color: 'white', opacity: 0.95, fontSize: '1.1rem', marginBottom: '0' }}>

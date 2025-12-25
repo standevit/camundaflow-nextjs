@@ -16,7 +16,7 @@ export default function BpmnContent() {
         marginBottom: '2rem'
       }}>
         <h3 style={{ 
-          fontSize: '1.75rem', 
+          fontSize: '1.5rem', 
           fontWeight: '700', 
           marginBottom: '0.5rem',
           color: 'white'
@@ -44,7 +44,7 @@ export default function BpmnContent() {
         marginBottom: '3rem'
       }}>
         <h3 style={{
-          fontSize: '1.75rem',
+          fontSize: '1.5rem',
           fontWeight: '700',
           marginBottom: '2rem',
           color: '#0f172a',
@@ -90,7 +90,7 @@ export default function BpmnContent() {
         marginBottom: '3rem'
       }}>
         <h3 style={{
-          fontSize: '1.75rem',
+          fontSize: '1.5rem',
           fontWeight: '700',
           marginBottom: '1.5rem',
           color: '#0f172a'
