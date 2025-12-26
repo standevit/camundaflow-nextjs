@@ -55,7 +55,6 @@ nav{
 .menu{
   display:flex;gap:0.9rem;
   border-radius:999px;
-  margin-left: 1rem;
 }
 .menu a{
   color:#475569;font-weight:600;font-size:0.96rem;
