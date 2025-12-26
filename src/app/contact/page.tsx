@@ -6,7 +6,7 @@ import { useTranslation } from "@/components/LanguageProvider";
 
 export default function ContactPage() {
   const { t } = useTranslation();
-  const [companyInfo, setCompanyInfo] = useState<{ name: string; address: string; phone: string; kvk: string } | null>(null);
+  const [companyInfo, setCompanyInfo] = useState<{ name: string; address: string; phone: string; email: string; kvk: string } | null>(null);
 
   useEffect(() => {
     document.title = `${t('contact_title') as string} | CamundaFlow`;
@@ -18,6 +18,7 @@ export default function ContactPage() {
       name: "UHJvQXBweg==",
       address: "UmFuZHN0YWQgMjIgNDYsIDEzMTZCWiBBbG1lcmUsIE5lZGVybGFuZA==", 
       phone: "ICs0OSAxNTEgMjU1Nzk0MzU=",
+      email: "cG9zdEBjYW11bmRhZmxvdy5kZQ==",
       kvk: "NzU3MDU1OTE="
     };
 
@@ -27,6 +28,7 @@ export default function ContactPage() {
         name: atob(obfuscated.name),
         address: atob(obfuscated.address),
         phone: atob(obfuscated.phone),
+        email: atob(obfuscated.email),
         kvk: atob(obfuscated.kvk)
       });
     } catch (e) {
@@ -100,26 +102,6 @@ export default function ContactPage() {
         alignItems: 'flex-start',
         color: 'white'
       }}>
-        {/* Left vertical line */}
-        <div style={{
-          position: 'absolute',
-          left: '5px',
-          top: '0',
-          bottom: '0',
-          width: '1px',
-          background: '#ffffff'
-        }}></div>
-        
-        {/* Right vertical line */}
-        <div style={{
-          position: 'absolute',
-          right: '5px',
-          top: '0',
-          bottom: '0',
-          width: '1px',
-          background: '#ffffff'
-        }}></div>
-        
         {companyInfo && (
           <div style={{ width: '100%', marginTop: '3rem' }}>
             <div style={{ 
@@ -146,7 +128,12 @@ export default function ContactPage() {
               <div style={{ marginBottom: '0.3rem' }}>
                 <span style={{ fontStyle: 'italic' }}>{t("kvk_number")}:</span> {companyInfo.kvk}
               </div>
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ marginBottom: '0.3rem', wordBreak: 'break-all' }}>
+                <a href={`mailto:${companyInfo.email}`} style={{ color: 'white', textDecoration: 'none' }}>
+                  ✉️ {companyInfo.email}
+                </a>
+              </div>
+              <div>
                 📞 {companyInfo.phone}
               </div>
             </div>

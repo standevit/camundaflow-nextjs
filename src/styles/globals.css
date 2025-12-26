@@ -287,24 +287,8 @@ footer a:hover{
   list-style: none;
 }
 
-.sidebar a {
-  display: block;
-  padding: 0.85rem 1.1rem;
-  border-radius: 10px;
-  color: #475569;
-  font-weight: 600;
-  font-size: 0.98rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
-  border-left: 3px solid #e2e8f0;
-}
 
-.sidebar a:hover {
-  background: #f8fafc;
-  color: #1e293b;
-  border-left-color: #94a3b8;
-}
+
 
 .sidebar a.active {
   background: transparent;

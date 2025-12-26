@@ -1,5 +1,5 @@
 <!-- 8. Suptilni plavi prsten oko kruga -->
-<svg width="135" height="52" viewBox="-14 -6 146 64" xmlns="http://www.w3.org/2000/svg">
+<svg width="122" height="47" viewBox="-14 -6 146 64" xmlns="http://www.w3.org/2000/svg">
   <!-- Gornji deo elipse (iza purple kruga) -->
   <path d="M 4 25.5 A 26 6 -20 0 1 48 31" fill="none" stroke="#8b5cf6" stroke-width="4" opacity="0.8"/>
   <circle cx="26" cy="26" r="22" fill="#1e40af" stroke="#1e40af" stroke-width="3"/>
