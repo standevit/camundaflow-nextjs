@@ -23,7 +23,7 @@ export default function HeaderNav() {
           <Link href="/references" className={`hover:text-blue-600 transition${pathname.startsWith('/references') ? ' active' : ''}`}>{t("nav_references")}</Link>
           <Link href="/contact" className={`hover:text-blue-600 transition${pathname.startsWith('/contact') ? ' active' : ''}`}>{t("nav_contact")}</Link>
         </div>
-        <div className="ml-4">
+        <div className="ml-20">
           <LanguageSelector />
         </div>
       </nav>

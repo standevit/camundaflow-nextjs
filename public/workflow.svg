@@ -1,5 +1,5 @@
 <!-- 8. Suptilni plavi prsten oko kruga -->
-<svg width="270" height="52" viewBox="-14 -6 305 64" xmlns="http://www.w3.org/2000/svg">
+<svg width="180" height="52" viewBox="-14 -6 203 64" xmlns="http://www.w3.org/2000/svg">
   <!-- Gornji deo elipse (iza purple kruga) -->
   <path d="M 4 25.5 A 26 6 -20 0 1 48 31" fill="none" stroke="#8b5cf6" stroke-width="4" opacity="0.8"/>
   <circle cx="26" cy="26" r="22" fill="#1e40af" stroke="#1e40af" stroke-width="3"/>
@@ -8,5 +8,5 @@
   <path d="M19 20 l6 6 l-6 6" stroke="white" stroke-width="3" fill="none"/>
   <!-- Donji deo elipse (ispred purple kruga) -->
   <path d="M 48 31 A 26 6 -20 0 1 4 25.5" fill="none" stroke="#8b5cf6" stroke-width="4" opacity="0.8"/>
-  <text x="76" y="34" font-family="Inter, sans-serif" font-size="29" font-weight="900" fill="#0f172a">Development</text>
+  <text x="76" y="34" font-family="Inter, sans-serif" font-size="29" font-weight="900" fill="#0f172a">Dev</text>
 </svg>
