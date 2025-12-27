@@ -1,13 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "@/components/LanguageProvider";
 
 export default function ContactForm() {
   const { t, getArray } = useTranslation();
+  const searchParams = useSearchParams();
   const [status, setStatus] = useState<"" | "loading" | "success" | "error">("");
   const topics = getArray("topic_options");
   const [topic, setTopic] = useState<string>(topics[0] || "");
+
+  useEffect(() => {
+    const topicParam = searchParams?.get("topic");
+    if (topicParam && topics.includes(topicParam)) {
+      setTopic(topicParam);
+    }
+  }, [searchParams, topics]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

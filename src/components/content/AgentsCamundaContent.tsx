@@ -165,7 +165,7 @@ export default function AgentsCamundaContent() {
           {t("agents_camunda_cta")}
         </p>
         <a 
-          href="/contact" 
+          href="/contact?topic=AI+%26+Prozessautomatisierung" 
           className="btn-primary"
           style={{
             marginTop: '1rem', 
