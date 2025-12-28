@@ -101,6 +101,7 @@ export default function AiAgentsPage() {
               {t("ai_camunda")}
             </a>
           </li>
+          <li><b>Use Cases</b></li>
           <li>
             <a
               className={`example-link ${activeTemplate === "ai-customer-service" ? "active" : ""}`}

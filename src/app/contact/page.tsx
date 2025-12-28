@@ -153,6 +153,43 @@ export default function ContactPage() {
                 {t("no_cure_no_pay")}
               </div>
             </div>
+
+            <div style={{
+              marginTop: '2rem',
+              paddingTop: '1.5rem',
+              borderTop: '1px solid rgba(255,255,255,0.2)',
+              width: '100%'
+            }}>
+              <a 
+                href="https://www.linkedin.com/company/camundaflow" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                  color: 'white',
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  fontWeight: '500',
+                  transition: 'opacity 0.3s ease',
+                  padding: '0.5rem'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+              >
+                <svg 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.006 1.419-.103.249-.129.597-.129.946v5.44h-3.554s.05-8.81 0-9.728h3.554v1.375c.427-.659 1.191-1.598 2.897-1.598 2.117 0 3.704 1.385 3.704 4.362v5.589zM5.337 8.855c-1.144 0-1.915-.759-1.915-1.71 0-.955.768-1.71 1.959-1.71 1.19 0 1.916.755 1.935 1.71 0 .951-.745 1.71-1.979 1.71zm1.616 11.597H3.721V9.624h3.232v10.828zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                </svg>
+                LinkedIn
+              </a>
+            </div>
           </div>
         )}
       </aside>

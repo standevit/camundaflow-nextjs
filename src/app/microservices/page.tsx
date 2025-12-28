@@ -104,6 +104,7 @@ export default function MicroservicesPage() {
               ✨ {t("microservices_best_practices")}
             </a>
           </li>
+          <li><b>Use Cases</b></li>
           <li>
             <a
               className={`example-link ${activeTemplate === "order-process" ? "active" : ""}`}

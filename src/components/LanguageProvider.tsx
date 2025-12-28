@@ -69,7 +69,7 @@ const translations: Record<string, Messages> = {
     ai_agents_title: "AI Agents",
     ai_agents_opt1: "AI Agents",
     ai_camunda: "AI & Camunda",
-    intelligent_customer_service: "Intelligenter Kundenservice",
+    intelligent_customer_service: "1. Intelligenter Kundenservice",
 
     // AI Agents Index
     ai_agents_index_heading: "AI Agent",
@@ -122,7 +122,7 @@ const translations: Record<string, Messages> = {
     agents_camunda_cta_button: "AI Agent Projekt anfragen",
 
     // AI Customer Service
-    ai_customer_service_intro_heading: "Intelligenter Kundenservice",
+    ai_customer_service_intro_heading: "1. Intelligenter Kundenservice",
     ai_customer_service_intro_desc: "KI-gestützter Kundenservice, der häufige Anfragen automatisiert und komplexe Fälle an Menschen eskaliert.",
     ai_customer_service_intro_capabilities_heading: "Fähigkeiten",
     ai_customer_service_intro_capability_1: "Automatische E-Mail-Klassifikation und Antwort",
@@ -326,7 +326,7 @@ const translations: Record<string, Messages> = {
     ms_bp_testing_item6: "Performance Testing: Load-Test Services unter realistischen Bedingungen",
 
     // Order Process Use Case
-    microservices_order_process: "Bestellprozess Orchestrierung",
+    microservices_order_process: "1. Bestellprozess Orchestrierung",
     order_process_hero_heading: "Use Case: Orchestrierung eines Bestellprozesses in einer Microservices-Architektur",
     order_process_hero_desc: "Transparente Geschäftsprozesse in verteilten Systemen – Mit Camunda Flow orchestrieren Sie komplexe Microservice-Landschaften über klar definierte BPMN-Workflows: fehlertolerant, skalierbar und jederzeit nachvollziehbar.",
     order_process_challenges_heading: "Herausforderungen ohne zentrale Prozesssteuerung",
@@ -719,7 +719,7 @@ const translations: Record<string, Messages> = {
     ai_agents_title: "AI Agents",
     ai_agents_opt1: "AI Agents",
     ai_camunda: "AI & Camunda",
-    intelligent_customer_service: "Intelligent Customer Service",
+    intelligent_customer_service: "1. Intelligent Customer Service",
 
     // AI Agents Index
     ai_agents_index_heading: "AI Agents",
@@ -772,7 +772,7 @@ const translations: Record<string, Messages> = {
     agents_camunda_cta_button: "Request AI Agent Project",
 
     // AI Customer Service
-    ai_customer_service_intro_heading: "Intelligent Customer Service",
+    ai_customer_service_intro_heading: "1. Intelligent Customer Service",
     ai_customer_service_intro_desc: "AI-powered customer service that automates common requests while escalating complex cases to humans.",
     ai_customer_service_intro_capabilities_heading: "Capabilities",
     ai_customer_service_intro_capability_1: "Automatic email classification and response",
@@ -976,7 +976,7 @@ const translations: Record<string, Messages> = {
     ms_bp_testing_item6: "Performance testing: Load test services under realistic conditions",
 
     // Order Process Use Case
-    microservices_order_process: "Order Process Orchestration",
+    microservices_order_process: "1. Order Process Orchestration",
     order_process_hero_heading: "Use Case: Orchestrating an Order Process in a Microservices Architecture",
     order_process_hero_desc: "Transparent business processes in distributed systems – With Camunda Flow, orchestrate complex microservice landscapes through clearly defined BPMN workflows: fault-tolerant, scalable, and always traceable.",
     order_process_challenges_heading: "Challenges Without Central Process Control",
@@ -1527,7 +1527,7 @@ const translations: Record<string, Messages> = {
     ai_agents_opt2: "Agents + Camunda",
     ai_agents_opt3: "AI Customer Service",
     ai_camunda: "AI & Camunda",
-    intelligent_customer_service: "Intelligente Klantenservice",
+    intelligent_customer_service: "1. Intelligente Klantenservice",
     
     ai_agents_index_heading: "AI Agent",
     ai_agents_index_intro: "Een autonome, intelligente software-component die zelfstandig taken waarneemt, beslissingen neemt en interacteert met mensen en andere systemen – aangedreven door Large Language Models (LLMs) en Camunda 8 orchestratie.",
@@ -1760,7 +1760,7 @@ const translations: Record<string, Messages> = {
     ms_bp_testing_item6: "Performance testing: Load test services onder realistische omstandigheden",
     
     // Order Process Use Case
-    microservices_order_process: "Bestelproces Orchestratie",
+    microservices_order_process: "1. Bestelproces Orchestratie",
     order_process_hero_heading: "Use Case: Orchestratie van een Bestelproces in een Microservices Architectuur",
     order_process_hero_desc: "Transparante bedrijfsprocessen in gedistribueerde systemen – Met Camunda Flow orkestrest u complexe microservice-landschappen via duidelijk gedefinieerde BPMN-workflows: fouttolerant, schaalbaar en altijd traceerbaar.",
     order_process_challenges_heading: "Uitdagingen Zonder Centrale Procesbesturing",
