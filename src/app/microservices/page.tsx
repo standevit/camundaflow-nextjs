@@ -1,5 +1,32 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import MicroservicesContent from "@/components/MicroservicesContent";
+
+export const metadata: Metadata = {
+  title: "Microservices Orchestration | CamundaFlow",
+  description: "Order Process Orchestration mit Microservices und Camunda. Skalierbare Prozessautomatisierung, Best Practices und Enterprise Patterns.",
+  keywords: "Microservices, Order Processing, Camunda, Prozessautomatisierung, BPMN, Orchestration",
+  openGraph: {
+    title: "Microservices Order Process Orchestration | CamundaFlow",
+    description: "Entdecken Sie wie Sie mit Microservices und Camunda 8 komplexe Geschäftsprozesse orchestrieren. Order Processing, Patterns und Best Practices.",
+    url: "https://camundaflow.de/microservices?tab=order-process",
+    type: "website",
+    images: [
+      {
+        url: "https://camundaflow.de/service-portal.avif",
+        width: 1200,
+        height: 630,
+        alt: "Microservices Portal",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Microservices Order Process Orchestration | CamundaFlow",
+    description: "Order Processing mit Camunda und Microservices Patterns",
+    images: ["https://camundaflow.de/service-portal.avif"],
+  },
+};
 
 export default function MicroservicesPage() {
   return (
