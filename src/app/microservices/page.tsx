@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://camundaflow.de/workflow2.avif",
+        url: "https://camundaflow.de/og-order-process.png",
         width: 1200,
         height: 630,
         alt: "Order Process Orchestration Diagram",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Microservices Order Process Orchestration | CamundaFlow",
     description: "Order Processing mit Camunda und Microservices Patterns",
-    images: ["https://camundaflow.de/workflow2.avif"],
+    images: ["https://camundaflow.de/og-order-process.png"],
   },
 };
 

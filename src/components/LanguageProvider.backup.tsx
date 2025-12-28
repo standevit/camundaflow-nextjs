@@ -137,7 +137,7 @@ const translations: Record<string, Messages> = {
     ai_agents_title: "AI Agents",
     ai_agents_opt1: "AI Agents",
     ai_camunda: "AI & Camunda",
-    intelligent_customer_service: "Intelligent Customer Service",
+    intelligent_customer_service: "1. Intelligent Customer Service",
 
     // MCP page
     mcp_title: "Model Context Protocol",
