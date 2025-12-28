@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "@/components/LanguageProvider";
 import MicroservicesIndexContent from "@/components/content/MicroservicesIndexContent";
 import MicroservicesPatternsContent from "@/components/content/MicroservicesPatternsContent";
@@ -9,7 +10,16 @@ import OrderProcessContent from "@/components/content/OrderProcessContent";
 
 export default function MicroservicesPage() {
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
   const [activeTemplate, setActiveTemplate] = useState("overview");
+
+  useEffect(() => {
+    // Read tab from URL parameters
+    const tab = searchParams.get('tab');
+    if (tab && ['overview', 'patterns', 'best-practices', 'order-process'].includes(tab)) {
+      setActiveTemplate(tab);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     // Update document title based on active template
