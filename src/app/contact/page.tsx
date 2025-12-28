@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
 import { useTranslation } from "@/components/LanguageProvider";
 
@@ -89,7 +89,9 @@ export default function ContactPage() {
             {t("contact_desc")}
           </p>
 
-          <ContactForm />
+          <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Učitavanje...</div>}>
+            <ContactForm />
+          </Suspense>
         </div>
       </main>
 
