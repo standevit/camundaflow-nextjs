@@ -63,7 +63,7 @@ export default function OrderProcessContent() {
               boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
             }}>
               <p style={{ margin: 0, lineHeight: '1.6', color: '#475569' }}>
-                ❌ {t(`order_process_challenge_${num}`)}
+                {t(`order_process_challenge_${num}`)}
               </p>
             </div>
           ))}

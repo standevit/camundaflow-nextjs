@@ -56,7 +56,7 @@ export default function MicroservicesIndexContent() {
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569', marginBottom: '1rem' }}>
           {t("ms_index_what_p1")}
         </p>
-        <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#000000ff' }}>
+        <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: '#475569' }}>
           {t("ms_index_what_p2")}
         </p>
       </div>
