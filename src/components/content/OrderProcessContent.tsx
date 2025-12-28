@@ -337,7 +337,7 @@ export default function OrderProcessContent() {
           🔁
         </div>
         <p style={{
-          margin: 0,
+     
           fontSize: '1.2rem',
           lineHeight: '1.7',
           color: 'white',
@@ -346,7 +346,7 @@ export default function OrderProcessContent() {
           {t("order_process_principle")}
         </p>
         <p style={{
-          margin: '0.5rem 0 0 0',
+          
           fontSize: '1rem',
           lineHeight: '1.6',
           color: 'white',
