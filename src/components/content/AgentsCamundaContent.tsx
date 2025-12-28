@@ -3,7 +3,9 @@
 import { useTranslation } from "@/components/LanguageProvider";
 
 export default function AgentsCamundaContent() {
-  const { t } = useTranslation();
+  const { t, getArray } = useTranslation();
+  const topics = getArray("topic_options");
+  const aiTopicUrl = topics.length > 7 ? `/contact?topic=${encodeURIComponent(topics[7])}` : "/contact";
 
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -165,7 +167,7 @@ export default function AgentsCamundaContent() {
           {t("agents_camunda_cta")}
         </p>
         <a 
-          href="/contact?topic=AI+%26+Prozessautomatisierung" 
+          href={aiTopicUrl}
           className="btn-primary"
           style={{
             marginTop: '1rem', 

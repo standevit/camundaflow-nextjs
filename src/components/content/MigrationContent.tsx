@@ -3,7 +3,9 @@
 import { useTranslation } from "@/components/LanguageProvider";
 
 export default function MigrationContent() {
-  const { t, locale } = useTranslation();
+  const { t, locale, getArray } = useTranslation();
+  const topics = getArray("topic_options");
+  const migrationTopicUrl = topics.length > 1 ? `/contact?topic=${encodeURIComponent(topics[1])}` : "/contact";
 
   const content = {
     de: {
@@ -203,6 +205,51 @@ export default function MigrationContent() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* CTA Section */}
+      <div style={{
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white',
+        padding: '1.5rem',
+        borderRadius: '12px',
+        textAlign: 'center',
+        marginTop: '2rem'
+      }}>
+        <p style={{
+          fontSize: '1.2rem',
+          lineHeight: '1.7',
+          marginBottom: '1.5rem',
+          color: 'white'
+        }}>
+          {t("migration_cta")}
+        </p>
+        <a 
+          href={migrationTopicUrl}
+          className="btn-primary"
+          style={{
+            marginTop: '1rem', 
+            display: 'inline-block',
+            padding: '0.75rem 1.5rem',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontWeight: '600',
+            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+          }}
+        >
+          {t("migration_cta_button")}
+        </a>
       </div>
     </div>
   );

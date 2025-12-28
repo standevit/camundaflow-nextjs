@@ -652,6 +652,8 @@ const translations: Record<string, Messages> = {
     migration_step9_desc: "User Tasks: Neue Implementation (seit 8.6: native Zeebe User Tasks, schneller und direkter). Forms: Camunda Forms (visuell im Modeler, JSON-basiert), deployed mit Prozess. Variablen sind JSON, Input/Output-Mappings für Transformationen. Tasklist rendert Forms automatisch.",
     migration_step10_title: "Fachliche und technische Validierung der migrierten Prozesse",
     migration_step10_desc: "Vergleich von Prozessdurchläufen in Camunda 7 und Camunda 8 anhand identischer Testfälle. Essentiell: Parallele Runs (Side-by-Side), identische Testfälle vergleichen (z. B. via CPT oder manuell). Tools wie Data Migrator für laufende Instanzen (eingeschränkt). Validiere fachlich (Fluss, Entscheidungen) und technisch (Performance, Incidents).",
+    migration_cta: "Planen Sie eine Migration von Camunda 7 auf 8? Wir unterstützen Sie mit Best Practices, automatisierten Tests und einer nahtlosen Transition.",
+    migration_cta_button: "Migrationsberatung anfragen",
   },
   en: {
     // Contact page
@@ -1300,6 +1302,8 @@ const translations: Record<string, Messages> = {
     migration_step9_desc: "User Tasks: New implementation (since 8.6: native Zeebe User Tasks, faster and more direct). Forms: Camunda Forms (visual in Modeler, JSON-based), deployed with process. Variables are JSON, Input/Output mappings for transformations. Tasklist renders forms automatically.",
     migration_step10_title: "Business and Technical Validation of Migrated Processes",
     migration_step10_desc: "Comparison of process runs in Camunda 7 and Camunda 8 based on identical test cases. Essential: Parallel runs (side-by-side), compare identical test cases (e.g., via CPT or manually). Tools like Data Migrator for running instances (limited). Validate functionally (flow, decisions) and technically (performance, incidents).",
+    migration_cta: "Planning a migration from Camunda 7 to 8? We support you with best practices, automated testing, and a seamless transition.",
+    migration_cta_button: "Request Migration Consultation",
   },
   nl: {
     // Contact page
@@ -1514,6 +1518,8 @@ const translations: Record<string, Messages> = {
     migration_step9_desc: "User Tasks: Nieuwe implementatie (sinds 8.6: native Zeebe User Tasks, sneller en directer). Forms: Camunda Forms (visueel in Modeler, JSON-gebaseerd), deployed met proces. Variabelen zijn JSON, Input/Output mappings voor transformaties. Tasklist rendert formulieren automatisch.",
     migration_step10_title: "Zakelijke en technische validatie van gemigreerde processen",
     migration_step10_desc: "Vergelijking van procesruns in Camunda 7 en Camunda 8 op basis van identieke testcases. Essentieel: Parallelle runs (side-by-side), vergelijk identieke testcases (bijv. via CPT of handmatig). Tools zoals Data Migrator voor lopende instanties (beperkt). Valideer functioneel (flow, beslissingen) en technisch (performance, incidents).",
+    migration_cta: "Plant u een migratie van Camunda 7 naar 8? Wij ondersteunen u met best practices, geautomatiseerde testen en een naadloze overgang.",
+    migration_cta_button: "Migratieadvies aanvragen",
     
     // AI Agents page
     ai_agents_title: "AI Agents",
