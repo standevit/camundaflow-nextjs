@@ -2013,6 +2013,15 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     try {
+      // First check if user has a preferred language (set from dashboard)
+      const userPreferredLang = localStorage.getItem("userPreferredLanguage");
+      if (userPreferredLang && ["de", "en", "nl"].includes(userPreferredLang)) {
+        setLocaleState(userPreferredLang);
+        localStorage.setItem("locale", userPreferredLang);
+        return;
+      }
+      
+      // Fall back to regular locale setting
       const stored = localStorage.getItem("locale");
       if (stored) setLocaleState(stored);
     } catch {}
