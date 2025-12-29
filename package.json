@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "auth": "^1.2.3",
     "bpmn-js": "^15.0.0",
     "bpmn-js-properties-panel": "^5.44.0",
