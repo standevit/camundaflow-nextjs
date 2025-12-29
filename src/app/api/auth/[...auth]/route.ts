@@ -1,3 +1,3 @@
-import { handlers } from "@/auth";  // Putanja do tvog auth.ts
+import { handlers } from "@/auth";
 
 export const { GET, POST } = handlers;

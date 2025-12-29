@@ -2,6 +2,7 @@
 
 import { signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface GitHubAuthButtonProps {
   session: any;
@@ -83,47 +84,87 @@ export default function GitHubAuthButton({ session }: GitHubAuthButtonProps) {
                 backgroundColor: "white",
                 borderRadius: "8px",
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-                padding: "0.75rem",
-                minWidth: "200px",
+                padding: "0.5rem",
+                minWidth: "180px",
                 zIndex: 1000,
+                border: "1px solid #e1e4e8",
               }}
             >
               <div
                 style={{
-                  padding: "0.75rem",
-                  borderBottom: "1px solid #eee",
+                  padding: "0.5rem 0.75rem",
+                  borderBottom: "1px solid #e1e4e8",
                   marginBottom: "0.5rem",
                 }}
               >
-                <div style={{ fontWeight: "600", fontSize: "0.9rem", marginBottom: "0.25rem" }}>
+                <div style={{ fontWeight: "600", fontSize: "0.875rem", marginBottom: "0.125rem" }}>
                   {session.user.name || "User"}
                 </div>
-                <div style={{ fontSize: "0.8rem", color: "#666" }}>
+                <div style={{ fontSize: "0.75rem", color: "#586069" }}>
                   {session.user.email}
                 </div>
               </div>
+
+              <Link
+                href="/dashboard"
+                onClick={() => setShowDropdown(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  width: "100%",
+                  padding: "0.5rem 0.75rem",
+                  backgroundColor: "transparent",
+                  color: "#24292e",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  fontSize: "0.875rem",
+                  transition: "background-color 0.2s",
+                  textDecoration: "none",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#f6f8fa";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M1.5 3.25c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5A1.75 1.75 0 015.75 7.5h-2.5A1.75 1.75 0 011.5 5.75v-2.5zM3.25 3a.25.25 0 00-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25h-2.5zM1.5 10.25c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a1.75 1.75 0 01-1.75 1.75h-2.5a1.75 1.75 0 01-1.75-1.75v-2.5zm1.75-.25a.25.25 0 00-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25h-2.5zM8.5 3.25c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a1.75 1.75 0 01-1.75 1.75h-2.5A1.75 1.75 0 018.5 5.75v-2.5zm1.75-.25a.25.25 0 00-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25h-2.5zM8.5 10.25c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a1.75 1.75 0 01-1.75 1.75h-2.5a1.75 1.75 0 01-1.75-1.75v-2.5zm1.75-.25a.25.25 0 00-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25h-2.5z"></path>
+                </svg>
+                dashboard
+              </Link>
+
               <button
                 onClick={handleSignOut}
                 style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
                   width: "100%",
-                  padding: "0.75rem",
-                  backgroundColor: "#f44336",
-                  color: "white",
+                  padding: "0.5rem 0.75rem",
+                  marginTop: "0.25rem",
+                  backgroundColor: "transparent",
+                  color: "#24292e",
                   border: "none",
-                  borderRadius: "6px",
+                  borderRadius: "4px",
                   cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "600",
+                  fontSize: "0.875rem",
                   transition: "background-color 0.2s",
+                  textAlign: "left",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#d32f2f";
+                  e.currentTarget.style.backgroundColor = "#f6f8fa";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f44336";
+                  e.currentTarget.style.backgroundColor = "transparent";
                 }}
               >
-                Abmelden
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5c.966 0 1.75.784 1.75 1.75v1.5A1.75 1.75 0 016.25 6h-2.5A1.75 1.75 0 012 4.25v-1.5zm1.75-.25a.25.25 0 00-.25.25v1.5c0 .138.112.25.25.25h2.5a.25.25 0 00.25-.25v-1.5a.25.25 0 00-.25-.25h-2.5zM2 10.75c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v1.5A1.75 1.75 0 016.25 14h-2.5A1.75 1.75 0 012 12.25v-1.5zm1.75-.25a.25.25 0 00-.25.25v1.5c0 .138.112.25.25.25h2.5a.25.25 0 00.25-.25v-1.5a.25.25 0 00-.25-.25h-2.5zM10 8.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zm0 4a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM9.22 3.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H4.75a.75.75 0 010-1.5h6.19L9.22 4.78a.75.75 0 010-1.06z"></path>
+                </svg>
+                abmelden
               </button>
             </div>
           )}
