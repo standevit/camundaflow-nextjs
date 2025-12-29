@@ -2,7 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 
 const MAX_CONTEXT_LENGTH = 8000; // characters limit per request (increased for system prompt)
 
-const SYSTEM_PROMPT = `Du bist ein spezialisierter AI-Assistent für CamundaFlow, eine Website über Workflow-Automatisierung und Business Process Management (BPM).
+const PAGE_CONTEXT: Record<string, string> = {
+  "/": "Hauptseite / Homepage - Übersicht über CamundaFlow Services",
+  "/microservices": "Microservices Architektur - Patterns, Best Practices und Implementierung",
+  "/camunda": "Camunda Platform - BPMN Engine, Workflow Automation und Prozessorchestrierung",
+  "/ai-agents": "KI-Agenten - Integration von AI Agents in Workflows und Prozessautomatisierung",
+  "/leistungen": "Dienstleistungen - Angebotene Services und Beratung",
+  "/references": "Referenzen - Projektbeispiele und Kundenprojekte",
+  "/contact": "Kontaktseite - Kontaktformular und Kontaktinformationen",
+  "/dashboard": "Dashboard - Benutzer Dashboard",
+  "/login": "Login Seite - Benutzer-Anmeldung",
+  "/model-context-protocol": "Model Context Protocol (MCP) - Integration und Verwendung"
+};
+
+function buildSystemPrompt(currentPage?: string): string {
+  let contextInfo = "";
+  if (currentPage && PAGE_CONTEXT[currentPage]) {
+    contextInfo = `\n\nAKTUELLE SEITE: Der Benutzer befindet sich auf: ${PAGE_CONTEXT[currentPage]}\nWenn der Benutzer nach "was ist hier", "diese Seite", "wo bin ich" oder ähnlichem fragt, beziehe dich auf diese Seite.`;
+  }
+  
+  return `Du bist ein spezialisierter AI-Assistent für CamundaFlow, eine Website über Workflow-Automatisierung und Business Process Management (BPM).${contextInfo}
 
 DEINE AUFGABE:
 - Beantworte NUR Fragen zu folgenden Themen:
@@ -23,15 +42,18 @@ WICHTIG:
 - Sei freundlich, präzise und hilfsbereit
 - Verwende Sprache die gefragt wird
 - Gib kurze praktische Beispiele wenn nötig`;
+}
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const userMessages = body.messages || [];
+    const currentPage = body.currentPage as string | undefined;
     
-    // Prepend system prompt to messages
+    // Prepend system prompt to messages with current page context
+    const systemPrompt = buildSystemPrompt(currentPage);
     const messages = [
-      { role: "system", content: SYSTEM_PROMPT },
+      { role: "system", content: systemPrompt },
       ...userMessages
     ];
 

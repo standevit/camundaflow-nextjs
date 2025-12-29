@@ -3,10 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { usePathname } from "next/navigation";
 
 type Msg = { role: "user" | "assistant" | "system"; content: string };
 
 export default function ChatWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([
@@ -49,7 +51,10 @@ export default function ChatWidget() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: messagesToSend }),
+        body: JSON.stringify({ 
+          messages: messagesToSend,
+          currentPage: pathname 
+        }),
       });
 
       if (!res.ok) {
