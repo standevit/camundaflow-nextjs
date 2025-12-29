@@ -6,6 +6,7 @@ import LanguageProvider from "@/components/LanguageProvider";
 import AuthProvider from "@/components/AuthProvider";
 import HeaderNav from "@/components/HeaderNav";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Camunda Flow – Prozessautomatisierung & BPM Experte",
@@ -42,6 +43,7 @@ export default function RootLayout({
             <ChatWidget />
           </LanguageProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
