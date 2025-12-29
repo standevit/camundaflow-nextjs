@@ -2,12 +2,15 @@
 
 import { useTranslation } from "@/components/LanguageProvider";
 import LanguageSelector from "@/components/LanguageSelector";
+import GitHubAuthButton from "@/components/GitHubAuthButton";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function HeaderNav() {
   const { t } = useTranslation();
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-xl border-b border-gray-200 py-[0.3rem]">
@@ -23,7 +26,8 @@ export default function HeaderNav() {
           <Link href="/references" className={`hover:text-blue-600 transition${pathname.startsWith('/references') ? ' active' : ''}`}>{t("nav_references")}</Link>
           <Link href="/contact" className={`hover:text-blue-600 transition${pathname.startsWith('/contact') ? ' active' : ''}`}>{t("nav_contact")}</Link>
         </div>
-        <div className="ml-2">
+        <div className="flex items-center space-x-4">
+          <GitHubAuthButton session={session} />
           <LanguageSelector />
         </div>
       </nav>

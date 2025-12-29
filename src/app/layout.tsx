@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "../styles/globals.css";
 import ChatWidget from "@/components/ChatWidget";
 import LanguageProvider from "@/components/LanguageProvider";
+import AuthProvider from "@/components/AuthProvider";
 import HeaderNav from "@/components/HeaderNav";
 import Footer from "@/components/Footer";
 
@@ -28,17 +29,19 @@ export default function RootLayout({
       </head>
 
       <body className="home min-h-screen flex flex-col">
-        <LanguageProvider>
-          <HeaderNav />
+        <AuthProvider>
+          <LanguageProvider>
+            <HeaderNav />
 
-          {/* SADRŽAJ STRANICA – ovo je {children} */}
-          <main className="flex-1">
-            {children}
-          </main>
+            {/* SADRŽAJ STRANICA – ovo je {children} */}
+            <main className="flex-1">
+              {children}
+            </main>
 
-          <Footer />
-          <ChatWidget />
-        </LanguageProvider>
+            <Footer />
+            <ChatWidget />
+          </LanguageProvider>
+        </AuthProvider>
       </body>
     </html>
   );
