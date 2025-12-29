@@ -14,7 +14,7 @@ export default function HeaderNav() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-xl border-b border-gray-200 py-[0.3rem]">
-      <nav className="max-w-5xl mx-auto px-30 flex items-center justify-between">
+      <nav className="max-w-6xl mx-auto px-30 flex items-center justify-between">
         <Link href="/" className="logo">
           <img src="/workflow.svg" alt="Development" height={46} />
         </Link>
