@@ -159,59 +159,6 @@ export default function BpmnContent() {
           </ol>
         </div>
       </div>
-
-      {/* Order Approval Process */}
-      <div style={{
-        background: 'white',
-        padding: '2.5rem',
-        borderRadius: '12px',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-        border: '1px solid #e2e8f0',
-        marginBottom: '3rem'
-      }}>
-        <div style={{ 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          padding: '1.5rem',
-          borderRadius: '12px',
-          marginBottom: '1.5rem',
-          color: 'white'
-        }}>
-          <h3 style={{ color: 'white', marginTop: 0, marginBottom: '0.5rem', fontSize: '1.5rem' }}>
-            ✅ Order Approval Prozess
-          </h3>
-          <p style={{ color: 'white', opacity: 0.95, marginBottom: 0 }}>
-            {t("order_approval_desc")}
-          </p>
-        </div>
-        <div 
-          className="bpmn-container" 
-          data-diagram="/bpmn/order-approval-process.bpmn"
-          style={{
-            height: '500px',
-            border: '1px solid #e2e8f0',
-            borderRadius: '8px',
-            marginBottom: '1.5rem',
-            overflow: 'hidden'
-          }}
-        ></div>
-        
-        <div style={{ 
-          background: '#f8f9fa',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          borderLeft: '4px solid #667eea'
-        }}>
-          <h4 style={{ color: '#667eea', marginTop: 0, marginBottom: '1rem' }}>Flow Beschreibung:</h4>
-          <ol style={{ marginLeft: '1.5rem', color: '#475569', lineHeight: '1.8' }}>
-            <li style={{ marginBottom: '0.5rem' }}><strong>Start Event:</strong> {t("order_step1")}</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong>Bestellung prüfen:</strong> {t("order_step2")}</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong>Gateway:</strong> {t("order_step3")}</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong>Manager Approval (User Task):</strong> {t("order_step4")}</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong>Bestellung bearbeiten:</strong> {t("order_step5")}</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong>End Event:</strong> {t("order_step6")}</li>
-          </ol>
-        </div>
-      </div>
     </div>
   );
 }

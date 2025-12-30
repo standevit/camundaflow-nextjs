@@ -37,7 +37,7 @@ export default function CamundaPage() {
     // Update document title based on active template
     const titleMap: Record<string, string> = {
       'bpmn': t('nav_bpmn') as string,
-      'process-basics': t('process_basics_title') as string,
+      'process-basics': 'Camunda 7',
       'camunda-index': t('what_is_camunda8') as string,
       'mcp': t('nav_mcp') as string,
       'migration': t('migration_link') as string
@@ -168,7 +168,7 @@ export default function CamundaPage() {
               className={`example-link ${activeTemplate === "process-basics" ? "active" : ""}`}
               onClick={() => setActiveTemplate("process-basics")}
             >
-              {t("process_basics_title")}
+              Camunda 7
             </a>
           </li>
           <li>
