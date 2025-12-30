@@ -1,9 +1,27 @@
 "use client";
 
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "@/components/LanguageProvider";
 
 export default function MigrationContent() {
   const { t, locale, getArray } = useTranslation();
+  const { data: session } = useSession();
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: "",
+  });
+
+  const userName = session?.user?.name || "";
+  const userEmail = session?.user?.email || "";
+  const [numberOfProjects, setNumberOfProjects] = useState(1);
+  const pricePerProject = 600;
+  const projectPrice = pricePerProject * numberOfProjects;
+  
   const topics = getArray("topic_options");
   const migrationTopicUrl = topics.length > 1 ? `/contact?topic=${encodeURIComponent(topics[1])}` : "/contact";
 
@@ -132,7 +150,8 @@ export default function MigrationContent() {
         color: 'white',
         padding: '1.5rem',
         borderRadius: '12px',
-        marginBottom: '2rem'
+        marginBottom: '2rem',
+        position: 'relative'
       }}>
         <h3 style={{ 
           fontSize: '1.5rem',
@@ -147,11 +166,304 @@ export default function MigrationContent() {
           fontSize: '1.1rem', 
           lineHeight: '1.8',
           opacity: '0.95',
-          marginBottom: '0'
+          marginBottom: '0',
+          paddingRight: '160px'
         }}>
           {currentContent.intro}
         </p>
+        
+        {/* Projekt anfragen Button */}
+        <button
+          onClick={() => setShowForm(true)}
+          style={{
+            position: 'absolute',
+            bottom: '1.5rem',
+            right: '1.5rem',
+            padding: '0.75rem 1.5rem',
+            background: 'white',
+            color: '#667eea',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            transition: 'transform 0.2s',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        >
+          📝 Projekt anfragen
+        </button>
       </div>
+
+      {/* Project Request Form */}
+      {showForm && (
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          padding: '2rem',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          marginBottom: '2rem',
+          border: '2px solid #667eea',
+        }}>
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#333' }}>
+            Camunda 7 → 8 Migration - Projekt anfragen
+          </h3>
+
+          {/* Price Info */}
+          <div style={{
+            backgroundColor: "#f0f7ff",
+            padding: "1rem",
+            borderRadius: "8px",
+            marginBottom: "1rem",
+            fontSize: "0.95rem",
+            color: "#0066cc",
+          }}>
+            💰 <strong>Projektpreis:</strong> €{pricePerProject} pro Prozess | 💵 <strong>Gesamt:</strong> €{projectPrice}
+          </div>
+
+          {/* Number of Projects Slider */}
+          <div style={{
+            backgroundColor: "#f8f9fa",
+            padding: "1.5rem",
+            borderRadius: "8px",
+            marginBottom: "1.5rem",
+          }}>
+            <label style={{ display: 'block', fontWeight: '600', marginBottom: '1rem', color: '#333', fontSize: '1rem' }}>
+              📊 Anzahl der zu migrierenden Prozesse: <span style={{ color: '#667eea', fontSize: '1.2rem' }}>{numberOfProjects}</span>
+            </label>
+            <input
+              type="range"
+              min="1"
+              max="100"
+              value={numberOfProjects}
+              onChange={(e) => setNumberOfProjects(Number(e.target.value))}
+              style={{
+                width: '100%',
+                height: '8px',
+                borderRadius: '4px',
+                outline: 'none',
+                background: `linear-gradient(to right, #667eea 0%, #667eea ${(numberOfProjects - 1) / 99 * 100}%, #e0e0e0 ${(numberOfProjects - 1) / 99 * 100}%, #e0e0e0 100%)`,
+                WebkitAppearance: 'none',
+                cursor: 'pointer',
+              }}
+            />
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', fontSize: '0.85rem', color: '#666' }}>
+              <span>1 Prozess</span>
+              <span>100 Prozesse</span>
+            </div>
+          </div>
+
+          {/* Project Description */}
+          <div style={{
+            backgroundColor: "#fff4e5",
+            padding: "1.5rem",
+            borderRadius: "8px",
+            marginBottom: "1.5rem",
+          }}>
+            <h4 style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#d97706", marginBottom: "1rem" }}>
+              📋 Was Sie erhalten
+            </h4>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", fontSize: "0.95rem", color: "#333" }}>
+              <div>
+                <strong>🔄 BPMN Model Migration</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Automatische und manuelle Anpassung Ihrer Camunda 7 BPMN-Modelle für Camunda 8 Kompatibilität.
+                </p>
+              </div>
+              <div>
+                <strong>⚙️ Code Migration</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Ersetzung von Java Delegates durch Job Workers, Anpassung von External Tasks und Service Tasks.
+                </p>
+              </div>
+              <div>
+                <strong>📋 Test Migration</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Umstellung Ihrer bestehenden Prozesstests auf Camunda Process Test (CPT) Framework.
+                </p>
+              </div>
+              <div>
+                <strong>🏗️ Architecture Consulting</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Beratung zu SaaS vs. Self-Managed, Kubernetes Setup, Skalierung und Best Practices.
+                </p>
+              </div>
+              <div>
+                <strong>✅ Validierung & Testing</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Side-by-Side Testing, Performance-Vergleich und fachliche Validierung der migrierten Prozesse.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Name *
+              </label>
+              <input
+                type="text"
+                value={formData.name || userName}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Ihr Name"
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                E-Mail *
+              </label>
+              <input
+                type="email"
+                value={formData.email || userEmail}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="ihre@email.de"
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Firma
+              </label>
+              <input
+                type="text"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                placeholder="Firmenname (optional)"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Telefon
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder="+49 (optional)"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Projektbeschreibung & Anforderungen
+              </label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Beschreiben Sie Ihr aktuelles Camunda 7 Setup, Anzahl der Prozesse, spezielle Anforderungen..."
+                rows={4}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                  resize: 'vertical',
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+              <button
+                onClick={() => setShowForm(false)}
+                style={{
+                  flex: 1,
+                  padding: '0.875rem',
+                  backgroundColor: '#f5f5f5',
+                  color: '#333',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                }}
+              >
+                Abbrechen
+              </button>
+              <button
+                onClick={async () => {
+                  try {
+                    const response = await fetch('/api/payment/create-charge', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        amount: projectPrice,
+                        projectRequest: {
+                          projectName: `Camunda 7 → 8 Migration (${numberOfProjects} ${numberOfProjects === 1 ? 'Prozess' : 'Prozesse'})`,
+                          projectType: 'Migration & Consulting',
+                          description: `Anzahl Prozesse: ${numberOfProjects}. Teilnehmer: ${formData.name || userName}, Email: ${formData.email || userEmail}${formData.company ? `, Firma: ${formData.company}` : ''}${formData.phone ? `, Tel: ${formData.phone}` : ''}. ${formData.message || ''}`,
+                          userEmail: formData.email || userEmail,
+                        },
+                      }),
+                    });
+                    
+                    if (response.ok) {
+                      const data = await response.json();
+                      window.location.href = data.hostedUrl;
+                    } else {
+                      const error = await response.json();
+                      alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
+                    }
+                  } catch (error) {
+                    console.error('Payment error:', error);
+                    alert('Fehler beim Erstellen der Zahlung. Bitte versuchen Sie es erneut.');
+                  }
+                }}
+                disabled={!formData.name && !userName || !formData.email && !userEmail}
+                style={{
+                  flex: 2,
+                  padding: '0.875rem',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  opacity: (!formData.name && !userName || !formData.email && !userEmail) ? 0.5 : 1,
+                }}
+              >
+                Projekt anfragen (€{projectPrice})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Migration Steps Grid */}
       <div style={{
@@ -205,51 +517,6 @@ export default function MigrationContent() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* CTA Section */}
-      <div style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
-        padding: '1.5rem',
-        borderRadius: '12px',
-        textAlign: 'center',
-        marginTop: '2rem'
-      }}>
-        <p style={{
-          fontSize: '1.2rem',
-          lineHeight: '1.7',
-          marginBottom: '1.5rem',
-          color: 'white'
-        }}>
-          {t("migration_cta")}
-        </p>
-        <a 
-          href={migrationTopicUrl}
-          className="btn-primary"
-          style={{
-            marginTop: '1rem', 
-            display: 'inline-block',
-            padding: '0.75rem 1.5rem',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: '600',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-          }}
-        >
-          {t("migration_cta_button")}
-        </a>
       </div>
     </div>
   );
