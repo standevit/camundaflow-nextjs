@@ -166,32 +166,7 @@ export default function AgentsCamundaContent() {
         }}>
           {t("agents_camunda_cta")}
         </p>
-        <a 
-          href={aiTopicUrl}
-          className="btn-primary"
-          style={{
-            marginTop: '1rem', 
-            display: 'inline-block',
-            padding: '0.75rem 1.5rem',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: '600',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-          }}
-        >
-          {t("agents_camunda_cta_button")}
-        </a>
+
       </div>
     </div>
   );
