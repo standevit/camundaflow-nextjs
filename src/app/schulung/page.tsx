@@ -24,7 +24,7 @@ export default function SchulungPage() {
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
 
-  const basePrice = selectedCourse === "krypto" ? 250 : 350;
+  const basePrice = selectedCourse === "krypto" ? 250 : selectedCourse === "ai-agents" ? 350 : 300;
   const trezorPrice = 65;
   const totalPrice = basePrice + (selectedCourse === "krypto" && includeTrezor ? trezorPrice : 0);
 
@@ -40,6 +40,12 @@ export default function SchulungPage() {
       icon: "🤖",
       title: "AI Agents",
       description: "Intelligente KI-Agenten entwickeln",
+    },
+    {
+      id: "marketing",
+      icon: "📊",
+      title: "Digital Marketing",
+      description: "SEO, Google & LinkedIn Marketing",
     },
   ];
 
@@ -121,7 +127,46 @@ export default function SchulungPage() {
     },
   ];
 
-  const topics = selectedCourse === "krypto" ? kryptoTopics : aiAgentsTopics;
+  const marketingTopics = [
+    {
+      id: "seo-basics",
+      icon: "🔍",
+      title: "SEO Grundlagen",
+      description: "Wie wird Ihre Website bei Google gefunden?",
+    },
+    {
+      id: "google-marketing",
+      icon: "🌐",
+      title: "Google Marketing",
+      description: "Google Ads, Analytics & Search Console",
+    },
+    {
+      id: "linkedin-marketing",
+      icon: "💼",
+      title: "LinkedIn Marketing",
+      description: "B2B Marketing auf LinkedIn",
+    },
+    {
+      id: "content-strategy",
+      icon: "✍️",
+      title: "Content Strategie",
+      description: "Relevante Inhalte für Ihre Zielgruppe",
+    },
+    {
+      id: "landing-pages",
+      icon: "🎯",
+      title: "Landing Pages",
+      description: "Optimierung für Konversion",
+    },
+    {
+      id: "analytics",
+      icon: "📈",
+      title: "Analytics & Tracking",
+      description: "Erfolg messen und optimieren",
+    },
+  ];
+
+  const topics = selectedCourse === "krypto" ? kryptoTopics : selectedCourse === "ai-agents" ? aiAgentsTopics : marketingTopics;
 
   const kryptoTopicContent: Record<string, { title: string; content: string[] }> = {
     "buy-crypto": {
@@ -253,7 +298,77 @@ export default function SchulungPage() {
     },
   };
 
-  const topicContent = selectedCourse === "krypto" ? kryptoTopicContent : aiAgentsTopicContent;
+  const marketingTopicContent: Record<string, { title: string; content: string[] }> = {
+    "seo-basics": {
+      title: "SEO Grundlagen - Wie wird Ihre Website gefunden?",
+      content: [
+        "SEO (Search Engine Optimization) ist der Prozess, Ihre Website so zu optimieren, dass sie in Suchmaschinen wie Google besser gefunden wird. Ohne SEO bleibt Ihre Website unsichtbar.",
+        "On-Page SEO: Title Tags, Meta Descriptions, Header-Struktur (H1-H6), Alt-Texte für Bilder, URL-Struktur, interne Verlinkung. Diese Faktoren können Sie direkt beeinflussen.",
+        "Keyword-Recherche: Welche Begriffe suchen Ihre Kunden? Tools wie Google Keyword Planner, Ubersuggest, Ahrefs helfen Ihnen, relevante Keywords zu finden.",
+        "Content-Qualität: Google bevorzugt hilfreiche, ausführliche Inhalte. Beantworten Sie Fragen Ihrer Zielgruppe umfassend. Vermeiden Sie Keyword-Stuffing.",
+        "Technisches SEO: Page Speed, Mobile-Optimierung, HTTPS, XML Sitemap, Robots.txt. Diese technischen Faktoren beeinflussen Ihr Ranking stark.",
+        "Wir analysieren Ihre Website, identifizieren Optimierungspotenziale und erstellen einen SEO-Fahrplan für bessere Rankings.",
+      ],
+    },
+    "google-marketing": {
+      title: "Google Marketing - Ads, Analytics & Search Console",
+      content: [
+        "Google Ads ermöglicht bezahlte Werbung in den Suchergebnissen. Sie zahlen nur, wenn jemand auf Ihre Anzeige klickt (PPC - Pay Per Click).",
+        "Kampagnen-Typen: Search Ads (Textanzeigen in Suchergebnissen), Display Ads (Banner auf Websites), Shopping Ads (für E-Commerce), Video Ads (YouTube).",
+        "Google Analytics 4 (GA4): Das wichtigste Tool zur Website-Analyse. Tracken Sie Besucher, deren Verhalten, Conversion-Pfade, demografische Daten.",
+        "Google Search Console: Überwachen Sie, wie Google Ihre Website sieht. Finden Sie technische Probleme, sehen Sie Ihre Rankings, analysieren Sie Klickraten.",
+        "Conversion-Tracking: Messen Sie, ob Ihre Marketing-Maßnahmen funktionieren. Tracken Sie Formulare, Käufe, Downloads, Telefon-Anrufe.",
+        "Wir richten Google Ads, Analytics und Search Console ein und zeigen Ihnen, wie Sie Daten interpretieren und Kampagnen optimieren.",
+      ],
+    },
+    "linkedin-marketing": {
+      title: "LinkedIn Marketing - B2B Lead-Generierung",
+      content: [
+        "LinkedIn ist die wichtigste Plattform für B2B-Marketing. 900+ Millionen Professionals nutzen LinkedIn, um sich zu vernetzen und Geschäftsbeziehungen aufzubauen.",
+        "Personal Branding: Ihr LinkedIn-Profil ist Ihre digitale Visitenkarte. Professionelles Foto, aussagekräftiger Headline, detaillierte Experience, regelmäßige Posts.",
+        "Content-Strategie: Teilen Sie Ihr Fachwissen durch Posts, Artikel, Videos. LinkedIn bevorzugt native Inhalte. Engagement (Likes, Kommentare) erhöht Ihre Reichweite massiv.",
+        "LinkedIn Ads: Sponsored Content, Message Ads, Text Ads. Targeting nach Job Title, Branche, Unternehmensgröße - perfekt für B2B.",
+        "Lead Generation Forms: Vorausgefüllte Formulare erhöhen die Conversion-Rate. Nutzer müssen keine Daten manuell eingeben.",
+        "Networking & Sales Navigator: Gezielt nach Leads suchen, InMails versenden, Beziehungen aufbauen. Wir zeigen Strategien für effektives LinkedIn-Networking.",
+      ],
+    },
+    "content-strategy": {
+      title: "Content Strategie - Inhalte, die Ihre Zielgruppe lieben",
+      content: [
+        "Content ist King - aber nur, wenn er relevant ist. Ihre Inhalte müssen die Probleme Ihrer Zielgruppe lösen und einen Mehrwert bieten.",
+        "Content-Typen: Blog-Artikel (für SEO), Videos (für Engagement), Infografiken (für Social Media), Case Studies (für B2B), Whitepapers & E-Books (für Lead-Gen).",
+        "Content-Kalender: Planen Sie Ihre Inhalte 3-6 Monate im Voraus. Berücksichtigen Sie Saisonalität, Produktlaunches, Branchenevents.",
+        "Storytelling: Menschen erinnern sich an Geschichten, nicht an Fakten. Nutzen Sie emotionale Geschichten, um Ihre Botschaft zu vermitteln.",
+        "Repurposing: Ein Blog-Artikel wird zu 5 LinkedIn-Posts, einem Video, einer Infografik. Maximieren Sie den ROI jedes Contents.",
+        "Wir entwickeln eine Content-Strategie, die zu Ihren Zielen passt, und erstellen einen 3-Monats-Redaktionsplan.",
+      ],
+    },
+    "landing-pages": {
+      title: "Landing Pages - Optimierung für Konversion",
+      content: [
+        "Landing Pages sind speziell für ein Ziel optimiert: Eine bestimmte Aktion (Kauf, Anmeldung, Download). Sie haben keine Ablenkungen wie ein Menü.",
+        "Struktur einer erfolgreichen Landing Page: 1) Starke Headline, 2) Überzeugendes Hero-Bild/Video, 3) Social Proof (Testimonials, Logos), 4) Clear Call-to-Action.",
+        "Above the Fold: Die wichtigsten Informationen müssen ohne Scrollen sichtbar sein. 80% der Besucher scrollen nicht runter.",
+        "A/B Testing: Testen Sie verschiedene Headlines, CTA-Buttons, Farben, Bilder. Kleine Änderungen können die Conversion-Rate verdoppeln.",
+        "Formulare optimieren: Je weniger Felder, desto höher die Conversion. Fragen Sie nur nach wirklich notwendigen Informationen.",
+        "Wir analysieren Ihre Landing Pages, identifizieren Conversion-Killer und implementieren datengetriebene Verbesserungen.",
+      ],
+    },
+    "analytics": {
+      title: "Analytics & Tracking - Erfolg messbar machen",
+      content: [
+        "Was Sie nicht messen, können Sie nicht verbessern. Analytics zeigt Ihnen, was funktioniert und was nicht.",
+        "KPIs definieren: Welche Kennzahlen sind wichtig für Ihr Business? Traffic, Bounce Rate, Conversion Rate, Cost per Acquisition, Customer Lifetime Value.",
+        "Event-Tracking: Tracken Sie spezifische Aktionen: Button-Klicks, Video-Views, Scroll-Tiefe, Formular-Interaktionen. Setup mit Google Tag Manager.",
+        "Attribution-Modelle: Welcher Marketing-Kanal führt zu Conversions? Last-Click, First-Click, Linear, Time-Decay - verstehen Sie die Customer Journey.",
+        "Dashboard & Reporting: Visualisieren Sie Ihre Daten mit Google Data Studio / Looker Studio. Automatisierte Berichte für Stakeholder.",
+        "GDPR & Privacy: Cookie-Banner, Consent Management, Datenschutz-konforme Tracking-Implementierung. Analytics ohne rechtliche Probleme.",
+        "Wir implementieren professionelles Tracking, erstellen Custom Dashboards und schulen Ihr Team in der Dateninterpretation.",
+      ],
+    },
+  };
+
+  const topicContent = selectedCourse === "krypto" ? kryptoTopicContent : selectedCourse === "ai-agents" ? aiAgentsTopicContent : marketingTopicContent;
 
   return (
     <>
@@ -321,15 +436,17 @@ export default function SchulungPage() {
               <>
                 <div style={{ textAlign: "center", marginBottom: "3rem" }}>
                   <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>
-                    {selectedCourse === "krypto" ? "₿" : "🤖"}
+                    {selectedCourse === "krypto" ? "₿" : selectedCourse === "ai-agents" ? "🤖" : "📊"}
                   </div>
                   <h2 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "0.5rem" }}>
-                    {selectedCourse === "krypto" ? "Kryptowährungen Kurs" : "AI Agents Kurs"}
+                    {selectedCourse === "krypto" ? "Kryptowährungen Kurs" : selectedCourse === "ai-agents" ? "AI Agents Kurs" : "Digital Marketing Kurs"}
                   </h2>
                   <p style={{ fontSize: "1.1rem", color: "#666", marginBottom: "1.5rem" }}>
                     {selectedCourse === "krypto" 
                       ? "Blockchain, Krypto kaufen, Wallet erstellen und sichern" 
-                      : "Entwickle intelligente AI Agents mit LangChain, OpenAI und RAG"}
+                      : selectedCourse === "ai-agents"
+                      ? "Entwickle intelligente AI Agents mit LangChain, OpenAI und RAG"
+                      : "SEO, Google Ads, LinkedIn Marketing & Web-Optimierung"}
                   </p>
                   <button
                     onClick={() => setShowForm(true)}
@@ -360,7 +477,7 @@ export default function SchulungPage() {
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
                       <h3 style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#333" }}>
-                        🎓 Kurs anfragen - {selectedCourse === "krypto" ? "Krypto Basics" : "AI Agents"}
+                        🎓 Kurs anfragen - {selectedCourse === "krypto" ? "Krypto Basics" : selectedCourse === "ai-agents" ? "AI Agents" : "Digital Marketing"}
                       </h3>
                       <button
                         onClick={() => setShowForm(false)}
@@ -384,7 +501,7 @@ export default function SchulungPage() {
                       fontSize: "0.95rem",
                       color: "#0066cc",
                     }}>
-                      💰 <strong>Preis:</strong> €{totalPrice} | ⏱️ <strong>Dauer:</strong> {selectedCourse === "krypto" ? "1,5 Stunden" : "2 Stunden"}
+                      💰 <strong>Preis:</strong> €{totalPrice} | ⏱️ <strong>Dauer:</strong> {selectedCourse === "krypto" ? "1,5 Stunden" : selectedCourse === "ai-agents" ? "2 Stunden" : "1,5 Stunden"}
                     </div>
 
                     {selectedCourse === "krypto" ? (
@@ -414,6 +531,43 @@ export default function SchulungPage() {
                             <strong>💼 Wallet-Erstellung & Sicherheit (30 Min)</strong>
                             <p style={{ marginTop: "0.25rem", color: "#666" }}>
                               Hardware vs. Software Wallets. Seed Phrase sicher aufbewahren. 2-Faktor-Authentifizierung aktivieren. Phishing-Schutz und Best Practices.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : selectedCourse === "marketing" ? (
+                      <div style={{
+                        backgroundColor: "#fff4e5",
+                        padding: "1.5rem",
+                        borderRadius: "8px",
+                        marginBottom: "1rem",
+                      }}>
+                        <h4 style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#d97706", marginBottom: "1rem" }}>
+                          📋 Kurs-Inhalte (1,5 Stunden)
+                        </h4>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", fontSize: "0.95rem", color: "#333" }}>
+                          <div>
+                            <strong>🔍 SEO Grundlagen (20 Min)</strong>
+                            <p style={{ marginTop: "0.25rem", color: "#666" }}>
+                              On-Page & Off-Page SEO. Keyword-Recherche. Technisches SEO. Wie wird Ihre Website bei Google gefunden?
+                            </p>
+                          </div>
+                          <div>
+                            <strong>🌐 Google Marketing (25 Min)</strong>
+                            <p style={{ marginTop: "0.25rem", color: "#666" }}>
+                              Google Ads Setup. Analytics 4 verstehen. Search Console nutzen. Conversion-Tracking implementieren.
+                            </p>
+                          </div>
+                          <div>
+                            <strong>💼 LinkedIn Marketing (20 Min)</strong>
+                            <p style={{ marginTop: "0.25rem", color: "#666" }}>
+                              B2B Lead-Generierung. Personal Branding. Content-Strategie. LinkedIn Ads für Business.
+                            </p>
+                          </div>
+                          <div>
+                            <strong>🎯 Landing Pages & Analytics (25 Min)</strong>
+                            <p style={{ marginTop: "0.25rem", color: "#666" }}>
+                              Conversion-Optimierung. A/B Testing. KPIs definieren. Erfolg messen und verbessern.
                             </p>
                           </div>
                         </div>
@@ -626,7 +780,9 @@ export default function SchulungPage() {
                             try {
                               const courseName = selectedCourse === "krypto" 
                                 ? `Krypto Basics Kurs${includeTrezor ? ' + Trezor Safe 3' : ''}` 
-                                : 'AI Agents Kurs';
+                                : selectedCourse === "ai-agents"
+                                ? 'AI Agents Kurs'
+                                : 'Digital Marketing Kurs';
                               
                               const response = await fetch('/api/payment/create-charge', {
                                 method: 'POST',
@@ -777,7 +933,7 @@ export default function SchulungPage() {
                         color: "#0066cc",
                         fontWeight: "600",
                       }}>
-                        💰 Ab €{course.id === "krypto" ? "250" : "350"} | ⏱️ {course.id === "krypto" ? "1,5" : "2"} Std
+                        💰 Ab €{course.id === "krypto" ? "250" : course.id === "ai-agents" ? "350" : "300"} | ⏱️ {course.id === "krypto" ? "1,5" : course.id === "ai-agents" ? "2" : "1,5"} Std
                       </div>
                     </div>
                   ))}
@@ -811,6 +967,29 @@ export default function SchulungPage() {
               <img 
                 src="/ai-profiel.webp" 
                 alt="AI Workflow" 
+                style={{
+                  width: '100%',
+                  aspectRatio: '1',
+                  objectFit: 'cover',
+                  borderRadius: '12px'
+                }}
+              />
+            </>
+          ) : selectedCourse === "marketing" ? (
+            <>
+              <img 
+                src="/all-the-data.png" 
+                alt="Digital Marketing Analytics" 
+                style={{
+                  width: '100%',
+                  aspectRatio: '1',
+                  objectFit: 'cover',
+                  borderRadius: '12px'
+                }}
+              />
+              <img 
+                src="/investing.png" 
+                alt="Marketing Strategy" 
                 style={{
                   width: '100%',
                   aspectRatio: '1',
