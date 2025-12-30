@@ -19,7 +19,6 @@ export default function HeaderNav() {
           <img src="/workflow.svg" alt="Development" height={46} />
         </Link>
         <div className="menu flex items-center space-x-6 font-medium" style={{ fontSize: '1.5rem' }}>
-          <Link href="/schulung" className={`hover:text-blue-600 transition${pathname.startsWith('/schulung') ? ' active' : ''}`}>{t("nav_schulung")}</Link>
           <Link href="/microservices" className={`hover:text-blue-600 transition${pathname.startsWith('/microservices') ? ' active' : ''}`}>Microservices</Link>
           <Link href="/camunda" className={`hover:text-blue-600 transition${pathname.startsWith('/camunda') ? ' active' : ''}`}>{t("nav_camunda")}</Link>
           <Link href="/ai-agents" className={`hover:text-blue-600 transition${pathname.startsWith('/ai-agents') ? ' active' : ''}`}>{t("nav_ai_agents")}</Link>

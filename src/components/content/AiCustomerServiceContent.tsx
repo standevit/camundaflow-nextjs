@@ -1,13 +1,24 @@
 "use client";
 
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "@/components/LanguageProvider";
 
-interface AiCustomerServiceContentProps {
-  onRequestProject?: () => void;
-}
-
-export default function AiCustomerServiceContent({ onRequestProject }: AiCustomerServiceContentProps) {
+export default function AiCustomerServiceContent() {
   const { t } = useTranslation();
+  const { data: session } = useSession();
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: "",
+  });
+
+  const userName = session?.user?.name || "";
+  const userEmail = session?.user?.email || "";
+  const projectPrice = 450;
 
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -34,37 +45,271 @@ export default function AiCustomerServiceContent({ onRequestProject }: AiCustome
           lineHeight: '1.8',
           opacity: '0.95',
           marginBottom: '0',
-          paddingRight: onRequestProject ? '160px' : '0'
+          paddingRight: '160px'
         }}>
           {t("ai_customer_service_intro_desc")}
         </p>
         
         {/* Projekt anfragen Button */}
-        {onRequestProject && (
-          <button
-            onClick={onRequestProject}
-            style={{
-              position: 'absolute',
-              bottom: '1.5rem',
-              right: '1.5rem',
-              padding: '0.75rem 1.5rem',
-              background: 'white',
-              color: '#667eea',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-              transition: 'transform 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            📝 Projekt anfragen
-          </button>
-        )}
+        <button
+          onClick={() => setShowForm(true)}
+          style={{
+            position: 'absolute',
+            bottom: '1.5rem',
+            right: '1.5rem',
+            padding: '0.75rem 1.5rem',
+            background: 'white',
+            color: '#667eea',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            transition: 'transform 0.2s',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        >
+          📝 Projekt anfragen
+        </button>
       </div>
+
+      {/* Project Request Form */}
+      {showForm && (
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          padding: '2rem',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          marginBottom: '2rem',
+          border: '2px solid #667eea',
+        }}>
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#333' }}>
+            AI Customer Service - Projekt anfragen
+          </h3>
+
+          {/* Price Info */}
+          <div style={{
+            backgroundColor: "#f0f7ff",
+            padding: "1rem",
+            borderRadius: "8px",
+            marginBottom: "1rem",
+            fontSize: "0.95rem",
+            color: "#0066cc",
+          }}>
+            💰 <strong>Projektpreis:</strong> €{projectPrice}
+          </div>
+
+          {/* Project Description */}
+          <div style={{
+            backgroundColor: "#fff4e5",
+            padding: "1.5rem",
+            borderRadius: "8px",
+            marginBottom: "1.5rem",
+          }}>
+            <h4 style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#d97706", marginBottom: "1rem" }}>
+              📋 Was Sie erhalten
+            </h4>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", fontSize: "0.95rem", color: "#333" }}>
+              <div>
+                <strong>🤖 AI-powered Chatbot</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Intelligenter Kundenservice-Bot mit OpenAI GPT-4, LangChain und RAG-System.
+                </p>
+              </div>
+              <div>
+                <strong>🔗 Camunda Integration</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Prozess-Orchestrierung für komplexe Anfragen, Eskalation und Human-in-the-Loop.
+                </p>
+              </div>
+              <div>
+                <strong>📚 Wissensdatenbank</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Vector Database (Pinecone/Weaviate) mit Ihren FAQs, Dokumentationen und Produktinfos.
+                </p>
+              </div>
+              <div>
+                <strong>💬 Multi-Channel</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Integration in Website, WhatsApp, Telegram, Slack und weitere Kanäle.
+                </p>
+              </div>
+              <div>
+                <strong>📊 Analytics Dashboard</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Monitoring, Reporting und kontinuierliche Verbesserung durch ML-Insights.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Name *
+              </label>
+              <input
+                type="text"
+                value={formData.name || userName}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Ihr Name"
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                E-Mail *
+              </label>
+              <input
+                type="email"
+                value={formData.email || userEmail}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="ihre@email.de"
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Firma
+              </label>
+              <input
+                type="text"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                placeholder="Firmenname (optional)"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Telefon
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder="+49 (optional)"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                Projektbeschreibung & Anforderungen
+              </label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Beschreiben Sie Ihre Kundenservice-Anforderungen, Anzahl der Anfragen, gewünschte Integrationen..."
+                rows={4}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                  resize: 'vertical',
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+              <button
+                onClick={() => setShowForm(false)}
+                style={{
+                  flex: 1,
+                  padding: '0.875rem',
+                  backgroundColor: '#f5f5f5',
+                  color: '#333',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                }}
+              >
+                Abbrechen
+              </button>
+              <button
+                onClick={async () => {
+                  try {
+                    const response = await fetch('/api/payment/create-charge', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        amount: projectPrice,
+                        projectRequest: {
+                          projectName: 'AI Customer Service Implementation',
+                          projectType: 'AI Agents & Customer Service',
+                          description: `Teilnehmer: ${formData.name || userName}, Email: ${formData.email || userEmail}${formData.company ? `, Firma: ${formData.company}` : ''}${formData.phone ? `, Tel: ${formData.phone}` : ''}. ${formData.message || ''}`,
+                          userEmail: formData.email || userEmail,
+                        },
+                      }),
+                    });
+                    
+                    if (response.ok) {
+                      const data = await response.json();
+                      window.location.href = data.hostedUrl;
+                    } else {
+                      const error = await response.json();
+                      alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
+                    }
+                  } catch (error) {
+                    console.error('Payment error:', error);
+                    alert('Fehler beim Erstellen der Zahlung. Bitte versuchen Sie es erneut.');
+                  }
+                }}
+                disabled={!formData.name && !userName || !formData.email && !userEmail}
+                style={{
+                  flex: 2,
+                  padding: '0.875rem',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  opacity: (!formData.name && !userName || !formData.email && !userEmail) ? 0.5 : 1,
+                }}
+              >
+                Projekt anfragen (€{projectPrice})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Capabilities Section */}
       <div style={{

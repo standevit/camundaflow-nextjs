@@ -8,7 +8,7 @@ interface ProjectRequestModalProps {
   onClose: () => void;
   userName?: string | null;
   userEmail?: string | null;
-  requestType?: "project" | "schulung";
+  requestType?: "project" | "schulung" | "ai-agents";
 }
 
 export default function ProjectRequestModal({ 
@@ -52,6 +52,15 @@ export default function ProjectRequestModal({
         { value: "crypto_schulung_payment", label: "Crypto Payment Integration" },
         { value: "crypto_schulung_custom", label: "Individuelles Schulungsprogramm" },
       ]
+    : requestType === "ai-agents"
+    ? [
+        { value: "ai_customer_service", label: "AI Customer Service Bot" },
+        { value: "ai_agents_integration", label: "AI Agents mit Camunda" },
+        { value: "rag_system", label: "RAG System & Wissensdatenbank" },
+        { value: "llm_orchestration", label: "LLM Orchestration" },
+        { value: "ai_consulting", label: "AI Strategy Consulting" },
+        { value: "ai_custom", label: "Custom AI Solution" },
+      ]
     : [
         { value: "camunda_workflow", label: "Camunda Workflow Design" },
         { value: "microservices", label: "Microservices Architecture" },
@@ -64,14 +73,20 @@ export default function ProjectRequestModal({
 
   const title = requestType === "schulung" 
     ? "🎓 Neue Schulung anfragen"
+    : requestType === "ai-agents"
+    ? "🤖 AI Agents Projekt anfragen"
     : "🚀 Neues Projekt anfragen";
 
   const nameLabel = requestType === "schulung"
     ? "Schulungsthema *"
+    : requestType === "ai-agents"
+    ? "Projektname *"
     : "Projektname *";
 
   const namePlaceholder = requestType === "schulung"
     ? "z.B. Bitcoin für Einsteiger"
+    : requestType === "ai-agents"
+    ? "z.B. AI Customer Service Bot"
     : "z.B. E-Commerce Workflow System";
 
   return (

@@ -34,7 +34,7 @@ export default function AiAgentsPage() {
       case "agents-camunda":
         return <AgentsCamundaContent />;
       case "ai-customer-service":
-        return <AiCustomerServiceContent onRequestProject={() => setShowRequestModal(true)} />;
+        return <AiCustomerServiceContent />;
       default:
         return <AiAgentsIndexContent />;
     }
