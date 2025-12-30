@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { amount, projectRequest } = body;
+    const { priceAmount, priceCurrency, title, description, successUrl, cancelUrl, metadata } = body;
 
-    if (!amount || amount < 50) {
+    if (!priceAmount || priceAmount < 50) {
       return NextResponse.json(
         { error: "Amount must be at least 50 EUR" },
         { status: 400 }
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     }
 
     const apiKey = process.env.COINGATE_API_KEY;
-    const environment = process.env.COINGATE_ENVIRONMENT || "live"; // 'sandbox' or 'live'
+    const environment = process.env.COINGATE_ENVIRONMENT || "sandbox"; // 'sandbox' or 'live'
     
     if (!apiKey) {
       console.error("COINGATE_API_KEY not set");
@@ -30,19 +30,19 @@ export async function POST(req: NextRequest) {
 
     // Create order on CoinGate
     const orderData = {
-      order_id: `project-${Date.now()}`,
-      price_amount: amount,
-      price_currency: "EUR",
-      receive_currency: "EUR",
-      title: `Project: ${projectRequest.projectName}`,
-      description: `${projectRequest.projectType} - ${projectRequest.description.substring(0, 200)}`,
+      order_id: `order-${Date.now()}`,
+      price_amount: priceAmount,
+      price_currency: priceCurrency || "EUR",
+      receive_currency: priceCurrency || "EUR",
+      title: title || "CamundaFlow Project",
+      description: description || "CamundaFlow service request",
       callback_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/payment/webhook`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment`,
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment/success`,
-      purchaser_email: projectRequest.userEmail || "",
-      // Custom data for later retrieval
-
+      cancel_url: cancelUrl || `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment`,
+      success_url: successUrl || `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment/success`,
+      purchaser_email: metadata?.email || "",
     };
+
+    console.log("Creating CoinGate order:", { environment, orderData });
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -53,26 +53,35 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(orderData),
     });
 
+    const responseText = await response.text();
+    console.log("CoinGate response status:", response.status);
+    console.log("CoinGate response body:", responseText);
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      let errorData;
+      try {
+        errorData = JSON.parse(responseText);
+      } catch {
+        errorData = { message: responseText };
+      }
       console.error("CoinGate API error:", errorData);
       return NextResponse.json(
-        { error: "Failed to create payment order" },
+        { error: "Failed to create payment order", details: errorData },
         { status: response.status }
       );
     }
 
-    const order = await response.json();
+    const order = JSON.parse(responseText);
 
     return NextResponse.json({
       orderId: order.id,
-      hostedUrl: order.payment_url,
+      checkoutUrl: order.payment_url,
       status: order.status,
     });
   } catch (error) {
     console.error("Payment creation error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
