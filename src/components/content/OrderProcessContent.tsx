@@ -18,7 +18,7 @@ export default function OrderProcessContent() {
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
-  const projectPrice = 500;
+  const projectPrice = 800;
   const [includeExtras, setIncludeExtras] = useState({
     eventDriven: false,
     multiTenant: false,
@@ -399,19 +399,28 @@ export default function OrderProcessContent() {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
-                        amount: totalPrice,
-                        projectRequest: {
-                          projectName: `Microservices Order Process${includeExtras.eventDriven ? ' + Kafka' : ''}${includeExtras.multiTenant ? ' + Multi-Tenant' : ''}${includeExtras.monitoring ? ' + Monitoring' : ''}`,
-                          projectType: 'Microservices Implementation',
-                          description: `Teilnehmer: ${formData.name || userName}, Email: ${formData.email || userEmail}${formData.company ? `, Firma: ${formData.company}` : ''}${formData.phone ? `, Tel: ${formData.phone}` : ''}. Extras: ${includeExtras.eventDriven ? 'Event-Driven Architecture ' : ''}${includeExtras.multiTenant ? 'Multi-Tenant ' : ''}${includeExtras.monitoring ? 'Monitoring ' : ''}. ${formData.message || ''}`,
-                          userEmail: formData.email || userEmail,
-                        },
+                        priceAmount: totalPrice,
+                        priceCurrency: 'EUR',
+                        title: 'Microservices Order Process Implementation',
+                        description: `Microservices Order Process - ${formData.company || formData.name}`,
+                        successUrl: `${window.location.origin}/payment/success`,
+                        cancelUrl: window.location.href,
+                        metadata: {
+                          type: 'microservices-implementation',
+                          name: formData.name || userName,
+                          email: formData.email || userEmail,
+                          company: formData.company,
+                          phone: formData.phone,
+                          message: formData.message,
+                          extras: JSON.stringify(includeExtras),
+                          totalPrice: totalPrice,
+                        }
                       }),
                     });
                     
                     if (response.ok) {
                       const data = await response.json();
-                      window.location.href = data.hostedUrl;
+                      window.location.href = data.checkoutUrl;
                     } else {
                       const error = await response.json();
                       alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);

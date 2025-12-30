@@ -18,7 +18,7 @@ export default function AiCustomerServiceContent() {
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
-  const projectPrice = 450;
+  const projectPrice = 950;
 
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -268,19 +268,26 @@ export default function AiCustomerServiceContent() {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
-                        amount: projectPrice,
-                        projectRequest: {
-                          projectName: 'AI Customer Service Implementation',
-                          projectType: 'AI Agents & Customer Service',
-                          description: `Teilnehmer: ${formData.name || userName}, Email: ${formData.email || userEmail}${formData.company ? `, Firma: ${formData.company}` : ''}${formData.phone ? `, Tel: ${formData.phone}` : ''}. ${formData.message || ''}`,
-                          userEmail: formData.email || userEmail,
-                        },
+                        priceAmount: projectPrice,
+                        priceCurrency: 'EUR',
+                        title: 'AI Customer Service Implementation',
+                        description: `AI Customer Service - ${formData.company || formData.name}`,
+                        successUrl: `${window.location.origin}/payment/success`,
+                        cancelUrl: window.location.href,
+                        metadata: {
+                          type: 'ai-customer-service',
+                          name: formData.name || userName,
+                          email: formData.email || userEmail,
+                          company: formData.company,
+                          phone: formData.phone,
+                          message: formData.message,
+                        }
                       }),
                     });
                     
                     if (response.ok) {
                       const data = await response.json();
-                      window.location.href = data.hostedUrl;
+                      window.location.href = data.checkoutUrl;
                     } else {
                       const error = await response.json();
                       alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
