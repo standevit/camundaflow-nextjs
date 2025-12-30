@@ -463,7 +463,7 @@ const translations: Record<string, Messages> = {
     footer_email: "post@camundaflow.de",
 
     // Schulung page
-    "schulung.header.title": "Kryptowährung Schulungen",
+    "schulung.header.title": "Schulungen",
     "schulung.header.subtitle": "Lernen Sie die Grundlagen von Blockchain, Wallets, Trading und mehr",
     "schulung.header.requestButton": "Kurs anfragen",
     "schulung.sidebar.title": "Kursthemen",
@@ -1173,7 +1173,7 @@ const translations: Record<string, Messages> = {
     footer_email: "post@camundaflow.de",
 
     // Schulung page
-    "schulung.header.title": "Cryptocurrency Courses",
+    "schulung.header.title": "Courses",
     "schulung.header.subtitle": "Learn the fundamentals of blockchain, wallets, trading and more",
     "schulung.header.requestButton": "Request Course",
     "schulung.sidebar.title": "Course Topics",
@@ -2119,7 +2119,7 @@ const translations: Record<string, Messages> = {
     mcp_benefit4: "Uitbreidbaar met custom tools en resources",
     
     // Schulung page
-    "schulung.header.title": "Cryptocurrency Cursussen",
+    "schulung.header.title": "Cursussen",
     "schulung.header.subtitle": "Leer de basis van blockchain, wallets, trading en meer",
     "schulung.header.requestButton": "Cursus aanvragen",
     "schulung.sidebar.title": "Cursusonderwerpen",
