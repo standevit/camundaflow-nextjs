@@ -1,14 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "@/components/LanguageProvider";
+import ProjectRequestModal from "@/components/ProjectRequestModal";
 import AiAgentsIndexContent from "@/components/content/AiAgentsIndexContent";
 import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
 import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
 
 export default function AiAgentsPage() {
+  const { data: session } = useSession();
   const { t } = useTranslation();
   const [activeTemplate, setActiveTemplate] = useState("ai-agents-index");
+  const [showRequestModal, setShowRequestModal] = useState(false);
+
+  const userName = session?.user?.name || "";
+  const userEmail = session?.user?.email || "";
 
   useEffect(() => {
     // Update document title based on active template
@@ -27,7 +34,7 @@ export default function AiAgentsPage() {
       case "agents-camunda":
         return <AgentsCamundaContent />;
       case "ai-customer-service":
-        return <AiCustomerServiceContent />;
+        return <AiCustomerServiceContent onRequestProject={() => setShowRequestModal(true)} />;
       default:
         return <AiAgentsIndexContent />;
     }
@@ -81,7 +88,15 @@ export default function AiAgentsPage() {
   }, [activeTemplate]);
 
   return (
-    <div className="container">
+    <>
+      <ProjectRequestModal
+        isOpen={showRequestModal}
+        onClose={() => setShowRequestModal(false)}
+        userName={userName}
+        userEmail={userEmail}
+        requestType="ai-agents"
+      />
+      <div className="container">
       <aside className="sidebar">
         <h3>AI Agents</h3>
         <ul>
@@ -149,5 +164,6 @@ export default function AiAgentsPage() {
         />
       </aside>
     </div>
+    </>
   );
 }

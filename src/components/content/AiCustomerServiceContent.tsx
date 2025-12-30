@@ -2,7 +2,11 @@
 
 import { useTranslation } from "@/components/LanguageProvider";
 
-export default function AiCustomerServiceContent() {
+interface AiCustomerServiceContentProps {
+  onRequestProject?: () => void;
+}
+
+export default function AiCustomerServiceContent({ onRequestProject }: AiCustomerServiceContentProps) {
   const { t } = useTranslation();
 
   return (
@@ -13,7 +17,8 @@ export default function AiCustomerServiceContent() {
         color: 'white',
         padding: '1.5rem',
         borderRadius: '12px',
-        marginBottom: '2rem'
+        marginBottom: '2rem',
+        position: 'relative'
       }}>
         <h3 style={{ 
           fontSize: '1.5rem', 
@@ -28,10 +33,37 @@ export default function AiCustomerServiceContent() {
           fontSize: '1.1rem', 
           lineHeight: '1.8',
           opacity: '0.95',
-          marginBottom: '0'
+          marginBottom: '0',
+          paddingRight: onRequestProject ? '160px' : '0'
         }}>
           {t("ai_customer_service_intro_desc")}
         </p>
+        
+        {/* Projekt anfragen Button */}
+        {onRequestProject && (
+          <button
+            onClick={onRequestProject}
+            style={{
+              position: 'absolute',
+              bottom: '1.5rem',
+              right: '1.5rem',
+              padding: '0.75rem 1.5rem',
+              background: 'white',
+              color: '#667eea',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+              transition: 'transform 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            📝 Projekt anfragen
+          </button>
+        )}
       </div>
 
       {/* Capabilities Section */}
