@@ -7,6 +7,7 @@ import ProjectRequestModal from "@/components/ProjectRequestModal";
 import AiAgentsIndexContent from "@/components/content/AiAgentsIndexContent";
 import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
 import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
+import LlmTrainingContent from "@/components/content/LlmTrainingContent";
 
 export default function AiAgentsPage() {
   const { data: session } = useSession();
@@ -22,7 +23,8 @@ export default function AiAgentsPage() {
     const titleMap: Record<string, string> = {
       'ai-agents-index': t('ai_agents_index_heading') as string,
       'agents-camunda': t('agents_camunda_heading') as string,
-      'ai-customer-service': t('ai_customer_service_intro_heading') as string
+      'ai-customer-service': t('ai_customer_service_intro_heading') as string,
+      'llm-training': 'LLM Training und Modellentwicklung'
     };
     document.title = `${titleMap[activeTemplate] || 'AI Agents'} | CamundaFlow`;
   }, [activeTemplate, t]);
@@ -35,6 +37,8 @@ export default function AiAgentsPage() {
         return <AgentsCamundaContent />;
       case "ai-customer-service":
         return <AiCustomerServiceContent />;
+      case "llm-training":
+        return <LlmTrainingContent />;
       default:
         return <AiAgentsIndexContent />;
     }
@@ -110,22 +114,13 @@ export default function AiAgentsPage() {
           </li>
           <li>
             <a
-              className={`example-link ${activeTemplate === "agents-camunda" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("agents-camunda")}
+              className={`example-link ${activeTemplate === "llm-training" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("llm-training")}
             >
-              {t("ai_camunda")}
+              LLM Training
             </a>
           </li>
-          <li><b>Use Cases</b></li>
-          <li>
-            <a
-              className={`example-link ${activeTemplate === "ai-customer-service" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("ai-customer-service")}
-            >
-              {t("intelligent_customer_service")}
-            </a>
-          </li>
-        </ul>
+      </ul>
       </aside>
 
       <main className="main-content">

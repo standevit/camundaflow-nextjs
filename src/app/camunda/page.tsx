@@ -7,6 +7,8 @@ import ProcessBasicsContent from "@/components/content/ProcessBasicsContent";
 import CamundaIndexContent from "@/components/content/CamundaIndexContent";
 import McpIndexContent from "@/components/content/McpIndexContent";
 import MigrationContent from "@/components/content/MigrationContent";
+import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
+import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
 
 export default function CamundaPage() {
   const { t } = useTranslation();
@@ -28,7 +30,7 @@ export default function CamundaPage() {
     // Check URL params for tab parameter
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab');
-    if (tab && ['bpmn', 'process-basics', 'camunda-index', 'mcp', 'migration'].includes(tab)) {
+    if (tab && ['bpmn', 'process-basics', 'camunda-index', 'mcp', 'migration', 'agents-camunda', 'ai-customer-service'].includes(tab)) {
       setActiveTemplate(tab);
     }
   }, []);
@@ -40,7 +42,9 @@ export default function CamundaPage() {
       'process-basics': 'Camunda 7',
       'camunda-index': t('what_is_camunda8') as string,
       'mcp': t('nav_mcp') as string,
-      'migration': t('migration_link') as string
+      'migration': t('migration_link') as string,
+      'agents-camunda': t('agents_camunda_heading') as string,
+      'ai-customer-service': t('ai_customer_service_intro_heading') as string
     };
     document.title = `${titleMap[activeTemplate] || 'Camunda 8'} | CamundaFlow`;
   }, [activeTemplate, t]);
@@ -57,6 +61,10 @@ export default function CamundaPage() {
         return <McpIndexContent />;
       case "migration":
         return <MigrationContent />;
+      case "agents-camunda":
+        return <AgentsCamundaContent />;
+      case "ai-customer-service":
+        return <AiCustomerServiceContent />;
       default:
         return <BpmnContent />;
     }
@@ -193,6 +201,24 @@ export default function CamundaPage() {
               onClick={() => setActiveTemplate("migration")}
             >
               Migration C7 → C8
+            </a>
+          </li>
+          <li style={{ marginTop: '1rem' }}><b>AI Integration</b></li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "agents-camunda" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("agents-camunda")}
+            >
+              {t("ai_camunda")}
+            </a>
+          </li>
+          <li><b>Use Cases</b></li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "ai-customer-service" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("ai-customer-service")}
+            >
+              {t("intelligent_customer_service")}
             </a>
           </li>
         </ul>

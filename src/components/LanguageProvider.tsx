@@ -73,7 +73,7 @@ const translations: Record<string, Messages> = {
 
     // AI Agents Index
     ai_agents_index_heading: "AI Agent",
-    ai_agents_index_intro: "Ein autonomer, intelligenter Software-Baustein, der eigenständig Aufgaben wahrnimmt, Entscheidungen trifft und mit Menschen sowie anderen Systemen interagiert – angetrieben durch Large Language Models (LLMs) und Camunda 8 Orchestrierung.",
+    ai_agents_index_intro: "Ein autonomer, intelligenter Software-Baustein, der eigenständig Aufgaben wahrnimmt, Entscheidungen trifft und mit Menschen sowie anderen Systemen interagiert – angetrieben durch Large Language Models (LLMs).",
     ai_agents_index_what_heading: "Was macht ein AI Agent konkret?",
     ai_agents_index_understands_label: "Versteht",
     ai_agents_index_understands: "natürliche Sprache (Kunden) Anfragen (E-Mail, Chat, Ticket, Sprache)",
@@ -783,7 +783,7 @@ const translations: Record<string, Messages> = {
 
     // AI Agents Index
     ai_agents_index_heading: "AI Agents",
-    ai_agents_index_intro: "An autonomous, intelligent software component that performs tasks, makes decisions and interacts with people and systems — powered by large language models (LLMs) and orchestrated by Camunda 8.",
+    ai_agents_index_intro: "An autonomous, intelligent software component that performs tasks, makes decisions and interacts with people and systems — powered by large language models (LLMs).",
     ai_agents_index_what_heading: "What does an AI agent do?",
     ai_agents_index_understands_label: "Understands",
     ai_agents_index_understands: "natural language customer requests (email, chat, ticket, voice)",
@@ -1651,7 +1651,7 @@ const translations: Record<string, Messages> = {
     intelligent_customer_service: "1. Intelligente Klantenservice",
     
     ai_agents_index_heading: "AI Agent",
-    ai_agents_index_intro: "Een autonome, intelligente software-component die zelfstandig taken waarneemt, beslissingen neemt en interacteert met mensen en andere systemen – aangedreven door Large Language Models (LLMs) en Camunda 8 orchestratie.",
+    ai_agents_index_intro: "Een autonome, intelligente software-component die zelfstandig taken waarneemt, beslissingen neemt en interacteert met mensen en andere systemen – aangedreven door Large Language Models (LLMs).",
     ai_agents_index_what_heading: "Wat doet een AI Agent concreet?",
     ai_agents_index_understands_label: "Begrijpt",
     ai_agents_index_understands: "natuurlijke taal (klanten) aanvragen (e-mail, chat, ticket, spraak)",
