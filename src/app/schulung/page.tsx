@@ -24,7 +24,7 @@ export default function SchulungPage() {
   const userEmail = session?.user?.email || "";
 
   const basePrice = 250;
-  const trezorPrice = 50;
+  const trezorPrice = 65;
   const totalPrice = basePrice + (includeTrezor ? trezorPrice : 0);
 
   const topics = [
@@ -310,10 +310,10 @@ export default function SchulungPage() {
                             🔐 Trezor Safe 3 Hardware Wallet hinzufügen
                           </h4>
                           <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "0.5rem" }}>
-                            Sichern Sie Ihre Kryptowährungen mit dem neuesten Hardware Wallet von Trezor. Perfekt für Anfänger!
+                            Sichern Sie Ihre Kryptowährungen mit dem Hardware Wallet von Trezor. Perfekt für Anfänger!
                           </p>
                           <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669" }}>
-                            + €50
+                            + €{trezorPrice}
                           </p>
                         </div>
                       </div>
