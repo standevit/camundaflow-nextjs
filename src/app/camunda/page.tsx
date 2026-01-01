@@ -30,7 +30,7 @@ export default function CamundaPage() {
     // Check URL params for tab parameter
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab');
-    if (tab && ['bpmn', 'process-basics', 'camunda-index', 'mcp', 'migration', 'agents-camunda', 'ai-customer-service'].includes(tab)) {
+    if (tab && ['bpmn', 'process-basics', 'camunda-index', 'mcp', 'migration', 'agents-camunda', 'ai-customer-service', 'mcp-use-case'].includes(tab)) {
       setActiveTemplate(tab);
     }
   }, []);
@@ -44,7 +44,8 @@ export default function CamundaPage() {
       'mcp': t('nav_mcp') as string,
       'migration': t('migration_link') as string,
       'agents-camunda': t('agents_camunda_heading') as string,
-      'ai-customer-service': t('ai_customer_service_intro_heading') as string
+      'ai-customer-service': t('ai_customer_service_intro_heading') as string,
+      'mcp-use-case': t('nav_mcp') as string
     };
     document.title = `${titleMap[activeTemplate] || 'Camunda 8'} | CamundaFlow`;
   }, [activeTemplate, t]);
@@ -65,6 +66,8 @@ export default function CamundaPage() {
         return <AgentsCamundaContent />;
       case "ai-customer-service":
         return <AiCustomerServiceContent />;
+      case "mcp-use-case":
+        return <McpIndexContent />;
       default:
         return <BpmnContent />;
     }
@@ -187,14 +190,7 @@ export default function CamundaPage() {
               Camunda 8
             </a>
           </li>
-          <li>
-            <a
-              className={`example-link ${activeTemplate === "mcp" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("mcp")}
-            >
-              {t("nav_mcp")}
-            </a>
-          </li>
+
           <li>
             <a
               className={`example-link ${activeTemplate === "migration" ? "active" : ""}`}
@@ -210,6 +206,14 @@ export default function CamundaPage() {
               onClick={() => setActiveTemplate("ai-customer-service")}
             >
               {t("intelligent_customer_service")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "mcp-use-case" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("mcp-use-case")}
+            >
+              2. {t("nav_mcp")}
             </a>
           </li>
         </ul>
