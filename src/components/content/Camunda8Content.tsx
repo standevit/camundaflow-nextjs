@@ -60,29 +60,7 @@ export default function Camunda8Content() {
           {t("camunda_index_intro")}
         </p>
         
-        {/* Projekt anfragen Button */}
-        <button
-          onClick={() => setShowForm(true)}
-          style={{
-            position: 'absolute',
-            bottom: '1.5rem',
-            right: '1.5rem',
-            padding: '0.75rem 1.5rem',
-            background: 'white',
-            color: '#667eea',
-            border: 'none',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            transition: 'transform 0.2s',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-        >
-          📝 Projekt anfragen
-        </button>
+
       </div>
 
       {/* Project Request Form */}

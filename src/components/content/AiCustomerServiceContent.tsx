@@ -18,8 +18,30 @@ export default function AiCustomerServiceContent() {
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
-  const projectPrice = 950;
+  const projectPrice = 4000;
   const [testnetConfirmed, setTestnetConfirmed] = useState(false);
+  const [includeExtras, setIncludeExtras] = useState({
+    sentimentAnalysis: false,
+    voicebot: false,
+    customIntegrations: false,
+    advancedReporting: false,
+    prioritySupport: false,
+  });
+
+  const extraPrices = {
+    sentimentAnalysis: 800,
+    voicebot: 1200,
+    customIntegrations: 1000,
+    advancedReporting: 600,
+    prioritySupport: 400,
+  };
+
+  const totalPrice = projectPrice + 
+    (includeExtras.sentimentAnalysis ? extraPrices.sentimentAnalysis : 0) +
+    (includeExtras.voicebot ? extraPrices.voicebot : 0) +
+    (includeExtras.customIntegrations ? extraPrices.customIntegrations : 0) +
+    (includeExtras.advancedReporting ? extraPrices.advancedReporting : 0) +
+    (includeExtras.prioritySupport ? extraPrices.prioritySupport : 0);
 
   // Appointment booking states
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
@@ -830,7 +852,7 @@ export default function AiCustomerServiceContent() {
             fontSize: "0.95rem",
             color: "#0066cc",
           }}>
-            💰 <strong>Projektpreis:</strong> €{projectPrice}
+            💰 <strong>Basispreis:</strong> €{projectPrice} | 💵 <strong>Gesamt:</strong> €{totalPrice}
           </div>
 
           {/* Project Description */}
@@ -873,6 +895,215 @@ export default function AiCustomerServiceContent() {
                 <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
                   Monitoring, Reporting und kontinuierliche Verbesserung durch ML-Insights.
                 </p>
+              </div>
+              <div>
+                <strong>🔐 Sicherheit & Datenschutz</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Ende-zu-Ende Verschlüsselung, GDPR-Compliance und sichere Datenspeicherung.
+                </p>
+              </div>
+              <div>
+                <strong>🎓 Training & Dokumentation</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Umfassendes Team-Training, technische Dokumentation und Best Practices Guide.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Features */}
+          <div style={{ marginBottom: "1.5rem" }}>
+            <h4 style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#059669", marginBottom: "1rem" }}>
+              ➕ Zusätzliche Features (optional)
+            </h4>
+            
+            {/* Sentiment Analysis */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.sentimentAnalysis ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, sentimentAnalysis: !includeExtras.sentimentAnalysis})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.sentimentAnalysis}
+                  onChange={(e) => setIncludeExtras({...includeExtras, sentimentAnalysis: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    😊 Sentiment Analysis & Emotion Detection
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    Automatische Erkennung von Kundenstimmung und Emotionen zur proaktiven Eskalation bei negativem Feedback.
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.sentimentAnalysis}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Voicebot */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.voicebot ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, voicebot: !includeExtras.voicebot})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.voicebot}
+                  onChange={(e) => setIncludeExtras({...includeExtras, voicebot: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    🎤 Voicebot Integration
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    Sprach-basierte KI für Telefon-Support mit Speech-to-Text und Text-to-Speech (mehrsprachig).
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.voicebot}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Integrations */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.customIntegrations ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, customIntegrations: !includeExtras.customIntegrations})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.customIntegrations}
+                  onChange={(e) => setIncludeExtras({...includeExtras, customIntegrations: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    🔌 Custom API Integrationen
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    Integration mit Ihren bestehenden Systemen (CRM, ERP, Ticketing, etc.) über REST APIs.
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.customIntegrations}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Reporting */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.advancedReporting ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, advancedReporting: !includeExtras.advancedReporting})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.advancedReporting}
+                  onChange={(e) => setIncludeExtras({...includeExtras, advancedReporting: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    📈 Advanced Analytics & Reporting
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    Erweiterte KPI-Dashboards, Custom Reports, Predictive Analytics und Business Intelligence.
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.advancedReporting}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Priority Support */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.prioritySupport ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, prioritySupport: !includeExtras.prioritySupport})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.prioritySupport}
+                  onChange={(e) => setIncludeExtras({...includeExtras, prioritySupport: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    ⚡ Priority Support & SLA
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    24/7 Priority Support mit garantierter Response Time, dedizierter Account Manager.
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.prioritySupport}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1059,7 +1290,7 @@ export default function AiCustomerServiceContent() {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
-                        priceAmount: projectPrice,
+                        priceAmount: totalPrice,
                         priceCurrency: 'EUR',
                         title: 'AI Customer Service Implementation',
                         description: `AI Customer Service - ${formData.company || formData.name}`,
@@ -1072,6 +1303,8 @@ export default function AiCustomerServiceContent() {
                           company: formData.company,
                           phone: formData.phone,
                           message: formData.message,
+                          extras: JSON.stringify(includeExtras),
+                          totalPrice: totalPrice,
                         }
                       }),
                     });
@@ -1103,7 +1336,7 @@ export default function AiCustomerServiceContent() {
                   opacity: (!formData.name && !userName || !formData.email && !userEmail || !testnetConfirmed) ? 0.6 : 1,
                 }}
               >
-                Projekt anfragen (€{projectPrice})
+                Projekt anfragen (€{totalPrice})
               </button>
             </div>
           </div>
