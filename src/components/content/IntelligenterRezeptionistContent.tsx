@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslation } from "../LanguageProvider";
 
 export default function IntelligenterRezeptionistContent() {
   const { data: session } = useSession();
+  const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -158,7 +160,7 @@ export default function IntelligenterRezeptionistContent() {
             margin: '0 0 0.5rem 0',
             color: 'white'
           }}>
-            Intelligenter Rezeptionist
+            {t('intelligent_receptionist_heading')}
           </h2>
           <p style={{
             margin: 0,
@@ -166,7 +168,7 @@ export default function IntelligenterRezeptionistContent() {
             opacity: 0.95,
             color: 'white'
           }}>
-            KI-gestützte Patientenbetreuung rund um die Uhr
+            {t('intelligent_receptionist_subtitle')}
           </p>
         </div>
       </div>
@@ -187,7 +189,7 @@ export default function IntelligenterRezeptionistContent() {
           paddingBottom: '0.75rem',
           borderBottom: '2px solid #667eea'
         }}>
-          Was können Sie erwarten?
+          {t('intelligent_receptionist_expectations_heading')}
         </h3>
         <div style={{
           background: '#f8f9fa',
@@ -196,14 +198,10 @@ export default function IntelligenterRezeptionistContent() {
           borderLeft: '4px solid #667eea'
         }}>
           <p style={{ margin: '0 0 1rem 0', color: '#334155', lineHeight: '1.8' }}>
-            Ein intelligenter AI-Rezeptionist revolutioniert Ihre Patientenbetreuung durch 24/7-Verfügbarkeit. 
-            Das System beantwortet automatisch Patientenanfragen, vereinbart Termine, bearbeitet Stornierungen 
-            und gibt Auskunft über Praxisöffnungszeiten, Leistungen und Standorte.
+            {t('intelligent_receptionist_expectations_p1')}
           </p>
           <p style={{ margin: 0, color: '#334155', lineHeight: '1.8' }}>
-            Der AI-Agent kann mehrere Sprachen sprechen, Versicherungsinformationen prüfen, 
-            Formulare vorausfüllen und dringende Fälle priorisieren – alles in natürlicher Sprache 
-            via Chat, Telefon oder E-Mail.
+            {t('intelligent_receptionist_expectations_p2')}
           </p>
         </div>
       </div>
@@ -224,25 +222,25 @@ export default function IntelligenterRezeptionistContent() {
           paddingBottom: '0.75rem',
           borderBottom: '2px solid #667eea'
         }}>
-          Wie wird es implementiert?
+          {t('intelligent_receptionist_implementation_heading')}
         </h3>
         <div style={{ display: 'grid', gap: '1rem' }}>
           {[
             {
-              phase: 'Phase 1: Analyse & Design (Woche 1-2)',
-              details: 'Erfassung Ihrer Praxisabläufe, Definition von Anwendungsfällen, Design der Gesprächsflüsse'
+              phase: t('intelligent_receptionist_phase_1'),
+              details: t('intelligent_receptionist_phase_1_details')
             },
             {
-              phase: 'Phase 2: Integration (Woche 3-4)',
-              details: 'Anbindung an Ihr Praxisverwaltungssystem, E-Mail, Telefon und Website-Integration'
+              phase: t('intelligent_receptionist_phase_2'),
+              details: t('intelligent_receptionist_phase_2_details')
             },
             {
-              phase: 'Phase 3: Training (Woche 5-6)',
-              details: 'Schulung des AI-Modells mit praxisspezifischen Daten, FAQs und Prozessen'
+              phase: t('intelligent_receptionist_phase_3'),
+              details: t('intelligent_receptionist_phase_3_details')
             },
             {
-              phase: 'Phase 4: Testing & Go-Live (Woche 7-8)',
-              details: 'Umfangreiche Tests, Mitarbeiterschulung, schrittweise Einführung mit Monitoring'
+              phase: t('intelligent_receptionist_phase_4'),
+              details: t('intelligent_receptionist_phase_4_details')
             }
           ].map((item, idx) => (
             <div key={idx} style={{
@@ -278,7 +276,7 @@ export default function IntelligenterRezeptionistContent() {
           paddingBottom: '0.75rem',
           borderBottom: '2px solid #667eea'
         }}>
-          Was wird benötigt?
+          {t('intelligent_receptionist_requirements_heading')}
         </h3>
         <div style={{
           display: 'grid',
@@ -286,9 +284,9 @@ export default function IntelligenterRezeptionistContent() {
           gap: '1.5rem'
         }}>
           {[
-            { title: 'Technisch', items: ['Zugang zu Ihrem PVS', 'Telefon-API (optional)', 'Website-Integration', 'Datenschutz-konforme Cloud'] },
-            { title: 'Organisatorisch', items: ['Schulung: 2-3 Stunden', 'Testphase: 2 Wochen', 'Prozessdokumentation', 'Change Management'] },
-            { title: 'Ressourcen', items: ['Projektleiter (10h)', 'IT-Admin (5h)', 'Praxispersonal (3h)', 'Fortlaufendes Monitoring'] }
+            { title: t('intelligent_receptionist_requirements_tech'), items: [t('intelligent_receptionist_requirements_tech_1'), t('intelligent_receptionist_requirements_tech_2'), t('intelligent_receptionist_requirements_tech_3'), t('intelligent_receptionist_requirements_tech_4')] },
+            { title: t('intelligent_receptionist_requirements_org'), items: [t('intelligent_receptionist_requirements_org_1'), t('intelligent_receptionist_requirements_org_2'), t('intelligent_receptionist_requirements_org_3'), t('intelligent_receptionist_requirements_org_4')] },
+            { title: t('intelligent_receptionist_requirements_resources'), items: [t('intelligent_receptionist_requirements_resources_1'), t('intelligent_receptionist_requirements_resources_2'), t('intelligent_receptionist_requirements_resources_3'), t('intelligent_receptionist_requirements_resources_4')] }
           ].map((col, idx) => (
             <div key={idx} style={{
               background: '#f8f9fa',
@@ -325,7 +323,7 @@ export default function IntelligenterRezeptionistContent() {
           paddingBottom: '0.75rem',
           borderBottom: '2px solid #667eea'
         }}>
-          Zeitrahmen & Kosten
+          {t('intelligent_receptionist_timeline_heading')}
         </h3>
         <div style={{
           display: 'grid',
@@ -340,13 +338,13 @@ export default function IntelligenterRezeptionistContent() {
             textAlign: 'center'
           }}>
             <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem', color: 'white' }}>
-              Implementierungsdauer
+              {t('intelligent_receptionist_timeline_duration')}
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '700', marginBottom: '0.5rem', color: 'white' }}>
-              6-8 Wochen
+              {t('intelligent_receptionist_timeline_duration_value')}
             </div>
             <div style={{ fontSize: '0.9rem', opacity: 0.9, color: 'white' }}>
-              Von Konzept bis Go-Live
+              {t('intelligent_receptionist_timeline_duration_subtitle')}
             </div>
           </div>
           <div style={{
@@ -357,13 +355,13 @@ export default function IntelligenterRezeptionistContent() {
             textAlign: 'center'
           }}>
             <div style={{ fontSize: '0.9rem', color: '#667eea', marginBottom: '0.5rem', fontWeight: '600' }}>
-              Einmalige Kosten
+              {t('intelligent_receptionist_timeline_onetime')}
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
-              €8.000 - €15.000
+              {t('intelligent_receptionist_timeline_onetime_value')}
             </div>
             <div style={{ fontSize: '0.9rem', color: '#475569' }}>
-              Setup, Integration, Training
+              {t('intelligent_receptionist_timeline_onetime_subtitle')}
             </div>
           </div>
           <div style={{
@@ -374,13 +372,13 @@ export default function IntelligenterRezeptionistContent() {
             textAlign: 'center'
           }}>
             <div style={{ fontSize: '0.9rem', color: '#667eea', marginBottom: '0.5rem', fontWeight: '600' }}>
-              Monatliche Kosten
+              {t('intelligent_receptionist_timeline_monthly')}
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
-              €300 - €800
+              {t('intelligent_receptionist_timeline_monthly_value')}
             </div>
             <div style={{ fontSize: '0.9rem', color: '#475569' }}>
-              Hosting, AI-API, Support, Updates
+              {t('intelligent_receptionist_timeline_monthly_subtitle')}
             </div>
           </div>
         </div>
@@ -402,7 +400,7 @@ export default function IntelligenterRezeptionistContent() {
           paddingBottom: '0.75rem',
           borderBottom: '2px solid #667eea'
         }}>
-          Effekt auf Ihre Praxis
+          {t('intelligent_receptionist_impact_heading')}
         </h3>
         <div style={{
           display: 'grid',
@@ -411,12 +409,12 @@ export default function IntelligenterRezeptionistContent() {
           marginBottom: '2rem'
         }}>
           {[
-            { metric: '80%', label: 'Weniger Telefonanrufe', icon: '📞' },
-            { metric: '40%', label: 'Zeitersparnis Personal', icon: '⏱️' },
-            { metric: '24/7', label: 'Verfügbarkeit', icon: '🌍' },
-            { metric: '95%', label: 'Patientenzufriedenheit', icon: '😊' },
-            { metric: '30%', label: 'Mehr Termine', icon: '📅' },
-            { metric: '€2.000+', label: 'Monatliche Einsparung', icon: '💰' }
+            { metric: '80%', label: t('intelligent_receptionist_impact_calls'), icon: '📞' },
+            { metric: '40%', label: t('intelligent_receptionist_impact_time'), icon: '⏱️' },
+            { metric: '24/7', label: t('intelligent_receptionist_impact_availability'), icon: '🌍' },
+            { metric: '95%', label: t('intelligent_receptionist_impact_satisfaction'), icon: '😊' },
+            { metric: '30%', label: t('intelligent_receptionist_impact_appointments'), icon: '📅' },
+            { metric: '€2.000+', label: t('intelligent_receptionist_impact_savings'), icon: '💰' }
           ].map((item, idx) => (
             <div key={idx} style={{
               background: '#f8f9fa',
@@ -459,7 +457,7 @@ export default function IntelligenterRezeptionistContent() {
               fontWeight: '700',
               color: '#166534'
             }}>
-              ROI-Berechnung
+              {t('intelligent_receptionist_roi_heading')}
             </h4>
           </div>
           <p style={{
@@ -468,9 +466,7 @@ export default function IntelligenterRezeptionistContent() {
             lineHeight: '1.8',
             fontSize: '1.05rem'
           }}>
-            Bei durchschnittlichen Einsparungen von <strong>€2.000-3.000 pro Monat</strong> amortisiert sich 
-            die Investition bereits nach <strong>4-6 Monaten</strong>. Danach profitieren Sie von dauerhaft 
-            reduzierten Personalkosten, höherer Effizienz und verbesserter Patientenerfahrung.
+            {t('intelligent_receptionist_roi_text')}
           </p>
         </div>
       </div>
@@ -489,7 +485,7 @@ export default function IntelligenterRezeptionistContent() {
           margin: '0 0 1rem 0',
           color: 'white'
         }}>
-          Bereit für Ihren intelligenten Rezeptionisten?
+          {t('intelligent_receptionist_cta_heading')}
         </h3>
         <p style={{
           margin: '0 0 1.5rem 0',
@@ -497,7 +493,7 @@ export default function IntelligenterRezeptionistContent() {
           opacity: 0.95,
           color: 'white'
         }}>
-          Kontaktieren Sie uns für eine kostenlose Beratung und Demo
+          {t('intelligent_receptionist_cta_text')}
         </p>
         <div style={{
           display: 'flex',
