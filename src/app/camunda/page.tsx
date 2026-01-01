@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/components/LanguageProvider";
 import BpmnContent from "@/components/content/BpmnContent";
-import ProcessBasicsContent from "@/components/content/ProcessBasicsContent";
-import CamundaIndexContent from "@/components/content/CamundaIndexContent";
+import Camunda7Content from "@/components/content/Camunda7Content";
+import Camunda8Content from "@/components/content/Camunda8Content";
 import McpIndexContent from "@/components/content/McpIndexContent";
 import MigrationContent from "@/components/content/MigrationContent";
 import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
@@ -54,9 +54,9 @@ export default function CamundaPage() {
       case "bpmn":
         return <BpmnContent />;
       case "process-basics":
-        return <ProcessBasicsContent />;
+        return <Camunda7Content />;
       case "camunda-index":
-        return <CamundaIndexContent />;
+        return <Camunda8Content />;
       case "mcp":
         return <McpIndexContent />;
       case "migration":

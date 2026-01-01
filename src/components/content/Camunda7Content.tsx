@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "@/components/LanguageProvider";
 
-export default function ProcessBasicsContent() {
+export default function Camunda7Content() {
   const { t } = useTranslation();
   const { data: session } = useSession();
   const [showForm, setShowForm] = useState(false);
