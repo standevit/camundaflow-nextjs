@@ -143,7 +143,7 @@ const translations: Record<string, Messages> = {
     mcp_example: "MCP Beispiel",
 
     // MCP Index
-    mcp_index_heading: "Model Context Protocol (MCP)",
+    mcp_index_heading: "2. Model Context Protocol (MCP)",
     mcp_index_intro: "Ein aufkommender offener Standard, der es KI-Agenten ermöglicht, externe Tools und andere Agenten sicher zu entdecken, zu verstehen und zu nutzen — das 'USB-C der Agenten-Interoperabilität', das im Multi-Agenten-Ökosystem schnell an Bedeutung gewinnt.",
     mcp_index_what_heading: "Was ermöglicht MCP konkret?",
     mcp_index_discovers_label: "Entdeckt",
@@ -853,7 +853,7 @@ const translations: Record<string, Messages> = {
     mcp_example: "MCP Example",
 
     // MCP Index
-    mcp_index_heading: "Model Context Protocol (MCP)",
+    mcp_index_heading: "2. Model Context Protocol (MCP)",
     mcp_index_intro: "An emerging open standard that enables AI agents to securely discover, understand, and use external tools and other agents — the \"USB-C of agent interoperability\" quickly gaining traction in the multi-agent ecosystem.",
     mcp_index_what_heading: "What does MCP enable?",
     mcp_index_discovers_label: "Discovers",
@@ -1687,7 +1687,7 @@ const translations: Record<string, Messages> = {
     mcp_option1: "Model Context Protocol",
     mcp_example: "MCP Voorbeeld",
     
-    mcp_index_heading: "Model Context Protocol (MCP)",
+    mcp_index_heading: "2. Model Context Protocol (MCP)",
     mcp_index_intro: "MCP is een open standaard van Anthropic om AI-assistenten (zoals Claude, GPT-4, etc.) veilig en gestandaardiseerd te verbinden met externe databronnen en tools.",
     mcp_index_what_heading: "Wat doet MCP concreet?",
     mcp_index_discovers_label: "Ontdekt:",
