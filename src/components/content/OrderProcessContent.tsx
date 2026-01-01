@@ -181,7 +181,8 @@ export default function OrderProcessContent() {
         <button
           onClick={() => {
             setShowAppointmentForm(true);
-            setAppointmentStep(1);
+            // If user is logged in, skip to calendar (step 3), otherwise start at step 1
+            setAppointmentStep(session?.user ? 3 : 1);
             setAppointmentData({
               name: userName || "",
               email: userEmail || "",
@@ -232,7 +233,7 @@ export default function OrderProcessContent() {
           <p style={{ color: '#666', marginBottom: '2rem' }}>
             {appointmentStep === 1 && "Schritt 1 von 3: Ihre Kontaktdaten"}
             {appointmentStep === 2 && "Schritt 2 von 3: E-Mail Verifizierung"}
-            {appointmentStep === 3 && "Schritt 3 von 3: Datum und Uhrzeit wählen"}
+            {appointmentStep === 3 && (session?.user ? "Datum und Uhrzeit wählen" : "Schritt 3 von 3: Datum und Uhrzeit wählen")}
           </p>
 
           {/* Step 1: Basic Information */}
