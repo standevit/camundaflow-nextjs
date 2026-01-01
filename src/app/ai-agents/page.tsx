@@ -124,6 +124,14 @@ export default function AiAgentsPage() {
               LLM Training
             </a>
           </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "agents-camunda" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("agents-camunda")}
+            >
+              {t("agents_camunda_heading")}
+            </a>
+          </li>
           <li><b>Use Cases</b></li>
           <li>
             <a

@@ -203,15 +203,6 @@ export default function CamundaPage() {
               Migration C7 → C8
             </a>
           </li>
-          <li style={{ marginTop: '1rem' }}><b>AI Integration</b></li>
-          <li>
-            <a
-              className={`example-link ${activeTemplate === "agents-camunda" ? "active" : ""}`}
-              onClick={() => setActiveTemplate("agents-camunda")}
-            >
-              {t("ai_camunda")}
-            </a>
-          </li>
           <li><b>Use Cases</b></li>
           <li>
             <a
