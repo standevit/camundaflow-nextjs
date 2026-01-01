@@ -476,7 +476,6 @@ export default function OrderProcessContent() {
         {/* Termin vereinbaren Button */}
       <div style={{
         marginBottom: '2rem',
-        display: 'flex',
         justifyContent: 'flex-start'
       }}>
         <button
