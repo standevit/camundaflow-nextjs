@@ -8,6 +8,7 @@ import AiAgentsIndexContent from "@/components/content/AiAgentsIndexContent";
 import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
 import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
 import LlmTrainingContent from "@/components/content/LlmTrainingContent";
+import IntelligenterRezeptionistContent from "@/components/content/IntelligenterRezeptionistContent";
 
 export default function AiAgentsPage() {
   const { data: session } = useSession();
@@ -24,7 +25,8 @@ export default function AiAgentsPage() {
       'ai-agents-index': t('ai_agents_index_heading') as string,
       'agents-camunda': t('agents_camunda_heading') as string,
       'ai-customer-service': t('ai_customer_service_intro_heading') as string,
-      'llm-training': 'LLM Training und Modellentwicklung'
+      'llm-training': 'LLM Training und Modellentwicklung',
+      'intelligenter-rezeptionist': 'Intelligenter Rezeptionist'
     };
     document.title = `${titleMap[activeTemplate] || 'AI Agents'} | CamundaFlow`;
   }, [activeTemplate, t]);
@@ -39,6 +41,8 @@ export default function AiAgentsPage() {
         return <AiCustomerServiceContent />;
       case "llm-training":
         return <LlmTrainingContent />;
+      case "intelligenter-rezeptionist":
+        return <IntelligenterRezeptionistContent />;
       default:
         return <AiAgentsIndexContent />;
     }
@@ -118,6 +122,15 @@ export default function AiAgentsPage() {
               onClick={() => setActiveTemplate("llm-training")}
             >
               LLM Training
+            </a>
+          </li>
+          <li><b>Use Cases</b></li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "intelligenter-rezeptionist" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("intelligenter-rezeptionist")}
+            >
+              1. Intelligenter Rezeptionist
             </a>
           </li>
       </ul>
