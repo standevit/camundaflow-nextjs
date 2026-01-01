@@ -18,11 +18,13 @@ export default function OrderProcessContent() {
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
-  const projectPrice = 800;
+  const projectPrice = 5000;
   const [includeExtras, setIncludeExtras] = useState({
     eventDriven: false,
     multiTenant: false,
     monitoring: false,
+    apiGateway: false,
+    security: false,
   });
   const [testnetConfirmed, setTestnetConfirmed] = useState(false);
 
@@ -42,15 +44,19 @@ export default function OrderProcessContent() {
   const [isCodeSending, setIsCodeSending] = useState(false);
 
   const extraPrices = {
-    eventDriven: 200,
-    multiTenant: 300,
-    monitoring: 150,
+    eventDriven: 1200,
+    multiTenant: 1500,
+    monitoring: 800,
+    apiGateway: 1000,
+    security: 800,
   };
 
   const totalPrice = projectPrice + 
     (includeExtras.eventDriven ? extraPrices.eventDriven : 0) +
     (includeExtras.multiTenant ? extraPrices.multiTenant : 0) +
-    (includeExtras.monitoring ? extraPrices.monitoring : 0);
+    (includeExtras.monitoring ? extraPrices.monitoring : 0) +
+    (includeExtras.apiGateway ? extraPrices.apiGateway : 0) +
+    (includeExtras.security ? extraPrices.security : 0);
 
   // Send verification code
   const sendVerificationCode = async () => {
@@ -1002,25 +1008,49 @@ export default function OrderProcessContent() {
               <div>
                 <strong>🏗️ Microservices Architektur</strong>
                 <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
-                  Vollständige Order Processing Lösung mit Camunda 8, Spring Boot, und REST APIs.
+                  Vollständige Order Processing Lösung mit Camunda 8, Spring Boot, und REST APIs. Modulare Services für Order, Inventory, Payment, Billing, Shipping und Notification.
                 </p>
               </div>
               <div>
                 <strong>⚙️ Orchestrierung & Workflow</strong>
                 <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
-                  BPMN-basierte Prozessautomatisierung mit Fehlerbehandlung und Retry-Logik.
+                  BPMN-basierte Prozessautomatisierung mit Fehlerbehandlung und Retry-Logik. Saga Pattern für verteilte Transaktionen und Kompensierung.
                 </p>
               </div>
               <div>
                 <strong>🗄️ Datenpersistenz</strong>
                 <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
-                  PostgreSQL/MySQL Datenbank-Integration mit JPA/Hibernate.
+                  PostgreSQL/MySQL Datenbank-Integration mit JPA/Hibernate. Optimierte Datenbankschemas und Migration Scripts.
                 </p>
               </div>
               <div>
                 <strong>📦 Deployment</strong>
                 <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
-                  Docker & Kubernetes Setup mit CI/CD Pipeline (GitHub Actions).
+                  Docker & Kubernetes Setup mit CI/CD Pipeline (GitHub Actions). Helm Charts für einfache Bereitstellung.
+                </p>
+              </div>
+              <div>
+                <strong>🔄 Service Communication</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  REST APIs mit OpenAPI/Swagger Dokumentation. Service Discovery und Load Balancing.
+                </p>
+              </div>
+              <div>
+                <strong>✅ Testing & Qualitätssicherung</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Unit Tests, Integration Tests und End-to-End Tests. Testabdeckung &gt; 80%.
+                </p>
+              </div>
+              <div>
+                <strong>📚 Dokumentation</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  Vollständige technische Dokumentation, Architektur-Diagramme, API Dokumentation und Deployment-Guides.
+                </p>
+              </div>
+              <div>
+                <strong>🎓 Schulung & Support</strong>
+                <p style={{ marginTop: "0.25rem", color: "#666", marginBottom: 0 }}>
+                  2 Stunden Online-Schulung für Ihr Team. 30 Tage kostenloser Support nach Projektabschluss.
                 </p>
               </div>
             </div>
@@ -1137,10 +1167,86 @@ export default function OrderProcessContent() {
                     📊 Monitoring & Observability
                   </h5>
                   <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
-                    Prometheus, Grafana, ELK Stack für Logging, Metriken und Distributed Tracing.
+                    Prometheus, Grafana, ELK Stack für Logging, Metriken und Distributed Tracing mit Jaeger.
                   </p>
                   <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
                     + €{extraPrices.monitoring}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* API Gateway */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.apiGateway ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, apiGateway: !includeExtras.apiGateway})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.apiGateway}
+                  onChange={(e) => setIncludeExtras({...includeExtras, apiGateway: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    🌐 API Gateway & Service Mesh
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    Kong/Istio API Gateway mit Rate Limiting, Circuit Breaker, Service Mesh für Traffic Management und Sicherheit.
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.apiGateway}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Security */}
+            <div style={{
+              backgroundColor: "#f0fdf4",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              border: includeExtras.security ? "2px solid #10b981" : "2px solid #e0e0e0",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+            onClick={() => setIncludeExtras({...includeExtras, security: !includeExtras.security})}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={includeExtras.security}
+                  onChange={(e) => setIncludeExtras({...includeExtras, security: e.target.checked})}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div style={{ flex: 1 }}>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginBottom: "0.5rem", marginTop: 0 }}>
+                    🔒 Advanced Security & Authentication
+                  </h5>
+                  <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: 0 }}>
+                    OAuth2/JWT Authentication, Role-based Access Control (RBAC), API Key Management, und Security Auditing.
+                  </p>
+                  <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#059669", marginTop: "0.5rem", marginBottom: 0 }}>
+                    + €{extraPrices.security}
                   </p>
                 </div>
               </div>
