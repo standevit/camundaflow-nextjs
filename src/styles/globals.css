@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
 body{
   font-family:'Inter',system-ui,sans-serif;
   background:#fafafa;color:#1e293b;line-height:1.7;
