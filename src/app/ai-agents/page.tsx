@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "@/components/LanguageProvider";
 import ProjectRequestModal from "@/components/ProjectRequestModal";
 import AiAgentsIndexContent from "@/components/content/AiAgentsIndexContent";
@@ -9,15 +10,25 @@ import AgentsCamundaContent from "@/components/content/AgentsCamundaContent";
 import AiCustomerServiceContent from "@/components/content/AiCustomerServiceContent";
 import LlmTrainingContent from "@/components/content/LlmTrainingContent";
 import IntelligenterRezeptionistContent from "@/components/content/IntelligenterRezeptionistContent";
+import FraudDetectionContent from "@/components/content/FraudDetectionContent";
 
 export default function AiAgentsPage() {
   const { data: session } = useSession();
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
   const [activeTemplate, setActiveTemplate] = useState("ai-agents-index");
   const [showRequestModal, setShowRequestModal] = useState(false);
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
+
+  // Handle URL tab parameter on mount
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab) {
+      setActiveTemplate(tab);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     // Update document title based on active template
@@ -26,7 +37,8 @@ export default function AiAgentsPage() {
       'agents-camunda': t('agents_camunda_heading') as string,
       'ai-customer-service': t('ai_customer_service_intro_heading') as string,
       'llm-training': 'LLM Training und Modellentwicklung',
-      'intelligenter-rezeptionist': 'Intelligenter Rezeptionist'
+      'intelligenter-rezeptionist': 'Intelligenter Rezeptionist',
+      'fraud-detection': t('fraud_detection_heading') as string
     };
     document.title = `${titleMap[activeTemplate] || 'AI Agents'} | CamundaFlow`;
   }, [activeTemplate, t]);
@@ -43,6 +55,8 @@ export default function AiAgentsPage() {
         return <LlmTrainingContent />;
       case "intelligenter-rezeptionist":
         return <IntelligenterRezeptionistContent />;
+      case "fraud-detection":
+        return <FraudDetectionContent />;
       default:
         return <AiAgentsIndexContent />;
     }
@@ -138,7 +152,15 @@ export default function AiAgentsPage() {
               className={`example-link ${activeTemplate === "intelligenter-rezeptionist" ? "active" : ""}`}
               onClick={() => setActiveTemplate("intelligenter-rezeptionist")}
             >
-              1. Intelligenter Rezeptionist
+              {t("intelligent_receptionist")}
+            </a>
+          </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "fraud-detection" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("fraud-detection")}
+            >
+              {t("fraud_detection")}
             </a>
           </li>
       </ul>
