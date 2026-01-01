@@ -19,6 +19,7 @@ export default function MigrationContent() {
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
   const [numberOfProjects, setNumberOfProjects] = useState(1);
+  const [testnetConfirmed, setTestnetConfirmed] = useState(false);
   const pricePerProject = 600;
   const projectPrice = pricePerProject * numberOfProjects;
   
@@ -398,6 +399,65 @@ export default function MigrationContent() {
               />
             </div>
 
+            <div style={{
+              backgroundColor: "#fff3cd",
+              border: "2px solid #ffc107",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              fontSize: "0.95rem",
+              color: "#856404",
+            }}>
+              <div style={{ display: "flex", alignItems: "start", gap: "0.75rem" }}>
+                <div style={{ fontSize: "1.5rem", flexShrink: 0 }}>⚠️</div>
+                <div>
+                  <div style={{ fontWeight: "700", fontSize: "1.05rem", marginBottom: "0.5rem" }}>
+                    WICHTIG: Dies ist ein TESTNET!
+                  </div>
+                  <div style={{ marginBottom: "0.75rem", lineHeight: "1.6" }}>
+                    Die Zahlung erfolgt auf einer <strong>Test-Blockchain</strong>. Verwenden Sie 
+                    <strong> KEINE echten Kryptowährungen</strong>! Sie müssen <strong>Testnet-Tokens</strong> verwenden, 
+                    die keinen realen Wert haben.
+                  </div>
+                  <div style={{ fontSize: "0.9rem", opacity: 0.9 }}>
+                    💡 Dies ist eine Demo-Umgebung zum Testen der Zahlungsfunktionalität.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{
+              border: "2px solid #e0e0e0",
+              borderRadius: "8px",
+              padding: "1rem",
+              backgroundColor: "#f8f9fa",
+            }}>
+              <label style={{
+                display: "flex",
+                alignItems: "start",
+                gap: "0.75rem",
+                cursor: "pointer",
+                userSelect: "none"
+              }}>
+                <input
+                  type="checkbox"
+                  checked={testnetConfirmed}
+                  onChange={(e) => setTestnetConfirmed(e.target.checked)}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                    marginTop: "0.15rem",
+                    flexShrink: 0
+                  }}
+                />
+                <span style={{ fontSize: "0.95rem", lineHeight: "1.5", color: "#333" }}>
+                  <strong>Ich bestätige,</strong> dass ich verstehe, dass dies ein <strong>Testnet</strong> ist 
+                  und ich ausschließlich <strong>Test-Kryptowährungen</strong> verwenden werde. 
+                  Ich werde keine echten Kryptowährungen senden. *
+                </span>
+              </label>
+            </div>
+
             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
               <button
                 onClick={() => setShowForm(false)}
@@ -422,19 +482,29 @@ export default function MigrationContent() {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
-                        amount: projectPrice,
-                        projectRequest: {
-                          projectName: `Camunda 7 → 8 Migration (${numberOfProjects} ${numberOfProjects === 1 ? 'Prozess' : 'Prozesse'})`,
-                          projectType: 'Migration & Consulting',
-                          description: `Anzahl Prozesse: ${numberOfProjects}. Teilnehmer: ${formData.name || userName}, Email: ${formData.email || userEmail}${formData.company ? `, Firma: ${formData.company}` : ''}${formData.phone ? `, Tel: ${formData.phone}` : ''}. ${formData.message || ''}`,
-                          userEmail: formData.email || userEmail,
-                        },
+                        priceAmount: projectPrice,
+                        priceCurrency: 'EUR',
+                        title: 'Camunda 7 → 8 Migration',
+                        description: `Camunda 7 → 8 Migration - ${numberOfProjects} ${numberOfProjects === 1 ? 'Prozess' : 'Prozesse'} - ${formData.company || formData.name}`,
+                        successUrl: `${window.location.origin}/payment/success`,
+                        cancelUrl: window.location.href,
+                        metadata: {
+                          type: 'camunda-migration',
+                          name: formData.name || userName,
+                          email: formData.email || userEmail,
+                          company: formData.company,
+                          phone: formData.phone,
+                          message: formData.message,
+                          numberOfProjects: numberOfProjects,
+                          pricePerProject: pricePerProject,
+                          totalPrice: projectPrice,
+                        }
                       }),
                     });
                     
                     if (response.ok) {
                       const data = await response.json();
-                      window.location.href = data.hostedUrl;
+                      window.location.href = data.checkoutUrl;
                     } else {
                       const error = await response.json();
                       alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
@@ -444,18 +514,19 @@ export default function MigrationContent() {
                     alert('Fehler beim Erstellen der Zahlung. Bitte versuchen Sie es erneut.');
                   }
                 }}
-                disabled={!formData.name && !userName || !formData.email && !userEmail}
+                disabled={!formData.name && !userName || !formData.email && !userEmail || !testnetConfirmed}
+                title={!testnetConfirmed ? "Bitte bestätigen Sie, dass Sie das Testnet verstehen" : ""}
                 style={{
                   flex: 2,
                   padding: '0.875rem',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background: (!formData.name && !userName || !formData.email && !userEmail || !testnetConfirmed) ? '#cccccc' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '8px',
-                  cursor: 'pointer',
+                  cursor: (!formData.name && !userName || !formData.email && !userEmail || !testnetConfirmed) ? 'not-allowed' : 'pointer',
                   fontWeight: '600',
                   fontSize: '1rem',
-                  opacity: (!formData.name && !userName || !formData.email && !userEmail) ? 0.5 : 1,
+                  opacity: (!formData.name && !userName || !formData.email && !userEmail || !testnetConfirmed) ? 0.6 : 1,
                 }}
               >
                 Projekt anfragen (€{projectPrice})

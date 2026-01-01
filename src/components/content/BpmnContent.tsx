@@ -21,6 +21,7 @@ export default function BpmnContent() {
     customExtensions: false,
     enterpriseSupport: false,
   });
+  const [testnetConfirmed, setTestnetConfirmed] = useState(false);
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
@@ -437,6 +438,65 @@ export default function BpmnContent() {
               </p>
             </div>
 
+            <div style={{
+              backgroundColor: "#fff3cd",
+              border: "2px solid #ffc107",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              fontSize: "0.95rem",
+              color: "#856404",
+            }}>
+              <div style={{ display: "flex", alignItems: "start", gap: "0.75rem" }}>
+                <div style={{ fontSize: "1.5rem", flexShrink: 0 }}>⚠️</div>
+                <div>
+                  <div style={{ fontWeight: "700", fontSize: "1.05rem", marginBottom: "0.5rem" }}>
+                    WICHTIG: Dies ist ein TESTNET!
+                  </div>
+                  <div style={{ marginBottom: "0.75rem", lineHeight: "1.6" }}>
+                    Die Zahlung erfolgt auf einer <strong>Test-Blockchain</strong>. Verwenden Sie 
+                    <strong> KEINE echten Kryptowährungen</strong>! Sie müssen <strong>Testnet-Tokens</strong> verwenden, 
+                    die keinen realen Wert haben.
+                  </div>
+                  <div style={{ fontSize: "0.9rem", opacity: 0.9 }}>
+                    💡 Dies ist eine Demo-Umgebung zum Testen der Zahlungsfunktionalität.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{
+              border: "2px solid #e0e0e0",
+              borderRadius: "8px",
+              padding: "1rem",
+              backgroundColor: "#f8f9fa",
+            }}>
+              <label style={{
+                display: "flex",
+                alignItems: "start",
+                gap: "0.75rem",
+                cursor: "pointer",
+                userSelect: "none"
+              }}>
+                <input
+                  type="checkbox"
+                  checked={testnetConfirmed}
+                  onChange={(e) => setTestnetConfirmed(e.target.checked)}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                    marginTop: "0.15rem",
+                    flexShrink: 0
+                  }}
+                />
+                <span style={{ fontSize: "0.95rem", lineHeight: "1.5", color: "#333" }}>
+                  <strong>Ich bestätige,</strong> dass ich verstehe, dass dies ein <strong>Testnet</strong> ist 
+                  und ich ausschließlich <strong>Test-Kryptowährungen</strong> verwenden werde. 
+                  Ich werde keine echten Kryptowährungen senden. *
+                </span>
+              </label>
+            </div>
+
             <div style={{ display: 'flex', gap: '1rem' }}>
               <button
                 type="button"
@@ -457,17 +517,20 @@ export default function BpmnContent() {
               </button>
               <button
                 type="submit"
+                disabled={!testnetConfirmed}
+                title={!testnetConfirmed ? "Bitte bestätigen Sie, dass Sie das Testnet verstehen" : ""}
                 style={{
                   flex: 1,
                   padding: '0.75rem',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background: !testnetConfirmed ? '#cccccc' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '6px',
                   fontSize: '1rem',
                   fontWeight: '600',
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)'
+                  cursor: !testnetConfirmed ? 'not-allowed' : 'pointer',
+                  boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)',
+                  opacity: !testnetConfirmed ? 0.6 : 1
                 }}
               >
                 Weiter zur Zahlung
