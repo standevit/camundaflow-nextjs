@@ -517,15 +517,18 @@ export default function IntelligenterRezeptionistContent() {
               });
             }}
             style={{
-              background: 'white',
-              color: '#667eea',
-              padding: '0.75rem 2rem',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: '600',
-              fontSize: '1.05rem',
-              cursor: 'pointer',
-              transition: 'transform 0.2s'
+            display: 'inline-block',
+            padding: '0.875rem 2rem',
+            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            color: 'white',
+            textDecoration: 'none',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+            transition: 'transform 0.2s, box-shadow 0.2s',
             }}
           >
             Beratungstermin vereinbaren
@@ -533,15 +536,19 @@ export default function IntelligenterRezeptionistContent() {
           <button
             onClick={() => setShowForm(true)}
             style={{
-              background: 'rgba(255,255,255,0.2)',
-              color: 'white',
-              padding: '0.75rem 2rem',
-              borderRadius: '8px',
-              border: '2px solid white',
-              fontWeight: '600',
-              fontSize: '1.05rem',
-              cursor: 'pointer',
-              transition: 'transform 0.2s'
+                          display: 'inline-block',
+            padding: '0.875rem 2rem',
+            marginLeft: '2rem',
+            background: 'linear-gradient(135deg, #eb7222ff 0%, #f17610ff 100%)',
+            color: 'white',
+            textDecoration: 'none',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+            transition: 'transform 0.2s, box-shadow 0.2s',
             }}
           >
             Projekt anfragen

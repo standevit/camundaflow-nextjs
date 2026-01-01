@@ -514,25 +514,26 @@ export default function OrderProcessContent() {
             e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.3)';
           }}
         >
-          📅 Termin vereinbaren
+          📅 Beratungstermin vereinbaren
         </button>
         {/* Projekt anfragen Button */}
         <button
           onClick={() => setShowForm(true)}
           style={{
           
-            bottom: '1.5rem',
-            right: '1.5rem',
-            padding: '0.75rem 1.5rem',
-            background: 'white',
-            color: '#667eea',
+            display: 'inline-block',
+            padding: '0.875rem 2rem',
+            marginLeft: '2rem',
+            background: 'linear-gradient(135deg, #eb7222ff 0%, #f17610ff 100%)',
+            color: 'white',
+            textDecoration: 'none',
             border: 'none',
             borderRadius: '8px',
             fontSize: '1rem',
             fontWeight: '600',
             cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            transition: 'transform 0.2s',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+            transition: 'transform 0.2s, box-shadow 0.2s',
           }}
           onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
           onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -551,6 +552,7 @@ export default function OrderProcessContent() {
           padding: '2rem',
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
           marginBottom: '2rem',
+          marginTop: '2rem',
           border: '2px solid #10b981',
         }}>
           <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.5rem', color: '#333' }}>
@@ -968,6 +970,7 @@ export default function OrderProcessContent() {
           padding: '2rem',
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
           marginBottom: '2rem',
+          marginTop: '2rem',
           border: '2px solid #667eea',
         }}>
           <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#333' }}>
