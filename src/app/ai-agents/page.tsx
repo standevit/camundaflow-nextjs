@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "@/components/LanguageProvider";
@@ -11,8 +11,9 @@ import AiCustomerServiceContent from "@/components/content/AiCustomerServiceCont
 import LlmTrainingContent from "@/components/content/LlmTrainingContent";
 import IntelligenterRezeptionistContent from "@/components/content/IntelligenterRezeptionistContent";
 import FraudDetectionContent from "@/components/content/FraudDetectionContent";
+import IntelligentDocumentProcessingContent from "@/components/content/IntelligentDocumentProcessingContent";
 
-export default function AiAgentsPage() {
+function AiAgentsContent() {
   const { data: session } = useSession();
   const { t } = useTranslation();
   const searchParams = useSearchParams();
@@ -38,7 +39,8 @@ export default function AiAgentsPage() {
       'ai-customer-service': t('ai_customer_service_intro_heading') as string,
       'llm-training': 'LLM Training und Modellentwicklung',
       'intelligenter-rezeptionist': 'Intelligenter Rezeptionist',
-      'fraud-detection': t('fraud_detection_heading') as string
+      'fraud-detection': t('fraud_detection_heading') as string,
+      'intelligent-document-processing': t('idp_heading') as string
     };
     document.title = `${titleMap[activeTemplate] || 'AI Agents'} | CamundaFlow`;
   }, [activeTemplate, t]);
@@ -57,6 +59,8 @@ export default function AiAgentsPage() {
         return <IntelligenterRezeptionistContent />;
       case "fraud-detection":
         return <FraudDetectionContent />;
+      case "intelligent-document-processing":
+        return <IntelligentDocumentProcessingContent />;
       default:
         return <AiAgentsIndexContent />;
     }
@@ -163,6 +167,14 @@ export default function AiAgentsPage() {
               {t("fraud_detection")}
             </a>
           </li>
+          <li>
+            <a
+              className={`example-link ${activeTemplate === "intelligent-document-processing" ? "active" : ""}`}
+              onClick={() => setActiveTemplate("intelligent-document-processing")}
+            >
+              {t("idp_nav")}
+            </a>
+          </li>
       </ul>
       </aside>
 
@@ -203,5 +215,13 @@ export default function AiAgentsPage() {
       </aside>
     </div>
     </>
+  );
+}
+
+export default function AiAgentsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AiAgentsContent />
+    </Suspense>
   );
 }

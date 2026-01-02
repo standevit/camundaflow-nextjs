@@ -138,7 +138,7 @@ const translations: Record<string, Messages> = {
     ai_customer_service_intro_process_step_5: "Wenn nicht, übernimmt ein menschlicher Agent die Nachbearbeitung.",
 
     // Fraud Detection & Compliance
-    fraud_detection: "2. Betrugserkennung & Compliance",
+    fraud_detection: "Betrugserkennung & Compliance",
     fraud_detection_heading: "Betrugserkennung & Compliance-Überwachung",
     fraud_detection_subtitle: "AI-gestützte Betrugserkennung mit vollständiger Nachvollziehbarkeit",
     fraud_detection_problem_heading: "Problem",
@@ -160,6 +160,30 @@ const translations: Record<string, Messages> = {
     fraud_detection_cta_text: "Kontaktieren Sie uns für eine kostenlose Beratung und Demo",
     fraud_detection_cta_button_consultation: "Beratungstermin vereinbaren",
     fraud_detection_cta_button_request: "Projekt anfragen",
+
+    // Intelligent Document Processing (IDP)
+    idp_nav: "Intelligente Dokumentenverarbeitung",
+    idp_heading: "Intelligente Dokumentenverarbeitung (IDP)",
+    idp_subtitle: "AI-gestützte Extraktion und Klassifizierung von Dokumenten",
+    idp_problem_heading: "Problem",
+    idp_problem_text: "Praxen und Unternehmen erhalten täglich Dokumente (Rechnungen, Verträge, Patientenformulare), die manuell erfasst werden müssen.",
+    idp_solution_heading: "Lösung mit AI Agent + Camunda",
+    idp_solution_text: "Der Agent extrahiert Daten aus PDFs/Scans, klassifiziert Dokumente und leitet sie weiter. Camunda steuert den gesamten Workflow: Prüfung auf Vollständigkeit, Eskalation bei Fehlern und Integration in ERP/CRM.",
+    idp_implementation_heading: "Implementierung",
+    idp_impl_1: "Camunda IDP-Connector für automatische Datenextraktion",
+    idp_impl_2: "AI Agent für Kontextentscheidungen z. B. „Ist das eine Rechnung oder ein Vertrag?",
+    idp_impl_3: "Vector-DB für RAG (Retrieval-Augmented Generation)",
+    idp_benefits_heading: "Vorteile & Skalierbarkeit",
+    idp_benefit_reduction: "Reduzierung manueller Arbeit",
+    idp_benefit_accuracy: "Genauigkeit",
+    idp_benefit_availability: "Verfügbarkeit",
+    idp_benefit_integration: "ERP/CRM-Integration",
+    idp_scalability_heading: "Skalierbarkeit",
+    idp_scalability_text: "Perfekt für kleine Praxen (z. B. Chiropraktiker mit Patientenformularen) oder große Versicherungen mit Tausenden von Schadensmeldungen.",
+    idp_cta_heading: "Bereit für intelligente Dokumentenverarbeitung?",
+    idp_cta_text: "Kontaktieren Sie uns für eine kostenlose Beratung und Demo",
+    idp_cta_button_consultation: "Beratungstermin vereinbaren",
+    idp_cta_button_request: "Projekt anfragen",
 
     // MCP page
     mcp_title: "Model Context Protocol",
@@ -804,7 +828,7 @@ const translations: Record<string, Messages> = {
     ai_agents_opt1: "AI Agents",
     ai_camunda: "AI & Camunda",
     intelligent_customer_service: "1. Intelligent Customer Service",
-    intelligent_receptionist: "1. Intelligent Receptionist",
+    intelligent_receptionist: "Intelligent Receptionist",
 
     // AI Agents Index
     ai_agents_index_heading: "AI Agents",
@@ -926,7 +950,7 @@ const translations: Record<string, Messages> = {
     intelligent_receptionist_cta_text: "Contact us for a free consultation and demo",
 
     // Fraud Detection & Compliance
-    fraud_detection: "2. Fraud Detection & Compliance",
+    fraud_detection: "Fraud Detection & Compliance",
     fraud_detection_heading: "Fraud Detection & Compliance Monitoring",
     fraud_detection_subtitle: "AI-powered fraud detection with complete traceability",
     fraud_detection_problem_heading: "Problem",
@@ -948,6 +972,30 @@ const translations: Record<string, Messages> = {
     fraud_detection_cta_text: "Contact us for a free consultation and demo",
     fraud_detection_cta_button_consultation: "Schedule consultation",
     fraud_detection_cta_button_request: "Request project",
+
+    // Intelligent Document Processing (IDP)
+    idp_nav: "Intelligent Document Processing",
+    idp_heading: "Intelligent Document Processing (IDP)",
+    idp_subtitle: "AI-powered extraction and classification of documents",
+    idp_problem_heading: "Problem",
+    idp_problem_text: "Practices and companies receive daily documents (invoices, contracts, patient forms) that must be manually captured.",
+    idp_solution_heading: "Solution with AI Agent + Camunda",
+    idp_solution_text: "The agent extracts data from PDFs/scans, classifies documents, and forwards them. Camunda controls the entire workflow: checking completeness, escalating errors, and integrating into ERP/CRM.",
+    idp_implementation_heading: "Implementation",
+    idp_impl_1: "Camunda IDP-Connector for automatic data extraction",
+    idp_impl_2: "AI Agent for context decisions (e.g., 'Is this an invoice or a contract?')",
+    idp_impl_3: "Vector-DB for RAG (Retrieval-Augmented Generation)",
+    idp_benefits_heading: "Benefits & Scalability",
+    idp_benefit_reduction: "Manual work reduction",
+    idp_benefit_accuracy: "Accuracy",
+    idp_benefit_availability: "Availability",
+    idp_benefit_integration: "ERP/CRM integration",
+    idp_scalability_heading: "Scalability",
+    idp_scalability_text: "Perfect for small practices (e.g., chiropractors with patient forms) or large insurance companies with thousands of claims.",
+    idp_cta_heading: "Ready for intelligent document processing?",
+    idp_cta_text: "Contact us for a free consultation and demo",
+    idp_cta_button_consultation: "Schedule consultation",
+    idp_cta_button_request: "Request project",
 
     // MCP page
     mcp_title: "Model Context Protocol",
