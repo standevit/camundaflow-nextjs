@@ -4,249 +4,183 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
-      {/* Hero Section */}
-      <div style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
-        padding: '3rem',
-        borderRadius: '12px',
-        textAlign: 'center',
-        marginBottom: '3rem',
-        position: 'relative',
-        overflow: 'hidden'
+    <div className="container">
+      {/* Left Sidebar with Images */}
+      <aside className="sidebar" style={{ 
+        padding: '1rem', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start'
       }}>
         <img 
           src="/workflow.avif" 
           alt="Workflow" 
           style={{
-            position: 'absolute',
-            left: '-50px',
-            top: '10px',
-            width: '250px',
-            height: '250px',
+            width: '100%',
+            aspectRatio: '1',
             objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.15',
-            zIndex: 0
+            borderRadius: '12px'
           }}
         />
         <img 
           src="/ai-water.avif" 
           alt="AI" 
           style={{
-            position: 'absolute',
-            right: '-60px',
-            bottom: '-30px',
-            width: '280px',
-            height: '280px',
+            width: '100%',
+            aspectRatio: '1',
             objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.15',
-            zIndex: 0
-          }}
-        />
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '700', marginBottom: '1rem', color: 'white', position: 'relative', zIndex: 1 }}>
-          Enterprise Workflow & AI Solutions
-        </h1>
-        <p style={{ fontSize: '1.2rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8', position: 'relative', zIndex: 1 }}>
-          Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
-        </p>
-      </div>
-
-      {/* Main Services Section */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '2rem',
-        marginBottom: '3rem'
-      }}>
-        {/* AI Agents */}
-        <Link href="/ai-agents" style={{ textDecoration: 'none' }}>
-          <div style={{
-            background: 'white',
-            padding: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            border: '1px solid #e2e8f0',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-            cursor: 'pointer',
-            height: '100%'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-          }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🤖</div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
-              AI Agents
-            </h3>
-            <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
-              Intelligente KI-Agenten für Kundenservice, Dokumentenverarbeitung, Betrugserkennung und automatisierte Geschäftsprozesse
-            </p>
-          </div>
-        </Link>
-
-        {/* Microservices */}
-        <Link href="/microservices" style={{ textDecoration: 'none' }}>
-          <div style={{
-            background: 'white',
-            padding: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            border: '1px solid #e2e8f0',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-            cursor: 'pointer',
-            height: '100%'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-          }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
-              Microservices
-            </h3>
-            <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
-              Moderne Microservices-Architekturen mit Event-Driven Design, API Gateways, Service Mesh und Cloud-Native Patterns
-            </p>
-          </div>
-        </Link>
-
-        {/* Camunda BPMN */}
-        <Link href="/camunda" style={{ textDecoration: 'none' }}>
-          <div style={{
-            background: 'white',
-            padding: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            border: '1px solid #e2e8f0',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-            cursor: 'pointer',
-            height: '100%'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-          }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
-              Camunda BPMN
-            </h3>
-            <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
-              Business Process Management mit Camunda 7/8, BPMN 2.0 Modellierung, Process Automation und Workflow Orchestrierung
-            </p>
-          </div>
-        </Link>
-      </div>
-
-      {/* Use Cases Section */}
-      <div style={{ marginBottom: '3rem', position: 'relative' }}>
-        <img 
-          src="/supply-chain.avif" 
-          alt="Supply Chain" 
-          style={{
-            position: 'absolute',
-            left: '-80px',
-            top: '50px',
-            width: '300px',
-            height: '300px',
-            objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.08',
-            zIndex: 0
-          }}
-        />
-        <img 
-          src="/service-portal.avif" 
-          alt="Service Portal" 
-          style={{
-            position: 'absolute',
-            right: '-100px',
-            top: '250px',
-            width: '320px',
-            height: '320px',
-            objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.08',
-            zIndex: 0
+            borderRadius: '12px'
           }}
         />
         <img 
           src="/blockchain.avif" 
           alt="Blockchain" 
           style={{
-            position: 'absolute',
-            left: '50%',
-            top: '500px',
-            transform: 'translateX(-50%)',
-            width: '280px',
-            height: '280px',
+            width: '100%',
+            aspectRatio: '1',
             objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.08',
-            zIndex: 0
+            borderRadius: '12px'
           }}
         />
-        <img 
-          src="/budgetverwaltung.avif" 
-          alt="Budget" 
-          style={{
-            position: 'absolute',
-            left: '-60px',
-            bottom: '100px',
-            width: '260px',
-            height: '260px',
-            objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.08',
-            zIndex: 0
-          }}
-        />
-        <img 
-          src="/crypto.avif" 
-          alt="Crypto" 
-          style={{
-            position: 'absolute',
-            right: '-70px',
-            bottom: '50px',
-            width: '290px',
-            height: '290px',
-            objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.08',
-            zIndex: 0
-          }}
-        />
-        <h2 style={{
-          fontSize: '2rem',
-          fontWeight: '700',
-          color: '#0f172a',
-          marginBottom: '2rem',
-          textAlign: 'center',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          Use Cases & Implementierungen
-        </h2>
+      </aside>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem'
-        }}>
+      {/* Main Content */}
+      <main className="main-content">
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
+          {/* Hero Section */}
+          <div style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            padding: '3rem',
+            borderRadius: '12px',
+            textAlign: 'center',
+            marginBottom: '3rem'
+          }}>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '700', marginBottom: '1rem', color: 'white' }}>
+              Enterprise Workflow & AI Solutions
+            </h1>
+            <p style={{ fontSize: '1.2rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8' }}>
+              Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
+            </p>
+          </div>
+
+          {/* Main Services Section */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            marginBottom: '3rem'
+          }}>
+            {/* AI Agents */}
+            <Link href="/ai-agents" style={{ textDecoration: 'none' }}>
+              <div style={{
+                background: 'white',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                border: '1px solid #e2e8f0',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                cursor: 'pointer',
+                height: '100%'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+              }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🤖</div>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
+                  AI Agents
+                </h3>
+                <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
+                  Intelligente KI-Agenten für Kundenservice, Dokumentenverarbeitung, Betrugserkennung und automatisierte Geschäftsprozesse
+                </p>
+              </div>
+            </Link>
+
+            {/* Microservices */}
+            <Link href="/microservices" style={{ textDecoration: 'none' }}>
+              <div style={{
+                background: 'white',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                border: '1px solid #e2e8f0',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                cursor: 'pointer',
+                height: '100%'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+              }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
+                  Microservices
+                </h3>
+                <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
+                  Moderne Microservices-Architekturen mit Event-Driven Design, API Gateways, Service Mesh und Cloud-Native Patterns
+                </p>
+              </div>
+            </Link>
+
+            {/* Camunda BPMN */}
+            <Link href="/camunda" style={{ textDecoration: 'none' }}>
+              <div style={{
+                background: 'white',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                border: '1px solid #e2e8f0',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                cursor: 'pointer',
+                height: '100%'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+              }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
+                  Camunda BPMN
+                </h3>
+                <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
+                  Business Process Management mit Camunda 7/8, BPMN 2.0 Modellierung, Process Automation und Workflow Orchestrierung
+                </p>
+              </div>
+            </Link>
+          </div>
+
+          {/* Use Cases Section */}
+          <div style={{ marginBottom: '3rem' }}>
+            <h2 style={{
+              fontSize: '2rem',
+              fontWeight: '700',
+              color: '#0f172a',
+              marginBottom: '2rem',
+              textAlign: 'center'
+            }}>
+              Use Cases & Implementierungen
+            </h2>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.5rem'
+            }}>
           {/* AI-powered Customer Service */}
           <div style={{
             background: 'white',
@@ -402,72 +336,81 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div style={{
-        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-        padding: '2.5rem',
-        borderRadius: '12px',
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden'
+          {/* CTA Section */}
+          <div style={{
+            background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+            padding: '2.5rem',
+            borderRadius: '12px',
+            textAlign: 'center'
+          }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '1rem' }}>
+              Bereit für Ihr Projekt?
+            </h3>
+            <p style={{ color: '#475569', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>
+              Lassen Sie uns gemeinsam Ihre Geschäftsprozesse automatisieren und optimieren
+            </p>
+            <Link href="/contact">
+              <button style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                padding: '1rem 2rem',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(102,126,234,0.3)',
+                transition: 'transform 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                Kontakt aufnehmen
+              </button>
+            </Link>
+          </div>
+        </div>
+      </main>
+
+      {/* Right Sidebar with Images */}
+      <aside className="sidebar" style={{ 
+        padding: '1rem', 
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start'
       }}>
         <img 
-          src="/handshake.avif" 
-          alt="Handshake" 
+          src="/service-portal.avif" 
+          alt="Service Portal" 
           style={{
-            position: 'absolute',
-            left: '-40px',
-            top: '-40px',
-            width: '220px',
-            height: '220px',
+            width: '100%',
+            aspectRatio: '1',
             objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.12',
-            zIndex: 0
+            borderRadius: '12px'
           }}
         />
         <img 
-          src="/contact.avif" 
-          alt="Contact" 
+          src="/supply-chain.avif" 
+          alt="Supply Chain" 
           style={{
-            position: 'absolute',
-            right: '-50px',
-            bottom: '-50px',
-            width: '240px',
-            height: '240px',
+            width: '100%',
+            aspectRatio: '1',
             objectFit: 'cover',
-            borderRadius: '16px',
-            opacity: '0.12',
-            zIndex: 0
+            borderRadius: '12px'
           }}
         />
-        <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
-          Bereit für Ihr Projekt?
-        </h3>
-        <p style={{ color: '#475569', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.6', position: 'relative', zIndex: 1 }}>
-          Lassen Sie uns gemeinsam Ihre Geschäftsprozesse automatisieren und optimieren
-        </p>
-        <Link href="/contact">
-          <button style={{
-            position: 'relative',
-            zIndex: 1,
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            padding: '1rem 2rem',
-            border: 'none',
-            borderRadius: '8px',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(102,126,234,0.3)',
-            transition: 'transform 0.2s'
+        <img 
+          src="/budgetverwaltung.avif" 
+          alt="Budget Management" 
+          style={{
+            width: '100%',
+            aspectRatio: '1',
+            objectFit: 'cover',
+            borderRadius: '12px'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-            Kontakt aufnehmen
-          </button>
-        </Link>
-      </div>
+        />
+      </aside>
     </div>
   );
 }
