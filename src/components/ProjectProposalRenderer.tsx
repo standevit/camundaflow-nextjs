@@ -498,7 +498,7 @@ export default function ProjectProposalRenderer({
       <div
         style={{
           backgroundColor: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
-          color: "white",
+          color: "black",
           padding: "1.5rem",
           borderRadius: "8px",
           marginBottom: "1.5rem",

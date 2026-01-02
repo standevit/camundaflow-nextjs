@@ -3,6 +3,19 @@
 import { useState, useRef, useEffect } from "react";
 import ProjectProposalRenderer from "./ProjectProposalRenderer";
 
+// Dinamički import html2pdf za PDF generisanje
+let html2pdf: any = null;
+if (typeof window !== "undefined") {
+  // Učitaj html2pdf kada je dostupan
+  import("html2pdf.js")
+    .then((module) => {
+      html2pdf = module.default;
+    })
+    .catch(() => {
+      console.warn("html2pdf nije dostupan");
+    });
+}
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -58,6 +71,7 @@ export default function CostConfigurator({ isOpen, onClose }: CostConfiguratorPr
   const [selectedOptions, setSelectedOptions] = useState<Record<string, boolean>>({});
   const [currentProposal, setCurrentProposal] = useState<ProjectProposal | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const proposalRef = useRef<HTMLDivElement>(null);
 
   const SYSTEM_PROMPT = `Ti si stručnjak za procjenu i planiranje softverskih projekata.
 Na osnovu korisnikovog opisa, generiši detaljan prijedlog u TAČNO definisanom JSON formatu.
@@ -131,6 +145,30 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // PDF Download funkcija
+  const downloadPDF = async () => {
+    if (!proposalRef.current || !currentProposal || !html2pdf) {
+      alert("PDF biblioteka nije dostupna. Instaliraj: npm install html2pdf.js");
+      return;
+    }
+
+    try {
+      const element = proposalRef.current;
+      const opt = {
+        margin: 10,
+        filename: `${currentProposal.project_name.replace(/\s+/g, "_")}_proposal.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { orientation: "portrait", unit: "mm", format: "a4" },
+      };
+
+      await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+      console.error("Greška pri generisanju PDF-a:", error);
+      alert("Greška pri generisanju PDF-a. Pokušaj ponovo.");
+    }
+  };
 
   // Helper function to extract JSON from assistant message
   const extractJsonFromContent = (content: string): ProjectProposal | null => {
@@ -328,11 +366,40 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
 
       {/* Project Proposal Display */}
       {currentProposal && (
-        <ProjectProposalRenderer
-          proposal={currentProposal}
-          selectedOptions={selectedOptions}
-          onOptionsChange={setSelectedOptions}
-        />
+        <div ref={proposalRef}>
+          <ProjectProposalRenderer
+            proposal={currentProposal}
+            selectedOptions={selectedOptions}
+            onOptionsChange={setSelectedOptions}
+          />
+          {/* PDF Download Button */}
+          <button
+            onClick={downloadPDF}
+            style={{
+              marginTop: "1.5rem",
+              padding: "0.875rem 1.5rem",
+              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "1rem",
+              fontWeight: "600",
+              cursor: "pointer",
+              boxShadow: "0 4px 12px rgba(102, 126, 234, 0.3)",
+              transition: "transform 0.2s, box-shadow 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 6px 16px rgba(102, 126, 234, 0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 4px 12px rgba(102, 126, 234, 0.3)";
+            }}
+          >
+            📥 PDF herunterladen
+          </button>
+        </div>
       )}
 
       {/* Chat Messages Container */}
