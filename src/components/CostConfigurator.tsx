@@ -1,10 +1,43 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import ProjectProposalRenderer from "./ProjectProposalRenderer";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+interface ProjectProposal {
+  project_name: string;
+  description_summary: string;
+  core_features: string[];
+  tech_stack: {
+    frontend: string;
+    backend: string;
+    database: string;
+    hosting: string;
+  };
+  timeline_weeks: {
+    design: number;
+    frontend_development: number;
+    backend_development: number;
+    testing_qa: number;
+    deployment: number;
+    total: number;
+  };
+  cost_breakdown: {
+    base_price_eur: number;
+    hourly_rate_eur: number;
+    estimated_hours: number;
+  };
+  optional_features: Array<{
+    name: string;
+    description: string;
+    additional_weeks: number;
+    additional_price_eur: number;
+  }>;
+  total_with_all_options_eur: number;
 }
 
 interface ConfiguratorOption {
@@ -22,7 +55,8 @@ export default function CostConfigurator({ isOpen, onClose }: CostConfiguratorPr
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, boolean>>({});
+  const [currentProposal, setCurrentProposal] = useState<ProjectProposal | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const SYSTEM_PROMPT = `Ti si stručnjak za procjenu i planiranje softverskih projekata.
@@ -98,11 +132,41 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
     scrollToBottom();
   }, [messages]);
 
+  // Helper function to extract JSON from assistant message
+  const extractJsonFromContent = (content: string): ProjectProposal | null => {
+    try {
+      // Try to find JSON block in markdown code fence
+      const jsonMatch = content.match(/```json\n?([\s\S]*?)\n?```/);
+      if (jsonMatch) {
+        const jsonStr = jsonMatch[1].trim();
+        const parsed = JSON.parse(jsonStr);
+        return parsed as ProjectProposal;
+      }
+
+      // Try to parse the entire content as JSON
+      const parsed = JSON.parse(content);
+      return parsed as ProjectProposal;
+    } catch (error) {
+      console.log("Could not parse JSON from content");
+      return null;
+    }
+  };
+
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage: Message = { role: "user", content: input };
+    // Build user message with selected options if available
+    let messageContent = input.trim();
+    if (currentProposal && Object.values(selectedOptions).some((v) => v)) {
+      const selectedFeatures = currentProposal.optional_features
+        .filter((f) => selectedOptions[f.name])
+        .map((f) => f.name);
+      
+      messageContent += `\n\n[Selektovane dodatne opcije: ${selectedFeatures.join(", ")}]`;
+    }
+
+    const userMessage: Message = { role: "user", content: messageContent };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
@@ -166,10 +230,19 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
       }
 
       if (assistantContent) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: assistantContent },
-        ]);
+        // Try to extract JSON proposal from content
+        const proposal = extractJsonFromContent(assistantContent);
+        
+        if (proposal) {
+          setCurrentProposal(proposal);
+          // Reset selected options when new proposal is received
+          setSelectedOptions({});
+          // Don't show JSON in chat, only show ProjectProposalRenderer
+        } else {
+          // If no JSON found, show the message in chat normally
+          const newMessage = { role: "assistant" as const, content: assistantContent };
+          setMessages((prev) => [...prev, newMessage]);
+        }
       }
     } catch (error) {
       console.error("Error:", error);
@@ -252,6 +325,15 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
           </p>
         </div>
       </div>
+
+      {/* Project Proposal Display */}
+      {currentProposal && (
+        <ProjectProposalRenderer
+          proposal={currentProposal}
+          selectedOptions={selectedOptions}
+          onOptionsChange={setSelectedOptions}
+        />
+      )}
 
       {/* Chat Messages Container */}
       <div
@@ -345,7 +427,11 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
         />
         <button
           type="submit"
-          disabled={isLoading || !input.trim()}
+          disabled={
+            isLoading ||
+            (!input.trim() &&
+              (currentProposal ? !Object.values(selectedOptions).some((v) => v) : true))
+          }
           style={{
             padding: "0.875rem 1.5rem",
             background:
