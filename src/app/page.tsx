@@ -49,27 +49,50 @@ export default function HomePage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
           {/* Hero Section */}
           <div style={{
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'linear-gradient(#342ccf 0%, #ffffffff 100%)',
             color: 'white',
-            padding: '3rem',
-            borderRadius: '12px',
+            padding: '0.5rem 1rem',
+            borderRadius: '16px',
             textAlign: 'center',
-            marginBottom: '3rem'
+            marginBottom: '3rem',
+            boxShadow: '0 20px 40px rgba(102,126,234,0.25)',
+            position: 'relative',
+            overflow: 'hidden'
           }}>
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '700', marginBottom: '1rem', color: 'white' }}>
-              Enterprise Workflow & AI Solutions
-            </h1>
-            <p style={{ fontSize: '1.2rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8' }}>
-              Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
-            </p>
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <span style={{ 
+                display: 'inline-block',
+                background: 'rgba(255,255,255,0.2)', 
+                padding: '0.4rem 1rem', 
+                borderRadius: '20px', 
+                fontSize: '0.85rem', 
+                fontWeight: 600,
+                marginBottom: '1rem',
+                letterSpacing: '0.5px'
+              }}>
+                🚀 Digitale Transformation
+              </span>
+              <h1 style={{ fontSize: '2.6rem', fontWeight: '800', marginBottom: '1rem', color: 'white', letterSpacing: '-0.5px' }}>
+                Enterprise Workflow & AI Solutions
+              </h1>
+              <p style={{ fontSize: '1.15rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8', maxWidth: '700px', margin: '0 auto' }}>
+                Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
+              </p>
+            </div>
           </div>
 
           {/* Main Services Section */}
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
+              Unsere Kernkompetenzen
+            </h2>
+            <p style={{ color: '#64748b', fontSize: '1rem' }}>Technologien, die Ihr Unternehmen voranbringen</p>
+          </div>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '2rem',
-            marginBottom: '3rem'
+            marginBottom: '3.5rem'
           }}>
             {/* AI Agents */}
             <Link href="/ai-agents" style={{ textDecoration: 'none' }}>
@@ -91,8 +114,14 @@ export default function HomePage() {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
               }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🤖</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
+                <div style={{ 
+                  width: '60px', height: '60px', 
+                  background: 'linear-gradient(135deg, #667eea20 0%, #764ba220 100%)', 
+                  borderRadius: '14px', 
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '2rem', marginBottom: '1.2rem' 
+                }}>🤖</div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1c2b80', marginBottom: '0.75rem' }}>
                   AI Agents
                 </h3>
                 <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
@@ -121,8 +150,14 @@ export default function HomePage() {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
               }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
+                <div style={{ 
+                  width: '60px', height: '60px', 
+                  background: 'linear-gradient(135deg, #10b98120 0%, #059f6920 100%)', 
+                  borderRadius: '14px', 
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '2rem', marginBottom: '1.2rem' 
+                }}>⚙️</div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.75rem' }}>
                   Microservices
                 </h3>
                 <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
@@ -151,8 +186,14 @@ export default function HomePage() {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
               }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#667eea', marginBottom: '1rem' }}>
+                <div style={{ 
+                  width: '60px', height: '60px', 
+                  background: 'linear-gradient(135deg, #f59e0b20 0%, #d9730620 100%)', 
+                  borderRadius: '14px', 
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '2rem', marginBottom: '1.2rem' 
+                }}>📊</div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.75rem' }}>
                   Camunda BPMN
                 </h3>
                 <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
@@ -164,15 +205,17 @@ export default function HomePage() {
 
           {/* Use Cases Section */}
           <div style={{ marginBottom: '3rem' }}>
-            <h2 style={{
-              fontSize: '2rem',
-              fontWeight: '700',
-              color: '#0f172a',
-              marginBottom: '2rem',
-              textAlign: 'center'
-            }}>
-              Use Cases & Implementierungen
-            </h2>
+            <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+              <h2 style={{
+                fontSize: '1.8rem',
+                fontWeight: '700',
+                color: '#0f172a',
+                marginBottom: '0.5rem'
+              }}>
+                Use Cases & Implementierungen
+              </h2>
+              <p style={{ color: '#64748b', fontSize: '1rem' }}>Praxiserprobte Lösungen für Ihre Branche</p>
+            </div>
 
             <div style={{
               display: 'grid',
@@ -183,11 +226,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>💬</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>💬</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               AI Customer Service
             </h4>
@@ -200,11 +255,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🚚</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🚚</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Supply Chain Management
             </h4>
@@ -217,11 +284,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>📄</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>📄</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Document Processing
             </h4>
@@ -234,11 +313,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🛡️</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🛡️</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Fraud Detection
             </h4>
@@ -251,11 +342,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>📦</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>📦</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Order Processing
             </h4>
@@ -268,11 +371,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>💰</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>💰</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Budget Management
             </h4>
@@ -285,11 +400,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🏛️</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🏛️</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Service Portal BW
             </h4>
@@ -302,11 +429,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>👥</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>👥</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Human-Centric Workflows
             </h4>
@@ -319,11 +458,23 @@ export default function HomePage() {
           <div style={{
             background: 'white',
             padding: '1.5rem',
-            borderRadius: '10px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            border: '1px solid #e2e8f0'
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e2e8f0',
+            transition: 'all 0.25s ease',
+            cursor: 'default'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+            e.currentTarget.style.borderColor = '#e2e8f0';
           }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🔄</div>
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🔄</div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
               Camunda Migration
             </h4>
@@ -336,35 +487,46 @@ export default function HomePage() {
 
           {/* CTA Section */}
           <div style={{
-            background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-            padding: '2.5rem',
-            borderRadius: '12px',
-            textAlign: 'center'
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            padding: '3rem 2.5rem',
+            borderRadius: '16px',
+            textAlign: 'center',
+            boxShadow: '0 20px 40px rgba(102,126,234,0.2)',
+            position: 'relative',
+            overflow: 'hidden'
           }}>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '1rem' }}>
-              Bereit für Ihr Projekt?
-            </h3>
-            <p style={{ color: '#475569', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>
-              Lassen Sie uns gemeinsam Ihre Geschäftsprozesse automatisieren und optimieren
-            </p>
-            <Link href="/contact">
-              <button style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
-                padding: '1rem 2rem',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '1.1rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(102,126,234,0.3)',
-                transition: 'transform 0.2s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                Kontakt aufnehmen
-              </button>
-            </Link>
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <h3 style={{ fontSize: '1.6rem', fontWeight: '700', color: 'white', marginBottom: '0.75rem' }}>
+                Bereit für Ihr Projekt?
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: '1.6', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
+                Lassen Sie uns gemeinsam Ihre Geschäftsprozesse automatisieren und optimieren
+              </p>
+              <Link href="/contact">
+                <button style={{
+                  background: 'white',
+                  color: '#667eea',
+                  padding: '1rem 2.2rem',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontSize: '1rem',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                  transition: 'all 0.25s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,0,0,0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)';
+                }}>
+                  Kontakt aufnehmen →
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
