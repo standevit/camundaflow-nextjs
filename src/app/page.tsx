@@ -49,7 +49,7 @@ export default function HomePage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
           {/* Hero Section */}
           <div style={{
-            background: 'linear-gradient(#342ccf 0%, #ffffffff 100%)',
+            background: 'linear-gradient(#342ccf 0%, #b9b3ff 100%)',
             color: 'white',
             padding: '0.5rem 1rem',
             borderRadius: '16px',
