@@ -49,13 +49,22 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const userMessages = body.messages || [];
     const currentPage = body.currentPage as string | undefined;
-    
-    // Prepend system prompt to messages with current page context
-    const systemPrompt = buildSystemPrompt(currentPage);
-    const messages = [
-      { role: "system", content: systemPrompt },
-      ...userMessages
-    ];
+    const context = body.context as string | undefined;
+
+    // If context is "cost-configurator", don't prepend system prompt (it's already in messages)
+    // Otherwise, prepend the standard CamundaFlow assistant prompt
+    let messages;
+    if (context === "cost-configurator") {
+      // CostConfigurator already has its own system prompt in messages
+      messages = userMessages;
+    } else {
+      // Regular chat - add CamundaFlow system prompt
+      const systemPrompt = buildSystemPrompt(currentPage);
+      messages = [
+        { role: "system", content: systemPrompt },
+        ...userMessages
+      ];
+    }
 
     // Validate context length to prevent excessive token usage
     const contextLength = JSON.stringify(messages).length;

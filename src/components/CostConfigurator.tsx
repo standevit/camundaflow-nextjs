@@ -25,6 +25,53 @@ export default function CostConfigurator({ isOpen, onClose }: CostConfiguratorPr
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const SYSTEM_PROMPT = `Ti si stručnjak za procjenu i planiranje softverskih projekata.
+Na osnovu korisnikovog opisa, generiši detaljan prijedlog u TAČNO definisanom JSON formatu.
+
+VAŽNO:
+- SVE dodatne, opcionalne ili alternativne funkcionalnosti koje nisu obavezni dio osnovnog zahtjeva MORAJU biti stavljene u polje "optional_features".
+- Čak i ako korisnik ne traži eksplicitno dodatne opcije, predloži 3–5 realnih i korisnih opcionih feature-a koji bi poboljšali projekat.
+- Ako ne postoji nijedna smislena opciona funkcionalnost, ostavi "optional_features" kao prazan niz [].
+- Nikada ne piši dodatne opcije u običnom tekstu van JSON-a.
+
+Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
+
+\`\`\`json
+{
+  "project_name": "Kratak naslov projekta",
+  "description_summary": "Kratak sažetak onoga što korisnik želi",
+  "core_features": ["Lista obaveznih funkcionalnosti"],
+  "tech_stack": {
+    "frontend": "...",
+    "backend": "...",
+    "database": "...",
+    "hosting": "..."
+  },
+  "timeline_weeks": {
+    "design": broj,
+    "frontend_development": broj,
+    "backend_development": broj,
+    "testing_qa": broj,
+    "deployment": broj,
+    "total": broj
+  },
+  "cost_breakdown": {
+    "base_price_eur": broj,
+    "hourly_rate_eur": 80,
+    "estimated_hours": broj
+  },
+  "optional_features": [
+    {
+      "name": "Naziv opcione funkcionalnosti",
+      "description": "Kratak opis šta donosi",
+      "additional_weeks": broj,
+      "additional_price_eur": broj
+    }
+  ],
+  "total_with_all_options_eur": broj
+}
+\`\`\``;
+
   // Initialize with first message
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -61,11 +108,18 @@ export default function CostConfigurator({ isOpen, onClose }: CostConfiguratorPr
     setIsLoading(true);
 
     try {
+      // Build messages with system prompt
+      const messagesToSend = [
+        { role: "system" as const, content: SYSTEM_PROMPT },
+        ...messages,
+        userMessage,
+      ];
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: [...messages, userMessage],
+          messages: messagesToSend,
           currentPage: "/",
           context: "cost-configurator",
         }),
