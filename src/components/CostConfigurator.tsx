@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ProjectProposalRenderer from "./ProjectProposalRenderer";
-import ProjectRequestModal from "./ProjectRequestModal";
 
 // Dinamički import html2pdf za PDF generisanje
 let html2pdf: any = null;
@@ -73,7 +72,6 @@ export default function CostConfigurator({ isOpen, onClose }: CostConfiguratorPr
   const [isLoading, setIsLoading] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<Record<string, boolean>>({});
   const [currentProposal, setCurrentProposal] = useState<ProjectProposal | null>(null);
-  const [showProjectRequest, setShowProjectRequest] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const proposalRef = useRef<HTMLDivElement>(null);
 
@@ -171,6 +169,49 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
     } catch (error) {
       console.error("Greška pri generisanju PDF-a:", error);
       alert("Greška pri generisanju PDF-a. Pokušaj ponovo.");
+    }
+  };
+
+  // Direktno kreiraj plaćanje i idi na payment
+  const handleDirectPayment = async () => {
+    if (!currentProposal) return;
+
+    try {
+      const estimatedPrice = currentProposal.cost_breakdown.base_price_eur * 0.25; // Sa 75% popustom
+      const response = await fetch('/api/payment/create-charge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceAmount: estimatedPrice,
+          priceCurrency: 'EUR',
+          title: currentProposal.project_name,
+          description: `Project Request - ${currentProposal.project_name}`,
+          successUrl: `${typeof window !== 'undefined' ? window.location.origin : ''}/payment/success`,
+          cancelUrl: typeof window !== 'undefined' ? window.location.href : '',
+          metadata: {
+            type: 'cost-configurator-project',
+            name: currentProposal.project_name,
+            email: session?.user?.email || "",
+            company: session?.user?.name || "",
+            phone: "",
+            message: currentProposal.description_summary,
+            projectType: 'ai-project',
+          }
+        }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (typeof window !== 'undefined') {
+          window.location.href = data.checkoutUrl;
+        }
+      } else {
+        const error = await response.json();
+        alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('Fehler beim Erstellen der Zahlung. Bitte versuchen Sie es erneut.');
     }
   };
 
@@ -354,7 +395,7 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
               margin: 0,
             }}
           >
-            Kosten Konfigurator
+            Kostenrechner
           </h3>
           <p
             style={{
@@ -406,22 +447,28 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
             </button>
             {/* Project Request Button */}
             <button
-              onClick={() => setShowProjectRequest(true)}
+              onClick={handleDirectPayment}
+              disabled={!currentProposal}
               style={{
                 padding: "0.875rem 1.5rem",
-                background: "linear-gradient(135deg, #eb7222ff 0%, #f17610ff 100%)",
+                background: !currentProposal
+                  ? "#cccccc"
+                  : "linear-gradient(135deg, #eb7222ff 0%, #f17610ff 100%)",
                 color: "white",
                 border: "none",
                 borderRadius: "8px",
                 fontSize: "1rem",
                 fontWeight: "600",
-                cursor: "pointer",
+                cursor: !currentProposal ? "not-allowed" : "pointer",
                 boxShadow: "0 4px 12px rgba(235, 114, 34, 0.3)",
                 transition: "transform 0.2s, box-shadow 0.2s",
+                opacity: !currentProposal ? 0.6 : 1,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 16px rgba(235, 114, 34, 0.4)";
+                if (currentProposal) {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 6px 16px rgba(235, 114, 34, 0.4)";
+                }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
@@ -589,15 +636,6 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
       >
         ✕ Schließen
       </button>
-
-      {/* Project Request Modal */}
-      <ProjectRequestModal
-        isOpen={showProjectRequest}
-        onClose={() => setShowProjectRequest(false)}
-        userName={session?.user?.name || ""}
-        userEmail={session?.user?.email || ""}
-        requestType="project"
-      />
     </div>
   );
 }

@@ -122,7 +122,7 @@ export default function HomePage() {
             left: '35%',
             padding: '0.3rem',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, #6861b1ff 0%, #b9b3ff 80%)',
+            background: 'linear-gradient(135deg, #6861b1ff 0%, #7d71fcff 80%)',
             
             border: '2px solid #462374ff',
             color: 'white',
@@ -580,30 +580,38 @@ export default function HomePage() {
               <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: '1.6', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
                 Lassen Sie uns gemeinsam Ihre Geschäftsprozesse automatisieren und optimieren
               </p>
-              <Link href="/contact">
-                <button style={{
-                  background: 'white',
-                  color: '#667eea',
-                  padding: '1rem 2.2rem',
-                  border: 'none',
-                  borderRadius: '10px',
-                  fontSize: '1rem',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
-                  transition: 'all 0.25s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,0,0,0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)';
-                }}>
-                  Kontakt aufnehmen →
-                </button>
-              </Link>
+              
+                <button
+          onClick={() => setShowCostConfigurator(true)}
+          style={{
+            position: 'relative',
+            padding: '0.3rem',
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, #6861b1ff 0%, #7d71fcff 80%)',
+            
+            border: '2px solid #462374ff',
+            color: 'white',
+            textDecoration: 'none',
+            
+            borderRadius: '8px',  
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(7, 4, 4, 0.3)',
+            transition: 'transform 0.2s, box-shadow 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 16px rgba(17, 16, 16, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(51, 49, 49, 0.3)';
+          }}
+        >
+          🔧 Starten Sie Kostenrechner
+        </button>
+             
             </div>
           </div>
         </div>

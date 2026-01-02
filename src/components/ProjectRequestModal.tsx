@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+interface ProjectProposal {
+  project_name: string;
+  description_summary: string;
+  core_features: string[];
+  cost_breakdown: {
+    base_price_eur: number;
+  };
+}
 
 interface ProjectRequestModalProps {
   isOpen: boolean;
@@ -9,6 +17,7 @@ interface ProjectRequestModalProps {
   userName?: string | null;
   userEmail?: string | null;
   requestType?: "project" | "schulung" | "ai-agents";
+  proposal?: ProjectProposal | null;
 }
 
 export default function ProjectRequestModal({ 
@@ -16,30 +25,79 @@ export default function ProjectRequestModal({
   onClose, 
   userName, 
   userEmail,
-  requestType = "project" 
+  requestType = "project",
+  proposal = null
 }: ProjectRequestModalProps) {
-  const router = useRouter();
   const [projectRequest, setProjectRequest] = useState({
     projectName: "",
     projectType: requestType === "schulung" ? "crypto_schulung" : "camunda_workflow",
     description: "",
     requirements: "",
     deadline: "",
+    estimatedPrice: 0,
   });
   const [testnetConfirmed, setTestnetConfirmed] = useState(false);
 
-  const handleRequestSubmit = () => {
-    try {
-      sessionStorage.setItem("projectRequest", JSON.stringify({
-        ...projectRequest,
-        userName,
-        userEmail,
-        timestamp: new Date().toISOString(),
+  // Popuni formu sa proposal podacima kada se modal otvori
+  useEffect(() => {
+    if (isOpen && proposal) {
+      setProjectRequest((prev) => ({
+        ...prev,
+        projectName: proposal.project_name,
+        description: proposal.description_summary,
+        requirements: proposal.core_features.join(", "),
+        estimatedPrice: proposal.cost_breakdown.base_price_eur * 0.25, // Sa 75% popustom
       }));
-      router.push("/payment");
-    } catch (e) {
-      console.error("Failed to save request", e);
-      alert("Fehler beim Speichern der Anfrage. Bitte versuchen Sie es erneut.");
+    } else if (!isOpen) {
+      // Resetuj formu kada se modal zatvori
+      setProjectRequest({
+        projectName: "",
+        projectType: requestType === "schulung" ? "crypto_schulung" : "camunda_workflow",
+        description: "",
+        requirements: "",
+        deadline: "",
+        estimatedPrice: 0,
+      });
+      setTestnetConfirmed(false);
+    }
+  }, [isOpen, proposal, requestType]);
+
+  const handleRequestSubmit = async () => {
+    try {
+      const response = await fetch('/api/payment/create-charge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceAmount: projectRequest.estimatedPrice,
+          priceCurrency: 'EUR',
+          title: projectRequest.projectName,
+          description: `Project Request - ${projectRequest.projectName}`,
+          successUrl: `${typeof window !== 'undefined' ? window.location.origin : ''}/payment/success`,
+          cancelUrl: typeof window !== 'undefined' ? window.location.href : '',
+          metadata: {
+            type: 'cost-configurator-project',
+            name: projectRequest.projectName,
+            email: projectRequest.description,
+            company: userName || "",
+            phone: userEmail || "",
+            message: projectRequest.requirements,
+            projectType: projectRequest.projectType,
+          }
+        }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (typeof window !== 'undefined') {
+          window.location.href = data.checkoutUrl;
+        }
+      } else {
+        const error = await response.json();
+        alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('Fehler beim Erstellen der Zahlung. Bitte versuchen Sie es erneut.');
     }
   };
 
@@ -308,7 +366,28 @@ export default function ProjectRequestModal({
             💡 <strong>Hinweis:</strong> Nach dem Absenden können Sie den Betrag wählen, den Sie für angemessen halten, und per Test-Kryptowährung bezahlen.
           </div>
 
-          <div style={{ display: "flex", gap: "1rem", marginTop: "0.5rem" }}>
+          {/* Price Summary from Proposal */}
+          {projectRequest.estimatedPrice > 0 && (
+            <div style={{
+              backgroundColor: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+              color: "white",
+              padding: "1.5rem",
+              borderRadius: "8px",
+              marginTop: "1rem",
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+                <span style={{ fontSize: "1rem", fontWeight: "600" }}>Geschätzter Preis:</span>
+                <span style={{ fontSize: "1.5rem", fontWeight: "700" }}>
+                  €{projectRequest.estimatedPrice.toLocaleString('de-DE', { maximumFractionDigits: 2 })}
+                </span>
+              </div>
+              <div style={{ fontSize: "0.85rem", opacity: 0.9 }}>
+                (Inklusive 75% Online-Rabatt)
+              </div>
+            </div>
+          )}
+
+          <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
             <button
               onClick={onClose}
               style={{
@@ -346,7 +425,7 @@ export default function ProjectRequestModal({
               }}
               title={!testnetConfirmed ? "Bitte bestätigen Sie, dass Sie das Testnet verstehen" : ""}
             >
-              Weiter zur Zahlung →
+              💳 Sofort zur Zahlung →
             </button>
           </div>
         </div>
