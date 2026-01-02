@@ -173,6 +173,7 @@ export default function MigrationContent() {
           {currentContent.intro}
         </p>
         
+      </div>
 
       {/* Project Request Form */}
       {showForm && (
