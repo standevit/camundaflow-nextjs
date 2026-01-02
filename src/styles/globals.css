@@ -57,23 +57,28 @@ nav{
   border-radius:999px;
 }
 .menu a{
-  color:#475569;font-weight:600;font-size:0.96rem;
+  color:#334155; font-weight:600; font-size:0.98rem;
   text-decoration:none;
-  border-radius:999px;transition:all .3s;
+  border-radius:10px; transition:color .2s ease;
   white-space: nowrap;
   min-width: max-content;   /* forsira da link bude širok koliko treba */
+  position: relative;
+  padding: 0.5rem 0.75rem;
 }
-.menu a:hover{
-  background:#fff;
-
+.menu a:hover{ color:#0f172a; }
+.menu a::after{
+  content:''; position:absolute; left:0; right:0; bottom:-6px;
+  margin: 0 auto; width:0; height:2px; background:#94a3b8;
+  transition: width .25s ease, background .25s ease;
 }
+.menu a:hover::after{ width:100%; }
 .menu a.active{
-  background:#fff;
-  color:#8b5cf6;
+  background:transparent;
+  color:#1e293b;
   font-weight:700;
-  border:2px solid #8b5cf6;
-  box-shadow:0 2px 8px rgba(139,92,246,0.08);
-  padding: 0.25rem;
+}
+.menu a.active::after{
+  width:100%; background:#667eea;
 }
 
 /* Main & Card */

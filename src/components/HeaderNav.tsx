@@ -14,11 +14,11 @@ export default function HeaderNav() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-xl border-b border-gray-200 py-[0.3rem]">
-      <nav className="max-w-6xl mx-auto px-30 flex items-center justify-between">
+      <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="logo">
           <img src="/workflow.svg" alt="Development" height={46} />
         </Link>
-        <div className="menu flex items-center space-x-6 font-medium" style={{ fontSize: '1.5rem' }}>
+        <div className="menu flex items-center space-x-6 font-medium">
           <Link href="/" className={`hover:text-blue-600 transition${pathname==='/' ? ' active' : ''}`}>Home</Link>
           <Link href="/microservices" className={`hover:text-blue-600 transition${pathname.startsWith('/microservices') ? ' active' : ''}`}>Microservices</Link>
           <Link href="/camunda" className={`hover:text-blue-600 transition${pathname.startsWith('/camunda') ? ' active' : ''}`}>{t("nav_camunda")}</Link>
