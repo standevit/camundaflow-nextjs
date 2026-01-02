@@ -22,11 +22,9 @@ export default function ChatWidget() {
     messagesRef.current?.scrollTo({ top: messagesRef.current.scrollHeight });
   }, [messages, open]);
 
-  // Auto-open chat on homepage
+  // Auto-open on homepage, auto-close elsewhere
   useEffect(() => {
-    if (pathname === "/") {
-      setOpen(true);
-    }
+    setOpen(pathname === "/");
   }, [pathname]);
 
   function addMessage(msg: Msg) {
