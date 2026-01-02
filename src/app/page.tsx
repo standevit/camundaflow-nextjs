@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import AppointmentForm from "@/components/AppointmentForm";
+import CostConfigurator from "@/components/CostConfigurator";
 
 export default function HomePage() {
   const { data: session } = useSession();
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
+  const [showCostConfigurator, setShowCostConfigurator] = useState(false);
   
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
@@ -98,9 +100,12 @@ export default function HomePage() {
               </h1>
               <p style={{ fontSize: '1.15rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8', maxWidth: '700px', margin: '0 auto' }}>
                 Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
+                
               </p>
             </div>
           </div>
+
+          
 
           {/* Appointment Form Modal */}
           <AppointmentForm
@@ -110,11 +115,55 @@ export default function HomePage() {
             userEmail={userEmail}
           />
 
+          <button
+          onClick={() => setShowCostConfigurator(true)}
+          style={{
+            position: 'relative',
+            left: '35%',
+            padding: '0.3rem',
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, #6861b1ff 0%, #b9b3ff 80%)',
+            
+            border: '2px solid #462374ff',
+            color: 'white',
+            textDecoration: 'none',
+            
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(7, 4, 4, 0.3)',
+            transition: 'transform 0.2s, box-shadow 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 16px rgba(17, 16, 16, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(51, 49, 49, 0.3)';
+          }}
+        >
+          🔧 Starten Sie Kosten Konfigurator
+        </button>
+        {/* Cost Configurator Modal */}
+          <CostConfigurator
+            isOpen={showCostConfigurator}
+            onClose={() => setShowCostConfigurator(false)}
+          />
+
+
+          
           {/* Main Services Section */}
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
-              Unsere Kernkompetenzen
+              
+              
+        
             </h2>
+
+
+
             <p style={{ color: '#64748b', fontSize: '1rem' }}>Technologien, die Ihr Unternehmen voranbringen</p>
           </div>
           <div style={{
@@ -563,6 +612,7 @@ export default function HomePage() {
       {/* Right Sidebar – single image */}
       <aside className="image-sidebar">
         <img src="/workflow2.avif" alt="Workflow 2" />
+        
       </aside>
     </div>
   );
