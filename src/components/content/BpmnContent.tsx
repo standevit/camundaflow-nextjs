@@ -72,7 +72,7 @@ export default function BpmnContent() {
         }}>
           <strong>Business Process Model and Notation (BPMN 2.0)</strong> {t("bpmn_desc")}
         </p>
-        
+      </div>
 
       {/* Project Request Form */}
       {showForm && (

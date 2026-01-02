@@ -173,6 +173,29 @@ export default function MigrationContent() {
           {currentContent.intro}
         </p>
         
+        {/* Projekt anfragen Button */}
+        <button
+          onClick={() => setShowForm(true)}
+          style={{
+            position: 'absolute',
+            bottom: '1.5rem',
+            right: '1.5rem',
+            padding: '0.75rem 1.5rem',
+            background: 'white',
+            color: '#667eea',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            transition: 'transform 0.2s',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        >
+          📝 Projekt anfragen
+        </button>
       </div>
 
       {/* Project Request Form */}
@@ -553,9 +576,9 @@ export default function MigrationContent() {
                 }}>
                   {step.title}
                 </h3>
-                <p style={{ 
-                  fontSize: '1rem', 
-                  color: '#475569', 
+                <p style={{
+                  fontSize: '1rem',
+                  color: '#475569',
                   lineHeight: '1.8',
                   margin: 0
                 }}>
@@ -566,6 +589,7 @@ export default function MigrationContent() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }
