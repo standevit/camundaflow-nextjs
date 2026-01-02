@@ -5,45 +5,43 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <div className="container">
-      {/* Left Sidebar with Images */}
-      <aside className="sidebar" style={{ 
-        padding: '1rem', 
-        background: 'transparent',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        alignItems: 'flex-start'
-      }}>
-        <img 
-          src="/workflow.avif" 
-          alt="Workflow" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px'
-          }}
-        />
-        <img 
-          src="/ai-water.avif" 
-          alt="AI" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px'
-          }}
-        />
-        <img 
-          src="/blockchain.avif" 
-          alt="Blockchain" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px'
-          }}
-        />
+      {/* Left Sidebar – Contact box + one image */}
+      <aside className="sidebar">
+        <div style={{
+          background: 'white',
+          padding: '1.5rem',
+          borderRadius: '12px',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+          border: '1px solid #e2e8f0',
+          marginBottom: '1rem'
+        }}>
+          <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem' }}>
+            Kontaktieren Sie uns gerne!
+          </h3>
+          <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+            Kontaktieren Sie uns gerne für Beratungen, ein Angebot oder eine Demo. Wir helfen Ihnen gern bei Prozessen und Automatisierung.          </p>
+          <Link href="/contact">
+            <button style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              padding: '0.8rem 1.3rem',
+              border: 'none',
+              borderRadius: '10px',
+              fontSize: '0.98rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 7px 22px rgba(102,126,234,0.35)'
+            }}>
+              Kontakt
+            </button>
+          </Link>
+        </div>
+        <img src="/contact.avif" alt="Kontakt" style={{
+          width: '100%',
+          borderRadius: '12px',
+          objectFit: 'cover',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
+        }} />
       </aside>
 
       {/* Main Content */}
@@ -371,45 +369,9 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* Right Sidebar with Images */}
-      <aside className="sidebar" style={{ 
-        padding: '1rem', 
-        background: 'transparent',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        alignItems: 'flex-start'
-      }}>
-        <img 
-          src="/service-portal.avif" 
-          alt="Service Portal" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px'
-          }}
-        />
-        <img 
-          src="/supply-chain.avif" 
-          alt="Supply Chain" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px'
-          }}
-        />
-        <img 
-          src="/budgetverwaltung.avif" 
-          alt="Budget Management" 
-          style={{
-            width: '100%',
-            aspectRatio: '1',
-            objectFit: 'cover',
-            borderRadius: '12px'
-          }}
-        />
+      {/* Right Sidebar – single image */}
+      <aside className="image-sidebar">
+        <img src="/workflow2.avif" alt="Workflow 2" />
       </aside>
     </div>
   );
