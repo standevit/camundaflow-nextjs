@@ -34,7 +34,7 @@ export default function IntelligenterRezeptionistContent() {
 
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
-  const projectPrice = 8500;
+  const projectPrice = 5100;
   const [includeExtras, setIncludeExtras] = useState({
     voiceIntegration: false,
     multiLanguage: false,
@@ -151,7 +151,7 @@ export default function IntelligenterRezeptionistContent() {
           color: 'white',
           flexShrink: 0
         }}>
-          1
+          �
         </div>
         <div>
           <h2 style={{

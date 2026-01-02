@@ -260,6 +260,87 @@ export default function FraudDetectionContent() {
         </div>
       </div>
 
+      {/* Timeline & Costs */}
+      <div style={{
+        background: 'white',
+        padding: '2rem',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        marginBottom: '2rem'
+      }}>
+        <h3 style={{
+          fontSize: '1.5rem',
+          fontWeight: '700',
+          color: '#0f172a',
+          marginBottom: '1.5rem',
+          paddingBottom: '0.75rem',
+          borderBottom: '2px solid #667eea',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem'
+        }}>
+          <span style={{ fontSize: '1.75rem' }}>💰</span>
+          {t('fraud_detection_timeline_heading')}
+        </h3>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1.5rem'
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            padding: '2rem',
+            borderRadius: '12px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem', color: 'white' }}>
+              {t('fraud_detection_timeline_duration')}
+            </div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '700', marginBottom: '0.5rem', color: 'white' }}>
+              {t('fraud_detection_timeline_duration_value')}
+            </div>
+            <div style={{ fontSize: '0.9rem', opacity: 0.9, color: 'white' }}>
+              {t('fraud_detection_timeline_duration_subtitle')}
+            </div>
+          </div>
+          <div style={{
+            background: '#f8f9fa',
+            padding: '2rem',
+            borderRadius: '12px',
+            border: '2px solid #667eea',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '0.9rem', color: '#667eea', marginBottom: '0.5rem', fontWeight: '600' }}>
+              {t('fraud_detection_timeline_onetime')}
+            </div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
+              {t('fraud_detection_timeline_onetime_value')}
+            </div>
+            <div style={{ fontSize: '0.9rem', color: '#475569' }}>
+              {t('fraud_detection_timeline_onetime_subtitle')}
+            </div>
+          </div>
+          <div style={{
+            background: '#f8f9fa',
+            padding: '2rem',
+            borderRadius: '12px',
+            border: '2px solid #667eea',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '0.9rem', color: '#667eea', marginBottom: '0.5rem', fontWeight: '600' }}>
+              {t('fraud_detection_timeline_monthly')}
+            </div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
+              {t('fraud_detection_timeline_monthly_value')}
+            </div>
+            <div style={{ fontSize: '0.9rem', color: '#475569' }}>
+              {t('fraud_detection_timeline_monthly_subtitle')}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Call to Action */}
       <div style={{
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',

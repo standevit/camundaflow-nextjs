@@ -156,7 +156,7 @@ function AiAgentsContent() {
               className={`example-link ${activeTemplate === "intelligenter-rezeptionist" ? "active" : ""}`}
               onClick={() => setActiveTemplate("intelligenter-rezeptionist")}
             >
-              {t("intelligent_receptionist")}
+              1. {t("intelligent_receptionist")}
             </a>
           </li>
           <li>
@@ -164,7 +164,7 @@ function AiAgentsContent() {
               className={`example-link ${activeTemplate === "fraud-detection" ? "active" : ""}`}
               onClick={() => setActiveTemplate("fraud-detection")}
             >
-              {t("fraud_detection")}
+              2. {t("fraud_detection")}
             </a>
           </li>
           <li>
@@ -172,7 +172,7 @@ function AiAgentsContent() {
               className={`example-link ${activeTemplate === "intelligent-document-processing" ? "active" : ""}`}
               onClick={() => setActiveTemplate("intelligent-document-processing")}
             >
-              {t("idp_nav")}
+              3. {t("idp_nav")}
             </a>
           </li>
       </ul>
