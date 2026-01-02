@@ -36,6 +36,13 @@ export default function CostConfigurator({ isOpen, onClose }: CostConfiguratorPr
     }
   }, [isOpen]);
 
+  // Close ChatWidget when CostConfigurator opens
+  useEffect(() => {
+    if (isOpen) {
+      window.dispatchEvent(new CustomEvent("closeChatWidget"));
+    }
+  }, [isOpen]);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };

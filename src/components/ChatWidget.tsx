@@ -27,6 +27,15 @@ export default function ChatWidget() {
     setOpen(pathname === "/");
   }, [pathname]);
 
+  // Listen for closeChatWidget event
+  useEffect(() => {
+    const handleCloseChatWidget = () => {
+      setOpen(false);
+    };
+    window.addEventListener("closeChatWidget", handleCloseChatWidget);
+    return () => window.removeEventListener("closeChatWidget", handleCloseChatWidget);
+  }, []);
+
   function addMessage(msg: Msg) {
     setMessages((m) => [...m, msg]);
   }
