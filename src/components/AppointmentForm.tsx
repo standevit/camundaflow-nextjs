@@ -468,7 +468,7 @@ export default function AppointmentForm({
             }}
           >
             <p style={{ margin: 0, color: "#059669" }}>
-              ✅ E-Mail erfolgreich verifiziert! Wählen Sie jetzt Ihren
+              ✅ User erfolgreich verifiziert! Wählen Sie jetzt Ihren
               gewünschten Termin.
             </p>
           </div>
