@@ -1,8 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import AppointmentForm from "@/components/AppointmentForm";
 
 export default function HomePage() {
+  const { data: session } = useSession();
+  const [showAppointmentForm, setShowAppointmentForm] = useState(false);
+  
+  const userName = session?.user?.name || "";
+  const userEmail = session?.user?.email || "";
   
   return (
     <div className="container">
@@ -22,42 +30,32 @@ export default function HomePage() {
           <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
             Für Beratungen, ein Angebot oder eine Demo. Wir helfen Ihnen gern bei Prozessen und Automatisierung.          </p>
           <button
-          onClick={() => {
-            setShowAppointmentForm(true);
-            // If user is logged in, skip to calendar (step 3), otherwise start at step 1
-            setAppointmentStep(session?.user ? 3 : 1);
-            setAppointmentData({
-              name: userName || "",
-              email: userEmail || "",
-              company: "",
-              phone: "",
-            });
-          }}
-          style={{
-            display: 'inline-block',
-            padding: '0.875rem 0.875rem',
-            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-            color: 'white',
-            textDecoration: 'none',
-            border: 'none',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 16px rgba(16, 185, 129, 0.4)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.3)';
-          }}
-        >
-          📅 Termin vereinbaren
-        </button>
+            onClick={() => setShowAppointmentForm(true)}
+            style={{
+              display: 'inline-block',
+              padding: '0.875rem 0.875rem',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: 'white',
+              textDecoration: 'none',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(16, 185, 129, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.3)';
+            }}
+          >
+            📅 Termin vereinbaren
+          </button>
         </div>
         <img src="/contact.avif" alt="Kontakt" style={{
           width: '100%',
@@ -103,6 +101,14 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+
+          {/* Appointment Form Modal */}
+          <AppointmentForm
+            isOpen={showAppointmentForm}
+            onClose={() => setShowAppointmentForm(false)}
+            userName={userName}
+            userEmail={userEmail}
+          />
 
           {/* Main Services Section */}
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
