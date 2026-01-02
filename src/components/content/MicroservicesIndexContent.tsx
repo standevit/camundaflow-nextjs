@@ -78,7 +78,8 @@ export default function MicroservicesIndexContent() {
           color: '#334155', 
           marginBottom: '1.25rem',
           paddingLeft: '1rem',
-          borderLeft: '4px solid #667eea'
+          borderLeft: '1px solid #babfd8ff',
+          borderRadius: '12px',
         }}>
           {t("ms_index_what_p1")}
         </p>
@@ -87,7 +88,8 @@ export default function MicroservicesIndexContent() {
           lineHeight: '1.9', 
           color: '#334155',
           paddingLeft: '1rem',
-          borderLeft: '4px solid #667eea'
+          borderLeft: '1px solid #babfd8ff',
+          borderRadius: '12px',
         }}>
           {t("ms_index_what_p2")}
         </p>
