@@ -144,7 +144,7 @@ export default function HomePage() {
             e.currentTarget.style.boxShadow = '0 4px 12px rgba(51, 49, 49, 0.3)';
           }}
         >
-          🔧 Starten Sie Kosten Konfigurator
+          🔧 Starten Sie Kostenrechner
         </button>
         {/* Cost Configurator Modal */}
           <CostConfigurator

@@ -129,7 +129,7 @@ export default function ProjectProposalRenderer({
             margin: "0 0 1rem 0",
           }}
         >
-          🎯 Obavezne funkcionalnosti
+          🎯 Erforderliche Funktionalitäten
         </h4>
         <ul
           style={{
@@ -224,7 +224,7 @@ export default function ProjectProposalRenderer({
             margin: "0 0 1rem 0",
           }}
         >
-          ⏱️ Vremenski plan
+          ⏱️ Zeitplan
         </h4>
         <div
           style={{
@@ -278,7 +278,7 @@ export default function ProjectProposalRenderer({
             margin: "1rem 0 0 0",
           }}
         >
-          <strong>Ukupno:</strong> {calculateTotalWeeks()} nedelja (sa odabranim opcijama)
+          <strong>Gesamtpreis:</strong> {calculateTotalWeeks()} Wochen (mit ausgewählten Optionen)
         </p>
       </div>
 
@@ -299,7 +299,7 @@ export default function ProjectProposalRenderer({
             margin: "0 0 1rem 0",
           }}
         >
-          💰 Cena
+          💰 Kosten
         </h4>
         <div
           style={{
@@ -324,7 +324,7 @@ export default function ProjectProposalRenderer({
                 margin: "0 0 0.5rem 0",
               }}
             >
-              Osnovna cena
+              Grundpreis
             </p>
             <p
               style={{
@@ -352,7 +352,7 @@ export default function ProjectProposalRenderer({
                 margin: "0 0 0.5rem 0",
               }}
             >
-              Satnica
+              Stundensatz
             </p>
             <p
               style={{
@@ -380,7 +380,7 @@ export default function ProjectProposalRenderer({
                 margin: "0 0 0.5rem 0",
               }}
             >
-              Sati
+              Stunden
             </p>
             <p
               style={{
@@ -415,7 +415,7 @@ export default function ProjectProposalRenderer({
               margin: "0 0 1.5rem 0",
             }}
           >
-            ✨ Opcionalne funkcionalnosti
+            ✨ Optionale Funktionalitäten
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {proposal.optional_features.map((feature, idx) => (
@@ -513,7 +513,7 @@ export default function ProjectProposalRenderer({
           }}
         >
           <span style={{ fontSize: "1rem", fontWeight: "600" }}>
-            Osnovna cena:
+            Grundpreis:
           </span>
           <span style={{ fontSize: "1.1rem" }}>
             €{proposal.cost_breakdown.base_price_eur.toLocaleString()}
@@ -522,7 +522,7 @@ export default function ProjectProposalRenderer({
         {Object.values(selectedOptions).some((v) => v) && (
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
             <span style={{ fontSize: "1rem", fontWeight: "600" }}>
-              Dodatne opcije:
+              Extra Optionen:
             </span>
             <span style={{ fontSize: "1.1rem" }}>
               €
@@ -533,6 +533,14 @@ export default function ProjectProposalRenderer({
             </span>
           </div>
         )}
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+          <span style={{ fontSize: "1rem", fontWeight: "600" }}>
+            Online Rabatt (40%):
+          </span>
+          <span style={{ fontSize: "1.1rem", color: "#4ade80" }}>
+            -€{(calculateTotalCost() * 0.40).toLocaleString('de-DE', { maximumFractionDigits: 2 })}
+          </span>
+        </div>
         <div
           style={{
             borderTop: "1px solid rgba(255,255,255,0.3)",
@@ -544,10 +552,10 @@ export default function ProjectProposalRenderer({
           }}
         >
           <span style={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            Ukupna cena:
+            Gesamtpreis:
           </span>
           <span style={{ fontSize: "1.5rem", fontWeight: "700" }}>
-            €{calculateTotalCost().toLocaleString()}
+            €{(calculateTotalCost() * 0.60).toLocaleString('de-DE', { maximumFractionDigits: 2 })}
           </span>
         </div>
       </div>
