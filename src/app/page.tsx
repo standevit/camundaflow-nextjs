@@ -34,41 +34,44 @@ export default function HomePage() {
       {/* Left Sidebar – Contact box + one image */}
       <aside className="sidebar">
         <div style={{
-          background: 'white',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
           padding: '1.5rem',
-          borderRadius: '12px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-          border: '1px solid #e2e8f0',
+          borderRadius: '16px',
+          boxShadow: '0 8px 32px rgba(0, 48, 63, 0.08)',
+          border: '1px solid rgba(122, 157, 150, 0.2)',
           marginBottom: '1rem'
         }}>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#00303F', marginBottom: '0.75rem' }}>
             Vereinbaren Sie jetzt einen Termin!
           </h3>
-          <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
-            Für Beratungen, ein Angebot oder eine Demo. Wir helfen Ihnen gern bei Prozessen und Automatisierung.          </p>
+          <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+            Für Beratungen, ein Angebot oder eine Demo. Wir helfen Ihnen gern bei Prozessen und Automatisierung.
+          </p>
           <button
             onClick={() => setShowAppointmentForm(true)}
             style={{
               display: 'inline-block',
-              padding: '0.875rem 0.875rem',
-              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              padding: '0.75rem 1.25rem',
+              background: 'linear-gradient(135deg, #7A9D96 0%, #5a827a 100%)',
               color: 'white',
               textDecoration: 'none',
               border: 'none',
-              borderRadius: '8px',
-              fontSize: '1rem',
+              borderRadius: '10px',
+              fontSize: '0.95rem',
               fontWeight: '600',
               cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
-              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 14px rgba(122, 157, 150, 0.3)',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 16px rgba(16, 185, 129, 0.4)';
+              e.currentTarget.style.boxShadow = '0 8px 20px rgba(122, 157, 150, 0.4)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.3)';
+              e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 157, 150, 0.3)';
             }}
           >
             📅 Termin vereinbaren
@@ -76,46 +79,72 @@ export default function HomePage() {
         </div>
         <img src="/contact.avif" alt="Kontakt" style={{
           width: '100%',
-          borderRadius: '12px',
+          borderRadius: '16px',
           objectFit: 'cover',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
+          boxShadow: '0 8px 32px rgba(0, 48, 63, 0.1)'
         }} />
       </aside>
 
       {/* Main Content */}
       <main className="main-content">
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
-          {/* Hero Section */}
+          {/* Hero Section - Modern Glassmorphism */}
           <div style={{
-            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            background: 'linear-gradient(135deg, #00303F 0%, #004d5a 50%, #006670 100%)',
             color: 'white',
-            padding: '0.5rem 1rem',
-            borderRadius: '16px',
+            padding: '2.5rem 2rem',
+            borderRadius: '24px',
             textAlign: 'center',
-            marginBottom: '2rem',
-            boxShadow: '0 20px 40px rgba(245,158,11,0.25)',
+            marginBottom: '3rem',
+            boxShadow: '0 25px 50px rgba(0, 48, 63, 0.25)',
             position: 'relative',
             overflow: 'hidden'
           }}>
+            {/* Subtle gradient overlay for depth */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'radial-gradient(ellipse at top right, rgba(202, 228, 219, 0.15) 0%, transparent 60%)',
+              pointerEvents: 'none'
+            }} />
             <div style={{ position: 'relative', zIndex: 1 }}>
               <span style={{ 
                 display: 'inline-block',
-                background: 'rgba(255,255,255,0.2)', 
-                padding: '0.4rem 1rem', 
-                borderRadius: '20px', 
+                background: 'rgba(220, 174, 29, 0.2)',
+                backdropFilter: 'blur(8px)',
+                padding: '0.5rem 1.25rem', 
+                borderRadius: '50px', 
                 fontSize: '0.85rem', 
-                fontWeight: 600,
-                marginBottom: '0rem',
-                letterSpacing: '0.5px'
+                fontWeight: 500,
+                marginBottom: '1rem',
+                letterSpacing: '0.5px',
+                border: '1px solid rgba(220, 174, 29, 0.3)',
+                color: '#DCAE1D'
               }}>
-                🚀 Digitale Transformation
+                ✨ Digitale Transformation 2026
               </span>
-              <h1 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '0rem', color: 'white', letterSpacing: '-0.5px' }}>
+              <h1 style={{ 
+                fontSize: '2.25rem', 
+                fontWeight: '700', 
+                marginBottom: '0.75rem', 
+                color: 'white', 
+                letterSpacing: '-0.5px',
+                lineHeight: '1.2'
+              }}>
                 Enterprise Workflow & AI Solutions
               </h1>
-              <p style={{ fontSize: '1rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8', maxWidth: '700px', margin: '0 auto' }}>
+              <p style={{ 
+                fontSize: '1.1rem', 
+                opacity: '0.9', 
+                marginBottom: 0, 
+                lineHeight: '1.7', 
+                maxWidth: '600px', 
+                margin: '0 auto' 
+              }}>
                 Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
-                
               </p>
             </div>
           </div>
@@ -133,32 +162,32 @@ export default function HomePage() {
           <button
           onClick={handleOpenCostConfigurator}
           style={{
-            position: 'relative',
-            left: '35%',
-            padding: '1.2rem 2.5rem',
+            display: 'block',
+            margin: '0 auto 3rem auto',
+            padding: '1rem 2rem',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, #d97f3e 0%, #c0621e 50%, #a85c1a 100%)',
+            background: 'linear-gradient(135deg, #DCAE1D 0%, #c49a18 100%)',
             border: 'none',
-            color: 'white',
+            color: '#00303F',
             textDecoration: 'none',
             borderRadius: '12px',
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             fontWeight: '700',
-            letterSpacing: '0.5px',
+            letterSpacing: '0.3px',
             cursor: 'pointer',
-            boxShadow: '0 10px 30px rgba(217, 127, 62, 0.25)',
+            boxShadow: '0 8px 24px rgba(220, 174, 29, 0.3)',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 15px 40px rgba(217, 127, 62, 0.35)';
+            e.currentTarget.style.transform = 'translateY(-3px)';
+            e.currentTarget.style.boxShadow = '0 12px 32px rgba(220, 174, 29, 0.4)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 10px 30px rgba(217, 127, 62, 0.25)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(220, 174, 29, 0.3)';
           }}
         >
-          🚀 Starten Sie AI Project Planner
+          🚀 AI Project Planner starten
         </button>
         {/* Cost Configurator Modal */}
           <div ref={costConfiguratorRef}>
@@ -171,51 +200,58 @@ export default function HomePage() {
 
           
           {/* Main Services Section */}
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
-              
-              
-        
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <h2 style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: '700', 
+              color: '#0f172a', 
+              marginBottom: '0.75rem',
+              letterSpacing: '-0.3px'
+            }}>
+              Unsere Expertise
             </h2>
-
-
-
-            <p style={{ color: '#64748b', fontSize: '1rem' }}>Technologien, die Ihr Unternehmen voranbringen</p>
+            <p style={{ color: '#64748b', fontSize: '1rem', maxWidth: '500px', margin: '0 auto' }}>
+              Technologien, die Ihr Unternehmen voranbringen
+            </p>
           </div>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '3.5rem'
+            gap: '1.5rem',
+            marginBottom: '4rem'
           }}>
             {/* AI Agents */}
             <Link href="/ai-agents" style={{ textDecoration: 'none' }}>
               <div style={{
-                background: 'white',
-                padding: '2rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                border: '1px solid #e2e8f0',
-                transition: 'transform 0.2s, box-shadow 0.2s',
+                background: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                padding: '1.75rem',
+                borderRadius: '16px',
+                boxShadow: '0 4px 20px rgba(0, 48, 63, 0.08)',
+                border: '1px solid rgba(122, 157, 150, 0.2)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 cursor: 'pointer',
                 height: '100%'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 48, 63, 0.15)';
+                e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 48, 63, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
               }}>
                 <div style={{ 
-                  width: '60px', height: '60px', 
-                  background: 'linear-gradient(135deg, #667eea20 0%, #764ba220 100%)', 
-                  borderRadius: '14px', 
+                  width: '52px', height: '52px', 
+                  background: 'linear-gradient(135deg, rgba(0,48,63,0.08) 0%, rgba(122,157,150,0.15) 100%)', 
+                  borderRadius: '12px', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '2rem', marginBottom: '1.2rem' 
+                  fontSize: '1.75rem', marginBottom: '1rem' 
                 }}>🤖</div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1c2b80', marginBottom: '0.75rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
                   AI Agents
                 </h3>
                 <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
@@ -227,31 +263,35 @@ export default function HomePage() {
             {/* Microservices */}
             <Link href="/microservices" style={{ textDecoration: 'none' }}>
               <div style={{
-                background: 'white',
-                padding: '2rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                border: '1px solid #e2e8f0',
-                transition: 'transform 0.2s, box-shadow 0.2s',
+                background: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                padding: '1.75rem',
+                borderRadius: '16px',
+                boxShadow: '0 4px 20px rgba(0, 48, 63, 0.08)',
+                border: '1px solid rgba(122, 157, 150, 0.2)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 cursor: 'pointer',
                 height: '100%'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 48, 63, 0.15)';
+                e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 48, 63, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
               }}>
                 <div style={{ 
-                  width: '60px', height: '60px', 
-                  background: 'linear-gradient(135deg, #10b98120 0%, #059f6920 100%)', 
-                  borderRadius: '14px', 
+                  width: '52px', height: '52px', 
+                  background: 'linear-gradient(135deg, rgba(0,48,63,0.08) 0%, rgba(122,157,150,0.15) 100%)', 
+                  borderRadius: '12px', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '2rem', marginBottom: '1.2rem' 
+                  fontSize: '1.75rem', marginBottom: '1rem' 
                 }}>⚙️</div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.75rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
                   Microservices
                 </h3>
                 <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
@@ -263,31 +303,35 @@ export default function HomePage() {
             {/* Camunda BPMN */}
             <Link href="/camunda" style={{ textDecoration: 'none' }}>
               <div style={{
-                background: 'white',
-                padding: '2rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                border: '1px solid #e2e8f0',
-                transition: 'transform 0.2s, box-shadow 0.2s',
+                background: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                padding: '1.75rem',
+                borderRadius: '16px',
+                boxShadow: '0 4px 20px rgba(0, 48, 63, 0.08)',
+                border: '1px solid rgba(122, 157, 150, 0.2)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 cursor: 'pointer',
                 height: '100%'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(102,126,234,0.3)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 48, 63, 0.15)';
+                e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 48, 63, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
               }}>
                 <div style={{ 
-                  width: '60px', height: '60px', 
-                  background: 'linear-gradient(135deg, #f59e0b20 0%, #d9730620 100%)', 
-                  borderRadius: '14px', 
+                  width: '52px', height: '52px', 
+                  background: 'linear-gradient(135deg, rgba(0,48,63,0.08) 0%, rgba(122,157,150,0.15) 100%)', 
+                  borderRadius: '12px', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '2rem', marginBottom: '1.2rem' 
+                  fontSize: '1.75rem', marginBottom: '1rem' 
                 }}>📊</div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.75rem' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#00303F', marginBottom: '0.75rem' }}>
                   Camunda BPMN
                 </h3>
                 <p style={{ color: '#475569', lineHeight: '1.6', margin: 0 }}>
@@ -303,12 +347,12 @@ export default function HomePage() {
               <h2 style={{
                 fontSize: '1.8rem',
                 fontWeight: '700',
-                color: '#0f172a',
+                color: '#00303F',
                 marginBottom: '0.5rem'
               }}>
                 Use Cases & Implementierungen
               </h2>
-              <p style={{ color: '#64748b', fontSize: '1rem' }}>Praxiserprobte Lösungen für Ihre Branche</p>
+              <p style={{ color: '#7A9D96', fontSize: '1rem' }}>Praxiserprobte Lösungen für Ihre Branche</p>
             </div>
 
             <div style={{
@@ -318,26 +362,27 @@ export default function HomePage() {
             }}>
           {/* AI-powered Customer Service */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>💬</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               AI Customer Service
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -347,26 +392,27 @@ export default function HomePage() {
 
           {/* Supply Chain Automation */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🚚</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Supply Chain Management
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -376,26 +422,27 @@ export default function HomePage() {
 
           {/* Intelligent Document Processing */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>📄</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Document Processing
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -405,26 +452,27 @@ export default function HomePage() {
 
           {/* Fraud Detection */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🛡️</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Fraud Detection
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -434,26 +482,27 @@ export default function HomePage() {
 
           {/* Order Management */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>📦</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Order Processing
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -463,26 +512,27 @@ export default function HomePage() {
 
           {/* Budget Management */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>💰</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Budget Management
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -492,26 +542,27 @@ export default function HomePage() {
 
           {/* Service Portal */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🏛️</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Service Portal BW
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -521,26 +572,27 @@ export default function HomePage() {
 
           {/* Human-Centric Workflows */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>👥</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Human-Centric Workflows
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -550,26 +602,27 @@ export default function HomePage() {
 
           {/* Camunda 7 → 8 Migration */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
             padding: '1.5rem',
             borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0, 48, 63, 0.06)',
+            border: '1px solid rgba(122, 157, 150, 0.2)',
             transition: 'all 0.25s ease',
             cursor: 'default'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
-            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 48, 63, 0.12)';
+            e.currentTarget.style.borderColor = 'rgba(0, 48, 63, 0.2)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-            e.currentTarget.style.borderColor = '#e2e8f0';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 48, 63, 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(122, 157, 150, 0.2)';
           }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.75rem' }}>🔄</div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#00303F', marginBottom: '0.5rem' }}>
               Camunda Migration
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>
@@ -579,52 +632,61 @@ export default function HomePage() {
         </div>
       </div>
 
-          {/* CTA Section */}
+          {/* CTA Section - Modern Glassmorphism */}
           <div style={{
-            background: 'linear-gradient(135deg, #d97f3e 0%, #b8621f 100%)',
-            padding: '3rem 2.5rem',
-            borderRadius: '16px',
+            background: 'linear-gradient(135deg, #00303F 0%, #004d5a 100%)',
+            padding: '3.5rem 2.5rem',
+            borderRadius: '24px',
             textAlign: 'center',
-            boxShadow: '0 20px 40px rgba(217,127,62,0.15)',
+            boxShadow: '0 25px 50px rgba(0, 48, 63, 0.2)',
             position: 'relative',
             overflow: 'hidden'
           }}>
+            {/* Subtle gradient overlay */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'radial-gradient(ellipse at bottom left, rgba(255,255,255,0.1) 0%, transparent 60%)',
+              pointerEvents: 'none'
+            }} />
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <h3 style={{ fontSize: '1.6rem', fontWeight: '700', color: 'white', marginBottom: '0.75rem' }}>
+              <h3 style={{ fontSize: '1.75rem', fontWeight: '700', color: 'white', marginBottom: '1rem' }}>
                 Bereit für Ihr Projekt?
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: '1.6', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', marginBottom: '2rem', lineHeight: '1.7', maxWidth: '480px', margin: '0 auto 2rem' }}>
                 Lassen Sie uns gemeinsam Ihre Geschäftsprozesse automatisieren und optimieren
               </p>
               
                 <button
           onClick={handleOpenCostConfigurator}
           style={{
-            position: 'relative',
-            padding: '1.2rem 2.5rem',
+            padding: '1rem 2rem',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, #d97f3e 0%, #c0621e 50%, #a85c1a 100%)',
+            background: 'linear-gradient(135deg, #DCAE1D 0%, #c49a18 100%)',
             border: 'none',
-            color: 'white',
+            color: '#00303F',
             textDecoration: 'none',
             borderRadius: '12px',  
-            fontSize: '1.1rem',
-            fontWeight: '700',
-            letterSpacing: '0.5px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            letterSpacing: '0.3px',
             cursor: 'pointer',
-            boxShadow: '0 10px 30px rgba(217, 127, 62, 0.25)',
+            boxShadow: '0 8px 24px rgba(220, 174, 29, 0.3)',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 15px 40px rgba(217, 127, 62, 0.35)';
+            e.currentTarget.style.transform = 'translateY(-3px)';
+            e.currentTarget.style.boxShadow = '0 12px 32px rgba(220, 174, 29, 0.4)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 10px 30px rgba(217, 127, 62, 0.25)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(220, 174, 29, 0.3)';
           }}
         >
-          🚀 Starten Sie AI Project Planner
+          🚀 AI Project Planner starten
         </button>
              
             </div>
