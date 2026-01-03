@@ -63,9 +63,17 @@ export async function GET(request: NextRequest) {
   try {
     const userEmail = request.nextUrl.searchParams.get('email');
     
+    console.log("📥 GET /api/projects - userEmail:", userEmail);
+    
     const projects = await prisma.projectRequest.findMany({
       where: userEmail ? { userEmail } : {},
       orderBy: { createdAt: 'desc' },
+    });
+
+    console.log(`✅ Found ${projects.length} projects for ${userEmail}`);
+    projects.forEach(p => {
+      console.log(`  - ${p.id}: ${p.projectName} (type: ${p.projectType})`);
+      console.log(`    requirements: ${p.requirements?.substring(0, 100)}...`);
     });
 
     return NextResponse.json({
@@ -73,7 +81,7 @@ export async function GET(request: NextRequest) {
       data: projects,
     });
   } catch (error) {
-    console.error('Greška pri dohvatanju zahtjeva:', error);
+    console.error('❌ Greška pri dohvatanju zahtjeva:', error);
     return NextResponse.json({
       success: false,
       error: 'Greška pri dohvatanju zahtjeva',

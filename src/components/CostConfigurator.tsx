@@ -218,22 +218,33 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
   // Save project to dashboard
   const saveProject = async (proposal: ProjectProposal) => {
     try {
+      console.log("💾 Saving complete proposal data to database...");
+      console.log("📦 Full Proposal data:", proposal);
+
       const response = await fetch("/api/projects/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           projectName: proposal.project_name,
           description: proposal.description_summary,
+          coreFeatures: proposal.core_features,
           costBreakdown: proposal.cost_breakdown,
           timeline: proposal.timeline_weeks,
+          techStack: proposal.tech_stack,
+          optionalFeatures: proposal.optional_features,
+          totalWithAllOptions: proposal.total_with_all_options_eur,
         }),
       });
 
       if (!response.ok) {
-        console.error("Failed to save project");
+        const error = await response.json();
+        console.error("❌ Failed to save project:", error);
+      } else {
+        const result = await response.json();
+        console.log("✅ Project saved successfully:", result);
       }
     } catch (error) {
-      console.error("Error saving project:", error);
+      console.error("❌ Error saving project:", error);
     }
   };
 
@@ -419,7 +430,7 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
               margin: 0,
             }}
           >
-            Kostenrechner
+            AI Project Planner
           </h3>
           <p
             style={{

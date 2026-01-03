@@ -87,13 +87,13 @@ export default function HomePage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
           {/* Hero Section */}
           <div style={{
-            background: 'linear-gradient(#342ccf 0%, #b9b3ff 100%)',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
             color: 'white',
             padding: '0.5rem 1rem',
             borderRadius: '16px',
             textAlign: 'center',
             marginBottom: '2rem',
-            boxShadow: '0 20px 40px rgba(102,126,234,0.25)',
+            boxShadow: '0 20px 40px rgba(245,158,11,0.25)',
             position: 'relative',
             overflow: 'hidden'
           }}>
@@ -135,31 +135,30 @@ export default function HomePage() {
           style={{
             position: 'relative',
             left: '35%',
-            padding: '0.3rem',
+            padding: '1.2rem 2.5rem',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, #6861b1ff 0%, #7d71fcff 80%)',
-            
-            border: '2px solid #462374ff',
+            background: 'linear-gradient(135deg, #d97f3e 0%, #c0621e 50%, #a85c1a 100%)',
+            border: 'none',
             color: 'white',
             textDecoration: 'none',
-            
-            borderRadius: '8px',
-            fontSize: '1rem',
-            fontWeight: '600',
+            borderRadius: '12px',
+            fontSize: '1.1rem',
+            fontWeight: '700',
+            letterSpacing: '0.5px',
             cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(7, 4, 4, 0.3)',
-            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: '0 10px 30px rgba(217, 127, 62, 0.25)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 16px rgba(17, 16, 16, 0.4)';
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = '0 15px 40px rgba(217, 127, 62, 0.35)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(51, 49, 49, 0.3)';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(217, 127, 62, 0.25)';
           }}
         >
-          🔧 Starten Sie Kostenrechner
+          🚀 Starten Sie AI Project Planner
         </button>
         {/* Cost Configurator Modal */}
           <div ref={costConfiguratorRef}>
@@ -582,11 +581,11 @@ export default function HomePage() {
 
           {/* CTA Section */}
           <div style={{
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'linear-gradient(135deg, #d97f3e 0%, #b8621f 100%)',
             padding: '3rem 2.5rem',
             borderRadius: '16px',
             textAlign: 'center',
-            boxShadow: '0 20px 40px rgba(102,126,234,0.2)',
+            boxShadow: '0 20px 40px rgba(217,127,62,0.15)',
             position: 'relative',
             overflow: 'hidden'
           }}>
@@ -602,31 +601,30 @@ export default function HomePage() {
           onClick={handleOpenCostConfigurator}
           style={{
             position: 'relative',
-            padding: '0.3rem',
+            padding: '1.2rem 2.5rem',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, #6861b1ff 0%, #7d71fcff 80%)',
-            
-            border: '2px solid #462374ff',
+            background: 'linear-gradient(135deg, #d97f3e 0%, #c0621e 50%, #a85c1a 100%)',
+            border: 'none',
             color: 'white',
             textDecoration: 'none',
-            
-            borderRadius: '8px',  
-            fontSize: '1rem',
-            fontWeight: '600',
+            borderRadius: '12px',  
+            fontSize: '1.1rem',
+            fontWeight: '700',
+            letterSpacing: '0.5px',
             cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(7, 4, 4, 0.3)',
-            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: '0 10px 30px rgba(217, 127, 62, 0.25)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 16px rgba(17, 16, 16, 0.4)';
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = '0 15px 40px rgba(217, 127, 62, 0.35)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(51, 49, 49, 0.3)';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(217, 127, 62, 0.25)';
           }}
         >
-          🔧 Starten Sie Kostenrechner
+          🚀 Starten Sie AI Project Planner
         </button>
              
             </div>

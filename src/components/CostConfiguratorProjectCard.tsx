@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import html2pdf from "html2pdf.js";
+import ProjectProposalForm from "@/components/ProjectProposalForm";
+import ProjectDetails from "@/components/ProjectDetails";
 
 interface CostBreakdown {
   base_price_eur: number;
@@ -21,9 +22,12 @@ interface Timeline {
 interface ProjectRequest {
   id: string;
   projectName: string;
+  projectType: string;
   description: string;
   requirements: string;
+  deadline?: string | null;
   estimatedPrice: number;
+  status?: string;
   createdAt: string;
 }
 
@@ -34,30 +38,68 @@ interface CostConfiguratorProjectProps {
 export default function CostConfiguratorProject({ project }: CostConfiguratorProjectProps) {
   const [showDetails, setShowDetails] = useState(false);
 
+  let coreFeatures: string[] = [];
   let costBreakdown: CostBreakdown | null = null;
   let timeline: Timeline | null = null;
 
   try {
-    const requirements = JSON.parse(project.requirements);
-    costBreakdown = requirements.costBreakdown;
-    timeline = requirements.timeline;
+    console.log("🔍 Parsing requirements for project:", project.id);
+    console.log("📦 Requirements content:", project.requirements);
+    console.log("📦 Requirements type:", typeof project.requirements);
+    
+    // Provjeri je li requirements prazan ili nije string
+    if (!project.requirements || project.requirements.trim() === '') {
+      console.log("⚠️ Requirements je prazan");
+    } else if (typeof project.requirements === 'string' && project.requirements.startsWith('{')) {
+      // JSON string
+      const requirements = JSON.parse(project.requirements);
+      console.log("✅ Parsed requirements:", requirements);
+      coreFeatures = requirements.coreFeatures || [];
+      costBreakdown = requirements.costBreakdown;
+      timeline = requirements.timeline;
+      console.log("✅ Parsed data:", { coreFeatures, costBreakdown, timeline });
+    } else {
+      // Plain tekst, ne JSON
+      console.log("⚠️ Requirements nije JSON, to je obični tekst");
+    }
   } catch (e) {
-    console.error("Failed to parse project requirements:", e);
+    console.error("❌ Failed to parse project requirements:", e);
+    console.error("Raw requirements:", project.requirements);
   }
 
-  const generatePDF = () => {
-    const element = document.getElementById(`project-pdf-${project.id}`);
-    if (!element) return;
+  const generatePDF = async () => {
+    try {
+      const html2pdf = (await import("html2pdf.js")).default;
+      const element = document.getElementById(`project-pdf-${project.id}`);
+      if (!element) {
+        console.error("PDF element not found");
+        alert("Fehler: Dokument konnte nicht generiert werden. Bitte versuchen Sie es später erneut.");
+        return;
+      }
 
-    const opt = {
-      margin: 10,
-      filename: `${project.projectName.replace(/\s+/g, "_")}_${new Date().toISOString().split("T")[0]}.pdf`,
-      image: { type: "jpeg" as const, quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { orientation: "portrait" as const, unit: "mm" as const, format: "a4" },
-    };
+      // Clone the element to avoid modifying the original
+      const clonedElement = element.cloneNode(true) as HTMLElement;
+      
+      const opt = {
+        margin: 10,
+        filename: `${project.projectName.replace(/\s+/g, "_")}_${new Date().toISOString().split("T")[0]}.pdf`,
+        image: { type: "jpeg" as const, quality: 0.98 },
+        html2canvas: { scale: 2, logging: false, useCORS: true, allowTaint: true },
+        jsPDF: { orientation: "portrait" as const, unit: "mm" as const, format: "a4" },
+      };
 
-    html2pdf().set(opt).from(element).save();
+      await html2pdf()
+        .set(opt)
+        .from(clonedElement)
+        .save()
+        .catch((error: unknown) => {
+          console.error("PDF generation error:", error);
+          alert("Fehler beim Herunterladen des PDF. Bitte versuchen Sie es später erneut.");
+        });
+    } catch (error) {
+      console.error("Fehler bei PDF-Generierung:", error);
+      alert("Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+    }
   };
 
   return (
@@ -154,6 +196,25 @@ export default function CostConfiguratorProject({ project }: CostConfiguratorPro
               </div>
             </div>
           )}
+          {project.deadline && (
+            <div>
+              <span style={{ color: "#999", fontWeight: "500" }}>📅 Termin:</span>
+              <div style={{ color: "#333", fontWeight: "600" }}>
+                {new Date(project.deadline).toLocaleDateString("de-DE")}
+              </div>
+            </div>
+          )}
+          {project.status && (
+            <div>
+              <span style={{ color: "#999", fontWeight: "500" }}>📌 Status:</span>
+              <div style={{ color: "#333", fontWeight: "600" }}>
+                {project.status === 'pending' && '⏳ Ausstehend'}
+                {project.status === 'approved' && '✓ Genehmigt'}
+                {project.status === 'rejected' && '✗ Abgelehnt'}
+                {project.status === 'completed' && '✓ Abgeschlossen'}
+              </div>
+            </div>
+          )}
         </div>
 
         <div style={{ fontSize: "0.85rem", color: "#999", marginBottom: "1rem" }}>
@@ -193,131 +254,64 @@ export default function CostConfiguratorProject({ project }: CostConfiguratorPro
 
           <button
             onClick={generatePDF}
+            disabled={!costBreakdown || !timeline}
             style={{
               padding: "0.5rem 1rem",
-              backgroundColor: "#10b981",
+              backgroundColor: costBreakdown && timeline ? "#10b981" : "#cccccc",
               color: "white",
               border: "none",
               borderRadius: "6px",
-              cursor: "pointer",
+              cursor: costBreakdown && timeline ? "pointer" : "not-allowed",
               fontWeight: "600",
               fontSize: "0.9rem",
               transition: "all 0.2s ease",
+              opacity: costBreakdown && timeline ? 1 : 0.6,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#059669";
+              if (costBreakdown && timeline) {
+                e.currentTarget.style.backgroundColor = "#059669";
+              }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#10b981";
+              if (costBreakdown && timeline) {
+                e.currentTarget.style.backgroundColor = "#10b981";
+              }
             }}
+            title={!costBreakdown || !timeline ? "PDF-Daten nicht verfügbar" : "PDF herunterladen"}
           >
             📥 PDF herunterladen
           </button>
         </div>
 
+        {(!costBreakdown || !timeline) && (
+          <div style={{
+            marginTop: "1rem",
+            padding: "0.75rem 1rem",
+            backgroundColor: "#fef3c7",
+            border: "1px solid #fcd34d",
+            borderRadius: "6px",
+            color: "#92400e",
+            fontSize: "0.9rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}>
+            <span>⚠️</span>
+            <span>
+              {!costBreakdown && !timeline 
+                ? "Diese Anfrage wurde nicht durch den Cost Configurator generiert."
+                : "PDF-Daten sind unvollständig und können nicht exportiert werden."}
+            </span>
+          </div>
+        )}
+
         {showDetails && (
           <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid #e0e0e0" }}>
-            {costBreakdown && (
-              <div style={{ marginBottom: "1rem" }}>
-                <h4 style={{ color: "#333", marginBottom: "0.5rem" }}>
-                  💵 Kostenaufschlüsselung
-                </h4>
-                <div style={{ backgroundColor: "white", padding: "0.75rem", borderRadius: "6px" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: "0.5rem",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <span>Basispreis:</span>
-                    <strong>
-                      €{costBreakdown.base_price_eur.toFixed(2)}
-                    </strong>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: "0.5rem",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <span>Stundenhonorar:</span>
-                    <strong>€{costBreakdown.hourly_rate_eur}/Std.</strong>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      paddingTop: "0.5rem",
-                      borderTop: "1px solid #e0e0e0",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <span>Geschätzte Stunden:</span>
-                    <strong>{costBreakdown.estimated_hours} Std.</strong>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {timeline && (
-              <div>
-                <h4 style={{ color: "#333", marginBottom: "0.5rem" }}>
-                  ⏱️ Zeitplan
-                </h4>
-                <div style={{ backgroundColor: "white", padding: "0.75rem", borderRadius: "6px" }}>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: "0.75rem",
-                    }}
-                  >
-                    <div style={{ fontSize: "0.85rem" }}>
-                      <span style={{ color: "#666" }}>Design:</span>
-                      <div style={{ fontWeight: "600" }}>{timeline.design} W.</div>
-                    </div>
-                    <div style={{ fontSize: "0.85rem" }}>
-                      <span style={{ color: "#666" }}>Frontend:</span>
-                      <div style={{ fontWeight: "600" }}>
-                        {timeline.frontend_development} W.
-                      </div>
-                    </div>
-                    <div style={{ fontSize: "0.85rem" }}>
-                      <span style={{ color: "#666" }}>Backend:</span>
-                      <div style={{ fontWeight: "600" }}>
-                        {timeline.backend_development} W.
-                      </div>
-                    </div>
-                    <div style={{ fontSize: "0.85rem" }}>
-                      <span style={{ color: "#666" }}>Testing/QA:</span>
-                      <div style={{ fontWeight: "600" }}>{timeline.testing_qa} W.</div>
-                    </div>
-                    <div style={{ fontSize: "0.85rem" }}>
-                      <span style={{ color: "#666" }}>Deployment:</span>
-                      <div style={{ fontWeight: "600" }}>{timeline.deployment} W.</div>
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "0.85rem",
-                        paddingTop: "0.5rem",
-                        borderTop: "1px solid #e0e0e0",
-                      }}
-                    >
-                      <span style={{ color: "#666", fontWeight: "600" }}>
-                        Gesamt:
-                      </span>
-                      <div style={{ fontWeight: "700", color: "#667eea" }}>
-                        {timeline.total} W.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+            <ProjectDetails 
+              projectType={project.projectType}
+              requirements={project.requirements}
+              description={project.description}
+            />
           </div>
         )}
       </div>
