@@ -29,6 +29,8 @@ const LANGUAGES = [
 ];
 
 export default function DashboardClient({ userName, userEmail, userImage }: DashboardClientProps) {
+  console.log('🔵 DashboardClient props:', { userName, userEmail, userImage });
+  
   const { locale, setLocale } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState(locale);
   const [showRequestModal, setShowRequestModal] = useState(false);
@@ -110,15 +112,15 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
         }}
       />
 
-    <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
+    <div style={{ padding: "1rem", maxWidth: "1200px", margin: "0 auto" }}>
       <div style={{ 
         background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         borderRadius: "12px",
-        padding: "2rem",
+        padding: "1rem",
         color: "white",
-        marginBottom: "2rem"
+        marginBottom: "1rem"
       }}>
-        <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
+        <h1 style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>
           Willkommen im Portal, {userName}! 👋
         </h1>
         <p style={{ opacity: 0.9 }}>
@@ -128,16 +130,17 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
 
       <div style={{ 
         display: "grid", 
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-        gap: "1.5rem" 
+        gridTemplateColumns: "1fr 1fr", 
+        gap: "1.5rem",
+        marginBottom: "1rem"
       }}>
                 <div style={{ 
           backgroundColor: "white", 
           borderRadius: "12px", 
-          padding: "1.5rem",
+          padding: "1rem",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
         }}>
-          <h2 style={{ fontSize: "1.3rem", marginBottom: "1rem", color: "#333" }}>
+          <h2 style={{ fontSize: "1.1rem", marginBottom: "0.75rem", color: "#333" }}>
             👤 Benutzerprofil
           </h2>
           <div style={{ color: "#666", marginBottom: "0.5rem" }}>
@@ -163,17 +166,17 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
         <div style={{ 
           backgroundColor: "white", 
           borderRadius: "12px", 
-          padding: "1.5rem",
+          padding: "1rem",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
         }}>
-          <h2 style={{ fontSize: "1.3rem", marginBottom: "1rem", color: "#333" }}>
+          <h2 style={{ fontSize: "1.1rem", marginBottom: "0.75rem", color: "#333" }}>
             🌍 Spracheinstellungen
           </h2>
-          <p style={{ color: "#666", marginBottom: "1rem", fontSize: "0.9rem" }}>
+          <p style={{ color: "#666", marginBottom: "0.75rem", fontSize: "0.85rem" }}>
             Wählen Sie Ihre bevorzugte Sprache. Diese wird automatisch beim nächsten Login verwendet.
           </p>
           
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
             {LANGUAGES.map((lang) => (
               <button
                 key={lang.code}
@@ -181,15 +184,15 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.75rem",
-                  padding: "0.75rem 1rem",
+                  gap: "0.5rem",
+                  padding: "0.5rem 0.75rem",
                   backgroundColor: selectedLanguage === lang.code ? "#667eea" : "#f5f5f5",
                   color: selectedLanguage === lang.code ? "white" : "#333",
                   border: selectedLanguage === lang.code ? "2px solid #667eea" : "2px solid transparent",
                   borderRadius: "8px",
                   cursor: "pointer",
                   fontWeight: selectedLanguage === lang.code ? "600" : "500",
-                  fontSize: "1rem",
+                  fontSize: "0.9rem",
                   transition: "all 0.2s ease",
                 }}
                 onMouseEnter={(e) => {
@@ -203,7 +206,7 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
                   }
                 }}
               >
-                <span style={{ fontSize: "1.5rem" }}>{lang.flag}</span>
+                <span style={{ fontSize: "1.25rem" }}>{lang.flag}</span>
                 <span>{lang.name}</span>
                 {selectedLanguage === lang.code && (
                   <span style={{ marginLeft: "auto" }}>✓</span>
@@ -213,53 +216,25 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
           </div>
 
           <div style={{ 
-            marginTop: "1rem", 
-            padding: "0.75rem", 
+            marginTop: "0.75rem", 
+            padding: "0.5rem", 
             backgroundColor: "#f0f7ff", 
             borderRadius: "6px",
-            fontSize: "0.85rem",
+            fontSize: "0.75rem",
             color: "#0066cc"
           }}>
             💡 <strong>Tipp:</strong> Diese Einstellung wird für Ihr Konto gespeichert und beim nächsten Login automatisch angewendet.
           </div>
         </div>
+      </div>
 
-        <div style={{ 
-          backgroundColor: "white", 
-          borderRadius: "12px", 
-          padding: "1.5rem",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-        }}>
-          <h2 style={{ fontSize: "1.3rem", marginBottom: "1rem", color: "#333" }}>
-            📊 Projekt anfragen
-          </h2>
-          <p style={{ color: "#666", marginBottom: "1rem" }}>
-            Beschreiben Sie Ihr Projekt im Detail und erhalten Sie eine maßgeschneiderte Lösung.
-          </p>
-          <button
-            onClick={() => setShowRequestModal(true)}
-            style={{
-            padding: "0.75rem 1.5rem",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "600",
-            fontSize: "1rem",
-          }}>
-            Projekt anfragen
-          </button>
-        </div>
-
-        {/* Moje Projekte Section */}
-        <div style={{ 
-          backgroundColor: "white", 
-          borderRadius: "12px", 
-          padding: "1.5rem",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-        }}>
-          <h2 style={{ fontSize: "1.3rem", marginBottom: "1rem", color: "#333" }}>
+      <div style={{ 
+        backgroundColor: "white", 
+        borderRadius: "12px", 
+        padding: "1rem",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+      }}>
+        <h2 style={{ fontSize: "1.1rem", marginBottom: "0.75rem", color: "#333" }}>
             📁 Meine Projektanfragen
           </h2>
           
@@ -359,8 +334,6 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
             </div>
           )}
         </div>
-
-      </div>
     </div>
     </>
   );

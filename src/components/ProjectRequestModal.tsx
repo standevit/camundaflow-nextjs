@@ -66,6 +66,18 @@ export default function ProjectRequestModal({
 
   const handleRequestSubmit = async () => {
     try {
+      console.log('🔵 handleRequestSubmit počeo');
+      console.log('📋 Podaci koji se prosleđuju:', {
+        projectName: projectRequest.projectName,
+        projectType: projectRequest.projectType,
+        description: projectRequest.description,
+        requirements: projectRequest.requirements,
+        deadline: projectRequest.deadline,
+        estimatedPrice: projectRequest.estimatedPrice,
+        userName: userName,
+        userEmail: userEmail,
+      });
+
       // Prvo, spremi projekt u bazu
       const projectResponse = await fetch('/api/projects', {
         method: 'POST',
@@ -77,30 +89,37 @@ export default function ProjectRequestModal({
           requirements: projectRequest.requirements,
           deadline: projectRequest.deadline || null,
           estimatedPrice: projectRequest.estimatedPrice,
-          userName: userName,
+          userName: userName || 'User',
           userEmail: userEmail,
         }),
       });
 
+      console.log('📡 API odgovor status:', projectResponse.status);
+
       if (!projectResponse.ok) {
         const error = await projectResponse.json();
-        console.error('Greška pri čuvanju projekta:', error);
-        alert(`Greška: ${error.error || 'Nije moguće spremiti projekt'}`);
+        console.error('❌ API greška (status ' + projectResponse.status + '):', error);
+        alert(`❌ Greška pri čuvanju projekta:\n${error.error || 'Nije moguće spremiti projekt'}`);
         return;
       }
 
       const savedProject = await projectResponse.json();
       console.log('✅ Projekt je sprema u bazu:', savedProject);
       
-      // Pokazuj success poruku
-      alert('✅ Projekt je uspješno sprema u bazu! Prebacujem na plaćanje...');
-
       // Obavijesti parent komponentu da je projekt sprema
       if (onProjectCreated) {
         onProjectCreated();
       }
 
-      // Sada idi na plaćanje
+      // ZATVORITI MODAL - projekt je već sprema, vidljiv je na dashboardu
+      onClose();
+      
+      // Pokazuj success poruku NAKON što se modal zatvori
+      alert('✅ Projekt je uspješno sprema u bazu! Prebacujem na plaćanje...');
+
+      console.log('💳 Kreiranje payment charge-a...');
+
+      // Sada idi na plaćanje (u novom tab-u da se ne gubi dashboard)
       const response = await fetch('/api/payment/create-charge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -124,17 +143,22 @@ export default function ProjectRequestModal({
         }),
       });
       
+      console.log('💳 Payment API odgovor:', response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log('✅ CoinGate URL:', data.checkoutUrl);
         if (typeof window !== 'undefined') {
-          window.location.href = data.checkoutUrl;
+          // Otvori CoinGate u novom tab-u
+          window.open(data.checkoutUrl, '_blank');
         }
       } else {
         const error = await response.json();
+        console.error('❌ Payment greška:', error);
         alert(`Fehler: ${error.error || 'Bitte versuchen Sie es erneut.'}`);
       }
     } catch (error) {
-      console.error('Payment error:', error);
+      console.error('❌ Payment error:', error);
       alert('Fehler beim Erstellen der Zahlung. Bitte versuchen Sie es erneut.');
     }
   };
