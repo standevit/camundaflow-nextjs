@@ -215,6 +215,28 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
     }
   };
 
+  // Save project to dashboard
+  const saveProject = async (proposal: ProjectProposal) => {
+    try {
+      const response = await fetch("/api/projects/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectName: proposal.project_name,
+          description: proposal.description_summary,
+          costBreakdown: proposal.cost_breakdown,
+          timeline: proposal.timeline_weeks,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to save project");
+      }
+    } catch (error) {
+      console.error("Error saving project:", error);
+    }
+  };
+
   // Helper function to extract JSON from assistant message
   const extractJsonFromContent = (content: string): ProjectProposal | null => {
     try {
@@ -320,6 +342,8 @@ Obavezan JSON format (ne smiješ dodavati ništa drugo osim validnog JSON-a):
           setCurrentProposal(proposal);
           // Reset selected options when new proposal is received
           setSelectedOptions({});
+          // Save project automatically
+          saveProject(proposal);
           // Don't show JSON in chat, only show ProjectProposalRenderer
         } else {
           // If no JSON found, show the message in chat normally

@@ -3,6 +3,7 @@
 import { useTranslation } from "@/components/LanguageProvider";
 import { useEffect, useState } from "react";
 import ProjectRequestModal from "@/components/ProjectRequestModal";
+import CostConfiguratorProjectCard from "@/components/CostConfiguratorProjectCard";
 
 interface ProjectRequest {
   id: string;
@@ -242,21 +243,34 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
             <p style={{ color: "#666", textAlign: "center", padding: "2rem" }}>
               ⏳ Wird geladen...
             </p>
-          ) : projects.length === 0 ? (
-            <div style={{ 
-              backgroundColor: "#f5f5f5", 
-              padding: "2rem", 
-              borderRadius: "8px", 
-              textAlign: "center",
-              color: "#666"
-            }}>
-              <p style={{ marginBottom: "1rem" }}>
-                Noch keine Projektanfragen. Klicken Sie oben auf "Projekt anfragen" um ein neues Projekt hinzuzufügen.
-              </p>
-            </div>
-          ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {projects.map((project) => (
+          ) : (() => {
+            const costConfigProjects = projects.filter(p => p.projectType === 'cost-configurator');
+            const otherProjects = projects.filter(p => p.projectType !== 'cost-configurator');
+            
+            return (
+              <>
+                {/* Cost Configurator Projects */}
+                {costConfigProjects.length > 0 && (
+                  <div style={{ marginBottom: "2rem" }}>
+                    <h3 style={{ fontSize: "1rem", color: "#333", marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      🔧 Generiierte Projekte ({costConfigProjects.length})
+                    </h3>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                      {costConfigProjects.map((project) => (
+                        <CostConfiguratorProjectCard key={project.id} project={project} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Other Projects */}
+                {otherProjects.length > 0 && (
+                  <div>
+                    <h3 style={{ fontSize: "1rem", color: "#333", marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      📋 Weitere Anfragen ({otherProjects.length})
+                    </h3>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                      {otherProjects.map((project) => (
                 <div 
                   key={project.id}
                   style={{
@@ -330,9 +344,28 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
                     📝 Angefordert am {new Date(project.createdAt).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Empty state */}
+                {costConfigProjects.length === 0 && otherProjects.length === 0 && (
+                  <div style={{ 
+                    backgroundColor: "#f5f5f5", 
+                    padding: "2rem", 
+                    borderRadius: "8px", 
+                    textAlign: "center",
+                    color: "#666"
+                  }}>
+                    <p style={{ marginBottom: "1rem" }}>
+                      Noch keine Projektanfragen. Klicken Sie oben auf "Projekt anfragen" um ein neues Projekt hinzuzufügen.
+                    </p>
+                  </div>
+                )}
+              </>
+            );
+            })()}
         </div>
     </div>
     </>
