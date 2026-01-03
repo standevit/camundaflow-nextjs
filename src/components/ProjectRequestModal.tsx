@@ -64,6 +64,33 @@ export default function ProjectRequestModal({
 
   const handleRequestSubmit = async () => {
     try {
+      // Prvo, spremi projekt u bazu
+      const projectResponse = await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectName: projectRequest.projectName,
+          projectType: projectRequest.projectType,
+          description: projectRequest.description,
+          requirements: projectRequest.requirements,
+          deadline: projectRequest.deadline || null,
+          estimatedPrice: projectRequest.estimatedPrice,
+          userName: userName,
+          userEmail: userEmail,
+        }),
+      });
+
+      if (!projectResponse.ok) {
+        const error = await projectResponse.json();
+        console.error('Greška pri čuvanju projekta:', error);
+        alert(`Greška: ${error.error || 'Nije moguće spremiti projekt'}`);
+        return;
+      }
+
+      const savedProject = await projectResponse.json();
+      console.log('Projekt je sprema:', savedProject);
+
+      // Sada idi na plaćanje
       const response = await fetch('/api/payment/create-charge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -82,6 +109,7 @@ export default function ProjectRequestModal({
             phone: userEmail || "",
             message: projectRequest.requirements,
             projectType: projectRequest.projectType,
+            projectId: savedProject.data.id,
           }
         }),
       });
