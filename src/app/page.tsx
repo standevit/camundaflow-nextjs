@@ -77,7 +77,7 @@ export default function HomePage() {
             padding: '0.5rem 1rem',
             borderRadius: '16px',
             textAlign: 'center',
-            marginBottom: '3rem',
+            marginBottom: '2rem',
             boxShadow: '0 20px 40px rgba(102,126,234,0.25)',
             position: 'relative',
             overflow: 'hidden'
@@ -90,15 +90,15 @@ export default function HomePage() {
                 borderRadius: '20px', 
                 fontSize: '0.85rem', 
                 fontWeight: 600,
-                marginBottom: '1rem',
+                marginBottom: '0rem',
                 letterSpacing: '0.5px'
               }}>
                 🚀 Digitale Transformation
               </span>
-              <h1 style={{ fontSize: '2.6rem', fontWeight: '800', marginBottom: '1rem', color: 'white', letterSpacing: '-0.5px' }}>
+              <h1 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '0rem', color: 'white', letterSpacing: '-0.5px' }}>
                 Enterprise Workflow & AI Solutions
               </h1>
-              <p style={{ fontSize: '1.15rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8', maxWidth: '700px', margin: '0 auto' }}>
+              <p style={{ fontSize: '1rem', opacity: '0.95', marginBottom: 0, lineHeight: '1.8', maxWidth: '700px', margin: '0 auto' }}>
                 Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
                 
               </p>
