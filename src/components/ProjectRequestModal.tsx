@@ -18,6 +18,7 @@ interface ProjectRequestModalProps {
   userEmail?: string | null;
   requestType?: "project" | "schulung" | "ai-agents";
   proposal?: ProjectProposal | null;
+  onProjectCreated?: () => void;
 }
 
 export default function ProjectRequestModal({ 
@@ -26,7 +27,8 @@ export default function ProjectRequestModal({
   userName, 
   userEmail,
   requestType = "project",
-  proposal = null
+  proposal = null,
+  onProjectCreated
 }: ProjectRequestModalProps) {
   const [projectRequest, setProjectRequest] = useState({
     projectName: "",
@@ -88,7 +90,15 @@ export default function ProjectRequestModal({
       }
 
       const savedProject = await projectResponse.json();
-      console.log('Projekt je sprema:', savedProject);
+      console.log('✅ Projekt je sprema u bazu:', savedProject);
+      
+      // Pokazuj success poruku
+      alert('✅ Projekt je uspješno sprema u bazu! Prebacujem na plaćanje...');
+
+      // Obavijesti parent komponentu da je projekt sprema
+      if (onProjectCreated) {
+        onProjectCreated();
+      }
 
       // Sada idi na plaćanje
       const response = await fetch('/api/payment/create-charge', {
@@ -99,8 +109,8 @@ export default function ProjectRequestModal({
           priceCurrency: 'EUR',
           title: projectRequest.projectName,
           description: `Project Request - ${projectRequest.projectName}`,
-          successUrl: `${typeof window !== 'undefined' ? window.location.origin : ''}/payment/success`,
-          cancelUrl: typeof window !== 'undefined' ? window.location.href : '',
+          successUrl: `${typeof window !== 'undefined' ? window.location.origin : ''}/dashboard`,
+          cancelUrl: `${typeof window !== 'undefined' ? window.location.origin : ''}/dashboard`,
           metadata: {
             type: 'cost-configurator-project',
             name: projectRequest.projectName,

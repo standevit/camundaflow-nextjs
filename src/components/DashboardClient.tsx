@@ -49,7 +49,24 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
 
     // Učitaj sprema projekte
     loadUserProjects();
+
+    // Osvježi projekte kada se prozor vrati u fokus (nakon plaćanja)
+    const handleFocus = () => {
+      console.log('Dashboard je opet u fokusu, osvježavam projekte...');
+      loadUserProjects();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
   }, []);
+
+  // Osvježi projekte kada se modal zatvori
+  useEffect(() => {
+    if (!showRequestModal) {
+      // Osvježi projekte nakon što se modal zatvori
+      loadUserProjects();
+    }
+  }, [showRequestModal]);
 
   const loadUserProjects = async () => {
     try {
@@ -87,6 +104,10 @@ export default function DashboardClient({ userName, userEmail, userImage }: Dash
         userName={userName}
         userEmail={userEmail}
         requestType="project"
+        onProjectCreated={() => {
+          // Osvježi projekte nakon što je projekt sprema
+          loadUserProjects();
+        }}
       />
 
     <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
