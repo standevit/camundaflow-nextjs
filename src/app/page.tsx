@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import AppointmentForm from "@/components/AppointmentForm";
@@ -10,9 +10,24 @@ export default function HomePage() {
   const { data: session } = useSession();
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
   const [showCostConfigurator, setShowCostConfigurator] = useState(false);
+  const costConfiguratorRef = useRef<HTMLDivElement>(null);
   
   const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
+  
+  // Scroll to CostConfigurator when it opens
+  const handleOpenCostConfigurator = () => {
+    setShowCostConfigurator(true);
+  };
+  
+  // Scroll effect when showCostConfigurator changes
+  useEffect(() => {
+    if (showCostConfigurator && costConfiguratorRef.current) {
+      setTimeout(() => {
+        costConfiguratorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [showCostConfigurator]);
   
   return (
     <div className="container">
@@ -116,7 +131,7 @@ export default function HomePage() {
           />
 
           <button
-          onClick={() => setShowCostConfigurator(true)}
+          onClick={handleOpenCostConfigurator}
           style={{
             position: 'relative',
             left: '35%',
@@ -147,10 +162,12 @@ export default function HomePage() {
           🔧 Starten Sie Kostenrechner
         </button>
         {/* Cost Configurator Modal */}
-          <CostConfigurator
-            isOpen={showCostConfigurator}
-            onClose={() => setShowCostConfigurator(false)}
-          />
+          <div ref={costConfiguratorRef}>
+            <CostConfigurator
+              isOpen={showCostConfigurator}
+              onClose={() => setShowCostConfigurator(false)}
+            />
+          </div>
 
 
           
@@ -582,7 +599,7 @@ export default function HomePage() {
               </p>
               
                 <button
-          onClick={() => setShowCostConfigurator(true)}
+          onClick={handleOpenCostConfigurator}
           style={{
             position: 'relative',
             padding: '0.3rem',
