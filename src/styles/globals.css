@@ -265,7 +265,7 @@ footer a:hover{
 .sidebar {
   width: 300px;
 
-  border-right: 1px solid #e2e8f0;
+
 
   position: sticky;
   top: 90px;
@@ -494,4 +494,157 @@ justify-content: flex-start;
   .bpmn-container {
     height: 500px;
   }
+}
+
+/* ========================================
+   CERULEAN THEME - Dark Teal with Honey accents
+   ======================================== */
+.cerulean-theme {
+  background: linear-gradient(180deg, #00303F 0%, #004d5a 30%, #1a6b7a 60%, #e8f4f0 100%) !important;
+  position: relative;
+}
+
+.cerulean-theme::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at top, rgba(220, 174, 29, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cerulean-theme .container {
+  position: relative;
+  z-index: 1;
+}
+
+.cerulean-theme .sidebar {
+  background: rgba(0, 48, 63, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(220, 174, 29, 0.2);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.cerulean-theme .sidebar h3 {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(220, 174, 29, 0.3);
+}
+
+.cerulean-theme .sidebar ul a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cerulean-theme .sidebar ul a:hover {
+  background: rgba(220, 174, 29, 0.15);
+  color: #DCAE1D;
+}
+
+.cerulean-theme .sidebar ul a.active {
+  background: linear-gradient(135deg, #DCAE1D 0%, #c49a18 100%);
+  color: #00303F;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(220, 174, 29, 0.35);
+}
+
+.cerulean-theme .card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(220, 174, 29, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cerulean-theme .card h1,
+.cerulean-theme .card h2 {
+  color: #00303F;
+}
+
+.cerulean-theme .card h1::after,
+.cerulean-theme .card h2::after {
+  background: linear-gradient(90deg, transparent, #DCAE1D, transparent);
+}
+
+.cerulean-theme .card h3,
+.cerulean-theme .card h4 {
+  color: #00303F;
+}
+
+.cerulean-theme .card p:first-of-type {
+  color: #00303F;
+}
+
+.cerulean-theme .sidebar li b {
+  color: #DCAE1D;
+}
+
+/* ========================================
+   HOME CERULEAN THEME – dark blue + honey highlights
+   ======================================== */
+.home-cerulean-theme {
+  background: linear-gradient(180deg, #185d92 0%, #2c81a7 45%, #5da9c7 80%, #ebf8ff 100%);
+  min-height: 100vh;
+  position: relative;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.home-cerulean-theme::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(220, 174, 29, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-cerulean-theme .container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-cerulean-theme .sidebar {
+
+
+
+}
+
+.home-cerulean-theme .sidebar h3 {
+  color: #DCAE1D;
+  border-bottom: 1px solid rgba(220, 174, 29, 0.35);
+}
+
+.home-cerulean-theme .sidebar ul a {
+  color: rgba(255, 255, 255, 0.85);
+  border-left-color: transparent;
+}
+
+.home-cerulean-theme .sidebar ul a:hover {
+  background: rgba(220, 174, 29, 0.15);
+  color: #00303F;
+  border-left-color: transparent;
+}
+
+.home-cerulean-theme .sidebar ul a.active {
+  background: linear-gradient(135deg, #DCAE1D 0%, #c49a18 100%);
+  color: #00303F;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(220, 174, 29, 0.35);
+  border: none;
+}
+
+.home-cerulean-theme .image-sidebar img {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  opacity: 0.95;
+}
+
+.home-cerulean-theme .image-sidebar img:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  opacity: 1;
+}
+
+.home-cerulean-theme .main-content {
+  color: #e0f2ff;
 }

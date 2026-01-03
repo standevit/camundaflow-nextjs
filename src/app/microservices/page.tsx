@@ -31,8 +31,10 @@ export const metadata: Metadata = {
 export default function MicroservicesPage() {
   return (
     <Suspense fallback={<div className="container"><div className="main-content"><div className="card">Učitavanje...</div></div></div>}>
-      <div className="container">
-        <MicroservicesContent />
+      <div className="cerulean-theme" style={{ minHeight: '100vh', marginTop: '-1rem', paddingTop: '1rem' }}>
+        <div className="container">
+          <MicroservicesContent />
+        </div>
       </div>
     </Suspense>
   );

@@ -30,7 +30,8 @@ export default function HomePage() {
   }, [showCostConfigurator]);
   
   return (
-    <div className="container">
+    <div className="home-cerulean-theme">
+      <div className="container">
       {/* Left Sidebar – Contact box + one image */}
       <aside className="sidebar">
         <div style={{
@@ -54,24 +55,24 @@ export default function HomePage() {
             style={{
               display: 'inline-block',
               padding: '0.75rem 1.25rem',
-              background: 'linear-gradient(135deg, #7A9D96 0%, #5a827a 100%)',
-              color: 'white',
+              background: 'linear-gradient(135deg, #DCAE1D 0%, #c49a18 100%)',
+              color: '#00303F',
               textDecoration: 'none',
               border: 'none',
               borderRadius: '10px',
               fontSize: '0.95rem',
               fontWeight: '600',
               cursor: 'pointer',
-              boxShadow: '0 4px 14px rgba(122, 157, 150, 0.3)',
+              boxShadow: '0 4px 14px rgba(220, 174, 29, 0.3)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 20px rgba(122, 157, 150, 0.4)';
+              e.currentTarget.style.boxShadow = '0 8px 20px rgba(220, 174, 29, 0.4)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 157, 150, 0.3)';
+              e.currentTarget.style.boxShadow = '0 4px 14px rgba(220, 174, 29, 0.3)';
             }}
           >
             📅 Termin vereinbaren
@@ -90,12 +91,12 @@ export default function HomePage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
           {/* Hero Section - Modern Glassmorphism */}
           <div style={{
-            background: 'linear-gradient(135deg, #00303F 0%, #004d5a 50%, #006670 100%)',
+            background: 'linear-gradient(135deg, #016685ff 0%, #004d5a 50%, #006670 100%)',
             color: 'white',
-            padding: '2.5rem 2rem',
+            padding: '1.5rem 2rem',
             borderRadius: '24px',
             textAlign: 'center',
-            marginBottom: '3rem',
+            marginBottom: '2rem',
             boxShadow: '0 25px 50px rgba(0, 48, 63, 0.25)',
             position: 'relative',
             overflow: 'hidden'
@@ -142,7 +143,8 @@ export default function HomePage() {
                 marginBottom: 0, 
                 lineHeight: '1.7', 
                 maxWidth: '600px', 
-                margin: '0 auto' 
+                margin: '0 auto',
+                color: '#4daab3ff'
               }}>
                 Spezialisiert auf Business Process Management, Microservices-Architekturen und KI-gestützte Automatisierung
               </p>
@@ -163,7 +165,7 @@ export default function HomePage() {
           onClick={handleOpenCostConfigurator}
           style={{
             display: 'block',
-            margin: '0 auto 3rem auto',
+            margin: '0 auto 1rem auto',
             padding: '1rem 2rem',
             textAlign: 'center',
             background: 'linear-gradient(135deg, #DCAE1D 0%, #c49a18 100%)',
@@ -204,13 +206,13 @@ export default function HomePage() {
             <h2 style={{ 
               fontSize: '1.75rem', 
               fontWeight: '700', 
-              color: '#0f172a', 
+              color: '#CAE4DB', 
               marginBottom: '0.75rem',
               letterSpacing: '-0.3px'
             }}>
               Unsere Expertise
             </h2>
-            <p style={{ color: '#64748b', fontSize: '1rem', maxWidth: '500px', margin: '0 auto' }}>
+            <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1rem', maxWidth: '500px', margin: '0 auto' }}>
               Technologien, die Ihr Unternehmen voranbringen
             </p>
           </div>
@@ -347,12 +349,12 @@ export default function HomePage() {
               <h2 style={{
                 fontSize: '1.8rem',
                 fontWeight: '700',
-                color: '#00303F',
+                color: '#DCAE1D',
                 marginBottom: '0.5rem'
               }}>
                 Use Cases & Implementierungen
               </h2>
-              <p style={{ color: '#7A9D96', fontSize: '1rem' }}>Praxiserprobte Lösungen für Ihre Branche</p>
+              <p style={{ color: 'rgba(255, 255, 255, 0.75)', fontSize: '1rem' }}>Praxiserprobte Lösungen für Ihre Branche</p>
             </div>
 
             <div style={{
@@ -700,5 +702,6 @@ export default function HomePage() {
         
       </aside>
     </div>
+  </div>
   );
 }
